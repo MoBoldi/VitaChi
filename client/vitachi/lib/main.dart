@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,6 +32,74 @@ class Home extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
             ),
           ),
-        ));
+        ),
+        drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+
+          children: <Widget>[
+
+            DrawerHeader(
+              child: Container(
+                child: Column(
+                  children: <Widget>[
+                    Image(
+                      image: AssetImage('assets/logo.png'),
+                    )
+                  ],
+                ),
+              ),
+              decoration: BoxDecoration(
+
+              ),
+
+            ),
+            ListTile(
+              title: Text("Home", style: TextStyle(fontSize: 18),),
+              onTap: (){
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("Eingaben", style: TextStyle(fontSize: 18),),
+              onTap: (){
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("Statistiken", style: TextStyle(fontSize: 18),),
+              onTap: (){
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("Freunde", style: TextStyle(fontSize: 18),),
+              onTap: (){
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("Shop", style: TextStyle(fontSize: 18),),
+              onTap: (){
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("ToDo",
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 18,
+                ),
+              ),
+              onTap: (){
+                Navigator.pop(context);
+              },
+              
+            )
+          ],
+        ),
+
+    ),
+    );
   }
 }
