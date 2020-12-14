@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class Essen extends StatefulWidget {
   @override
