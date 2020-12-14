@@ -1,7 +1,6 @@
 package entity;
 import java.sql.Date;
 import javax.persistence.*;
-import java.time.*;
 
 public class Eingabe {
 
