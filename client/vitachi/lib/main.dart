@@ -1,9 +1,14 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'package:vitachi/pages/EssenNav.dart';
 
 void main() {
-  runApp(MaterialApp(home: Home()));
+  runApp(MaterialApp(
+      home: Home(),
+    routes: {
+        '/home': (context) => Home(),
+        '/eingabeNav': (context) => EingabenNav()
+    },
+  ));
 }
 
 class Home extends StatelessWidget {
@@ -57,13 +62,13 @@ class Home extends StatelessWidget {
             ListTile(
               title: Text("Home", style: TextStyle(fontSize: 18),),
               onTap: (){
-                Navigator.pop(context);
+
               },
             ),
             ListTile(
               title: Text("Eingaben", style: TextStyle(fontSize: 18),),
               onTap: (){
-                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/eingabeNav');
               },
             ),
             ListTile(
