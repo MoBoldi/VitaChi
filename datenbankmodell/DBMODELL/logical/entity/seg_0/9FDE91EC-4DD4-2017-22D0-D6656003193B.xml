@@ -1,0 +1,116 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="9FDE91EC-4DD4-2017-22D0-D6656003193B" name="Accessoire">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:01:00 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Accessoire_ID" id="BC620BA2-DE95-A9FD-74EE-563BF2A62D83">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:03:56 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Preis" id="970F1DEF-A6E5-555C-29F4-F7D37227CA13">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:04:32 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<ownDataTypeParameters>,4,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Bezeichnung" id="766560D6-A08B-BD85-7101-E4B1D15C4382">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:04:54 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Beschreibung" id="C386CFBF-B719-34B1-8CC9-499AADC0F123">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:05:12 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>150</dataTypeSize>
+<ownDataTypeParameters>150,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Details" id="2EC6A3FE-D270-BFBE-EEA7-575BDDC50025">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:05:27 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>200</dataTypeSize>
+<ownDataTypeParameters>200,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Bild_Pfad" id="5C9D7B1E-283B-0531-E239-9E25168B1D07">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:18:05 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>200</dataTypeSize>
+<ownDataTypeParameters>200,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="88F58991-EBC4-F526-9339-E20B8D1BA7FB" name="Accessoire PK">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:04:25 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>BC620BA2-DE95-A9FD-74EE-563BF2A62D83</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

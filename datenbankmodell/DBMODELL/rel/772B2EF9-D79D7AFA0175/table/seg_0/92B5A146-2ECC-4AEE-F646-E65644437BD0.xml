@@ -1,0 +1,110 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="92B5A146-2ECC-4AEE-F646-E65644437BD0" name="Aufgaben">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:41:58 UTC</createdTime>
+<generatorID>5FBD28B6-EBA7-D28B-F26E-36D53E1A6F71</generatorID>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Aufgaben_ID" id="72EB76CD-4909-F2C8-D629-C36BBF8EC564">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:41:58 UTC</createdTime>
+<generatorID>B51FB527-EC3E-08D9-6B4D-A754C17B2481</generatorID>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Bezeichnung" id="1325A2BD-1F9A-BB6E-2DD2-CA3DC32BCE6A">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:41:58 UTC</createdTime>
+<generatorID>66272321-9EB5-85D1-9D34-C2A2489B163A</generatorID>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EndDatum" id="69E40124-2CA9-0C06-6AF1-975F14A7DB6F">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:41:58 UTC</createdTime>
+<generatorID>5C004538-8E1A-793C-7D3F-385493FF5D72</generatorID>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Erledigt" id="79A088A3-B0ED-C2B3-D2CA-110518F1EA60">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:41:58 UTC</createdTime>
+<generatorID>EBBB5AE4-5814-792C-168E-924CDD127908</generatorID>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ErstellDatum" id="7939647A-C9F0-CEEE-2A5A-8C59106195A6">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:41:58 UTC</createdTime>
+<generatorID>91E65C1C-5E10-CDBD-BBC7-3279CB566D01</generatorID>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="User_User_ID1" id="9D8C24E7-BCA2-121D-64A6-39E1B0BA090F">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:41:58 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E8FF37AD-0811-A63F-B7C0-169A1DDD17DE" referredColumn="C5DACB3A-1E45-AE88-88E1-183B1BA333C0"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="72F8E65D-545E-3BDA-905B-2E16D9B91530" name="Aufgaben_PK">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:41:58 UTC</createdTime>
+<generatorID>937894F9-2908-0187-22AB-F3E059A4FD6E</generatorID>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="72EB76CD-4909-F2C8-D629-C36BBF8EC564"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="666689A7-7FDA-D951-BFC7-D20DFABFE420" name="Aufgaben_User_FK">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:41:58 UTC</createdTime>
+<generatorID>CCF1D677-0EBE-DA4B-73B2-E6E61861F205</generatorID>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9D8C24E7-BCA2-121D-64A6-39E1B0BA090F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
