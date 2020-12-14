@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:vitachi/pages/Essen.dart';
 import 'package:vitachi/pages/EssenNav.dart';
-import 'package:vitachi/home.dart';
-import 'package:vitachi/statistics.dart';
+import 'file:///C:/Users/noahs/OneDrive/Dokumente/Schule/VitaChi/VitaChi/client/vitachi/lib/pages/home.dart';
+import 'file:///C:/Users/noahs/OneDrive/Dokumente/Schule/VitaChi/VitaChi/client/vitachi/lib/pages/statistics.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -9,7 +10,8 @@ void main() {
     routes: {
         '/home': (context) => Home(),
         '/eingabeNav': (context) => EingabenNav(),
-        '/statistics': (context) => Statistics()
+        '/statistics': (context) => Statistics(),
+        '/essen': (context) => Essen()
     },
   ));
 }

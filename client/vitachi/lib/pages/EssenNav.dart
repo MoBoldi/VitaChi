@@ -126,7 +126,7 @@ class _EingabenNavState extends State<EingabenNav> {
                       FlatButton(
                           color: Colors.purpleAccent[100],
                           onPressed: () {
-
+                            Navigator.pushReplacementNamed(context, '/essen');
                           },
                           child: Text('Hinzufügen'),
                       )
