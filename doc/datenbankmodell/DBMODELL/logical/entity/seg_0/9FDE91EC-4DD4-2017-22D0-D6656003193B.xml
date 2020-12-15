@@ -35,7 +35,6 @@
 <engineerTo>
 <item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
@@ -49,7 +48,6 @@
 <engineerTo>
 <item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
@@ -63,7 +61,6 @@
 <engineerTo>
 <item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
@@ -77,21 +74,19 @@
 <engineerTo>
 <item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>200</dataTypeSize>
 <ownDataTypeParameters>200,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Bild_Pfad" id="5C9D7B1E-283B-0531-E239-9E25168B1D07">
+<Attribute name="GIF_Name" id="5C9D7B1E-283B-0531-E239-9E25168B1D07">
 <createdBy>julian</createdBy>
 <createdTime>2020-12-14 21:18:05 UTC</createdTime>
 <ownerDesignName>DBMODELL</ownerDesignName>
 <engineerTo>
 <item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
