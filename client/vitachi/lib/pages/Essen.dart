@@ -97,97 +97,109 @@ class _EssenState extends State<Essen> {
           ],
         ),
       ),
-      backgroundColor: Color.fromRGBO(242, 231, 254, 1.0),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Expanded(
-            child: Icon(
-              Icons.food_bank,
-              size: 170,
-            ),
-            flex: 5,
-          ),
-          Expanded(
-            child: Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+
+      body:
+         Stack(
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text("Essen", style: TextStyle(fontSize: 26)),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                        "Bewerte hier auf einer Skala von 1 bis 5 Sternen deine letzte Mahlzeit.",
-                        style: TextStyle(fontSize: 15)),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    color: Color.fromRGBO(242, 231, 254, 1.0),
                   ),
                 ],
               ),
-              margin: EdgeInsets.fromLTRB(30.0, 0, 30, 0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-            ),
-            flex: 3,
-          ),
-          Expanded(
-            child: Container(
-              child: Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Padding(padding: EdgeInsets.fromLTRB(0, 80, 0, 0)),
-                  Text(
-                    "Wie gut hat dir deine letzte Mahlzeit geschmeckt?",
-                  ),
-                  RatingBar.builder(
-                    initialRating: 3,
-                    minRating: 1,
-                    direction: Axis.horizontal,
-                    allowHalfRating: false,
-                    itemCount: 5,
-                    itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star,
-                      color: Colors.amber,
+                  Expanded(
+                    child: Icon(
+                      Icons.food_bank,
+                      size: 170,
                     ),
-                    onRatingUpdate: (rating) {
-                      print(rating);
-                    },
+                    flex: 5,
                   ),
-                  Text("Wie gut hat dir deine letzte Mahlzeit geschmeckt?"),
-                  RatingBar.builder(
-                    initialRating: 3,
-                    minRating: 1,
-                    direction: Axis.horizontal,
-                    allowHalfRating: false,
-                    itemCount: 5,
-                    itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star,
-                      color: Colors.amber,
+                  Expanded(
+                    child: Card(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(padding: EdgeInsets.fromLTRB(10,10,0,0), child:
+                          Text("Essen", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),),
+                          Padding(padding: EdgeInsets.fromLTRB(10, 0, 0, 0), child: Text(
+                              "Bewerte hier auf einer Skala von 1 bis 5 Sternen deine letzte Mahlzeit.",
+                              style: TextStyle(fontSize: 15)),),
+                        ],
+                      ),
+                      margin: EdgeInsets.fromLTRB(30.0, 0, 30, 0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
                     ),
-                    onRatingUpdate: (rating) {
-                      print(rating);
-                    },
+                    flex: 3,
                   ),
-                  FlatButton(
-                    color: Color.fromRGBO(242, 231, 254, 1.0),
-                    onPressed: () {},
-                    child: Text(
-                      "Absenden",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(padding: EdgeInsets.fromLTRB(0, 80, 0, 0)),
+                          Text(
+                            "Wie gut hat dir deine letzte Mahlzeit geschmeckt?",
+                          ),
+                          RatingBar.builder(
+                            initialRating: 3,
+                            minRating: 1,
+                            direction: Axis.horizontal,
+                            allowHalfRating: false,
+                            itemCount: 5,
+                            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                            itemBuilder: (context, _) => Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            onRatingUpdate: (rating) {
+                              print(rating);
+                            },
+                          ),
+                          Text("Wie gut hat dir deine letzte Mahlzeit geschmeckt?"),
+                          RatingBar.builder(
+                            initialRating: 3,
+                            minRating: 1,
+                            direction: Axis.horizontal,
+                            allowHalfRating: false,
+                            itemCount: 5,
+                            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                            itemBuilder: (context, _) => Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            onRatingUpdate: (rating) {
+                              print(rating);
+                            },
+                          ),
+                          FlatButton(
+                            color: Color.fromRGBO(242, 231, 254, 1.0),
+                            onPressed: () {},
+                            child: Text(
+                              "Absenden",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  )
+                    flex: 13,
+                  ),
                 ],
               ),
-              decoration: BoxDecoration(color: Colors.white),
-            ),
-            flex: 10,
+            ],
           ),
-        ],
-      ),
-    );
+
+          );
+
   }
 }
