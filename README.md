@@ -19,6 +19,7 @@ Beim Backend haben wir uns für das Java-Framework Quarkus als Server und für e
 # Charakter
 <img src="https://github.com/MoBoldi/VitaChi/blob/main/Avatar/Prototyp_Screenshot_1.12.20.png" alt="Avatar" width="50%">
 Diese Blume soll das Wohlbefinden des Useres wiederspiegeln. Das Wohlbefinden kann mithilfe von sechs verschieden Zuständen gezeigt werden. Angenommen, der User würde nicht genug schlafen und fühlt sich deshalb nicht gut, lässt die Blume ihren Kopf sinken und das Gesicht ist nicht mehr fröhlich. Wir haben uns für eine Blume entschieden, da diese für kein Geschlecht oder für keine Hautfarbe steht. Außerdem kann man mit einer Blume einige Emotionen zeigen.
+Umgesetzt wurde der Avatar mithilfe von Cinema 4D.
 
 # Links
 [Icons](https://www.flaticon.com/)
