@@ -1,0 +1,100 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="DDC9A3A6-9D4D-D0F0-4077-37900D350F17" name="User_BesitzListe">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:10:07 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Besitz_ID" id="B3C38AB2-02E1-37F3-3084-15E1C66A461F">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:10:18 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="User_ID" id="3197753F-45D7-09DA-6CEA-56BF6C7FC063">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:10:46 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Accessoire_ID" id="05BD8C0D-E372-A235-DCD4-BB74B9CB022A">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:11:14 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Kaufdatum" id="CBA723B5-B423-B978-87A3-243057A08A08">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:17:06 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Accessoire_ID1" id="63341975-5089-BE6D-DBAC-3D2264BBD237">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:17:33 UTC</createdTime>
+<generatorID>8E0B59BB-4904-FACE-A502-1716F9EEE7CA</generatorID>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<referedAttribute>BC620BA2-DE95-A9FD-74EE-563BF2A62D83</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="403DB8D3-F897-95C5-2CA8-88697306C632" name="User_BesitzListe PK">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:10:40 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>B3C38AB2-02E1-37F3-3084-15E1C66A461F</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

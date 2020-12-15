@@ -1,0 +1,115 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="331AE5FA-8773-710B-4EAF-787A5EFAF2ED" name="Eingabe">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 20:52:29 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Eingabe_ID" id="420CEB30-3CBD-7CDD-BFEF-7A5DE3312FC6">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 20:53:04 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Typ" id="FEF03FCB-1A3E-7B84-9565-C316512552B9">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 20:54:34 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Bewertung1" id="87F2DBF1-02C7-B898-96D1-9AA20126F23A">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 20:54:55 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Bewertung2" id="9EFFE40F-C21A-A36B-3E28-5B92CCE5C768">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 20:55:22 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Datum" id="FDC280BF-D1D5-F839-B2AB-2411DC5AD344">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 20:57:55 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="User_ID" id="29A5A107-C572-1B67-C67A-040A30137CEE">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 21:09:34 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="EB5BADDB-034B-A899-238D-486786D84A27" name="Eingabe PK">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-14 20:53:11 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>420CEB30-3CBD-7CDD-BFEF-7A5DE3312FC6</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
