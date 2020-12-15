@@ -44,7 +44,7 @@ class MyDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 18),
             ),
             onTap: () {
-              Navigator.pushReplacementNamed(context, '/statistics');
+              Navigator.pushReplacementNamed(context, '/statisticsNav');
             },
           ),
           ListTile(

@@ -6,6 +6,7 @@ import 'package:vitachi/pages/Essen.dart';
 import 'package:vitachi/pages/EssenNav.dart';
 import 'package:vitachi/pages/home.dart';
 import 'package:vitachi/pages/statistics.dart';
+import 'package:vitachi/pages/statisticsNav.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -14,12 +15,14 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => Home());
-      case '/statistics':
-        return MaterialPageRoute(builder: (_) => Statistics());
+      case '/statisticsNav':
+        return MaterialPageRoute(builder: (_) => StatisticsNav());
       case '/eingabeNav':
         return MaterialPageRoute(builder: (_) => EingabenNav());
       case '/essen':
         return MaterialPageRoute(builder: (_) => Essen());
+      case '/statistics':
+        return MaterialPageRoute(builder: (_) => Statistics());
       default:
         return _errorRoute();
     }
