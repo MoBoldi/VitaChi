@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vitachi/components/myAppBar.dart';
+import 'package:vitachi/components/myDrawer.dart';
 import 'package:vitachi/main.dart';
 
 class EingabenNav extends StatefulWidget {
@@ -10,84 +12,8 @@ class _EingabenNavState extends State<EingabenNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("VitaChi"),
-        centerTitle: true,
-        backgroundColor: Colors.purpleAccent,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add, color: Colors.white),
-            onPressed: null,
-          )
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-
-          children: <Widget>[
-
-            DrawerHeader(
-              child: Container(
-                child: Column(
-                  children: <Widget>[
-                    Image(
-                      image: AssetImage('assets/logo.png'),
-                    )
-                  ],
-                ),
-              ),
-              decoration: BoxDecoration(
-
-              ),
-
-            ),
-            ListTile(
-              title: Text("Home", style: TextStyle(fontSize: 18),),
-              onTap: (){
-                Navigator.pushReplacementNamed(context, '/home');
-              },
-            ),
-            ListTile(
-              title: Text("Eingaben", style: TextStyle(fontSize: 18),),
-              onTap: (){
-                Navigator.pushReplacementNamed(context, '/eingabeNav');
-              },
-            ),
-            ListTile(
-              title: Text("Statistiken", style: TextStyle(fontSize: 18),),
-              onTap: (){
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text("Freunde", style: TextStyle(fontSize: 18),),
-              onTap: (){
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text("Shop", style: TextStyle(fontSize: 18),),
-              onTap: (){
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text("ToDo",
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 18,
-                ),
-              ),
-              onTap: (){
-                Navigator.pop(context);
-              },
-
-            )
-          ],
-        ),
-
-      ),
+      appBar: MyAppBar(context, 'VitaChi', null),
+      drawer: MyDrawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
@@ -104,8 +30,7 @@ class _EingabenNavState extends State<EingabenNav> {
                     blurRadius: 7,
                     offset: Offset(0, 3), // changes position of shadow
                   ),
-                ]
-            ),
+                ]),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -124,20 +49,18 @@ class _EingabenNavState extends State<EingabenNav> {
                       Text('Essen'),
                       Text('Hier eingeben zum Essen'),
                       FlatButton(
-                          color: Colors.purpleAccent[100],
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(context, '/essen');
-                          },
-                          child: Text('Hinzufügen'),
+                        color: Colors.purpleAccent[100],
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/essen');
+                        },
+                        child: Text('Hinzufügen'),
                       )
                     ],
                   ),
                   flex: 6,
                 )
-
               ],
             ),
-
           ),
           Container(
             height: 120,
@@ -152,8 +75,7 @@ class _EingabenNavState extends State<EingabenNav> {
                     blurRadius: 7,
                     offset: Offset(0, 3), // changes position of shadow
                   ),
-                ]
-            ),
+                ]),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -173,19 +95,15 @@ class _EingabenNavState extends State<EingabenNav> {
                       Text('Bewerte hier deine letzte aktive Bewegung'),
                       FlatButton(
                         color: Colors.purpleAccent[100],
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                         child: Text('Hinzufügen'),
                       )
                     ],
                   ),
                   flex: 6,
                 )
-
               ],
             ),
-
           ),
           Container(
             height: 120,
@@ -200,8 +118,7 @@ class _EingabenNavState extends State<EingabenNav> {
                     blurRadius: 7,
                     offset: Offset(0, 3), // changes position of shadow
                   ),
-                ]
-            ),
+                ]),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -221,19 +138,15 @@ class _EingabenNavState extends State<EingabenNav> {
                       Text('Bewerte hier deinen letzten Schlaf'),
                       FlatButton(
                         color: Colors.purpleAccent[100],
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                         child: Text('Hinzufügen'),
                       )
                     ],
                   ),
                   flex: 6,
                 )
-
               ],
             ),
-
           ),
           Container(
             height: 120,
@@ -248,8 +161,7 @@ class _EingabenNavState extends State<EingabenNav> {
                     blurRadius: 7,
                     offset: Offset(0, 3), // changes position of shadow
                   ),
-                ]
-            ),
+                ]),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -269,23 +181,18 @@ class _EingabenNavState extends State<EingabenNav> {
                       Text('Hier kannst du deine Arbeitszeit eingeben'),
                       FlatButton(
                         color: Colors.purpleAccent[100],
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                         child: Text('Hinzufügen'),
                       )
                     ],
                   ),
                   flex: 6,
                 )
-
               ],
             ),
-
           )
         ],
       ),
     );
   }
 }
-
