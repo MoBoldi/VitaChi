@@ -22,7 +22,6 @@
 <engineerTo>
 <item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
@@ -36,7 +35,6 @@
 <engineerTo>
 <item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT007</logicalDatatype>
@@ -49,11 +47,39 @@
 <engineerTo>
 <item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT007</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="User_ID" id="23919D1A-F91A-3BAB-5CA7-F339C968A7FD">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-15 10:59:42 UTC</createdTime>
+<generatorID>A94BB949-EB7E-60AC-7049-0CEC987DFD45</generatorID>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<referedAttribute>FB095760-0237-B7E8-6980-7F59044CCD3A</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="1CE00779-B564-D7C8-EC23-78473BEA2926" name="Arbeit PK">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-15 10:59:36 UTC</createdTime>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>01DDCC3A-7223-9A40-D358-297499F1D1C2</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
 </Entity>

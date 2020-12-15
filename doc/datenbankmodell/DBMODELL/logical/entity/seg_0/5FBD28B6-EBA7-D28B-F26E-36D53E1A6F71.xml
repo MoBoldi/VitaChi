@@ -73,10 +73,24 @@
 <engineerTo>
 <item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="User_ID" id="1E9AA5CD-884B-8345-B432-3D22F17FA4BF">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-15 10:59:42 UTC</createdTime>
+<generatorID>CCF1D677-0EBE-DA4B-73B2-E6E61861F205</generatorID>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<referedAttribute>FB095760-0237-B7E8-6980-7F59044CCD3A</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>

@@ -28,20 +28,6 @@
 <dataTypePrecision>8</dataTypePrecision>
 <ownDataTypeParameters>,8,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Typ" id="FEF03FCB-1A3E-7B84-9565-C316512552B9">
-<createdBy>julian</createdBy>
-<createdTime>2020-12-14 20:54:34 UTC</createdTime>
-<ownerDesignName>DBMODELL</ownerDesignName>
-<engineerTo>
-<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
-</engineerTo>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>1</dataTypeSize>
-<ownDataTypeParameters>1,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="Bewertung1" id="87F2DBF1-02C7-B898-96D1-9AA20126F23A">
 <createdBy>julian</createdBy>
 <createdTime>2020-12-14 20:54:55 UTC</createdTime>
@@ -49,7 +35,6 @@
 <engineerTo>
 <item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
@@ -63,7 +48,6 @@
 <engineerTo>
 <item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
@@ -77,25 +61,40 @@
 <engineerTo>
 <item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT007</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="User_ID" id="29A5A107-C572-1B67-C67A-040A30137CEE">
+<Attribute name="User_ID1" id="66C692AF-5BA6-28D9-9960-E548EEC81B70">
 <createdBy>julian</createdBy>
-<createdTime>2020-12-14 21:09:34 UTC</createdTime>
+<createdTime>2020-12-15 10:59:42 UTC</createdTime>
+<generatorID>25B1D0A3-4F02-0806-F8E8-DE873C8CEC35</generatorID>
 <ownerDesignName>DBMODELL</ownerDesignName>
 <engineerTo>
 <item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
+<referedAttribute>FB095760-0237-B7E8-6980-7F59044CCD3A</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
 <dataTypePrecision>6</dataTypePrecision>
-<ownDataTypeParameters>,6,</ownDataTypeParameters>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Typ_ID" id="19AB725A-340E-B064-6E46-0D7AC7407C4E">
+<createdBy>julian</createdBy>
+<createdTime>2020-12-15 11:01:40 UTC</createdTime>
+<generatorID>460F7056-C91E-5DE1-5EC6-B004A9BCEE8B</generatorID>
+<ownerDesignName>DBMODELL</ownerDesignName>
+<engineerTo>
+<item key="772B2EF9-63F3-9E85-7A58-D79D7AFA0175" value="true"/>
+</engineerTo>
+<referedAttribute>319A06B9-1339-74C8-520D-71C065A9E020</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
