@@ -2,15 +2,20 @@ package entity;
 import java.sql.Date;
 import javax.persistence.*;
 
+@Entity
+@NamedQueries({
+        @NamedQuery(name = "Eingabe.findAll", query = "SELECT e FROM Eingabe e")
+})
 public class Eingabe {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long eingabeID;
+    
     private String typ;
     private int bewertung1;
     private int bewertung2;
     private Date datum;
-
 
 
     public Eingabe(){}
@@ -23,6 +28,7 @@ public class Eingabe {
         this.datum =  datum;
     }
 
+    //<editor-fold desc="Getter und Setter">
     public long getEingabeID() {
         return eingabeID;
     }
@@ -62,5 +68,6 @@ public class Eingabe {
     public void setDatum(Date datum) {
         this.datum = datum;
     }
+    //</editor-fold>
 }
 

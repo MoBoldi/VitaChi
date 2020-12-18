@@ -1,12 +1,18 @@
 package entity;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
+@Entity
+@NamedQueries({
+        @NamedQuery(name = "Arbeit.findAll", query = "SELECT w FROM Arbeit w")
+})
 public class Arbeit {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long arbeitID;
+
     private Date startdatum;
     private Date enddatum;
 
@@ -19,6 +25,7 @@ public class Arbeit {
         this.enddatum = enddatum;
     }
 
+    //<editor-fold desc="Getter und Setter">
     public long getArbeitID() {
         return arbeitID;
     }
@@ -42,5 +49,6 @@ public class Arbeit {
     public void setEnddatum(Date enddatum) {
         this.enddatum = enddatum;
     }
+    //</editor-fold>
 }
 
