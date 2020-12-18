@@ -1,17 +1,22 @@
 package entity;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
+@Entity
+@NamedQueries({
+        @NamedQuery(name = "Aufgaben.findAll", query = "SELECT t FROM Aufgaben t")
+})
 public class Aufgaben {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long aufgabenID;
+
     private String bezeichnung;
     private Date erstelldatum;
     private Date enddatum;
     private char status;
-
 
 
     public Aufgaben(){}
@@ -24,6 +29,7 @@ public class Aufgaben {
         this.status =  status;
     }
 
+    //<editor-fold desc="Getter und Setter">
     public long getAufgabenID() {
         return aufgabenID;
     }
@@ -63,5 +69,6 @@ public class Aufgaben {
     public void setStatus(char status) {
         this.status = status;
     }
+    //</editor-fold>
 }
 

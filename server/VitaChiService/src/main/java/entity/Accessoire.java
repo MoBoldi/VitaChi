@@ -3,16 +3,21 @@ import java.sql.Date;
 import javax.persistence.*;
 import java.time.*;
 
+@Entity
+@NamedQueries({
+        @NamedQuery(name = "Accessoire.findAll", query = "SELECT a FROM Accessoire a")
+})
 public class Accessoire {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long accessoireID;
+
     private String bezeichnung;
     private String beschreibung;
     private int preis;
     private String details;
     private String bild_pfad;
-
 
 
     public Accessoire(){}
@@ -25,6 +30,7 @@ public class Accessoire {
         this. details=  details;
     }
 
+    //<editor-fold desc="Getter und Setter">
     public long getAccessoireID() {
         return accessoireID;
     }
@@ -72,5 +78,6 @@ public class Accessoire {
     public void setBild_pfad(String bild_pfad) {
         this.bild_pfad = bild_pfad;
     }
+    //</editor-fold>
 }
 
