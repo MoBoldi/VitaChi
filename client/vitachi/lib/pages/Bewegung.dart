@@ -3,12 +3,12 @@ import 'package:vitachi/components/myAppBar.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-class Essen extends StatefulWidget {
+class Bewegung extends StatefulWidget {
   @override
-  _EssenState createState() => _EssenState();
+  _BewegungState createState() => _BewegungState();
 }
 
-class _EssenState extends State<Essen> {
+class _BewegungState extends State<Bewegung> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class _EssenState extends State<Essen> {
           children: <Widget>[
             Expanded(
               child: FittedBox(
-                child: Icon(Icons.food_bank),
+                child: Icon(Icons.sports_basketball),
               ),
               flex: 5,
             ),
@@ -38,14 +38,14 @@ class _EssenState extends State<Essen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Expanded(
-                        child: AutoSizeText("Essen",
+                        child: AutoSizeText("Bewegung",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 50)),
                         flex: 1,
                       ),
                       Expanded(
                         child: AutoSizeText(
-                          "Bewerte hier auf einer Skala von 1 bis 5 Sternen wie dir deine letzte Mahlzeit",
+                          "Bewerte hier auf einer Skala von 1 bis 5 Sternen deine letzte  Bewegung.",
                           style: TextStyle(fontSize: 23),
                           maxLines: 2,
                         ),
@@ -71,7 +71,7 @@ class _EssenState extends State<Essen> {
                   ),
                   Expanded(
                     child: AutoSizeText(
-                      "Wie gut hat dir deine letzte Mahlzeit geschmeckt?",
+                      "Wie anstrengend war deine letze Bewegung?",
                       style: TextStyle(fontSize: 20),
                       maxLines: 2,
                       textAlign: TextAlign.center,
@@ -100,7 +100,7 @@ class _EssenState extends State<Essen> {
                   ),
                   Expanded(
                     child: AutoSizeText(
-                      "Wie gesund war deine letzte Mahlzeit?",
+                      "Wie fühlst du dich nach der Bewegung?",
                       style: TextStyle(fontSize: 20),
                       maxLines: 2,
                       textAlign: TextAlign.center,
