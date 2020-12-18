@@ -40,7 +40,7 @@ class _EssenState extends State<Essen> {
                     Expanded(
                       child: AutoSizeText(
                         "Bewerte hier auf einer Skala von 1 bis 5 Sternen wie dir deine letzte Mahlzeit",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 23),
                         maxLines: 2,
                       ),
                       flex: 2,
@@ -61,12 +61,12 @@ class _EssenState extends State<Essen> {
               children: [
                 Expanded(
                   child: Container(),
-                  flex: 2,
+                  flex: 4,
                 ),
                 Expanded(
                   child: AutoSizeText(
                     "Wie gut hat dir deine letzte Mahlzeit geschmeckt?",
-                    style: TextStyle(fontSize: 23),
+                    style: TextStyle(fontSize: 20),
                     maxLines: 2,
                     textAlign: TextAlign.center,
                   ),
@@ -95,7 +95,7 @@ class _EssenState extends State<Essen> {
                 Expanded(
                   child: AutoSizeText(
                     "Wie gesund war deine letzte Mahlzeit?",
-                    style: TextStyle(fontSize: 17),
+                    style: TextStyle(fontSize: 20),
                     maxLines: 2,
                     textAlign: TextAlign.center,
                   ),
@@ -134,7 +134,9 @@ class _EssenState extends State<Essen> {
                 "Absenden",
                 style: TextStyle(fontSize: 15),
               ),
+                shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0))
             ),
+
             flex: 1,
           ),
           Expanded(child: Container(), flex: 2,)
