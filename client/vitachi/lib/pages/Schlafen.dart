@@ -3,12 +3,12 @@ import 'package:vitachi/components/myAppBar.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-class Essen extends StatefulWidget {
+class Schlafen extends StatefulWidget {
   @override
-  _EssenState createState() => _EssenState();
+  _SchlafenState createState() => _SchlafenState();
 }
 
-class _EssenState extends State<Essen> {
+class _SchlafenState extends State<Schlafen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class _EssenState extends State<Essen> {
           children: <Widget>[
             Expanded(
               child: FittedBox(
-                child: Icon(Icons.food_bank),
+                child: Icon(Icons.bedtime),
               ),
               flex: 5,
             ),
@@ -38,14 +38,14 @@ class _EssenState extends State<Essen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Expanded(
-                        child: AutoSizeText("Essen",
+                        child: AutoSizeText("Schlafen",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 50)),
                         flex: 1,
                       ),
                       Expanded(
                         child: AutoSizeText(
-                          "Bewerte hier auf einer Skala von 1 bis 5 Sternen wie dir deine letzte Mahlzeit",
+                          "Bewerte hier auf einer Skala von 1 bis 5 Sternen deinen letzten  Schlaf.",
                           style: TextStyle(fontSize: 23),
                           maxLines: 2,
                         ),
@@ -71,7 +71,7 @@ class _EssenState extends State<Essen> {
                   ),
                   Expanded(
                     child: AutoSizeText(
-                      "Wie gut hat dir deine letzte Mahlzeit geschmeckt?",
+                      "Wie lange hast du geschlafen?",
                       style: TextStyle(fontSize: 20),
                       maxLines: 2,
                       textAlign: TextAlign.center,
@@ -100,7 +100,7 @@ class _EssenState extends State<Essen> {
                   ),
                   Expanded(
                     child: AutoSizeText(
-                      "Wie gesund war deine letzte Mahlzeit?",
+                      "Wie gut hast du geschlafen?",
                       style: TextStyle(fontSize: 20),
                       maxLines: 2,
                       textAlign: TextAlign.center,

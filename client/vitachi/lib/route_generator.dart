@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
 import 'package:vitachi/main.dart';
+import 'package:vitachi/pages/Arbeit.dart';
+import 'package:vitachi/pages/Bewegung.dart';
 import 'package:vitachi/pages/Essen.dart';
 import 'package:vitachi/pages/EssenNav.dart';
+import 'package:vitachi/pages/Schlafen.dart';
 import 'package:vitachi/pages/home.dart';
 import 'package:vitachi/pages/statistics.dart';
 import 'package:vitachi/pages/statisticsNav.dart';
@@ -23,6 +26,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Essen());
       case '/statistics':
         return MaterialPageRoute(builder: (_) => Statistics());
+      case '/bewegung':
+        return MaterialPageRoute(builder: (_) => Bewegung());
+      case '/schlafen':
+        return MaterialPageRoute(builder: (_) => Schlafen());
+      case '/arbeit':
+        return MaterialPageRoute(builder: (_) => Arbeit());
       default:
         return _errorRoute();
     }

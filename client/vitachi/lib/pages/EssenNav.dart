@@ -38,7 +38,7 @@ class _EingabenNavState extends State<EingabenNav> {
                 children: <Widget>[
                   Expanded(
                     child: Icon(
-                      Icons.food_bank,
+                      Icons.fastfood_rounded,
                       size: 80,
                     ),
                     flex: 2,
@@ -53,7 +53,7 @@ class _EingabenNavState extends State<EingabenNav> {
                         FlatButton(
                           color: Colors.purpleAccent[100],
                           onPressed: () {
-                            Navigator.pushReplacementNamed(context, '/essen');
+                            Navigator.pushNamed(context, '/essen');
                           },
                           child: Text('Hinzufügen'),
                         )
@@ -83,7 +83,7 @@ class _EingabenNavState extends State<EingabenNav> {
                 children: <Widget>[
                   Expanded(
                     child: Icon(
-                      Icons.sports,
+                      Icons.sports_basketball,
                       size: 80,
                     ),
                     flex: 2,
@@ -97,7 +97,9 @@ class _EingabenNavState extends State<EingabenNav> {
                         Text('Bewerte hier deine letzte aktive Bewegung'),
                         FlatButton(
                           color: Colors.purpleAccent[100],
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/bewegung');
+                          },
                           child: Text('Hinzufügen'),
                         )
                       ],
@@ -140,7 +142,9 @@ class _EingabenNavState extends State<EingabenNav> {
                         Text('Bewerte hier deinen letzten Schlaf'),
                         FlatButton(
                           color: Colors.purpleAccent[100],
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/schlafen');
+                          },
                           child: Text('Hinzufügen'),
                         )
                       ],
@@ -183,7 +187,9 @@ class _EingabenNavState extends State<EingabenNav> {
                         Text('Hier kannst du deine Arbeitszeit eingeben'),
                         FlatButton(
                           color: Colors.purpleAccent[100],
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/arbeit');
+                          },
                           child: Text('Hinzufügen'),
                         )
                       ],
