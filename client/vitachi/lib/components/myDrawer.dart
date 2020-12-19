@@ -62,7 +62,7 @@ class MyDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 18),
             ),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushReplacementNamed(context, '/shop');
             },
           ),
           ListTile(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
-import 'package:vitachi/main.dart';
 
 class EingabenNav extends StatefulWidget {
   @override
