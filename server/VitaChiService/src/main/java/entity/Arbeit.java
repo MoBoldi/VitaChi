@@ -15,14 +15,16 @@ public class Arbeit {
 
     private Date startdatum;
     private Date enddatum;
+    private long userID;
 
 
     public Arbeit(){}
 
-    public Arbeit(long arbeitID, Date startdatum, Date enddatum) {
+    public Arbeit(long arbeitID, Date startdatum, Date enddatum, long userID) {
         this.arbeitID = arbeitID;
         this.startdatum = startdatum;
         this.enddatum = enddatum;
+        this.userID = userID;
     }
 
     //<editor-fold desc="Getter und Setter">
@@ -49,6 +51,15 @@ public class Arbeit {
     public void setEnddatum(Date enddatum) {
         this.enddatum = enddatum;
     }
+
+    public long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(long userID) {
+        this.userID = userID;
+    }
+
     //</editor-fold>
 }
 

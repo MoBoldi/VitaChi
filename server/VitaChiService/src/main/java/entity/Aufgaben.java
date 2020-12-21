@@ -17,16 +17,18 @@ public class Aufgaben {
     private Date erstelldatum;
     private Date enddatum;
     private char status;
+    private long userID;
 
 
     public Aufgaben(){}
 
-    public Aufgaben(long aufgabenID, String bezeichnung, Date erstelldatum, Date enddatum, char status) {
+    public Aufgaben(long aufgabenID, String bezeichnung, Date erstelldatum, Date enddatum, char status, long userID) {
         this.aufgabenID = aufgabenID;
         this.bezeichnung = bezeichnung;
         this.erstelldatum = erstelldatum;
         this.enddatum = enddatum;
         this.status =  status;
+        this.userID = userID;
     }
 
     //<editor-fold desc="Getter und Setter">
@@ -69,6 +71,15 @@ public class Aufgaben {
     public void setStatus(char status) {
         this.status = status;
     }
+
+    public long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(long userID) {
+        this.userID = userID;
+    }
+
     //</editor-fold>
 }
 
