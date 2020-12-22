@@ -9,16 +9,16 @@ class Home extends StatelessWidget {
     ChartData('', 2, Colors.green[100]),
   ];
   final List<ChartData> food = [
-    ChartData('Food', 3, Colors.blue),
-    ChartData('', 2, Colors.blue[100]),
+    ChartData('Food', 4, Colors.blue),
+    ChartData('', 1, Colors.blue[100]),
   ];
   final List<ChartData> movement = [
     ChartData('Movement', 3, Colors.amber),
     ChartData('', 2, Colors.amber[100]),
   ];
   final List<ChartData> sleep = [
-    ChartData('Sleep', 3, Colors.purple),
-    ChartData('', 2, Colors.purple[100]),
+    ChartData('Sleep', 2, Colors.purple),
+    ChartData('', 3, Colors.purple[100]),
   ];
 
   @override
