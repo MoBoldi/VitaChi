@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
-import 'package:vitachi/main.dart';
 import 'package:vitachi/pages/Arbeit.dart';
 import 'package:vitachi/pages/Bewegung.dart';
 import 'package:vitachi/pages/Essen.dart';
