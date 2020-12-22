@@ -1,0 +1,8 @@
+  22.12.2020 11:01:38: Komposition 'VitaChi' gestartet.
+
+  Speichern unter: C:\Users\Markus Stadler\Documents\HTL\4.Klasse\ITP\Projekt2021\VitaChi\doc\Logo\VitaChi.avi      Rendern vom Benutzer gestoppt.    22.12.2020 11:01:50: Komposition 'VitaChi' beendet.
+
+
+  Bish. Renderz.: 11 Sekunden
+Das Protokoll wurde am 22.12.2020 um 11:01:50 geschlossen.
+
