@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:vitachi/entitys/Produkt.dart';
+import 'package:vitachi/pages/detail_shop.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -55,29 +56,35 @@ class _BodyState extends State<Body> {
                   crossAxisSpacing: 20,
                   childAspectRatio: 0.75),
               itemBuilder: (context, index) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                        child: Container(
-                            padding: EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                                color: Colors.lightBlue,
-                                borderRadius: BorderRadius.circular(16)),
-                            child: Image(
-                              image: NetworkImage(userData[index]["avatar"]),
-                            ))),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: Text(
-                        userData[index]["first_name"],
+                return GestureDetector(
+                  onTap: () {
+                    //Navigator.pushNamed(context, '/detailShop');
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailShop(data: userData[index])));
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                          child: Container(
+                              padding: EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                  color: Colors.lightBlue,
+                                  borderRadius: BorderRadius.circular(16)),
+                              child: Image(
+                                image: NetworkImage(userData[index]["avatar"]),
+                              ))),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Text(
+                          userData[index]["first_name"],
+                        ),
                       ),
-                    ),
-                    Text(
-                      "234€",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
+                      Text(
+                        "234€",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 );
               }),
         ))
@@ -85,7 +92,7 @@ class _BodyState extends State<Body> {
     );
   }
 }
-
+/*
 class ProduktKarte extends StatelessWidget {
   final Produkt produkt;
 
@@ -124,3 +131,4 @@ class ProduktKarte extends StatelessWidget {
     );
   }
 }
+*/
