@@ -24,7 +24,7 @@ class DetailShop extends StatelessWidget {
                 child: Stack(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: size.height * 0.3),
+                      margin: EdgeInsets.only(top: size.height /2.5),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
@@ -41,12 +41,13 @@ class DetailShop extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image(image: NetworkImage(data["avatar"]), height: MediaQuery.of(context).size.height/7,),
+                            Image(image: NetworkImage(data["avatar"]), height: MediaQuery.of(context).size.height/4,),
                           ],
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height / 20),
-                        Row(
+                            height: MediaQuery.of(context).size.height / 7
+                        ),
+                        /*Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Expanded(
@@ -66,30 +67,54 @@ class DetailShop extends StatelessWidget {
                               flex: 3,
                             ),
                           ],
+                        ),*/
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20.0),
+                              child: Text(data["first_name"] + " " + data["last_name"], style: TextStyle(fontSize: size.height/30),),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20.0),
+                              child: Text("klein gedruckte Zusatzinfo", style: TextStyle(color: Color(0xffb560a0))),
+                            ),
+
+                          ],
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height / 10
+                            height: MediaQuery.of(context).size.height / 20
                         ),
+                        Divider(
+                          color: Colors.black,
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height / 20
+                        ),
+
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(20.0, 0, 20, 0),
+                          padding: const EdgeInsets.fromLTRB(20,0,20,0),
                           child: AutoSizeText("Beschreibung:",
                             style: TextStyle(fontSize: 20),),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(20.0),
+                          padding: const EdgeInsets.fromLTRB(20,0,20,0),
                           child: AutoSizeText("öllöksajdfsajfölksdj lk sdfljsaklöfj kjs dfölja sflöj salkf saldjf klsaj fklsja klf jakls flsadkjfsdjf sadkl fsj df jsaldf jösaldj fölasdj fasjf ösldfj söl jfd",
-                            style: TextStyle(fontSize: 20), maxLines: 4,),
+                              style: TextStyle(fontSize: 20), maxLines: 4,),
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height / 10
+                            height: MediaQuery.of(context).size.height / 20
                         ),
                         Row(
                           children: [
                             Container(
                               child: Padding(
-                                padding: const EdgeInsets.fromLTRB(20,0,20,0),
-                                child: AutoSizeText("243 VitaCoins", style: TextStyle(fontSize: 20),),
+                                padding: const EdgeInsets.fromLTRB(20,0,2,0),
+                                child: AutoSizeText("243", style: TextStyle(fontSize: 20),),
                               ),
+                            ),
+                            Icon(
+                              Icons.monetization_on_outlined
                             ),
                             Expanded(
                               child: Padding(
