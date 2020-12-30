@@ -21,8 +21,7 @@ public class Eingabe {
 
     public Eingabe(){}
 
-    public Eingabe(long eingabeID, String typ, int bewertung1, int bewertung2, LocalDate datum, long userID) {
-        this.eingabeID = eingabeID;
+    public Eingabe(String typ, int bewertung1, int bewertung2, LocalDate datum, long userID) {
         this.typ = typ;
         this.bewertung1 = bewertung1;
         this.bewertung2 = bewertung2;
@@ -31,13 +30,6 @@ public class Eingabe {
     }
 
     //<editor-fold desc="Getter und Setter">
-    public long getEingabeID() {
-        return eingabeID;
-    }
-
-    public void setEingabeID(long eingabeID) {
-        this.eingabeID = eingabeID;
-    }
 
     public String getTyp() {
         return typ;

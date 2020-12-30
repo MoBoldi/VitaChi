@@ -29,7 +29,7 @@ public class VitaChiService {
 
 
     // Initialisiren der DB
-    @Path("init/{Entity}")
+    @Path("init")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String init() {
@@ -46,7 +46,7 @@ public class VitaChiService {
     }
 
     // Ein Training senden
-    @Path("find/{Entity}&{id}")
+    @Path("find/{Entity}/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Object findAll(@PathParam("Entity") String param, @PathParam("id") long id) {
@@ -54,7 +54,7 @@ public class VitaChiService {
     }
 
     // Ein Training löschen
-    @Path("delete/{Entity}&{id}")
+    @Path("delete/{Entity}/{id}")
     @DELETE
     public String deleteTraining(@PathParam("Entity") String param, @PathParam("id") long id) {
         repo.delete(param, id);

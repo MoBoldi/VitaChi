@@ -22,8 +22,7 @@ public class Accessoire {
 
     public Accessoire(){}
 
-    public Accessoire(long accessoireID, String bezeichnung, String beschreibung,int preis,String details, String bildPfad) {
-        this.accessoireID = accessoireID;
+    public Accessoire(String bezeichnung, String beschreibung,int preis,String details, String bildPfad) {
         this.bezeichnung = bezeichnung;
         this.beschreibung = beschreibung;
         this.preis = preis;
@@ -31,13 +30,6 @@ public class Accessoire {
     }
 
     //<editor-fold desc="Getter und Setter">
-    public long getAccessoireID() {
-        return accessoireID;
-    }
-
-    public void setAccessoireID(long accessoireID) {
-        this.accessoireID = accessoireID;
-    }
 
     public String getBezeichnung() {
         return bezeichnung;

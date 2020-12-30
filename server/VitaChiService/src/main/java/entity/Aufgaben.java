@@ -1,7 +1,7 @@
 package entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @NamedQueries({
@@ -14,16 +14,15 @@ public class Aufgaben {
     private long aufgabenID;
 
     private String bezeichnung;
-    private Date erstelldatum;
-    private Date enddatum;
+    private LocalDate erstelldatum;
+    private LocalDate enddatum;
     private char status;
     private long userID;
 
 
     public Aufgaben(){}
 
-    public Aufgaben(long aufgabenID, String bezeichnung, Date erstelldatum, Date enddatum, char status, long userID) {
-        this.aufgabenID = aufgabenID;
+    public Aufgaben(String bezeichnung, LocalDate erstelldatum, LocalDate enddatum, char status, long userID) {
         this.bezeichnung = bezeichnung;
         this.erstelldatum = erstelldatum;
         this.enddatum = enddatum;
@@ -32,13 +31,6 @@ public class Aufgaben {
     }
 
     //<editor-fold desc="Getter und Setter">
-    public long getAufgabenID() {
-        return aufgabenID;
-    }
-
-    public void setAufgabenID(long aufgabenID) {
-        this.aufgabenID = aufgabenID;
-    }
 
     public String getBezeichnung() {
         return bezeichnung;
@@ -48,19 +40,19 @@ public class Aufgaben {
         this.bezeichnung = bezeichnung;
     }
 
-    public Date getErstelldatum() {
+    public LocalDate getErstelldatum() {
         return erstelldatum;
     }
 
-    public void setErstelldatum(Date erstelldatum) {
+    public void setErstelldatum(LocalDate erstelldatum) {
         this.erstelldatum = erstelldatum;
     }
 
-    public Date getEnddatum() {
+    public LocalDate getEnddatum() {
         return enddatum;
     }
 
-    public void setEnddatum(Date enddatum) {
+    public void setEnddatum(LocalDate enddatum) {
         this.enddatum = enddatum;
     }
 

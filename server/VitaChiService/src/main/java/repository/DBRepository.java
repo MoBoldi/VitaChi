@@ -20,16 +20,14 @@ public class DBRepository {
 
     // Initialisieren
     public void initDB() {
-        this.create(new Eingabe(1, "Bewertung 1", 3, 4, LocalDate.of(2020, 11, 27), 1));
+        this.create(new Eingabe("Bewertung 1", 3, 4, LocalDate.of(2020, 11, 27), 1));
         //this.create(new Training("Training 2", LocalDate.of(2020, 11, 27), "2", "Schwimmen", false));
         //this.create(new Training("Training 3", LocalDate.of(2020, 11, 27), "2", "Kraftsport", false));
     }
 
     // Lesen aller Trainings
     public List findAll(String param) {
-        var entity = param;
-
-        return em.createQuery("select returnObject from entity as returnObject").getResultList();
+        return em.createQuery("select returnObject from " + param + " as returnObject").getResultList();
     }
 
     // Löschen eines Trainings
@@ -46,7 +44,8 @@ public class DBRepository {
 
     // Lesen eines Trainings mit id
     public Object find(String entity, long id) {
-        return em.find(Object.class, id);
+        System.out.println(Eingabe.class);
+        return em.find(Eingabe.class, id);
     }
 
     // Ändern eines Trainings mit id
