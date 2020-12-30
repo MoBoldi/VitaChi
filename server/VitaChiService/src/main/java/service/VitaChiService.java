@@ -23,8 +23,8 @@ public class VitaChiService {
     @Path("test/{Entity}")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String test() {
-        return "VitaChi is in the room!" + {{Entity}} + "grüßt seine Schwestern und Brüder!";
+    public String test(@PathParam("Entity") String param) {
+        return "VitaChi is in the room! " + param + " grüßt seine Schwestern und Brüder!";
     }
 
 
@@ -41,23 +41,23 @@ public class VitaChiService {
     @Path("findAll/{Entity}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Training> findAll() {
-        return repo.findAll();
+    public List findAll(@PathParam("Entity") String param) {
+        return repo.findAll(param);
     }
 
     // Ein Training senden
-    @Path("find/{id}")
+    @Path("find/{Entity}&{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Training findAll(@PathParam("id") long id) {
-        return repo.find(id);
+    public Object findAll(@PathParam("Entity") String param, @PathParam("id") long id) {
+        return repo.find(param, id);
     }
 
     // Ein Training löschen
-    @Path("delete/{id}")
+    @Path("delete/{Entity}&{id}")
     @DELETE
-    public String deleteTraining(@PathParam("id") long id) {
-        repo.delete(id);
+    public String deleteTraining(@PathParam("Entity") String param, @PathParam("id") long id) {
+        repo.delete(param, id);
         return "training deleted";
     }
 
@@ -66,17 +66,18 @@ public class VitaChiService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Training createTraining(Training training) {
-        repo.create(training);
+    public Object createTraining(Object updateObject) {
+        repo.create(updateObject);
         //System.out.println(training);
-        return training;
+        return updateObject;
     }
 
     // Ein Training ändern
     @Path("update")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public String updateTraining(Training training) {
-        repo.update(training);
+    public String updateTraining(Object updateObject) {
+        repo.update(updateObject);
         return "training updated";
     }
+}
