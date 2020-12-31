@@ -25,7 +25,9 @@ class _EssenState extends State<Essen> {
           children: <Widget>[
             Expanded(
               child: FittedBox(
-                child: Icon(Icons.food_bank),
+                child: Image(
+                  image: AssetImage('assets/salad.png'),
+                ),
               ),
               flex: 5,
             ),

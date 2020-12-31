@@ -25,7 +25,12 @@ class _SchlafenState extends State<Schlafen> {
           children: <Widget>[
             Expanded(
               child: FittedBox(
-                child: Icon(Icons.bedtime),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Image(
+                    image: AssetImage('assets/night.png'),
+                  ),
+                ),
               ),
               flex: 5,
             ),

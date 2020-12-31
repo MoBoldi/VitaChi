@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:vitachi/entitys/Produkt.dart';
 import 'package:vitachi/pages/detail_shop.dart';
 
 class Body extends StatefulWidget {
@@ -17,6 +16,7 @@ class _BodyState extends State<Body> {
 
   Future getData() async {
     Response response = await get('https://reqres.in/api/users?page=2');
+
     data = json.decode(response.body);
     setState(() {
       userData = data["data"];
@@ -28,6 +28,7 @@ class _BodyState extends State<Body> {
   void initState() {
     super.initState();
     getData();
+
   }
 
   @override
@@ -132,3 +133,5 @@ class ProduktKarte extends StatelessWidget {
   }
 }
 */
+
+

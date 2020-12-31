@@ -36,9 +36,11 @@ class _EingabenNavState extends State<EingabenNav> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
-                    child: Icon(
-                      Icons.fastfood_rounded,
-                      size: 80,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image(
+                        image: AssetImage('assets/salad.png'),
+                      ),
                     ),
                     flex: 2,
                   ),
@@ -81,9 +83,11 @@ class _EingabenNavState extends State<EingabenNav> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
-                    child: Icon(
-                      Icons.sports_basketball,
-                      size: 80,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image(
+                        image: AssetImage('assets/basketball-ball.png'),
+                      ),
                     ),
                     flex: 2,
                   ),
@@ -126,9 +130,11 @@ class _EingabenNavState extends State<EingabenNav> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
-                    child: Icon(
-                      Icons.bedtime,
-                      size: 80,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image(
+                        image: AssetImage('assets/night.png'),
+                      ),
                     ),
                     flex: 2,
                   ),
@@ -171,9 +177,11 @@ class _EingabenNavState extends State<EingabenNav> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
-                    child: Icon(
-                      Icons.work,
-                      size: 80,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image(
+                        image: AssetImage('assets/laptop.png'),
+                      ),
                     ),
                     flex: 2,
                   ),
