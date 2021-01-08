@@ -11,6 +11,8 @@ import 'package:vitachi/pages/home.dart';
 import 'package:vitachi/pages/statistics.dart';
 import 'package:vitachi/pages/statisticsNav.dart';
 
+import 'pages/Wellbeing.dart';
+
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -26,6 +28,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Essen());
       case '/statistics':
         return MaterialPageRoute(builder: (_) => Statistics());
+      case '/wellbeing':
+        return MaterialPageRoute(builder: (_) => Wellbeing());
       case '/bewegung':
         return MaterialPageRoute(builder: (_) => Bewegung());
       case '/schlafen':
