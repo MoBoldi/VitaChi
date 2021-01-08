@@ -25,7 +25,12 @@ class _BewegungState extends State<Bewegung> {
           children: <Widget>[
             Expanded(
               child: FittedBox(
-                child: Icon(Icons.sports_basketball),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Image(
+                    image: AssetImage('assets/basketball-ball.png'),
+                  ),
+                ),
               ),
               flex: 5,
             ),

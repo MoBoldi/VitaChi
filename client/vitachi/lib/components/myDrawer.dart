@@ -69,7 +69,6 @@ class MyDrawer extends StatelessWidget {
             title: Text(
               "ToDo",
               style: TextStyle(
-                color: Colors.grey,
                 fontSize: 18,
               ),
             ),

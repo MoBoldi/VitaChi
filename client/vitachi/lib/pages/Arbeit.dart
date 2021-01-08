@@ -26,7 +26,9 @@ class _ArbeitState extends State<Arbeit> {
           children: <Widget>[
             Expanded(
               child: FittedBox(
-                child: Icon(Icons.work),
+                child: Image(
+                  image: AssetImage('assets/laptop.png'),
+                ),
               ),
               flex: 5,
             ),

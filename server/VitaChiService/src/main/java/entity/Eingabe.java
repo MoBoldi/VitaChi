@@ -1,5 +1,5 @@
 package entity;
-import java.sql.Date;
+import java.time.LocalDate;
 import javax.persistence.*;
 
 @Entity
@@ -15,14 +15,13 @@ public class Eingabe {
     private String typ;
     private int bewertung1;
     private int bewertung2;
-    private Date datum;
+    private LocalDate datum;
     private long userID;
 
 
     public Eingabe(){}
 
-    public Eingabe(long eingabeID, String typ, int bewertung1, int bewertung2, Date datum, long userID) {
-        this.eingabeID = eingabeID;
+    public Eingabe(String typ, int bewertung1, int bewertung2, LocalDate datum, long userID) {
         this.typ = typ;
         this.bewertung1 = bewertung1;
         this.bewertung2 = bewertung2;
@@ -31,13 +30,6 @@ public class Eingabe {
     }
 
     //<editor-fold desc="Getter und Setter">
-    public long getEingabeID() {
-        return eingabeID;
-    }
-
-    public void setEingabeID(long eingabeID) {
-        this.eingabeID = eingabeID;
-    }
 
     public String getTyp() {
         return typ;
@@ -63,11 +55,11 @@ public class Eingabe {
         this.bewertung2 = bewertung2;
     }
 
-    public Date getDatum() {
+    public LocalDate getDatum() {
         return datum;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(LocalDate datum) {
         this.datum = datum;
     }
 

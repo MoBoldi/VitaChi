@@ -1,11 +1,36 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vitachi/components/myAppBar.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:vitachi/components/myDrawer.dart';
+import 'package:http/http.dart';
+import 'package:vitachi/pages/detail_shop.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  Map data;
+  List userData;
+
+  Future getData() async {
+    Response response = await get('https://reqres.in/api/users?page=2');
+
+    data = json.decode(response.body);
+    setState(() {
+      userData = data["data"];
+    });
+    print(userData.toString());
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,19 +48,57 @@ class Body extends StatelessWidget {
         ),
         Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: GridView.builder(
-                  itemCount: 10,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20, childAspectRatio: 0.75),
-                  itemBuilder: (context, index) => ProductCard()),
-            ))
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: GridView.builder(
+              itemCount: userData.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 20,
+                  childAspectRatio: 0.75),
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    //Navigator.pushNamed(context, '/detailShop');
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailShop(data: userData[index])));
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                          child: Container(
+                              padding: EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                  color: Color(0xffd665ba),
+                                  borderRadius: BorderRadius.circular(16)),
+                              child: Image(
+                                image: NetworkImage(userData[index]["avatar"]),
+                              ))),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Text(
+                          userData[index]["first_name"],
+                        ),
+                      ),
+                      Text(
+                        "234€",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+        ))
       ],
     );
   }
 }
+/*
+class ProduktKarte extends StatelessWidget {
+  final Produkt produkt;
 
-class ProductCard extends StatelessWidget {
+  ProduktKarte({Key key, this.produkt}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -45,15 +108,19 @@ class ProductCard extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
-                color: Colors.lightBlue, borderRadius: BorderRadius.circular(16)),
+                color: Colors.lightBlue,
+                borderRadius: BorderRadius.circular(16)),
             child: FittedBox(
-              child: Icon(Icons.laptop_chromebook, size: MediaQuery.of(context).size.height/7,),
+              child: Icon(
+                Icons.laptop_chromebook,
+                size: MediaQuery.of(context).size.height / 7,
+              ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5),
             child: Text(
-              "Laptop",
+              produkt.title,
             ),
           ),
           Text(
@@ -65,3 +132,6 @@ class ProductCard extends StatelessWidget {
     );
   }
 }
+*/
+
+

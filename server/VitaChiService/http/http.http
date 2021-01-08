@@ -1,27 +1,9 @@
-GET http://localhost:8080/training/message
+GET http://localhost:8080/vitaChi/test/Eingabe
 ###
-GET http://localhost:8080/training/init
+GET http://localhost:8080/vitaChi/init
 ###
-GET http://localhost:8080/training/findAll
+GET http://localhost:8080/vitaChi/findAll/Eingabe
 ###
-GET http://localhost:8080/training/find/1
+GET http://localhost:8080/vitaChi/find/Eingabe/1
 ###
-DELETE http://localhost:8080/training/delete/1
-###
-POST http://localhost:8080/training/create
-Content-Type: application/json
-{
-  "firstname": "Zeus",
-  "lastname": "Zeppelin",
-  "country": "Zypern",
-  "gender": "M"
-}
-###
-PUT http://localhost:8080/training/update
-Content-Type: application/json
-{
-  "firstname": "Zeus NEU",
-  "lastname": "Zeppelin NEU",
-  "country": "Zypern NEU",
-  "gender": "M NEU"
-}
+DELETE http://localhost:8080/vitaChi/delete/Eingabe/1
