@@ -5,6 +5,7 @@ import 'package:vitachi/pages/Arbeit.dart';
 import 'package:vitachi/pages/Bewegung.dart';
 import 'package:vitachi/pages/Essen.dart';
 import 'package:vitachi/pages/EssenNav.dart';
+import 'package:vitachi/pages/Login.dart';
 import 'package:vitachi/pages/Schlafen.dart';
 import 'package:vitachi/pages/Shop.dart';
 import 'package:vitachi/pages/detail_shop.dart';
@@ -41,6 +42,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Shop());
       case '/detailShop':
         return MaterialPageRoute(builder: (_) => DetailShop());
+      case '/login':
+        return MaterialPageRoute(builder: (_) => Login());
       default:
         return _errorRoute();
     }

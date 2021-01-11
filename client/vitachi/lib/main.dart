@@ -6,13 +6,14 @@ void main() {
   runApp(
     MaterialApp(
       home: Home(),
+      debugShowCheckedModeBanner: false,
       /*routes: {
       '/home': (context) => Home(),
       '/eingabeNav': (context) => EingabenNav(),
       '/statistics': (context) => Statistics(),
       '/essen': (context) => Essen()
     },*/
-      initialRoute: '/',
+      initialRoute: '/login',
       onGenerateRoute: RouteGenerator.generateRoute,
     ),
   );

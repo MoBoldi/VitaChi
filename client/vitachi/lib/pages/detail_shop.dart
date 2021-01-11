@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:vitachi/components/myAppBar.dart';
+import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class DetailShop extends StatelessWidget {
@@ -14,8 +14,8 @@ class DetailShop extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-        appBar: MyAppBar(context, 'VitaChi', null),
-        backgroundColor: Color(0xffF2E7FE),
+        appBar: MyAppBarEingaben(context, 'VitaChi', null),
+        backgroundColor:  Color(0xff82b086),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -36,7 +36,7 @@ class DetailShop extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text("VitaShop", style: Theme.of(context).textTheme.headline6,),
+                          //child: Text("VitaShop", style: Theme.of(context).textTheme.headline6,),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -77,7 +77,7 @@ class DetailShop extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 20.0),
-                              child: Text("klein gedruckte Zusatzinfo", style: TextStyle(color: Color(0xffb560a0))),
+                              child: Text("klein gedruckte Zusatzinfo", style: TextStyle(color: Color(0xFF3D6845))),
                             ),
 
                           ],
@@ -124,10 +124,11 @@ class DetailShop extends StatelessWidget {
                                       "Kaufen",
                                       style: TextStyle(
                                         fontSize: 17,
-                                        fontWeight: FontWeight.bold
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white
                                       ),
                                     ),
-                                  color: Colors.purpleAccent[100],
+                                  color: Color(0xFF3D6845),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18)
                                   ),

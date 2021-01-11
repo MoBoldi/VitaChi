@@ -52,7 +52,7 @@ class _EingabenNavState extends State<EingabenNav> {
                         Text('Essen'),
                         Text('Hier eingeben zum Essen'),
                         FlatButton(
-                          color: Colors.purpleAccent[100],
+                          color: Color(0xffbbedc5),
                           onPressed: () {
                             Navigator.pushNamed(context, '/essen');
                           },
@@ -99,7 +99,7 @@ class _EingabenNavState extends State<EingabenNav> {
                         Text('Bewegung'),
                         Text('Bewerte hier deine letzte aktive Bewegung'),
                         FlatButton(
-                          color: Colors.purpleAccent[100],
+                          color: Color(0xffbbedc5),
                           onPressed: () {
                             Navigator.pushNamed(context, '/bewegung');
                           },
@@ -146,7 +146,7 @@ class _EingabenNavState extends State<EingabenNav> {
                         Text('Schlaf'),
                         Text('Bewerte hier deinen letzten Schlaf'),
                         FlatButton(
-                          color: Colors.purpleAccent[100],
+                          color: Color(0xffbbedc5),
                           onPressed: () {
                             Navigator.pushNamed(context, '/schlafen');
                           },
@@ -193,7 +193,7 @@ class _EingabenNavState extends State<EingabenNav> {
                         Text('Arbeit'),
                         Text('Hier kannst du deine Arbeitszeit eingeben'),
                         FlatButton(
-                          color: Colors.purpleAccent[100],
+                          color: Color(0xffbbedc5),
                           onPressed: () {
                             Navigator.pushNamed(context, '/arbeit');
                           },

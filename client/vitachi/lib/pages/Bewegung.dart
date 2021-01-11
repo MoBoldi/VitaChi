@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vitachi/components/myAppBar.dart';
+import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -12,8 +12,8 @@ class _BewegungState extends State<Bewegung> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(context, 'VitaChi', null),
-      backgroundColor: Color(0xffF2E7FE),
+      appBar: MyAppBarEingaben(context, 'VitaChi', null),
+      backgroundColor: Color(0xff82b086),
       body: Stack(children: <Widget>[
         Container(
           margin: EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.height/3.5,0,0),
@@ -140,10 +140,10 @@ class _BewegungState extends State<Bewegung> {
               child: FlatButton(
                   onPressed: () {},
                   minWidth: MediaQuery.of(context).size.width / 2,
-                  color: Colors.purpleAccent,
+                  color: Color(0xFF3D6845),
                   child: AutoSizeText(
                     "Absenden",
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(5.0))),

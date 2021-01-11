@@ -1,11 +1,11 @@
 class Produkt{
-  String image, title, description;
-  int price, size, id;
+  String image, title, description, color;
+  int price, id;
   Produkt({
     this.id,
-    this.size,
     this.price,
     this.image,
+    this.color,
     this.title,
     this.description
 });
