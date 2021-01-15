@@ -73,7 +73,9 @@ class _BodyState extends State<Body> {
                                   borderRadius: BorderRadius.circular(16)),
                               child: Image(
                                 image: NetworkImage(userData[index]["avatar"]),
-                              ))),
+                              )
+                          )
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Text(

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:vitachi/entitys/Eingaben.dart';
+
+var eingaben = 0;
 
 class Bewegung extends StatefulWidget {
   @override
@@ -96,7 +99,6 @@ class _BewegungState extends State<Bewegung> {
                       color: Colors.amber,
                     ),
                     onRatingUpdate: (rating) {
-                      print(rating);
                     },
                   ),
                   Expanded(
@@ -125,7 +127,6 @@ class _BewegungState extends State<Bewegung> {
                       color: Colors.amber,
                     ),
                     onRatingUpdate: (rating) {
-                      print(rating);
                     },
                   ),
                   Expanded(
@@ -138,7 +139,8 @@ class _BewegungState extends State<Bewegung> {
             ),
             Expanded(
               child: FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                  },
                   minWidth: MediaQuery.of(context).size.width / 2,
                   color: Color(0xFF3D6845),
                   child: AutoSizeText(
@@ -159,3 +161,6 @@ class _BewegungState extends State<Bewegung> {
     );
   }
 }
+
+
+

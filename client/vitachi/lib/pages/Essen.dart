@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:vitachi/entitys/Eingaben.dart';
+
+
 
 class Essen extends StatefulWidget {
   @override
@@ -9,6 +12,7 @@ class Essen extends StatefulWidget {
 }
 
 class _EssenState extends State<Essen> {
+  Eingaben essenEingaben = new Eingaben(0,0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,6 +98,7 @@ class _EssenState extends State<Essen> {
                     ),
                     onRatingUpdate: (rating) {
                       print(rating);
+                      essenEingaben.setEingabe1(rating);
                     },
                   ),
                   Expanded(
@@ -123,6 +128,7 @@ class _EssenState extends State<Essen> {
                     ),
                     onRatingUpdate: (rating) {
                       print(rating);
+                      essenEingaben.setEingabe2(rating);
                     },
                   ),
                   Expanded(
@@ -135,7 +141,12 @@ class _EssenState extends State<Essen> {
             ),
             Expanded(
               child: FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print(essenEingaben.setAvg());
+                    Navigator.pushReplacementNamed(context, '/', arguments: {
+                      'avg': essenEingaben.setAvg()
+                    });
+                  },
                   minWidth: MediaQuery.of(context).size.width / 2,
                   color: Color(0xFF3D6845),
                   child: AutoSizeText(

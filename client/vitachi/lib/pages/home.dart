@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
+import 'package:vitachi/pages/Essen.dart';
+
+
+
 
 class Home extends StatelessWidget {
   final List<ChartData> ges = [
@@ -21,8 +25,17 @@ class Home extends StatelessWidget {
     ChartData('', 3, Colors.purple[100]),
   ];
 
+  Map data = {};
+
+
   @override
   Widget build(BuildContext context) {
+
+    data = ModalRoute.of(context).settings.arguments;
+    print(data);
+
+
+
     return Scaffold(
         appBar: MyAppBar(context, 'VitaChi', null),
         body: Container(
