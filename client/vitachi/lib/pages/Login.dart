@@ -43,36 +43,58 @@ class _LoginState extends State<Login> {
                                     height: MediaQuery.of(context).size.height/16,
                                   ),
                                   SizedBox(
-                                    height: MediaQuery.of(context).size.height/16,
-                                    width: MediaQuery.of(context).size.width/2,
-                                    child: TextFormField(
-                                      decoration: const InputDecoration(
-                                        hintText: 'Benutzername',
+                                    height: MediaQuery.of(context).size.height/12,
+                                    width: MediaQuery.of(context).size.width/1.5,
+                                    child: Card(
+                                      child: Center(
+                                        child: TextFormField(
+                                          textAlign: TextAlign.center,
+                                          decoration: const InputDecoration(
+                                            hintText: 'Benutzername',
+                                            border: InputBorder.none,
+                                            focusedBorder: InputBorder.none,
+                                            enabledBorder: InputBorder.none,
+                                            errorBorder: InputBorder.none,
+                                            disabledBorder: InputBorder.none,
+                                          ),
+                                          validator: (value) {
+                                            if (value.isEmpty) {
+                                              return 'Bitte gib einen Benutzernamen ein';
+                                            }
+                                            return null;
+                                          },
+                                        ),
                                       ),
-                                      validator: (value) {
-                                        if (value.isEmpty) {
-                                          return 'Bitte gib einen Benutzernamen ein';
-                                        }
-                                        return null;
-                                      },
+                                      elevation: 5,
                                     ),
                                   ),
                                   Container(
                                     height: MediaQuery.of(context).size.height/32,
                                   ),
                                   SizedBox(
-                                    height: MediaQuery.of(context).size.height/16,
-                                    width: MediaQuery.of(context).size.width/2,
-                                    child: TextFormField(
-                                      decoration: const InputDecoration(
-                                        hintText: 'Passwort',
+                                    height: MediaQuery.of(context).size.height/12,
+                                    width: MediaQuery.of(context).size.width/1.5,
+                                    child: Card(
+                                      child: Center(
+                                        child: TextFormField(
+                                          textAlign: TextAlign.center,
+                                          decoration: const InputDecoration(
+                                            hintText: 'Passwort',
+                                            border: InputBorder.none,
+                                            focusedBorder: InputBorder.none,
+                                            enabledBorder: InputBorder.none,
+                                            errorBorder: InputBorder.none,
+                                            disabledBorder: InputBorder.none,
+                                          ),
+                                          validator: (value) {
+                                            if (value.isEmpty) {
+                                              return 'Bitte gib ein Passwort ein';
+                                            }
+                                            return null;
+                                          },
+                                        ),
                                       ),
-                                      validator: (value) {
-                                        if (value.isEmpty) {
-                                          return 'Bitte gib ein Passwort ein';
-                                        }
-                                        return null;
-                                      },
+                                      elevation: 5,
                                     ),
                                   ),
                                   Container(
@@ -94,7 +116,9 @@ class _LoginState extends State<Login> {
                                     height: MediaQuery.of(context).size.height/32,
                                   ),
                                   FlatButton(
-                                    onPressed: (){},
+                                    onPressed: (){
+                                      Navigator.pushReplacementNamed(context, '/register');
+                                    },
                                     child: Text("Registrieren", style: TextStyle(color: Colors.white),),
                                     color: Color(0xFF3D6845),
                                   )

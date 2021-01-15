@@ -76,13 +76,13 @@ class _EssenState extends State<Essen> {
                     flex: 4,
                   ),
                   Expanded(
-                    child: AutoSizeText(
+                    child: Text(
                       "Wie gut hat dir deine letzte Mahlzeit geschmeckt?",
-                      style: TextStyle(fontSize: 20),
-                      maxLines: 2,
+                      style: TextStyle(fontSize: MediaQuery.of(context).size.height/30),
                       textAlign: TextAlign.center,
+                      overflow: TextOverflow.visible,
                     ),
-                    flex: 2,
+                    flex: 5,
                   ),
                   RatingBar.builder(
                     initialRating: 3,
@@ -106,13 +106,13 @@ class _EssenState extends State<Essen> {
                     flex: 1,
                   ),
                   Expanded(
-                    child: AutoSizeText(
+                    child: Text(
                       "Wie gesund war deine letzte Mahlzeit?",
-                      style: TextStyle(fontSize: 20),
-                      maxLines: 2,
+                      style: TextStyle(fontSize: MediaQuery.of(context).size.height/30),
                       textAlign: TextAlign.center,
+                      overflow: TextOverflow.visible,
                     ),
-                    flex: 2,
+                    flex: 5,
                   ),
                   RatingBar.builder(
                     initialRating: 3,

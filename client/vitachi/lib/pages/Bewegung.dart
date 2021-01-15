@@ -78,13 +78,14 @@ class _BewegungState extends State<Bewegung> {
                     flex: 4,
                   ),
                   Expanded(
-                    child: AutoSizeText(
+                    child: Text(
                       "Wie anstrengend war deine letze Bewegung?",
-                      style: TextStyle(fontSize: 20),
-                      maxLines: 2,
+
+                      overflow: TextOverflow.visible,
+                      style: TextStyle(fontSize: MediaQuery.of(context).size.height/30),
                       textAlign: TextAlign.center,
                     ),
-                    flex: 2,
+                    flex: 6,
                   ),
                   RatingBar.builder(
                     initialRating: 3,
@@ -103,16 +104,16 @@ class _BewegungState extends State<Bewegung> {
                   ),
                   Expanded(
                     child: Container(),
-                    flex: 1,
+                    flex: 2,
                   ),
                   Expanded(
-                    child: AutoSizeText(
+                    child: Text(
                       "Wie fühlst du dich nach der Bewegung?",
-                      style: TextStyle(fontSize: 20),
-                      maxLines: 2,
+                      overflow: TextOverflow.visible,
+                      style: TextStyle(fontSize: MediaQuery.of(context).size.height/30),
                       textAlign: TextAlign.center,
                     ),
-                    flex: 2,
+                    flex: 4,
                   ),
                   RatingBar.builder(
                     initialRating: 3,

@@ -77,8 +77,8 @@ class _SchlafenState extends State<Schlafen> {
                   Expanded(
                     child: AutoSizeText(
                       "Wie lange hast du geschlafen?",
-                      style: TextStyle(fontSize: 20),
-                      maxLines: 2,
+                      overflow: TextOverflow.visible,
+                      style: TextStyle(fontSize: MediaQuery.of(context).size.height/30),
                       textAlign: TextAlign.center,
                     ),
                     flex: 2,
@@ -106,8 +106,8 @@ class _SchlafenState extends State<Schlafen> {
                   Expanded(
                     child: AutoSizeText(
                       "Wie gut hast du geschlafen?",
-                      style: TextStyle(fontSize: 20),
-                      maxLines: 2,
+                      overflow: TextOverflow.visible,
+                      style: TextStyle(fontSize: MediaQuery.of(context).size.height/30),
                       textAlign: TextAlign.center,
                     ),
                     flex: 2,
