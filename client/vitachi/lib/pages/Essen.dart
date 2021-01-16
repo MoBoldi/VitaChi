@@ -4,15 +4,13 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:vitachi/entitys/Eingaben.dart';
 
-
-
 class Essen extends StatefulWidget {
   @override
   _EssenState createState() => _EssenState();
 }
 
 class _EssenState extends State<Essen> {
-  Eingaben essenEingaben = new Eingaben(0,0);
+  Eingaben essenEingaben = new Eingaben(0, 0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +18,10 @@ class _EssenState extends State<Essen> {
       backgroundColor: Color(0xff82b086),
       body: Stack(children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.height/3.5,0,0),
+          margin: EdgeInsets.fromLTRB(
+              0, MediaQuery.of(context).size.height / 3.5, 0, 0),
           color: Colors.white,
-          height: MediaQuery.of(context).size.height/1.5,
+          height: MediaQuery.of(context).size.height / 1.5,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,7 +77,8 @@ class _EssenState extends State<Essen> {
                   Expanded(
                     child: Text(
                       "Wie gut hat dir deine letzte Mahlzeit geschmeckt?",
-                      style: TextStyle(fontSize: MediaQuery.of(context).size.height/30),
+                      style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.height / 30),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.visible,
                     ),
@@ -108,7 +108,8 @@ class _EssenState extends State<Essen> {
                   Expanded(
                     child: Text(
                       "Wie gesund war deine letzte Mahlzeit?",
-                      style: TextStyle(fontSize: MediaQuery.of(context).size.height/30),
+                      style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.height / 30),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.visible,
                     ),
@@ -143,9 +144,8 @@ class _EssenState extends State<Essen> {
               child: FlatButton(
                   onPressed: () {
                     print(essenEingaben.setAvg());
-                    Navigator.pushReplacementNamed(context, '/', arguments: {
-                      'avg': essenEingaben.setAvg()
-                    });
+                    Navigator.pushReplacementNamed(context, '/',
+                        arguments: {'avg': essenEingaben.setAvg()});
                   },
                   minWidth: MediaQuery.of(context).size.width / 2,
                   color: Color(0xFF3D6845),

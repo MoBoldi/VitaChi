@@ -64,6 +64,7 @@ class _Statistics extends State<Statistics> {
                   xValueMapper: (ChartData data, _) => data.x,
                   yValueMapper: (ChartData data, _) => data.y,
                   innerRadius: '80%',
+                  radius: '60%',
                   pointColorMapper: (ChartData data, _) => data.color,
                 ),
               ],
@@ -112,9 +113,10 @@ class _Statistics extends State<Statistics> {
               ),
             ),
             Container(
-              child: Center(
-                child: Container(
-                  child: SfCartesianChart(
+              child: Wrap(
+                children: [
+                  Container(
+                    child: SfCartesianChart(
                       primaryXAxis: CategoryAxis(),
                       primaryYAxis: NumericAxis(
                         minimum: 0,
@@ -128,8 +130,29 @@ class _Statistics extends State<Statistics> {
                           yValueMapper: (ChartData rating, _) => rating.y,
                           color: chartColor,
                         ),
-                      ]),
-                ),
+                      ],
+                    ),
+                  ),
+                  Center(
+                    child: Wrap(
+                      //mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MaterialButton(
+                          onPressed: null,
+                          child: Text("Woche"),
+                        ),
+                        MaterialButton(
+                          onPressed: null,
+                          child: Text("Monat"),
+                        ),
+                        MaterialButton(
+                          onPressed: null,
+                          child: Text("Jahr"),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

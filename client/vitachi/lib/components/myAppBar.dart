@@ -8,7 +8,9 @@ Widget MyAppBar(BuildContext context, String title, dynamic otherData) {
     actions: <Widget>[
       IconButton(
         icon: Icon(Icons.add, color: Colors.white),
-        onPressed: null,
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, '/eingabeNav');
+        },
       )
     ],
   );

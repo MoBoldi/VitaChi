@@ -4,16 +4,13 @@ import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
 import 'package:vitachi/pages/Essen.dart';
 
-
-
-
 class Home extends StatelessWidget {
   final List<ChartData> ges = [
     ChartData('Wellbeeing', 3, Colors.green),
     ChartData('', 2, Colors.green[100]),
   ];
-  final List<ChartData> food = [
-    ChartData('Food', 4, Colors.blue),
+  List<ChartData> food = [
+    ChartData('Food', 5, Colors.blue),
     ChartData('', 1, Colors.blue[100]),
   ];
   final List<ChartData> movement = [
@@ -27,14 +24,18 @@ class Home extends StatelessWidget {
 
   Map data = {};
 
-
   @override
   Widget build(BuildContext context) {
-
     data = ModalRoute.of(context).settings.arguments;
+    if (data == null) {
+      data = {
+        'arg': food[0].y,
+      };
+    } else {
+      food[0].y = data['avg'];
+      food[1].y = 5 - data['avg'];
+    }
     print(data);
-
-
 
     return Scaffold(
         appBar: MyAppBar(context, 'VitaChi', null),
@@ -44,7 +45,7 @@ class Home extends StatelessWidget {
               children: [
                 Container(
                   child: Image(
-                    image: AssetImage('assets/Blume_Placeholder.png'),
+                    image: getEmotion(food[0].y),
                   ),
                 ),
                 Container(
@@ -102,7 +103,7 @@ class Home extends StatelessWidget {
 class ChartData {
   ChartData(this.x, this.y, [this.color]);
   final String x;
-  final double y;
+  double y;
   final Color color;
 }
 
@@ -137,4 +138,20 @@ SfCircularChart getChart(List<ChartData> data) {
       ),
     ],
   );
+}
+
+AssetImage getEmotion(double wellbeing) {
+  if (1 <= wellbeing && wellbeing < 2) {
+    return AssetImage('assets/Blume_1.png');
+  } else if (2 <= wellbeing && wellbeing < 3) {
+    return AssetImage('assets/Blume_2.png');
+  } else if (3 <= wellbeing && wellbeing < 4) {
+    return AssetImage('assets/Blume_3.png');
+  } else if (4 <= wellbeing && wellbeing < 4.5) {
+    return AssetImage('assets/Blume_4.png');
+  } else if (4.5 <= wellbeing && wellbeing <= 5) {
+    return AssetImage('assets/Blume_5.png');
+  } else {
+    return AssetImage('assets/Blume_3.png');
+  }
 }
