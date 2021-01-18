@@ -14,66 +14,126 @@ class MyDrawer extends StatelessWidget {
                 children: <Widget>[
                   Image(
                     image: AssetImage('assets/logo.png'),
-                  )
+                  ),
                 ],
               ),
             ),
             decoration: BoxDecoration(),
           ),
           ListTile(
-            title: Text(
-              "Home",
-              style: TextStyle(fontSize: 18),
+            title: Row(
+              children: [
+                Icon(
+                    Icons.home
+                ),
+                Text(
+                  " Home",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ],
             ),
             onTap: () {
               Navigator.pushReplacementNamed(context, '/');
             },
           ),
           ListTile(
-            title: Text(
-              "Eingaben",
-              style: TextStyle(fontSize: 18),
+            title: Row(
+              children: [
+                Icon(
+                    Icons.star
+                ),
+                Text(
+                  " Eingaben",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ],
             ),
             onTap: () {
               Navigator.pushReplacementNamed(context, '/eingabeNav');
             },
           ),
           ListTile(
-            title: Text(
-              "Statistiken",
-              style: TextStyle(fontSize: 18),
+            title: Row(
+              children: [
+                Icon(
+                    Icons.bar_chart
+                ),
+                Text(
+                  " Statistiken",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ],
             ),
             onTap: () {
               Navigator.pushReplacementNamed(context, '/statisticsNav');
             },
           ),
           ListTile(
-            title: Text(
-              "Freunde",
-              style: TextStyle(fontSize: 18),
+            title: Row(
+              children: [
+                Icon(
+                    Icons.person_add
+                ),
+                Text(
+                  " Freunde",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ],
             ),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            title: Text(
-              "Shop",
-              style: TextStyle(fontSize: 18),
+            title: Row(
+              children: [
+                Icon(
+                    Icons.shopping_cart
+                ),
+                Text(
+                  " Shop",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ],
             ),
             onTap: () {
               Navigator.pushReplacementNamed(context, '/shop');
             },
           ),
           ListTile(
-            title: Text(
-              "ToDo",
-              style: TextStyle(
-                fontSize: 18,
-              ),
+            title: Row(
+              children: [
+                Icon(
+                  Icons.menu_book
+                ),
+                Text(
+                  " ToDo",
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              ],
             ),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushReplacementNamed(context, '/aufgaben');
+            },
+          ),
+          ListTile(
+            title: Row(
+              children: [
+                Icon(
+                  Icons.settings
+                ),
+                Text(
+                  " Settings",
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              ],
+            ),
+            onTap: () {
+
             },
           )
         ],
