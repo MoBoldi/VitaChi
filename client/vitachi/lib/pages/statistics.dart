@@ -9,10 +9,10 @@ class Statistics extends StatefulWidget {
 }
 
 class _Statistics extends State<Statistics> {
-  final Color chartColor = Colors.blue;
+  final Color chartColor = Color(0xFF3D6845);
   final PassedData data = PassedData(
       chartData: ([
-        ChartData('Test', 2, Colors.blue),
+        ChartData('Test', 2, Color(0xFF3D6845)),
         ChartData('', 3, Colors.grey[200]),
       ]),
       barChartData: ([
@@ -43,117 +43,135 @@ class _Statistics extends State<Statistics> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(context, "VitaChi", null),
+      backgroundColor: Color(0xff82b086),
       body: SingleChildScrollView(
-        child: Column(
+        child: Stack(
           children: [
-            SfCircularChart(
-              annotations: <CircularChartAnnotation>[
-                CircularChartAnnotation(
-                  widget: Container(
-                    child: Text(
-                      "${data.chartData[1].y}",
-                      style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 0.5), fontSize: 25),
-                    ),
-                  ),
-                ),
-              ],
-              series: <CircularSeries>[
-                DoughnutSeries<ChartData, String>(
-                  dataSource: data.chartData,
-                  xValueMapper: (ChartData data, _) => data.x,
-                  yValueMapper: (ChartData data, _) => data.y,
-                  innerRadius: '80%',
-                  radius: '60%',
-                  pointColorMapper: (ChartData data, _) => data.color,
-                ),
-              ],
-            ),
-            Card(
-              margin: EdgeInsets.fromLTRB(15, 0, 15, 20),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
-                child: Center(
-                  child: AutoSizeText(
-                    '${data.title}',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
-            ),
             Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AutoSizeText(
-                        'Eingaben Gesamt:',
+              margin: EdgeInsets.fromLTRB(
+                  0, MediaQuery.of(context).size.height / 3, 0, 0),
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height / 1.2,
+            ),
+            Column(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height / 3.5,
+                  child: SfCircularChart(
+                    annotations: <CircularChartAnnotation>[
+                      CircularChartAnnotation(
+                        widget: Container(
+                          child: Text(
+                            "${data.chartData[1].y}",
+                            style: TextStyle(
+                              color: Color.fromRGBO(255, 255, 255, 1),
+                              fontSize: 25,
+                            ),
+                          ),
+                        ),
                       ),
-                      AutoSizeText(
-                        '1 Stern:',
-                      ),
-                      AutoSizeText(
-                        '5 Sterne:',
+                    ],
+                    series: <CircularSeries>[
+                      DoughnutSeries<ChartData, String>(
+                        dataSource: data.chartData,
+                        xValueMapper: (ChartData data, _) => data.x,
+                        yValueMapper: (ChartData data, _) => data.y,
+                        innerRadius: '80%',
+                        radius: '80%',
+                        pointColorMapper: (ChartData data, _) => data.color,
                       ),
                     ],
                   ),
-                  Column(
+                ),
+                Card(
+                  margin: EdgeInsets.fromLTRB(15, 0, 15, 20),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                    child: Center(
+                      child: AutoSizeText(
+                        '${data.title}',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 30, 0, 50),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      AutoSizeText('${getEntries()}'),
-                      AutoSizeText('${data.star1}'),
-                      AutoSizeText('${data.star5}'),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AutoSizeText(
+                            'Eingaben Gesamt:',
+                          ),
+                          AutoSizeText(
+                            '1 Stern:',
+                          ),
+                          AutoSizeText(
+                            '5 Sterne:',
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          AutoSizeText('${getEntries()}'),
+                          AutoSizeText('${data.star1}'),
+                          AutoSizeText('${data.star5}'),
+                        ],
+                      ),
                     ],
                   ),
-                ],
-              ),
-            ),
-            Container(
-              child: Wrap(
-                children: [
-                  Container(
-                    child: SfCartesianChart(
-                      primaryXAxis: CategoryAxis(),
-                      primaryYAxis: NumericAxis(
-                        minimum: 0,
-                        maximum: 5.5,
-                        isVisible: false,
+                ),
+                Container(
+                  child: Wrap(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        child: SfCartesianChart(
+                          primaryXAxis: CategoryAxis(),
+                          primaryYAxis: NumericAxis(
+                            minimum: 0,
+                            maximum: 5.5,
+                            isVisible: false,
+                          ),
+                          series: <ChartSeries<ChartData, String>>[
+                            ColumnSeries<ChartData, String>(
+                              dataSource: data.barChartData,
+                              xValueMapper: (ChartData rating, _) => rating.x,
+                              yValueMapper: (ChartData rating, _) => rating.y,
+                              color: chartColor,
+                            ),
+                          ],
+                        ),
                       ),
-                      series: <ChartSeries<ChartData, String>>[
-                        ColumnSeries<ChartData, String>(
-                          dataSource: data.barChartData,
-                          xValueMapper: (ChartData rating, _) => rating.x,
-                          yValueMapper: (ChartData rating, _) => rating.y,
-                          color: chartColor,
+                      Center(
+                        child: Wrap(
+                          //mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            MaterialButton(
+                              onPressed: null,
+                              child: Text("Woche"),
+                            ),
+                            MaterialButton(
+                              onPressed: null,
+                              child: Text("Monat"),
+                            ),
+                            MaterialButton(
+                              onPressed: null,
+                              child: Text("Jahr"),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Center(
-                    child: Wrap(
-                      //mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        MaterialButton(
-                          onPressed: null,
-                          child: Text("Woche"),
-                        ),
-                        MaterialButton(
-                          onPressed: null,
-                          child: Text("Monat"),
-                        ),
-                        MaterialButton(
-                          onPressed: null,
-                          child: Text("Jahr"),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),

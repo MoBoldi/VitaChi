@@ -12,7 +12,7 @@ class Wellbeing extends StatefulWidget {
 }
 
 class _Wellbeing extends State<Wellbeing> {
-  final Color chartColor = Colors.blue;
+  final Color chartColor = Color(0xFF3D6845);
   final PassedData data = PassedData(
       chartData: ([
         ChartData('Test', 2, Colors.blue),
@@ -37,6 +37,7 @@ class _Wellbeing extends State<Wellbeing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Color(0xff82b086),
       appBar: MyAppBar(context, 'VitaChi', null),
       drawer: MyDrawer(),
       body: SingleChildScrollView(
@@ -44,7 +45,7 @@ class _Wellbeing extends State<Wellbeing> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Card(
-              margin: EdgeInsets.fromLTRB(15, 10, 15, 20),
+              margin: EdgeInsets.fromLTRB(15, 25, 15, 20),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
                 child: Center(
@@ -58,21 +59,24 @@ class _Wellbeing extends State<Wellbeing> {
                 ),
               ),
             ),
-            SfCartesianChart(
-              primaryXAxis: CategoryAxis(),
-              primaryYAxis: NumericAxis(
-                minimum: 0,
-                maximum: 5.5,
-                isVisible: false,
-              ),
-              series: <ChartSeries<ChartData, String>>[
-                ColumnSeries<ChartData, String>(
-                  dataSource: data.barChartData,
-                  xValueMapper: (ChartData rating, _) => rating.x,
-                  yValueMapper: (ChartData rating, _) => rating.y,
-                  color: chartColor,
+            Container(
+              padding: EdgeInsets.fromLTRB(10, 0, 10, 20),
+              child: SfCartesianChart(
+                primaryXAxis: CategoryAxis(),
+                primaryYAxis: NumericAxis(
+                  minimum: 0,
+                  maximum: 5.5,
+                  isVisible: false,
                 ),
-              ],
+                series: <ChartSeries<ChartData, String>>[
+                  ColumnSeries<ChartData, String>(
+                    dataSource: data.barChartData,
+                    xValueMapper: (ChartData rating, _) => rating.x,
+                    yValueMapper: (ChartData rating, _) => rating.y,
+                    color: chartColor,
+                  ),
+                ],
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
