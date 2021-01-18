@@ -113,7 +113,7 @@ class _BewegungState extends State<Bewegung> {
                       style: TextStyle(fontSize: MediaQuery.of(context).size.height/30),
                       textAlign: TextAlign.center,
                     ),
-                    flex: 4,
+                    flex: 6,
                   ),
                   RatingBar.builder(
                     initialRating: 3,
