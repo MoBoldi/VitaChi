@@ -10,12 +10,12 @@ class MyDrawer extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             child: Container(
-              child: Column(
-                children: <Widget>[
+              child: Center(
+                child:
                   Image(
                     image: AssetImage('assets/logo.png'),
+                    height: MediaQuery.of(context).size.height/9,
                   ),
-                ],
               ),
             ),
             decoration: BoxDecoration(),
