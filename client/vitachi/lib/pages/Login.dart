@@ -12,22 +12,36 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final eingaben = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-                color: Color(0xffbbedc5),
-                height: MediaQuery.of(context).size.height/3,
-                margin: EdgeInsets.fromLTRB(0, 0, 0, MediaQuery.of(context).size.height/16),
-                child: Image(
-                  image: AssetImage('assets/logo.png'),
+            Stack(
+              children: [
+                Container(
+                  color: Color(0xffbbedc5),
+                  height: MediaQuery.of(context).size.height/3,
                 ),
-              ),
+                Center(
+                  child: Container(
+                      color: Color(0xffbbedc5),
+                      height: MediaQuery.of(context).size.height/3,
 
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, MediaQuery.of(context).size.height/16),
+                      child: Image(
+                            image: AssetImage('assets/logo.png'),
+                            width: MediaQuery.of(context).size.width/1.5,
+                          ),
+                  ),
+                ),
+              ]
+            ),
+            
             Container(
                       child: Column(
                         children: [

@@ -17,14 +17,26 @@ class _RegisterState extends State<Register> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-                margin: EdgeInsets.fromLTRB(0, 0, 0, MediaQuery.of(context).size.height/16),
-                height: MediaQuery.of(context).size.height/3,
-                color: Color(0xffbbedc5),
-                child: Image(
-                  image: AssetImage('assets/logo.png'),
-                ),
-              ),
+            Stack(
+                children: [
+                  Container(
+                    color: Color(0xffbbedc5),
+                    height: MediaQuery.of(context).size.height/3,
+                  ),
+                  Center(
+                    child: Container(
+                      color: Color(0xffbbedc5),
+                      height: MediaQuery.of(context).size.height/3,
+
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, MediaQuery.of(context).size.height/16),
+                      child: Image(
+                        image: AssetImage('assets/logo.png'),
+                        width: MediaQuery.of(context).size.width/1.5,
+                      ),
+                    ),
+                  ),
+                ]
+            ),
             Container(
 
                 child: Column(
@@ -36,9 +48,7 @@ class _RegisterState extends State<Register> {
                         key: eingaben,
                         child: Column(
                           children: [
-                            Container(
-                              height: MediaQuery.of(context).size.height/16,
-                            ),
+
                             SizedBox(
                               height: MediaQuery.of(context).size.height/12,
                               width: MediaQuery.of(context).size.width/1.5,
@@ -138,6 +148,16 @@ class _RegisterState extends State<Register> {
                                 },
                                 child: Text('Registrieren', style: TextStyle(color: Colors.white))
                             ),
+                            Container(
+                              height: MediaQuery.of(context).size.height/32,
+                            ),
+                            FlatButton(
+                              onPressed: (){
+                                Navigator.pushReplacementNamed(context, '/login');
+                              },
+                              child: Text("Zurück", style: TextStyle(color: Colors.white),),
+                              color: Color(0xFF3D6845),
+                            )
                           ],
                         ),
 
