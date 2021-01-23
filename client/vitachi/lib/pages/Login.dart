@@ -1,18 +1,17 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vitachi/components/myAppBar.dart';
-import 'package:http/http.dart';
+import 'package:provider/provider.dart';
+import 'package:vitachi/ChangeListener/loginListener.dart';
+import 'package:vitachi/pages/TextFieldWidget.dart';
 
 
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
 }
-
+final Color color = Color(0xFF3D6845);
 class _LoginState extends State<Login> {
   final eingaben = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +45,6 @@ class _LoginState extends State<Login> {
                       child: Column(
                         children: [
                           Container(
-                            //margin: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height/4, 0, MediaQuery.of(context).size.height/4),
                             child:
                                 Form(
                                   key: eingaben,
@@ -55,85 +53,80 @@ class _LoginState extends State<Login> {
                                       Container(
                                         height: MediaQuery.of(context).size.height/16,
                                       ),
-                                      SizedBox(
-                                        height: MediaQuery.of(context).size.height/12,
-                                        width: MediaQuery.of(context).size.width/1.5,
-                                        child: Card(
-                                          child: Center(
-                                            child: TextFormField(
-                                              textAlign: TextAlign.center,
-                                              decoration: const InputDecoration(
-                                                hintText: 'Benutzername',
-                                                border: InputBorder.none,
-                                                focusedBorder: InputBorder.none,
-                                                enabledBorder: InputBorder.none,
-                                                errorBorder: InputBorder.none,
-                                                disabledBorder: InputBorder.none,
-                                              ),
-                                              validator: (value) {
-                                                if (value.isEmpty) {
-                                                  return 'Bitte gib einen Benutzernamen ein';
-                                                }
-                                                return null;
-                                              },
-                                            ),
-                                          ),
-                                          elevation: 5,
+                                      TextFieldWidget(
+                                        hintText: 'Benutzername',
+                                        prefixIconData: Icons.person_outline,
+                                        obscureText: false,
+                                      ),
+                                      Container(
+                                        height: MediaQuery.of(context).size.height/32,
+                                      ),
+                                      TextFieldWidget(
+                                        hintText: 'Passwort',
+                                        prefixIconData: Icons.lock_outline,
+                                        obscureText: true,
+                                      ),
+                                      /*SizedBox(
+                                        width: MediaQuery.of(context).size.width/1.2,
+                                        child: TextFieldWidget(
+                                          hintText: 'Benutzername',
+                                          obscureText: false,
+                                          prefixIconData: Icons.person_outline,
                                         ),
                                       ),
                                       Container(
                                         height: MediaQuery.of(context).size.height/32,
                                       ),
                                       SizedBox(
-                                        height: MediaQuery.of(context).size.height/12,
-                                        width: MediaQuery.of(context).size.width/1.5,
-                                        child: Card(
-                                          child: Center(
-                                            child: TextFormField(
-                                              textAlign: TextAlign.center,
-                                              decoration: const InputDecoration(
-                                                hintText: 'Passwort',
-                                                border: InputBorder.none,
-                                                focusedBorder: InputBorder.none,
-                                                enabledBorder: InputBorder.none,
-                                                errorBorder: InputBorder.none,
-                                                disabledBorder: InputBorder.none,
-                                              ),
-                                              validator: (value) {
-                                                if (value.isEmpty) {
-                                                  return 'Bitte gib ein Passwort ein';
-                                                }
-                                                return null;
-                                              },
+                                        width: MediaQuery.of(context).size.width/1.2,
+                                        child: TextFieldWidget(
+                                          hintText: 'Passwort',
+                                          obscureText: true,
+                                          prefixIconData: Icons.lock_outline,
+                                        ),
+                                      ),*/
+                                      Container(
+                                        height: MediaQuery.of(context).size.height/15,
+                                      ),
+                                      SizedBox(
+                                        width: MediaQuery.of(context).size.width/1.2,
+                                        height: MediaQuery.of(context).size.height/15,
+                                        child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              primary: Color(0xFF3D6845),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.circular(50)
+                                              )
                                             ),
-                                          ),
-                                          elevation: 5,
+
+                                            onPressed: () {
+                                              if (eingaben.currentState.validate()) {
+                                                // Process data.
+                                                Navigator.pushNamed(context, '/');
+                                              }
+                                          },
+                                          child: Text('Login', style: TextStyle(color: Colors.white))
                                         ),
                                       ),
                                       Container(
-                                        height: MediaQuery.of(context).size.height/8,
+                                        height: MediaQuery.of(context).size.height/90,
                                       ),
-                                      ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            primary: Color(0xFF3D6845),
+                                      SizedBox(
+                                        width: MediaQuery.of(context).size.width/1.2,
+                                        height: MediaQuery.of(context).size.height/15,
+                                        child: FlatButton(
+                                          onPressed: (){
+                                            Navigator.pushReplacementNamed(context, '/register');
+                                          },
+                                          child: Text("Registrieren", style: TextStyle(color: Colors.black)),
+                                          shape: RoundedRectangleBorder(side: BorderSide(
+                                              color: color,
+                                              width: 1,
+                                              style: BorderStyle.solid
                                           ),
-                                        onPressed: () {
-                                          if (eingaben.currentState.validate()) {
-                                            // Process data.
-                                            Navigator.pushNamed(context, '/');
-                                          }
-                                        },
-                                        child: Text('Login', style: TextStyle(color: Colors.white))
-                                      ),
-                                      Container(
-                                        height: MediaQuery.of(context).size.height/32,
-                                      ),
-                                      FlatButton(
-                                        onPressed: (){
-                                          Navigator.pushReplacementNamed(context, '/register');
-                                        },
-                                        child: Text("Registrieren", style: TextStyle(color: Colors.white),),
-                                        color: Color(0xFF3D6845),
+                                          borderRadius: BorderRadius.circular(50)
+                                          ),
+                                        ),
                                       )
                                     ],
                                   ),
