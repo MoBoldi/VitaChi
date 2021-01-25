@@ -19,20 +19,21 @@ public class VitaChiService {
     @Inject
     DBRepository repo;
 
+    @Path("test/{Entity}")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String test() {
-        return "VitaChi is in the room! Accessoires grüßt seine Schwestern und Brüder!";
-    }
-
-
-    // Initialisiren der DB
-    @Path("init")
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String init() {
-        repo.initDB();
-        return "Datenbank Eingabe wurde initialisiert";
+    public String test(@PathParam("Entity") String entity) {
+        if(entity == "Accessoire") {
+            return VitaChiServiceAccessoire.test();
+        } else if (entity == "Arbeit") {
+            return VitaChiServiceArbeit.test();
+        } else if (entity == "Aufgaben") {
+            return VitaChiServiceAufgaben.test();
+        } else if (entity == "Eingabe") {
+            return VitaChiServiceEingabe.test();
+        } else {
+            return "VitaChi is here, but there is no entity with this name!";
+        }
     }
 
     // Liste aller Trainings senden
@@ -48,14 +49,14 @@ public class VitaChiService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Object findAll(@PathParam("id") long id) {
-        return repo.find(Aufgaben.class, id);
+        return repo.find(id);
     }
 
     // Ein Training löschen
     @Path("delete/{Entity}/{id}")
     @DELETE
     public String deleteTraining(@PathParam("Entity") String param, @PathParam("id") long id) {
-        repo.delete(param, id);
+        repo.delete(id);
         return "training deleted";
     }
 

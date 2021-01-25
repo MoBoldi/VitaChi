@@ -18,13 +18,6 @@ public class DBRepository {
     @Inject
     private EntityManager em;
 
-    // Initialisieren
-    public void initDB() {
-        this.create(new Eingabe("Bewertung 1", 3, 4, LocalDate.of(2020, 11, 27), 1));
-        //this.create(new Training("Training 2", LocalDate.of(2020, 11, 27), "2", "Schwimmen", false));
-        //this.create(new Training("Training 3", LocalDate.of(2020, 11, 27), "2", "Kraftsport", false));
-    }
-
     // Lesen aller Trainings
     public List findAll(String param) {
         return em.createQuery("select returnObject from " + param + " as returnObject").getResultList();
