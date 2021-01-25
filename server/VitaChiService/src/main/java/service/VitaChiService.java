@@ -13,39 +13,54 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-public class VitaChiServiceAccessoire extends VitaChiService {
-
+@ApplicationScoped
+@Path("/vitaChi")
+public class VitaChiService {
     @Inject
     DBRepository repo;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String test(String param) {
-        return "VitaChi is in the room! " + param + " grüßt seine Schwestern und Brüder!";
+    public String test() {
+        return "VitaChi is in the room! Accessoires grüßt seine Schwestern und Brüder!";
+    }
+
+
+    // Initialisiren der DB
+    @Path("init")
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String init() {
+        repo.initDB();
+        return "Datenbank Eingabe wurde initialisiert";
     }
 
     // Liste aller Trainings senden
+    @Path("findAll/{Entity}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List findAll(String param) {
+    public List findAll(@PathParam("Entity") String param) {
         return repo.findAll(param);
     }
 
     // Ein Training senden
+    @Path("find/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Object findAll(long id) {
-        return repo.find(Accessoire.class, id);
+    public Object findAll(@PathParam("id") long id) {
+        return repo.find(Aufgaben.class, id);
     }
 
     // Ein Training löschen
+    @Path("delete/{Entity}/{id}")
     @DELETE
-    public String deleteTraining(long id) {
-        repo.delete(id);
+    public String deleteTraining(@PathParam("Entity") String param, @PathParam("id") long id) {
+        repo.delete(param, id);
         return "training deleted";
     }
 
     // Ein Training hinzufügen
+    @Path("create")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -56,6 +71,7 @@ public class VitaChiServiceAccessoire extends VitaChiService {
     }
 
     // Ein Training ändern
+    @Path("update")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public String updateTraining(Object updateObject) {
