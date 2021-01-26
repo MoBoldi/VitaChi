@@ -11,11 +11,10 @@ class MyDrawer extends StatelessWidget {
           DrawerHeader(
             child: Container(
               child: Center(
-                child:
-                  Image(
-                    image: AssetImage('assets/logo.png'),
-                    height: MediaQuery.of(context).size.height/9,
-                  ),
+                child: Image(
+                  image: AssetImage('assets/logo.png'),
+                  height: MediaQuery.of(context).size.height / 9,
+                ),
               ),
             ),
             decoration: BoxDecoration(),
@@ -23,9 +22,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: Row(
               children: [
-                Icon(
-                    Icons.home
-                ),
+                Icon(Icons.home),
                 Text(
                   " Home",
                   style: TextStyle(fontSize: 18),
@@ -39,9 +36,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: Row(
               children: [
-                Icon(
-                    Icons.star
-                ),
+                Icon(Icons.star),
                 Text(
                   " Eingaben",
                   style: TextStyle(fontSize: 18),
@@ -55,9 +50,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: Row(
               children: [
-                Icon(
-                    Icons.bar_chart
-                ),
+                Icon(Icons.bar_chart),
                 Text(
                   " Statistiken",
                   style: TextStyle(fontSize: 18),
@@ -71,9 +64,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: Row(
               children: [
-                Icon(
-                    Icons.person_add
-                ),
+                Icon(Icons.person_add),
                 Text(
                   " Freunde",
                   style: TextStyle(fontSize: 18),
@@ -87,9 +78,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: Row(
               children: [
-                Icon(
-                    Icons.shopping_cart
-                ),
+                Icon(Icons.shopping_cart),
                 Text(
                   " Shop",
                   style: TextStyle(fontSize: 18),
@@ -103,9 +92,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: Row(
               children: [
-                Icon(
-                  Icons.menu_book
-                ),
+                Icon(Icons.menu_book),
                 Text(
                   " ToDo",
                   style: TextStyle(
@@ -121,9 +108,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: Row(
               children: [
-                Icon(
-                  Icons.settings
-                ),
+                Icon(Icons.settings),
                 Text(
                   " Settings",
                   style: TextStyle(
@@ -132,9 +117,7 @@ class MyDrawer extends StatelessWidget {
                 ),
               ],
             ),
-            onTap: () {
-
-            },
+            onTap: () {},
           )
         ],
       ),

@@ -43,15 +43,15 @@ class _Statistics extends State<Statistics> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(context, "VitaChi", null),
-      backgroundColor: Color(0xff82b086),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Stack(
           children: [
             Container(
               margin: EdgeInsets.fromLTRB(
-                  0, MediaQuery.of(context).size.height / 3, 0, 0),
-              color: Colors.white,
-              height: MediaQuery.of(context).size.height / 1.2,
+                  0, /*MediaQuery.of(context).size.height / 3*/ 0, 0, 0),
+              color: Color(0xff82b086),
+              height: MediaQuery.of(context).size.height / 3,
             ),
             Column(
               children: [

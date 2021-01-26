@@ -5,7 +5,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
 
-class Home extends StatelessWidget {
+class NewHome extends StatelessWidget {
   final List<ChartData> ges = [
     ChartData('Wellbeing', 3, Colors.green),
     ChartData('', 2, Colors.green[100]),

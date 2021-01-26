@@ -7,12 +7,6 @@ void main() {
     MaterialApp(
       home: Home(),
       debugShowCheckedModeBanner: false,
-      /*routes: {
-      '/home': (context) => Home(),
-      '/eingabeNav': (context) => EingabenNav(),
-      '/statistics': (context) => Statistics(),
-      '/essen': (context) => Essen()
-    },*/
       initialRoute: '/login',
       onGenerateRoute: RouteGenerator.generateRoute,
     ),
