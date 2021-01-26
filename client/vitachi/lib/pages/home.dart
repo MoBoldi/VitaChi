@@ -214,11 +214,11 @@ IconData getIcon(String input) {
     case 'FOOD':
       return Icons.restaurant_menu;
     case 'MOVEMENT':
-      return Icons.sports_basketball;
+      return Icons.directions_run;
     case 'SLEEP':
       return Icons.nights_stay;
     case 'WELLBEING':
-      return Icons.group_work;
+      return Icons.favorite;
     default:
       return Icons.error;
   }

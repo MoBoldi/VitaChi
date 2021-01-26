@@ -12,7 +12,6 @@ import 'package:vitachi/pages/Shop.dart';
 import 'package:vitachi/pages/aufgaben.dart';
 import 'package:vitachi/pages/detail_shop.dart';
 import 'package:vitachi/pages/home.dart';
-import 'package:vitachi/pages/newHome.dart';
 import 'package:vitachi/pages/statistics.dart';
 import 'package:vitachi/pages/statisticsNav.dart';
 
@@ -51,8 +50,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Register());
       case '/aufgaben':
         return MaterialPageRoute(builder: (_) => Aufgabe());
-      case '/newHome':
-        return MaterialPageRoute(builder: (_) => NewHome());
 
       default:
         return _errorRoute();
