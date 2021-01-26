@@ -16,9 +16,11 @@ class _ArbeitState extends State<Arbeit> {
   var hoursStr = '00';
   var minutesStr = '00';
   var secondsStr = '00';
+  final Color color = Color(0xFF3D6845);
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: MyAppBarEingaben(context, 'VitaChi', null),
       backgroundColor: Color(0xff82b086),
@@ -32,12 +34,15 @@ class _ArbeitState extends State<Arbeit> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Expanded(
-              child: FittedBox(
-                child: Image(
-                  image: AssetImage('assets/laptop.png'),
+              child: Container(
+                margin: EdgeInsets.only(bottom: size.height/30),
+                child: FittedBox(
+                  child: Image(
+                    image: AssetImage('assets/laptop.png'),
+                  ),
                 ),
               ),
-              flex: 5,
+              flex: 6,
             ),
             Expanded(
               child: Card(
@@ -142,15 +147,21 @@ class _ArbeitState extends State<Arbeit> {
             Expanded(
               child: FlatButton(
                   onPressed: () {},
-                  minWidth: MediaQuery.of(context).size.width / 2,
+                  minWidth: MediaQuery.of(context).size.width / 1.25,
                   color: Color(0xFF3D6845),
                   child: AutoSizeText(
                     "Absenden",
                     style: TextStyle(fontSize: 15,  color: Colors.white),
                   ),
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(5.0))),
-              flex: 1,
+                shape: RoundedRectangleBorder(side: BorderSide(
+                    color: color,
+                    width: 1,
+                    style: BorderStyle.solid
+                ),
+                    borderRadius: BorderRadius.circular(50)
+                ),
+              ),
+              flex: 2,
             ),
             Expanded(
               child: Container(),

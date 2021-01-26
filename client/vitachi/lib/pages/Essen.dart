@@ -8,11 +8,12 @@ class Essen extends StatefulWidget {
   @override
   _EssenState createState() => _EssenState();
 }
-
+final Color color = Color(0xFF3D6845);
 class _EssenState extends State<Essen> {
   Eingaben essenEingaben = new Eingaben(0, 0);
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: MyAppBarEingaben(context, 'VitaChi', null),
       backgroundColor: Color(0xff82b086),
@@ -27,12 +28,15 @@ class _EssenState extends State<Essen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Expanded(
-              child: FittedBox(
-                child: Image(
-                  image: AssetImage('assets/salad.png'),
+              child: Container(
+                margin: EdgeInsets.only(bottom: size.height/30),
+                child: FittedBox(
+                  child: Image(
+                    image: AssetImage('assets/salad.png'),
+                  ),
                 ),
               ),
-              flex: 5,
+              flex: 6,
             ),
             Expanded(
               child: Card(
@@ -50,7 +54,7 @@ class _EssenState extends State<Essen> {
                       ),
                       Expanded(
                         child: AutoSizeText(
-                          "Bewerte hier auf einer Skala von 1 bis 5 Sternen wie dir deine letzte Mahlzeit",
+                          "Bewerte hier auf einer Skala von 1 bis 5 Sternen deine letzte Mahlzeit!",
                           style: TextStyle(fontSize: 23),
                           maxLines: 2,
                         ),
@@ -72,7 +76,7 @@ class _EssenState extends State<Essen> {
                 children: [
                   Expanded(
                     child: Container(),
-                    flex: 4,
+                    flex: 2,
                   ),
                   Expanded(
                     child: Text(
@@ -82,7 +86,7 @@ class _EssenState extends State<Essen> {
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.visible,
                     ),
-                    flex: 5,
+                    flex: 4,
                   ),
                   RatingBar.builder(
                     initialRating: 3,
@@ -103,7 +107,7 @@ class _EssenState extends State<Essen> {
                   ),
                   Expanded(
                     child: Container(),
-                    flex: 1,
+                    flex: 2,
                   ),
                   Expanded(
                     child: Text(
@@ -113,7 +117,7 @@ class _EssenState extends State<Essen> {
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.visible,
                     ),
-                    flex: 5,
+                    flex: 4,
                   ),
                   RatingBar.builder(
                     initialRating: 3,
@@ -134,7 +138,7 @@ class _EssenState extends State<Essen> {
                   ),
                   Expanded(
                     child: Container(),
-                    flex: 4,
+                    flex: 2,
                   )
                 ],
               ),
@@ -147,15 +151,21 @@ class _EssenState extends State<Essen> {
                     Navigator.pushReplacementNamed(context, '/',
                         arguments: {'avg': essenEingaben.setAvg()});
                   },
-                  minWidth: MediaQuery.of(context).size.width / 2,
+                  minWidth: MediaQuery.of(context).size.width / 1.25,
                   color: Color(0xFF3D6845),
                   child: AutoSizeText(
                     "Absenden",
                     style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(5.0))),
-              flex: 1,
+                  shape: RoundedRectangleBorder(side: BorderSide(
+                      color: color,
+                      width: 1,
+                      style: BorderStyle.solid
+                  ),
+                      borderRadius: BorderRadius.circular(50)
+                  ),
+              ),
+              flex: 2,
             ),
             Expanded(
               child: Container(),

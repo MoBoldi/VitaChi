@@ -28,6 +28,11 @@ class TextFieldWidget extends StatelessWidget {
         cursorColor: color,
         obscureText: obscureText,
         decoration: InputDecoration(
+          errorStyle: TextStyle(height: 0),
+          focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.red)
+          ),
           prefixIcon: Icon(
             prefixIconData,
             size: MediaQuery.of(context).size.height/35,
@@ -49,7 +54,7 @@ class TextFieldWidget extends StatelessWidget {
         ),
         validator: (value) {
           if (value.isEmpty) {
-            return 'error';
+            return '';
           }
           return null;
         },

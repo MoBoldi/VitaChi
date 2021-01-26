@@ -36,10 +36,9 @@ class _RegisterState extends State<Register> {
                   ),
                   Center(
                     child: Container(
-                      color: Color(0xffbbedc5),
                       height: MediaQuery.of(context).size.height/3.5,
 
-                      margin: EdgeInsets.fromLTRB(0, 0, 0, MediaQuery.of(context).size.height/16),
+                      margin: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height/25, 0, 0),
                       child: Image(
                         image: AssetImage('assets/logo.png'),
                         width: MediaQuery.of(context).size.width/1.5,
