@@ -11,6 +11,8 @@ class Schlafen extends StatefulWidget {
 class _SchlafenState extends State<Schlafen> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final Color color = Color(0xFF3D6845);
     return Scaffold(
       appBar: MyAppBarEingaben(context, 'VitaChi', null),
       backgroundColor: Color(0xff82b086),
@@ -24,15 +26,18 @@ class _SchlafenState extends State<Schlafen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Expanded(
-              child: FittedBox(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Image(
-                    image: AssetImage('assets/night.png'),
+              child: Container(
+                margin: EdgeInsets.only(bottom: size.height/30),
+                child: FittedBox(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Image(
+                      image: AssetImage('assets/night.png'),
+                    ),
                   ),
                 ),
               ),
-              flex: 5,
+              flex: 6,
             ),
             Expanded(
               child: Card(
@@ -139,15 +144,21 @@ class _SchlafenState extends State<Schlafen> {
             Expanded(
               child: FlatButton(
                   onPressed: () {},
-                  minWidth: MediaQuery.of(context).size.width / 2,
+                  minWidth: MediaQuery.of(context).size.width / 1.25,
                   color: Color(0xFF3D6845),
                   child: AutoSizeText(
                     "Absenden",
                     style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(5.0))),
-              flex: 1,
+                shape: RoundedRectangleBorder(side: BorderSide(
+                    color: color,
+                    width: 1,
+                    style: BorderStyle.solid
+                ),
+                    borderRadius: BorderRadius.circular(50)
+                ),
+              ),
+              flex: 2,
             ),
             Expanded(
               child: Container(),
