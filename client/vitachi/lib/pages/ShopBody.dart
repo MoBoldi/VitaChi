@@ -8,19 +8,21 @@ import 'package:vitachi/pages/detail_shop.dart';
 class Body extends StatefulWidget {
   @override
   _BodyState createState() => _BodyState();
+
 }
 
+
 class _BodyState extends State<Body> {
+
   Map data;
   List userData;
 
-  Future getData() async {
+  Future<dynamic> getData() async {
     Response response = await get('https://reqres.in/api/users?page=2');
 
     data = json.decode(response.body);
-    setState(() {
-      userData = data["data"];
-    });
+
+    userData = data["data"];
     print(userData.toString());
   }
 
@@ -28,7 +30,6 @@ class _BodyState extends State<Body> {
   void initState() {
     super.initState();
     getData();
-
   }
 
   @override
@@ -46,50 +47,64 @@ class _BodyState extends State<Body> {
                 .copyWith(fontWeight: FontWeight.bold),
           ),
         ),
+        
         Expanded(
             child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: GridView.builder(
-              itemCount: userData.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  childAspectRatio: 0.75),
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    //Navigator.pushNamed(context, '/detailShop');
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailShop(data: userData[index])));
-                  },
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                          child: Container(
-                              padding: EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                  color: Color(0xff82b086),
-                                  borderRadius: BorderRadius.circular(16)),
-                              child: Image(
-                                image: NetworkImage(userData[index]["avatar"]),
-                              )
-                          )
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: Text(
-                          userData[index]["first_name"],
+          child: FutureBuilder(
+            future: getData(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return GridView.builder(
+                    itemCount: userData.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 20,
+                        crossAxisSpacing: 20,
+                        childAspectRatio: 0.75),
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          //Navigator.pushNamed(context, '/detailShop');
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailShop(data: userData[index])));
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                                child: Container(
+                                    padding: EdgeInsets.all(20),
+                                    decoration: BoxDecoration(
+                                        color: Color(0xff82b086),
+                                        borderRadius: BorderRadius.circular(
+                                            16)),
+                                    child: Image(
+                                      image: NetworkImage(
+                                          userData[index]["avatar"]),
+                                    )
+                                )
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: Text(
+                                userData[index]["first_name"],
+                              ),
+                            ),
+                            Text(
+                              "234€",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
                         ),
-                      ),
-                      Text(
-                        "234€",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                );
-              }),
+                      );
+                    });
+              }else{
+                return Image(image: AssetImage('assets/logo.png'));
+              }
+            }
+          ),
         ))
       ],
     );
