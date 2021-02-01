@@ -117,7 +117,9 @@ class MyDrawer extends StatelessWidget {
                 ),
               ],
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/settings');
+            },
           )
         ],
       ),

@@ -1,11 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:vitachi/entitys/Eingaben.dart';
 
 var eingaben = 0;
-
+var sterne = 3.0;
 class Bewegung extends StatefulWidget {
   @override
   _BewegungState createState() => _BewegungState();
@@ -20,157 +20,153 @@ class _BewegungState extends State<Bewegung> {
     return Scaffold(
       appBar: MyAppBarEingaben(context, 'VitaChi', null),
       backgroundColor: Color(0xff82b086),
-      body: Stack(children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.height/3.5,0,0),
-          color: Colors.white,
-          height: MediaQuery.of(context).size.height/1.5,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.only(bottom: size.height/30),
-                child: FittedBox(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Image(
-                      image: AssetImage('assets/basketball-ball.png'),
-                    ),
-                  ),
-                ),
-              ),
-              flex: 6,
+      body: SingleChildScrollView(
+        child: Stack(children: <Widget>[
+          Container(
+            margin: EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.height/4,0,0),
+            height: MediaQuery.of(context).size.height/1.5,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+              color: Colors.white
             ),
-            Expanded(
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                        child: AutoSizeText("Bewegung",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 50)),
-                        flex: 1,
-                      ),
-                      Expanded(
-                        child: AutoSizeText(
-                          "Bewerte hier auf einer Skala von 1 bis 5 Sternen deine letzte  Bewegung.",
-                          style: TextStyle(fontSize: 23),
-                          maxLines: 2,
-                        ),
-                        flex: 2,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image(
+                        image: AssetImage('assets/basketball-ball.png'),
+                        width: size.width/3,
+                    ),
+                  ],
+                ),
+              Container(
+                width: size.width/1.1,
+                height: size.height/6,
+                margin: EdgeInsets.only(top: size.height/8),
+                child: Card(
+                  color: Color(0xffc9f0cd),
+                  elevation: 2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: size.width/1.5,
+                            child: AutoSizeText("Wie fühlst du dich nach deiner letzten Aktivität?",
+                              style: TextStyle(fontSize: 20),textAlign: TextAlign.center,
+                              maxLines: 2,)
+                          ),
+
+                          Container(
+                            width: size.width/2,
+                            height: size.height/15,
+                            child: FittedBox(
+                              child: RatingBar.builder(
+                                initialRating: 3,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: false,
+                                itemCount: 5,
+                                itemPadding: EdgeInsets.symmetric(
+                                    horizontal: 0.2),
+                                itemBuilder: (context, _) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                onRatingUpdate: (rating) {
+
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
-                margin: EdgeInsets.fromLTRB(30.0, 0, 30, 0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
+              ),
+              Container(
+                width: size.width/1.1,
+                height: size.height/6,
+                margin: EdgeInsets.only(top: size.height/20),
+                child: Card(
+                  color: Color(0xffc9f0cd),
+                  elevation: 2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: size.width/1.5,
+                            child: AutoSizeText("Wie anstrengend war deine letzte Aktivität?",
+                              style: TextStyle(fontSize: 20),textAlign: TextAlign.center,
+                              maxLines: 2,),
+                          ),
+
+                          Container(
+                            width: size.width/2,
+                            height: size.height/15,
+                            child: FittedBox(
+                              child: RatingBar.builder(
+                                initialRating: 3,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: false,
+                                itemCount: 5,
+                                itemPadding: EdgeInsets.symmetric(
+                                    horizontal: 0.2),
+                                itemBuilder: (context, _) => Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                onRatingUpdate: (rating) {
+
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              flex: 3,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Container(),
-                    flex: 4,
-                  ),
-                  Expanded(
-                    child: Text(
-                      "Wie anstrengend war deine letze Bewegung?",
-
-                      overflow: TextOverflow.visible,
-                      style: TextStyle(fontSize: MediaQuery.of(context).size.height/30),
-                      textAlign: TextAlign.center,
-                    ),
-                    flex: 6,
-                  ),
-                  RatingBar.builder(
-                    initialRating: 3,
-                    minRating: 1,
-                    direction: Axis.horizontal,
-                    allowHalfRating: false,
-                    itemCount: 5,
-                    itemPadding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width / 40),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
-                    onRatingUpdate: (rating) {
-                    },
-                  ),
-                  Expanded(
-                    child: Container(),
-                    flex: 2,
-                  ),
-                  Expanded(
-                    child: Text(
-                      "Wie fühlst du dich nach der Bewegung?",
-                      overflow: TextOverflow.visible,
-                      style: TextStyle(fontSize: MediaQuery.of(context).size.height/30),
-                      textAlign: TextAlign.center,
-                    ),
-                    flex: 6,
-                  ),
-                  RatingBar.builder(
-                    initialRating: 3,
-                    minRating: 1,
-                    direction: Axis.horizontal,
-                    allowHalfRating: false,
-                    itemCount: 5,
-                    itemPadding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width / 40),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
-                    onRatingUpdate: (rating) {
-                    },
-                  ),
-                  Expanded(
-                    child: Container(),
-                    flex: 4,
-                  )
-                ],
-              ),
-              flex: 10,
-            ),
-            Expanded(
-              child: FlatButton(
+              Container(
+                margin: EdgeInsets.only(top: size.height/20),
+                child: FlatButton(
                   onPressed: () {
+
                   },
                   minWidth: MediaQuery.of(context).size.width / 1.25,
+                  height: size.height/15,
                   color: Color(0xFF3D6845),
                   child: AutoSizeText(
                     "Absenden",
                     style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
-                shape: RoundedRectangleBorder(side: BorderSide(
-                    color: color,
-                    width: 1,
-                    style: BorderStyle.solid
-                ),
-                    borderRadius: BorderRadius.circular(50)
+                  shape: RoundedRectangleBorder(side: BorderSide(
+                      color: color,
+                      width: 1,
+                      style: BorderStyle.solid
+                  ),
+                      borderRadius: BorderRadius.circular(50)
+                  ),
                 ),
               ),
-              flex: 2,
-            ),
-            Expanded(
-              child: Container(),
-              flex: 2,
-            ),
-          ],
+            ],
+          ),
+        ]
         ),
-      ]),
+      ),
     );
   }
 }
