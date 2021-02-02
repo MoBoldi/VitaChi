@@ -12,7 +12,7 @@ class _EingabenNavState extends State<EingabenNav> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final Color color = Color(0xffbbedc5);
+    final Color color = Color(0xffB58E62);
     return Scaffold(
       appBar: MyAppBar(context, 'VitaChi', null),
       drawer: MyDrawer(),
@@ -66,9 +66,10 @@ class _EingabenNavState extends State<EingabenNav> {
                         Container(
                             child: Icon(
                               Icons.arrow_forward_outlined,
+                              color: Colors.white,
                               ),
                           width: size.width/4,
-                          color: Color(0xffbbedc5),
+                          color: color,
                           height: size.height/5.5,
                         )
                       ],
@@ -123,9 +124,10 @@ class _EingabenNavState extends State<EingabenNav> {
                         Container(
                           child: Icon(
                             Icons.arrow_forward_outlined,
+                            color: Colors.white,
                           ),
                           width: size.width/4,
-                          color: Color(0xffbbedc5),
+                          color: color,
                           height: size.height/5.5,
                         )
                       ],
@@ -180,9 +182,10 @@ class _EingabenNavState extends State<EingabenNav> {
                         Container(
                           child: Icon(
                             Icons.arrow_forward_outlined,
+                            color: Colors.white,
                           ),
                           width: size.width/4,
-                          color: Color(0xffbbedc5),
+                          color: color,
                           height: size.height/5.5,
                         )
                       ],
@@ -237,9 +240,10 @@ class _EingabenNavState extends State<EingabenNav> {
                         Container(
                           child: Icon(
                             Icons.arrow_forward_outlined,
+                            color: Colors.white,
                           ),
                           width: size.width/4,
-                          color: Color(0xffbbedc5),
+                          color: color,
                           height: size.height/5.5,
                         )
                       ],

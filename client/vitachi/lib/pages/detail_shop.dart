@@ -15,7 +15,7 @@ class DetailShop extends StatelessWidget {
 
     return Scaffold(
         appBar: MyAppBarEingaben(context, 'VitaChi', null),
-        backgroundColor:  Color(0xff82b086),
+        backgroundColor:  Colors.white,
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -24,9 +24,9 @@ class DetailShop extends StatelessWidget {
                 child: Stack(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: size.height /2.5),
+                      margin: EdgeInsets.only(top: size.height /3),
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Color(0xffB58E62),
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(24),
                               topRight: Radius.circular(24))),
@@ -45,7 +45,7 @@ class DetailShop extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height / 7
+                            height: MediaQuery.of(context).size.height / 10
                         ),
                         /*Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -77,7 +77,7 @@ class DetailShop extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 20.0),
-                              child: Text("klein gedruckte Zusatzinfo", style: TextStyle(color: Color(0xFF3D6845))),
+                              child: Text("klein gedruckte Zusatzinfo", style: TextStyle(color: Color(0xFFB5475A))),
                             ),
 
                           ],
@@ -128,7 +128,7 @@ class DetailShop extends StatelessWidget {
                                         color: Colors.white
                                       ),
                                     ),
-                                  color: Color(0xFF3D6845),
+                                  color: Color(0xFFB5475A),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18)
                                   ),

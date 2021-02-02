@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 Widget MyAppBarEingaben(BuildContext context, String title, dynamic otherData) {
   return AppBar(
     centerTitle: true,
-    backgroundColor:  Color(0xff82b086),
+    backgroundColor:  Colors.white,
     elevation: 0.0,
+    iconTheme: IconThemeData(
+      color: Colors.black, //change your color here
+    ),
     actions: <Widget>[
       IconButton(
-        icon: Icon(Icons.info_outline, color: Colors.white),
+        icon: Icon(Icons.info_outline, color: Colors.black),
         onPressed: () {
           showDialog(
             context: context,

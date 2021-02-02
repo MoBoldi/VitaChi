@@ -4,7 +4,7 @@ Widget MyAppBar(BuildContext context, String title, dynamic otherData) {
   return AppBar(
     title: Text('$title'),
     centerTitle: true,
-    backgroundColor: Color(0xFF3D6845),
+    backgroundColor: Color(0xFFB5475A),
     actions: <Widget>[
       IconButton(
         icon: Icon(Icons.add, color: Colors.white),
