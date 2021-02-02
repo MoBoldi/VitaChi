@@ -20,13 +20,13 @@ class DetailShop extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: size.height,
+                height: size.height/1.1,
                 child: Stack(
                   children: [
                     Container(
                       margin: EdgeInsets.only(top: size.height /3),
                       decoration: BoxDecoration(
-                          color: Color(0xffB58E62),
+                          color: Color(0xFFB5475A),
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(24),
                               topRight: Radius.circular(24))),
@@ -73,34 +73,30 @@ class DetailShop extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 20.0),
-                              child: Text(data["first_name"] + " " + data["last_name"], style: TextStyle(fontSize: size.height/30),),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20.0),
-                              child: Text("klein gedruckte Zusatzinfo", style: TextStyle(color: Color(0xFFB5475A))),
+                              child: Text(data["first_name"] + " " + data["last_name"], style: TextStyle(fontSize: size.height/30, color: Colors.white, fontWeight: FontWeight.bold),),
                             ),
 
                           ],
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height / 20
+                            height: MediaQuery.of(context).size.height / 30
                         ),
                         Divider(
                           color: Colors.black,
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height / 20
+                            height: MediaQuery.of(context).size.height / 25
                         ),
 
                         Padding(
                           padding: const EdgeInsets.fromLTRB(20,0,20,0),
                           child: AutoSizeText("Beschreibung:",
-                            style: TextStyle(fontSize: 20),),
+                            style: TextStyle(fontSize: 20, color: Colors.white),),
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(20,0,20,0),
                           child: AutoSizeText("öllöksajdfsajfölksdj lk sdfljsaklöfj kjs dfölja sflöj salkf saldjf klsaj fklsja klf jakls flsadkjfsdjf sadkl fsj df jsaldf jösaldj fölasdj fasjf ösldfj söl jfd",
-                              style: TextStyle(fontSize: 20), maxLines: 4,),
+                              style: TextStyle(fontSize: 20, color: Colors.white), maxLines: 4,),
                         ),
                         SizedBox(
                             height: MediaQuery.of(context).size.height / 20
@@ -110,11 +106,12 @@ class DetailShop extends StatelessWidget {
                             Container(
                               child: Padding(
                                 padding: const EdgeInsets.fromLTRB(20,0,2,0),
-                                child: AutoSizeText("243", style: TextStyle(fontSize: 20),),
+                                child: AutoSizeText("243", style: TextStyle(fontSize: 20, color: Colors.white),),
                               ),
                             ),
                             Icon(
-                              Icons.monetization_on_outlined
+                              Icons.monetization_on_outlined,
+                              color: Colors.white,
                             ),
                             Expanded(
                               child: Padding(
@@ -128,7 +125,7 @@ class DetailShop extends StatelessWidget {
                                         color: Colors.white
                                       ),
                                     ),
-                                  color: Color(0xFFB5475A),
+                                  color: Color(0xffB58E62),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18)
                                   ),

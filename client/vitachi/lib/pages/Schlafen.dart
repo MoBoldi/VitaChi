@@ -12,161 +12,141 @@ class _SchlafenState extends State<Schlafen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final Color color = Color(0xFF3D6845);
+    final Color color =  Color(0xff28AA7D);
     return Scaffold(
       appBar: MyAppBarEingaben(context, 'VitaChi', null),
-      backgroundColor: Color(0xff82b086),
-      body: Stack(children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.height/3.5,0,0),
-          color: Colors.white,
-          height: MediaQuery.of(context).size.height/1.5,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.only(bottom: size.height/30),
-                child: FittedBox(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Image(
-                      image: AssetImage('assets/night.png'),
-                    ),
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Container(
+          width: size.width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image(
+                  width: size.width/2.6,
+                  image: AssetImage('assets/night.png')
+              ),
+              Container(
+                  margin: EdgeInsets.only(top: size.height/20),
+                  child: Text("Schlaf", style: TextStyle(fontSize: size.width/12, fontWeight: FontWeight.bold), )
+              ),
+              Container(
+                margin: EdgeInsets.only(top: size.height/80),
+                child: Text("Bitte Bewerte deinen letzten Schlaf",
+                  style: TextStyle(
+                      fontSize: size.width/25
                   ),
                 ),
               ),
-              flex: 6,
-            ),
-            Expanded(
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                        child: AutoSizeText("Schlafen",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 50)),
-                        flex: 1,
+              Stack(
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      margin: EdgeInsets.only(top: size.height/9),
+                      width: size.width/1.3,
+                      height: size.height/2.7,
+                      decoration: new BoxDecoration(
+                          color: color,
+                          borderRadius: new BorderRadius.only(
+                            topLeft: const Radius.circular(40.0),
+                            topRight: const Radius.circular(40.0),
+                            bottomLeft: const Radius.circular(40.0),
+                          )
                       ),
-                      Expanded(
-                        child: AutoSizeText(
-                          "Bewerte hier auf einer Skala von 1 bis 5 Sternen deinen letzten  Schlaf.",
-                          style: TextStyle(fontSize: 23),
-                          maxLines: 2,
-                        ),
-                        flex: 2,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text("Wie lange?", style: TextStyle(color: Colors.white, fontSize: size.width/20)),
+                          Container(
+                            margin: EdgeInsets.only( bottom: size.height/25),
+                            width: size.width/1.7,
+                            child: Center(
+                              child: RatingBar.builder(
+                                itemSize: size.width/10,
+                                initialRating: 3,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: false,
+                                itemCount: 5,
+                                itemPadding: EdgeInsets.symmetric(
+                                    horizontal: 0.3),
+                                itemBuilder: (context, _) => Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                onRatingUpdate: (rating) {
+                                },
+                              ),
+                            ),
+                          ),
+                          Text("Wie gut?", style: TextStyle(color: Colors.white, fontSize: size.width/20)),
+                          Container(
+                            margin: EdgeInsets.only( bottom: size.height/45),
+                            width: size.width/1.7,
+                            child: Center(
+                              child: RatingBar.builder(
+                                itemSize: size.width/10,
+                                initialRating: 3,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: false,
+                                itemCount: 5,
+                                itemPadding: EdgeInsets.symmetric(
+                                    horizontal: 0.3),
+                                itemBuilder: (context, _) => Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                onRatingUpdate: (rating) {
+                                },
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Container(
+                              height: size.height/20,
+                              child: FlatButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(15.0)
+                                    )
+                                ),
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(context, '/',);
+                                },
+                                color: Color(0xFFB5475A),
+                                child: Text(
+                                  "Absenden",
+                                  style: TextStyle(fontSize: size.width/30, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-                margin: EdgeInsets.fromLTRB(30.0, 0, 30, 0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-              ),
-              flex: 3,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Container(),
-                    flex: 4,
-                  ),
-                  Expanded(
-                    child: AutoSizeText(
-                      "Wie lange hast du geschlafen?",
-                      overflow: TextOverflow.visible,
-                      style: TextStyle(fontSize: MediaQuery.of(context).size.height/30),
-                      textAlign: TextAlign.center,
                     ),
-                    flex: 2,
                   ),
-                  RatingBar.builder(
-                    initialRating: 3,
-                    minRating: 1,
-                    direction: Axis.horizontal,
-                    allowHalfRating: false,
-                    itemCount: 5,
-                    itemPadding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width / 40),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star,
-                      color: Colors.amber,
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      margin: EdgeInsets.only(top: size.height/15),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        backgroundImage: AssetImage('assets/AvatarBlume.PNG'),
+                        radius: size.width/15,
+                      ),
                     ),
-                    onRatingUpdate: (rating) {
-                      print(rating);
-                    },
                   ),
-                  Expanded(
-                    child: Container(),
-                    flex: 1,
-                  ),
-                  Expanded(
-                    child: AutoSizeText(
-                      "Wie gut hast du geschlafen?",
-                      overflow: TextOverflow.visible,
-                      style: TextStyle(fontSize: MediaQuery.of(context).size.height/30),
-                      textAlign: TextAlign.center,
-                    ),
-                    flex: 2,
-                  ),
-                  RatingBar.builder(
-                    initialRating: 3,
-                    minRating: 1,
-                    direction: Axis.horizontal,
-                    allowHalfRating: false,
-                    itemCount: 5,
-                    itemPadding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width / 40),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
-                    onRatingUpdate: (rating) {
-                      print(rating);
-                    },
-                  ),
-                  Expanded(
-                    child: Container(),
-                    flex: 4,
-                  )
                 ],
               ),
-              flex: 10,
-            ),
-            Expanded(
-              child: FlatButton(
-                  onPressed: () {},
-                  minWidth: MediaQuery.of(context).size.width / 1.25,
-                  color: Color(0xFF3D6845),
-                  child: AutoSizeText(
-                    "Absenden",
-                    style: TextStyle(fontSize: 15, color: Colors.white),
-                  ),
-                shape: RoundedRectangleBorder(side: BorderSide(
-                    color: color,
-                    width: 1,
-                    style: BorderStyle.solid
-                ),
-                    borderRadius: BorderRadius.circular(50)
-                ),
-              ),
-              flex: 2,
-            ),
-            Expanded(
-              child: Container(),
-              flex: 2,
-            ),
-          ],
+            ],
+          ),
         ),
-      ]),
+
+
+      ),
     );
   }
 }

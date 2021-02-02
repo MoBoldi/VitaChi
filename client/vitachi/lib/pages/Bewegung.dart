@@ -27,7 +27,7 @@ class _BewegungState extends State<Bewegung> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image(
-                width: size.width/3,
+                width: size.width/2.6,
                   image: AssetImage('assets/basketball-ball.png')
               ),
               Container(
@@ -35,74 +35,121 @@ class _BewegungState extends State<Bewegung> {
                   child: Text("Bewegung", style: TextStyle(fontSize: size.width/12, fontWeight: FontWeight.bold), )
               ),
               Container(
-                margin: EdgeInsets.only(top: size.height/10),
-                width: size.width/1.3,
-                height: size.height/2.6,
-                decoration: new BoxDecoration(
-                    color: color,
-                    borderRadius: new BorderRadius.only(
-                      topLeft: const Radius.circular(40.0),
-                      topRight: const Radius.circular(40.0),
-                      bottomLeft: const Radius.circular(40.0),
-                      bottomRight: const Radius.circular(40.0),
-                    )
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: size.height/15,
-                    ),
-                    AutoSizeText("Wie fühlst du dich?", style: TextStyle(color: Colors.white, fontSize: 20),maxLines: 1,),
-                    Container(
-                      margin: EdgeInsets.only( bottom: size.height/20),
-                      width: size.width/1.7,
-                      child: Center(
-                        child: RatingBar.builder(
-                          initialRating: 3,
-                          minRating: 1,
-                          direction: Axis.horizontal,
-                          allowHalfRating: false,
-                          itemCount: 5,
-                          itemPadding: EdgeInsets.symmetric(
-                              horizontal: 0.3),
-                          itemBuilder: (context, _) => Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          onRatingUpdate: (rating) {
-                          },
-                        ),
-                      ),
-                    ),
-                    AutoSizeText("Wie anstrengend war's?", style: TextStyle(color: Colors.white, fontSize: 20),maxLines: 1,),
-                    Container(
-                      width: size.width/1.7,
-                      child: Center(
-                        child: RatingBar.builder(
-                          initialRating: 3,
-                          minRating: 1,
-                          direction: Axis.horizontal,
-                          allowHalfRating: false,
-                          itemCount: 5,
-                          itemPadding: EdgeInsets.symmetric(
-                              horizontal: 0.3),
-                          itemBuilder: (context, _) => Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          onRatingUpdate: (rating) {
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
+                margin: EdgeInsets.only(top: size.height/80),
+                child: Text("Bitte Bewerte deine letzte sportlich Bewegung",
+                  style: TextStyle(
+                    fontSize: size.width/25
+                  ),
                 ),
               ),
-
+              Stack(
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      margin: EdgeInsets.only(top: size.height/9),
+                      width: size.width/1.3,
+                      height: size.height/2.7,
+                      decoration: new BoxDecoration(
+                          color: color,
+                          borderRadius: new BorderRadius.only(
+                            topLeft: const Radius.circular(40.0),
+                            topRight: const Radius.circular(40.0),
+                            bottomLeft: const Radius.circular(40.0),
+                          )
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text("Wie fühlst du dich?", style: TextStyle(color: Colors.white, fontSize: size.width/20)),
+                          Container(
+                            margin: EdgeInsets.only( bottom: size.height/25),
+                            width: size.width/1.7,
+                            child: Center(
+                              child: RatingBar.builder(
+                                itemSize: size.width/10,
+                                initialRating: 3,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: false,
+                                itemCount: 5,
+                                itemPadding: EdgeInsets.symmetric(
+                                    horizontal: 0.3),
+                                itemBuilder: (context, _) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                onRatingUpdate: (rating) {
+                                },
+                              ),
+                            ),
+                          ),
+                          Text("Wie anstrengend war's?", style: TextStyle(color: Colors.white, fontSize: size.width/20)),
+                          Container(
+                            margin: EdgeInsets.only( bottom: size.height/45),
+                            width: size.width/1.7,
+                            child: Center(
+                              child: RatingBar.builder(
+                                itemSize: size.width/10,
+                                initialRating: 3,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: false,
+                                itemCount: 5,
+                                itemPadding: EdgeInsets.symmetric(
+                                    horizontal: 0.3),
+                                itemBuilder: (context, _) => Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                onRatingUpdate: (rating) {
+                                },
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Container(
+                              height: size.height/20,
+                              child: FlatButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(15.0)
+                                    )
+                                ),
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(context, '/',);
+                                },
+                                color: Color(0xFFB5475A),
+                                child: Text(
+                                  "Absenden",
+                                  style: TextStyle(fontSize: size.width/30, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      margin: EdgeInsets.only(top: size.height/15),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        backgroundImage: AssetImage('assets/AvatarBlume.PNG'),
+                        radius: size.width/15,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
-        )
+        ),
+
+
       ),
     );
   }

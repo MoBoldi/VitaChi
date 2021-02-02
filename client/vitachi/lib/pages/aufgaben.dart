@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
+import 'package:vitachi/pages/Essen.dart';
 import 'package:vitachi/pages/ShopBody.dart';
 
 class Aufgabe extends StatefulWidget {
@@ -44,14 +45,16 @@ class _AufgabeState extends State<Aufgabe> {
                           setState(() {
                             tasks.add(input);
                           });
-
                           Navigator.of(context).pop();
                         },
-                        child: Text("hinzufügen"))
+                        color: Color(0xFFB5475A),
+                        child: Text("hinzufügen")
+                    )
                   ],
                 );
               });
         },
+        backgroundColor: Color(0xFFB5475A),
         child: Icon(
           Icons.add,
           color: Colors.white,

@@ -93,7 +93,7 @@ class Home extends StatelessWidget {
                     height: 20,
                   ),
                   child: Container(
-                    color: Color(0xffB58E62),
+                    color: Color(0xFF3D6845),
                   ),
                 ),
               ),

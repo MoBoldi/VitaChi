@@ -21,155 +21,147 @@ class _ArbeitState extends State<Arbeit> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final Color color =  Color(0xff28AA7D);
     return Scaffold(
       appBar: MyAppBarEingaben(context, 'VitaChi', null),
-      backgroundColor: Color(0xff82b086),
-      body: Stack(children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.height/3.5,0,0),
-          color: Colors.white,
-          height: MediaQuery.of(context).size.height/1.5,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.only(bottom: size.height/30),
-                child: FittedBox(
-                  child: Image(
-                    image: AssetImage('assets/laptop.png'),
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Container(
+          width: size.width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image(
+                  width: size.width/2.6,
+                  image: AssetImage('assets/laptop.png')
+              ),
+              Container(
+                  margin: EdgeInsets.only(top: size.height/20),
+                  child: Text("Arbeit", style: TextStyle(fontSize: size.width/12, fontWeight: FontWeight.bold), )
+              ),
+              Container(
+                margin: EdgeInsets.only(top: size.height/80),
+                child: Text("Bitte Verwalte hier deine Arbeitszeit",
+                  style: TextStyle(
+                      fontSize: size.width/25
                   ),
                 ),
               ),
-              flex: 6,
-            ),
-            Expanded(
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                        child: AutoSizeText("Arbeiten",
+              Stack(
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      margin: EdgeInsets.only(top: size.height/9),
+                      width: size.width/1.3,
+                      height: size.height/2.7,
+                      decoration: new BoxDecoration(
+                          color: color,
+                          borderRadius: new BorderRadius.only(
+                            topLeft: const Radius.circular(40.0),
+                            topRight: const Radius.circular(40.0),
+                            bottomLeft: const Radius.circular(40.0),
+                          )
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "$hoursStr:$minutesStr:$secondsStr",
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 50)),
-                        flex: 1,
-                      ),
-                      Expanded(
-                        child: AutoSizeText(
-                          "Du kannst hier deine Arbeitszeit verwalten um gerecht dafür belohnt zu werden.",
-                          style: TextStyle(fontSize: 23),
-                          maxLines: 2,
-                        ),
-                        flex: 2,
-                      ),
-                    ],
-                  ),
-                ),
-                margin: EdgeInsets.fromLTRB(30.0, 0, 30, 0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-              ),
-              flex: 3,
-            ),
-            Expanded(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "$hoursStr:$minutesStr:$secondsStr",
-                      style: TextStyle(
-                        fontSize: 90.0,
-                      ),
-                    ),
-                    SizedBox(height: 30.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        RaisedButton(
-                          padding:
-                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                          onPressed: () {
-                            timerStream = stopWatchStream();
-                            timerSubscription = timerStream.listen((int newTick) {
-                              setState(() {
-                                hoursStr = ((newTick / (60 * 60)) % 60)
-                                    .floor()
-                                    .toString()
-                                    .padLeft(2, '0');
-                                minutesStr = ((newTick / 60) % 60)
-                                    .floor()
-                                    .toString()
-                                    .padLeft(2, '0');
-                                secondsStr =
-                                    (newTick % 60).floor().toString().padLeft(2, '0');
-                              });
-                            });
-                          },
-                          color: Colors.green,
-                          child: Text(
-                            'START',
-                            style: TextStyle(
-                              fontSize: 20.0,
+                              fontSize: size.width/6,
+                              color: Colors.white
                             ),
                           ),
-                        ),
-                        SizedBox(width: 40.0),
-                        RaisedButton(
-                          padding:
-                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                          onPressed: () {
-                            timerSubscription.cancel();
-                            timerStream = null;
-                          },
-                          color: Colors.red,
-                          child: Text(
-                            'STOP',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20.0,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RaisedButton(
+                                padding:
+                                EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                                onPressed: () {
+                                  timerStream = stopWatchStream();
+                                  timerSubscription = timerStream.listen((int newTick) {
+                                    setState(() {
+                                      hoursStr = ((newTick / (60 * 60)) % 60)
+                                          .floor()
+                                          .toString()
+                                          .padLeft(2, '0');
+                                      minutesStr = ((newTick / 60) % 60)
+                                          .floor()
+                                          .toString()
+                                          .padLeft(2, '0');
+                                      secondsStr =
+                                          (newTick % 60).floor().toString().padLeft(2, '0');
+                                    });
+                                  });
+                                },
+                                color: Color(0xffB58E62),
+                                child: Text(
+                                  'START',
+                                  style: TextStyle(
+                                    fontSize: size.width/20,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: size.width/15,
+                              ),
+                              RaisedButton(
+                                padding:
+                                EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                                onPressed: () {
+                                  timerSubscription.cancel();
+                                  timerStream = null;
+                                },
+                                color: Color(0xFFB5475A),
+                                child: Text(
+                                  'STOP',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: size.width/20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Container(
+                              margin: EdgeInsets.only(top: size.height/18),
+                              height: size.height/20,
+                              child: FlatButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(15.0)
+                                    )
+                                ),
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(context, '/');
+                                },
+                                color: Color(0xFFB5475A),
+                                child: Text(
+                                  "Absenden",
+                                  style: TextStyle(fontSize: size.width/30, color: Colors.white),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              flex: 10,
-            ),
+                        ],
+                      ),
 
-            Expanded(
-              child: FlatButton(
-                  onPressed: () {},
-                  minWidth: MediaQuery.of(context).size.width / 1.25,
-                  color: Color(0xFF3D6845),
-                  child: AutoSizeText(
-                    "Absenden",
-                    style: TextStyle(fontSize: 15,  color: Colors.white),
+                    ),
                   ),
-                shape: RoundedRectangleBorder(side: BorderSide(
-                    color: color,
-                    width: 1,
-                    style: BorderStyle.solid
-                ),
-                    borderRadius: BorderRadius.circular(50)
-                ),
+
+                ],
               ),
-              flex: 2,
-            ),
-            Expanded(
-              child: Container(),
-              flex: 2,
-            ),
-          ],
+
+            ],
+          ),
         ),
-      ]),
+
+
+      ),
     );
   }
 }
