@@ -25,12 +25,12 @@ class _EssenState extends State<Essen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image(
-                  width: size.width/2.6,
-                  image: AssetImage('assets/salad.png')
+                  width: size.height/4,
+                  image: AssetImage('assets/essen.png')
               ),
               Container(
                   margin: EdgeInsets.only(top: size.height/20),
-                  child: Text("Bewegung", style: TextStyle(fontSize: size.width/12, fontWeight: FontWeight.bold), )
+                  child: Text("Essen", style: TextStyle(fontSize: size.width/12, fontWeight: FontWeight.bold), )
               ),
               Container(
                 margin: EdgeInsets.only(top: size.height/80),

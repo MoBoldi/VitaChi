@@ -12,7 +12,7 @@ class _EingabenNavState extends State<EingabenNav> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final Color color = Color(0xffB58E62);
+    final Color color = Color(0xff82b086);
     return Scaffold(
       appBar: MyAppBar(context, 'VitaChi', null),
       drawer: MyDrawer(),
@@ -216,7 +216,7 @@ class _EingabenNavState extends State<EingabenNav> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     Image(
-                      height: size.height/8,
+                      height: size.height/7,
                       image: AssetImage('assets/laptop.png'),
                     ),
                     SizedBox(

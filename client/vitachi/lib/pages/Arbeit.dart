@@ -32,11 +32,10 @@ class _ArbeitState extends State<Arbeit> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image(
-                  width: size.width/2.6,
+                  width: size.height/4.5,
                   image: AssetImage('assets/laptop.png')
               ),
               Container(
-                  margin: EdgeInsets.only(top: size.height/20),
                   child: Text("Arbeit", style: TextStyle(fontSize: size.width/12, fontWeight: FontWeight.bold), )
               ),
               Container(
@@ -96,7 +95,7 @@ class _ArbeitState extends State<Arbeit> {
                                     });
                                   });
                                 },
-                                color: Color(0xffB58E62),
+                                color: Color(0xff82b086),
                                 child: Text(
                                   'START',
                                   style: TextStyle(

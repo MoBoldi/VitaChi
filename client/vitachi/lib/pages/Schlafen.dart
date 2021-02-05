@@ -23,11 +23,10 @@ class _SchlafenState extends State<Schlafen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image(
-                  width: size.width/2.6,
-                  image: AssetImage('assets/night.png')
+                  width: size.height/3,
+                  image: AssetImage('assets/sleep.png')
               ),
               Container(
-                  margin: EdgeInsets.only(top: size.height/20),
                   child: Text("Schlaf", style: TextStyle(fontSize: size.width/12, fontWeight: FontWeight.bold), )
               ),
               Container(

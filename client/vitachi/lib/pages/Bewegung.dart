@@ -27,11 +27,10 @@ class _BewegungState extends State<Bewegung> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image(
-                width: size.width/2.6,
-                  image: AssetImage('assets/basketball-ball.png')
+                width: size.height/5,
+                  image: AssetImage('assets/basketball.png')
               ),
               Container(
-                margin: EdgeInsets.only(top: size.height/20),
                   child: Text("Bewegung", style: TextStyle(fontSize: size.width/12, fontWeight: FontWeight.bold), )
               ),
               Container(
