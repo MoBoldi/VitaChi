@@ -14,7 +14,7 @@ class DetailShop extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-        appBar: MyAppBarEingaben(context, 'VitaChi', null),
+        appBar: MyAppBarWhite(context, 'VitaChi', null),
         backgroundColor:  Colors.white,
         body: SingleChildScrollView(
           child: Column(
@@ -26,7 +26,7 @@ class DetailShop extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(top: size.height /3),
                       decoration: BoxDecoration(
-                          color: Color(0xFFB5475A),
+                          color: Color(0xFF017ebe),
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(24),
                               topRight: Radius.circular(24))),
@@ -71,11 +71,24 @@ class DetailShop extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20.0),
-                              child: Text(data["first_name"] + " " + data["last_name"], style: TextStyle(fontSize: size.height/30, color: Colors.white, fontWeight: FontWeight.bold),),
-                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(data["first_name"] + " " + data["last_name"], style: TextStyle(fontSize: size.height/30, color: Colors.white, fontWeight: FontWeight.bold),),
+                                Container(
+                                    child: Row(
+                                      children: [
+                                        Text("243", style: TextStyle(color: Colors.white, fontSize: size.width/20),),
+                                        Icon(
+                                            Icons.monetization_on_outlined,
+                                            color: Colors.amber,
+                                        ),
+                                      ],
+                                    )
+                                ),
 
+                              ],
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -102,36 +115,24 @@ class DetailShop extends StatelessWidget {
                             height: MediaQuery.of(context).size.height / 20
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(20,0,2,0),
-                                child: AutoSizeText("243", style: TextStyle(fontSize: 20, color: Colors.white),),
-                              ),
-                            ),
-                            Icon(
-                              Icons.monetization_on_outlined,
-                              color: Colors.white,
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(20,0,20,0),
-                                child: FlatButton(onPressed: () {},
-                                    child: Text(
+                            FlatButton(
+                              onPressed: () {},
+                              child: Text(
                                       "Kaufen",
                                       style: TextStyle(
-                                        fontSize: 17,
+                                        fontSize: size.width/20,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white
                                       ),
                                     ),
-                                  color: Color(0xffB58E62),
+                                  color: Color(0xff710b79),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18)
                                   ),
-                                ),
+                              minWidth: size.width/2.5,
                               ),
-                            ),
                           ],
                         )
                       ],

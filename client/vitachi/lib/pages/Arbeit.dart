@@ -23,7 +23,7 @@ class _ArbeitState extends State<Arbeit> {
     final size = MediaQuery.of(context).size;
     final Color color =  Color(0xff28AA7D);
     return Scaffold(
-      appBar: MyAppBarEingaben(context, 'VitaChi', null),
+      appBar: MyAppBarArbeiten(context, 'VitaChi', null),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(

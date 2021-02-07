@@ -7,20 +7,20 @@ import 'package:vitachi/components/myDrawer.dart';
 
 class Home extends StatelessWidget {
   final List<ChartData> ges = [
-    ChartData('Wellbeing', 3, Color(0xFFB5475A)),
-    ChartData('', 2, Color(0xFFF25E77)),
+    ChartData('Wellbeing', 3, Color(0xFF710b79)),
+    ChartData('', 2, Color(0xFFc901a1)),
   ];
   List<ChartData> food = [
-    ChartData('Food', 5, Color(0xFFB5475A)),
-    ChartData('', 1, Color(0xFFF25E77)),
+    ChartData('Food', 5, Color(0xFF710b79)),
+    ChartData('', 1, Color(0xFFc901a1)),
   ];
   final List<ChartData> movement = [
-    ChartData('Movement', 3, Color(0xFFB5475A)),
-    ChartData('', 2, Color(0xFFF25E77)),
+    ChartData('Movement', 3, Color(0xFF710b79)),
+    ChartData('', 2, Color(0xFFc901a1)),
   ];
   final List<ChartData> sleep = [
-    ChartData('Sleep', 2, Color(0xFFB5475A)),
-    ChartData('', 3, Color(0xFFF25E77)),
+    ChartData('Sleep', 2, Color(0xFF710b79)),
+    ChartData('', 3, Color(0xFFc901a1)),
   ];
 
   Map data = {};
@@ -41,7 +41,7 @@ class Home extends StatelessWidget {
     print(data);
 
     return Scaffold(
-        backgroundColor: Color(0xff82b086),
+        backgroundColor: Color(0xff5bc7e3),
         appBar: MyAppBar(context, 'VitaChi', null),
         body: Container(
           child: Stack(
@@ -93,7 +93,7 @@ class Home extends StatelessWidget {
                     height: 20,
                   ),
                   child: Container(
-                    color: Color(0xFF3D6845),
+                    color: Color(0xFF0331a1),
                   ),
                 ),
               ),

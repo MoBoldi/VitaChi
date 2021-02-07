@@ -12,7 +12,7 @@ class _EingabenNavState extends State<EingabenNav> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final Color color = Color(0xff82b086);
+    final Color color = Color(0xff710b79);
     return Scaffold(
       appBar: MyAppBar(context, 'VitaChi', null),
       drawer: MyDrawer(),
