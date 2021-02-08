@@ -23,7 +23,7 @@ class _AufgabeState extends State<Aufgabe> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(context, 'Vitachi', null),
-      backgroundColor: Color(0xff82b086),
+      backgroundColor: Colors.white,
       drawer: MyDrawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -47,14 +47,14 @@ class _AufgabeState extends State<Aufgabe> {
                           });
                           Navigator.of(context).pop();
                         },
-                        color: Color(0xFFB5475A),
+                        color: Color(0xff266cbe),
                         child: Text("hinzufügen")
                     )
                   ],
                 );
               });
         },
-        backgroundColor: Color(0xFFB5475A),
+        backgroundColor: Color(0xff266cbe),
         child: Icon(
           Icons.add,
           color: Colors.white,
