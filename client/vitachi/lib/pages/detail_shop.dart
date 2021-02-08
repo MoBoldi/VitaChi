@@ -26,7 +26,7 @@ class DetailShop extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(top: size.height /3),
                       decoration: BoxDecoration(
-                          color: Color(0xFF017ebe),
+                          color: Color(0xFF4D774E),
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(24),
                               topRight: Radius.circular(24))),
@@ -81,7 +81,7 @@ class DetailShop extends StatelessWidget {
                                         Text("243", style: TextStyle(color: Colors.white, fontSize: size.width/20),),
                                         Icon(
                                             Icons.monetization_on_outlined,
-                                            color: Colors.amber,
+                                            color: Color(0xffF1B24A),
                                         ),
                                       ],
                                     )
@@ -124,12 +124,15 @@ class DetailShop extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize: size.width/20,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white
+                                        color: Color(0xffF1B24A),
                                       ),
                                     ),
-                                  color: Color(0xff710b79),
+                                  color: Color(0xFF164A41),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18)
+                                    side: BorderSide(
+                                      color: Color(0xffF1B24A),
+                                    ),
+                                    borderRadius: BorderRadius.circular(18),
                                   ),
                               minWidth: size.width/2.5,
                               ),

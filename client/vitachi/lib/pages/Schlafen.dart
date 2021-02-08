@@ -12,7 +12,7 @@ class _SchlafenState extends State<Schlafen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final Color color =  Color(0xff28AA7D);
+    final Color color =  Color(0xff4D774E);
     return Scaffold(
       appBar: MyAppBarEingaben(context, 'VitaChi', null),
       backgroundColor: Colors.white,
@@ -23,10 +23,11 @@ class _SchlafenState extends State<Schlafen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image(
-                  width: size.height/3,
+                  width: size.height/4.5,
                   image: AssetImage('assets/sleep.png')
               ),
               Container(
+                margin: EdgeInsets.only(top: size.height/30),
                   child: Text("Schlaf", style: TextStyle(fontSize: size.width/12, fontWeight: FontWeight.bold), )
               ),
               Container(

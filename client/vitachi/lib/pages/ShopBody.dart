@@ -77,7 +77,7 @@ class _BodyState extends State<Body> {
                                 child: Container(
                                     padding: EdgeInsets.all(20),
                                     decoration: BoxDecoration(
-                                        color: Color(0xff82b086),
+                                        color: Color(0xff9DC88D),
                                         borderRadius: BorderRadius.circular(
                                             16)),
                                     child: Image(

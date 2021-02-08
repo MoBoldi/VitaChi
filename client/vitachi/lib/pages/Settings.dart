@@ -9,7 +9,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  final color = Color(0xff5bc7e3);
+  final color = Color(0xff4D774E);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

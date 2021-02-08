@@ -14,7 +14,7 @@ class _EssenState extends State<Essen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final Color color =  Color(0xff017ebe);
+    final Color color =  Color(0xff4D774E);
     //blau grünton 28AA7D
     return Scaffold(
       appBar: MyAppBarEingaben(context, 'VitaChi', null),
@@ -123,7 +123,7 @@ class _EssenState extends State<Essen> {
                                   Navigator.pushReplacementNamed(context, '/',
                                       arguments: {'avg': essenEingaben.setAvg()});
                                 },
-                                color: Color(0xFF710b79),
+                                color: Color(0xFFB5475A),
                                 child: Text(
                                   "Absenden",
                                   style: TextStyle(fontSize: size.width/30, color: Colors.white),

@@ -9,10 +9,12 @@ class EingabenNav extends StatefulWidget {
 }
 
 class _EingabenNavState extends State<EingabenNav> {
+  final lightgreen = Color(0xFF28AA7D);
+  final darkpurple = Color(0xFF710b79);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final Color color = Color(0xff710b79);
+    final Color color = Color(0xFFF1B24A);
     return Scaffold(
       appBar: MyAppBar(context, 'VitaChi', null),
       drawer: MyDrawer(),
@@ -42,8 +44,8 @@ class _EingabenNavState extends State<EingabenNav> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     Image(
-                        height: size.height/8,
-                        image: AssetImage('assets/salad.png'),
+                        height: size.height/9,
+                        image: AssetImage('assets/essen.png'),
                       ),
                     SizedBox(
                       width: size.width/10,
@@ -101,7 +103,7 @@ class _EingabenNavState extends State<EingabenNav> {
                   children: <Widget>[
                     Image(
                       height: size.height/8,
-                      image: AssetImage('assets/basketball-ball.png'),
+                      image: AssetImage('assets/basketball.png'),
                     ),
                     SizedBox(
                       width: size.width/13,
@@ -159,7 +161,7 @@ class _EingabenNavState extends State<EingabenNav> {
                   children: <Widget>[
                     Image(
                       height: size.height/8,
-                      image: AssetImage('assets/night.png'),
+                      image: AssetImage('assets/sleep.png'),
                     ),
                     SizedBox(
                       width: size.width/10,
@@ -216,7 +218,7 @@ class _EingabenNavState extends State<EingabenNav> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     Image(
-                      height: size.height/7,
+                      height: size.height/8,
                       image: AssetImage('assets/laptop.png'),
                     ),
                     SizedBox(

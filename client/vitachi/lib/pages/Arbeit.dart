@@ -32,10 +32,11 @@ class _ArbeitState extends State<Arbeit> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image(
-                  width: size.height/4.5,
+                  width: size.height/5,
                   image: AssetImage('assets/laptop.png')
               ),
               Container(
+                  margin: EdgeInsets.only(top: size.height/30),
                   child: Text("Arbeit", style: TextStyle(fontSize: size.width/12, fontWeight: FontWeight.bold), )
               ),
               Container(

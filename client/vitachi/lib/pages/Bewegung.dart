@@ -31,6 +31,7 @@ class _BewegungState extends State<Bewegung> {
                   image: AssetImage('assets/basketball.png')
               ),
               Container(
+                  margin: EdgeInsets.only(top: size.height/30),
                   child: Text("Bewegung", style: TextStyle(fontSize: size.width/12, fontWeight: FontWeight.bold), )
               ),
               Container(
