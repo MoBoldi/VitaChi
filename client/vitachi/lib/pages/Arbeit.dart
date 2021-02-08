@@ -56,7 +56,10 @@ class _ArbeitState extends State<Arbeit> {
                       width: size.width/1.3,
                       height: size.height/2.7,
                       decoration: new BoxDecoration(
-                          color: color,
+                          gradient: LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              colors: [Color(0xff3f8ee9), Color(0xff5db4ec)]),
                           borderRadius: new BorderRadius.only(
                             topLeft: const Radius.circular(40.0),
                             topRight: const Radius.circular(40.0),

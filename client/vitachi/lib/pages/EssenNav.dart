@@ -9,12 +9,10 @@ class EingabenNav extends StatefulWidget {
 }
 
 class _EingabenNavState extends State<EingabenNav> {
-  final lightgreen = Color(0xFF28AA7D);
-  final darkpurple = Color(0xFF710b79);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final Color color = Color(0xFFF1B24A);
+    final Color color = Color(0xff9DC88D);
     return Scaffold(
       appBar: MyAppBar(context, 'VitaChi', null),
       drawer: MyDrawer(),
@@ -30,7 +28,10 @@ class _EingabenNavState extends State<EingabenNav> {
                 height: size.height/5.5,
                 margin: EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [Color(0xff54a2fc), Color(0xff6bc2fa)]),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -41,26 +42,20 @@ class _EingabenNavState extends State<EingabenNav> {
                     ]),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Image(
                         height: size.height/9,
                         image: AssetImage('assets/essen.png'),
                       ),
-                    SizedBox(
-                      width: size.width/10,
-                    ),
                     Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                              child: Text('Essen', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold),
+                              child: Text('Essen', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold, color: Colors.white),
                               )
                           ),
                         ],
-                    ),
-                    SizedBox(
-                      width: size.width/6,
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -70,8 +65,7 @@ class _EingabenNavState extends State<EingabenNav> {
                               Icons.arrow_forward_outlined,
                               color: Colors.white,
                               ),
-                          width: size.width/4,
-                          color: color,
+                          width: size.width/5,
                           height: size.height/5.5,
                         )
                       ],
@@ -88,7 +82,10 @@ class _EingabenNavState extends State<EingabenNav> {
                 height: size.height/5.5,
                 margin: EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [Color(0xff54a2fc), Color(0xff6bc2fa)]),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -99,26 +96,20 @@ class _EingabenNavState extends State<EingabenNav> {
                     ]),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Image(
                       height: size.height/8,
                       image: AssetImage('assets/basketball.png'),
                     ),
-                    SizedBox(
-                      width: size.width/13,
-                    ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                            child: Text('Bewegung', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold),
+                            child: Text('Bewegung', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold, color: Colors.white),
                             )
                         ),
                       ],
-                    ),
-                    SizedBox(
-                      width: size.width/13,
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -128,8 +119,7 @@ class _EingabenNavState extends State<EingabenNav> {
                             Icons.arrow_forward_outlined,
                             color: Colors.white,
                           ),
-                          width: size.width/4,
-                          color: color,
+                          width: size.width/5,
                           height: size.height/5.5,
                         )
                       ],
@@ -146,7 +136,10 @@ class _EingabenNavState extends State<EingabenNav> {
                 height: size.height/5.5,
                 margin: EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [Color(0xff54a2fc), Color(0xff6bc2fa)]),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -157,26 +150,20 @@ class _EingabenNavState extends State<EingabenNav> {
                     ]),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Image(
                       height: size.height/8,
                       image: AssetImage('assets/sleep.png'),
                     ),
-                    SizedBox(
-                      width: size.width/10,
-                    ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                            child: Text('Schlaf', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold),
+                            child: Text('Schlaf', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold, color: Colors.white),
                             )
                         ),
                       ],
-                    ),
-                    SizedBox(
-                      width: size.width/6,
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -186,8 +173,7 @@ class _EingabenNavState extends State<EingabenNav> {
                             Icons.arrow_forward_outlined,
                             color: Colors.white,
                           ),
-                          width: size.width/4,
-                          color: color,
+                          width: size.width/5,
                           height: size.height/5.5,
                         )
                       ],
@@ -204,7 +190,10 @@ class _EingabenNavState extends State<EingabenNav> {
                 height: size.height/5.5,
                 margin: EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [Color(0xff54a2fc), Color(0xff6bc2fa)]),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -215,26 +204,20 @@ class _EingabenNavState extends State<EingabenNav> {
                     ]),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Image(
                       height: size.height/8,
                       image: AssetImage('assets/laptop.png'),
                     ),
-                    SizedBox(
-                      width: size.width/10,
-                    ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                            child: Text('Arbeit', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold),
+                            child: Text('Arbeit', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold, color: Colors.white),
                             )
                         ),
                       ],
-                    ),
-                    SizedBox(
-                      width: size.width/6,
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -244,8 +227,7 @@ class _EingabenNavState extends State<EingabenNav> {
                             Icons.arrow_forward_outlined,
                             color: Colors.white,
                           ),
-                          width: size.width/4,
-                          color: color,
+                          width: size.width/5,
                           height: size.height/5.5,
                         )
                       ],

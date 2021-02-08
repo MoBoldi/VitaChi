@@ -24,9 +24,9 @@ class DetailShop extends StatelessWidget {
                 child: Stack(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: size.height /3),
+                      margin: EdgeInsets.only(top: size.height /2),
                       decoration: BoxDecoration(
-                          color: Color(0xFF4D774E),
+                          color: Color(0xFF5db4ec),
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(24),
                               topRight: Radius.circular(24))),
@@ -34,40 +34,15 @@ class DetailShop extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          //child: Text("VitaShop", style: Theme.of(context).textTheme.headline6,),
-                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image(image: NetworkImage(data["avatar"]), height: MediaQuery.of(context).size.height/4,),
+                            Image(image: NetworkImage(data["avatar"]), height: MediaQuery.of(context).size.height/2,),
                           ],
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height / 10
+                            height: MediaQuery.of(context).size.height / 20
                         ),
-                        /*Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(40,0,40,0),
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height/10,
-                                  child: Card(
-                                    child: Center(
-                                        child: Text(
-                                          data["first_name"], style: Theme.of(context).textTheme.headline5,
-                                        )
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              flex: 3,
-                            ),
-                          ],
-                        ),*/
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -80,7 +55,7 @@ class DetailShop extends StatelessWidget {
                                       children: [
                                         Text("243", style: TextStyle(color: Colors.white, fontSize: size.width/20),),
                                         Icon(
-                                            Icons.monetization_on_outlined,
+                                            Icons.monetization_on,
                                             color: Color(0xffF1B24A),
                                         ),
                                       ],
@@ -103,12 +78,7 @@ class DetailShop extends StatelessWidget {
 
                         Padding(
                           padding: const EdgeInsets.fromLTRB(20,0,20,0),
-                          child: AutoSizeText("Beschreibung:",
-                            style: TextStyle(fontSize: 20, color: Colors.white),),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20,0,20,0),
-                          child: AutoSizeText("öllöksajdfsajfölksdj lk sdfljsaklöfj kjs dfölja sflöj salkf saldjf klsaj fklsja klf jakls flsadkjfsdjf sadkl fsj df jsaldf jösaldj fölasdj fasjf ösldfj söl jfd",
+                          child: AutoSizeText("öllöksajdfsajfölksdj lk sdfljsaklöfj kjs dfölja sflöj salkf saldjf klsaj",
                               style: TextStyle(fontSize: 20, color: Colors.white), maxLines: 4,),
                         ),
                         SizedBox(
@@ -124,13 +94,13 @@ class DetailShop extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize: size.width/20,
                                         fontWeight: FontWeight.bold,
-                                        color: Color(0xffF1B24A),
+                                        color: Colors.white,
                                       ),
                                     ),
-                                  color: Color(0xFF164A41),
+                                  color: Color(0xff266cbe),
                                   shape: RoundedRectangleBorder(
                                     side: BorderSide(
-                                      color: Color(0xffF1B24A),
+                                      color: Colors.white,
                                     ),
                                     borderRadius: BorderRadius.circular(18),
                                   ),

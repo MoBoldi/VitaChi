@@ -9,20 +9,20 @@ class Home extends StatelessWidget {
   final lightgreen = Color(0xFF28AA7D);
 
   final List<ChartData> ges = [
-    ChartData('Wellbeing', 3, Color(0xFFF1B24A)),
-    ChartData('', 2, Color(0xFFE6C38C)),
+    ChartData('Wellbeing', 3, Color(0xFF4DA8DA)),
+    ChartData('', 2, Color(0xFF9dc6dd)),
   ];
   List<ChartData> food = [
-    ChartData('Food', 5, Color(0xFFF1B24A)),
-    ChartData('', 1, Color(0xFFE6C38C)),
+    ChartData('Food', 5, Color(0xFF4DA8DA)),
+    ChartData('', 1,  Color(0xFF9dc6dd)),
   ];
   final List<ChartData> movement = [
-    ChartData('Movement', 3, Color(0xFFF1B24A)),
-    ChartData('', 2, Color(0xFFE6C38C)),
+    ChartData('Movement', 3, Color(0xFF4DA8DA)),
+    ChartData('', 2, Color(0xFF9dc6dd)),
   ];
   final List<ChartData> sleep = [
-    ChartData('Sleep', 2, Color(0xFFF1B24A)),
-    ChartData('', 3, Color(0xFFE6C38C)),
+    ChartData('Sleep', 2, Color(0xFF4DA8DA)),
+    ChartData('', 3, Color(0xFF9dc6dd)),
   ];
 
   Map data = {};
@@ -43,10 +43,16 @@ class Home extends StatelessWidget {
     print(data);
 
     return Scaffold(
-        backgroundColor: Color(0xff9DC88D),
+
         //Color(0xff5bc7e3)
         appBar: MyAppBar(context, 'VitaChi', null),
         body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.center,
+                end: Alignment.bottomCenter,
+                colors: [Color(0xff4491eb), Color(0xff5dacde)]),
+          ),
           child: Stack(
             children: [
               Container(
@@ -96,7 +102,7 @@ class Home extends StatelessWidget {
                     height: 20,
                   ),
                   child: Container(
-                    color: Color(0xFF164A41),
+                    color: Color(0xff266cbe),
                     //Color(0xFF0331a1)
                   ),
                 ),
