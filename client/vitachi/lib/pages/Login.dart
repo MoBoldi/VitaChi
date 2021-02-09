@@ -11,7 +11,7 @@ class Login extends StatefulWidget {
   _LoginState createState() => _LoginState();
 }
 
-final Color color = Color(0xFF3D6845);
+final Color color = Color(0xff3f8ee9);
 
 class _LoginState extends State<Login> {
   final eingaben = GlobalKey<FormState>();
@@ -25,7 +25,12 @@ class _LoginState extends State<Login> {
           children: [
             Stack(children: [
               Container(
-                color: Color(0xffbbedc5),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [Color(0xff3f8ee9), Color(0xff5db4ec)]),
+                ),
                 height: MediaQuery.of(context).size.height / 2,
               ),
               AnimatedPositioned(
@@ -100,7 +105,7 @@ class _LoginState extends State<Login> {
                               height: MediaQuery.of(context).size.height / 15,
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: Color(0xFF3D6845),
+                                      primary: Color(0xff3f8ee9),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(50))),

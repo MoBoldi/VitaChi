@@ -11,7 +11,7 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final eingaben = GlobalKey<FormState>();
-  final Color color = Color(0xFF3D6845);
+  final Color color = Color(0xff3f8ee9);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -23,7 +23,12 @@ class _RegisterState extends State<Register> {
             Stack(
                 children: [
                   Container(
-                    color: Color(0xffbbedc5),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [Color(0xff3f8ee9), Color(0xff5db4ec)]),
+                    ),
                     height: MediaQuery.of(context).size.height/2,
                   ),
                   AnimatedPositioned(
@@ -86,7 +91,7 @@ class _RegisterState extends State<Register> {
                                   height: MediaQuery.of(context).size.height/15,
                                   child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                          primary: Color(0xFF3D6845),
+                                          primary: Color(0xff3f8ee9),
                                           shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.circular(50)
                                           )
@@ -113,7 +118,7 @@ class _RegisterState extends State<Register> {
                                     },
                                     child: Text("Zurück", style: TextStyle(color: Colors.black)),
                                     shape: RoundedRectangleBorder(side: BorderSide(
-                                        color: color,
+                                        color: Color(0xff3f8ee9),
                                         width: 1,
                                         style: BorderStyle.solid
                                     ),

@@ -6,21 +6,23 @@ import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
 
 class Home extends StatelessWidget {
+  final lightgreen = Color(0xFF28AA7D);
+
   final List<ChartData> ges = [
-    ChartData('Wellbeing', 3, Color(0xFFB5475A)),
-    ChartData('', 2, Color(0xFFF25E77)),
+    ChartData('Wellbeing', 3, Color(0xFF4DA8DA)),
+    ChartData('', 2, Color(0xFF9dc6dd)),
   ];
   List<ChartData> food = [
-    ChartData('Food', 5, Color(0xFFB5475A)),
-    ChartData('', 1, Color(0xFFF25E77)),
+    ChartData('Food', 5, Color(0xFF4DA8DA)),
+    ChartData('', 1,  Color(0xFF9dc6dd)),
   ];
   final List<ChartData> movement = [
-    ChartData('Movement', 3, Color(0xFFB5475A)),
-    ChartData('', 2, Color(0xFFF25E77)),
+    ChartData('Movement', 3, Color(0xFF4DA8DA)),
+    ChartData('', 2, Color(0xFF9dc6dd)),
   ];
   final List<ChartData> sleep = [
-    ChartData('Sleep', 2, Color(0xFFB5475A)),
-    ChartData('', 3, Color(0xFFF25E77)),
+    ChartData('Sleep', 2, Color(0xFF4DA8DA)),
+    ChartData('', 3, Color(0xFF9dc6dd)),
   ];
 
   Map data = {};
@@ -41,9 +43,16 @@ class Home extends StatelessWidget {
     print(data);
 
     return Scaffold(
-        backgroundColor: Color(0xff82b086),
+
+        //Color(0xff5bc7e3)
         appBar: MyAppBar(context, 'VitaChi', null),
         body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.center,
+                end: Alignment.bottomCenter,
+                colors: [Color(0xff4491eb), Color(0xff5dacde)]),
+          ),
           child: Stack(
             children: [
               Container(
@@ -93,7 +102,8 @@ class Home extends StatelessWidget {
                     height: 20,
                   ),
                   child: Container(
-                    color: Color(0xFF3D6845),
+                    color: Color(0xff266cbe),
+                    //Color(0xFF0331a1)
                   ),
                 ),
               ),

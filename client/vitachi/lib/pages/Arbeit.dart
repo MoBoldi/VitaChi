@@ -23,7 +23,7 @@ class _ArbeitState extends State<Arbeit> {
     final size = MediaQuery.of(context).size;
     final Color color =  Color(0xff28AA7D);
     return Scaffold(
-      appBar: MyAppBarEingaben(context, 'VitaChi', null),
+      appBar: MyAppBarArbeiten(context, 'VitaChi', null),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
@@ -32,10 +32,11 @@ class _ArbeitState extends State<Arbeit> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image(
-                  width: size.height/4.5,
+                  width: size.height/5,
                   image: AssetImage('assets/laptop.png')
               ),
               Container(
+                  margin: EdgeInsets.only(top: size.height/30),
                   child: Text("Arbeit", style: TextStyle(fontSize: size.width/12, fontWeight: FontWeight.bold), )
               ),
               Container(
@@ -55,7 +56,10 @@ class _ArbeitState extends State<Arbeit> {
                       width: size.width/1.3,
                       height: size.height/2.7,
                       decoration: new BoxDecoration(
-                          color: color,
+                          gradient: LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              colors: [Color(0xff3f8ee9), Color(0xff5db4ec)]),
                           borderRadius: new BorderRadius.only(
                             topLeft: const Radius.circular(40.0),
                             topRight: const Radius.circular(40.0),

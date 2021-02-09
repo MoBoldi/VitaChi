@@ -77,24 +77,30 @@ class _BodyState extends State<Body> {
                                 child: Container(
                                     padding: EdgeInsets.all(20),
                                     decoration: BoxDecoration(
-                                        color: Color(0xff82b086),
+                                        gradient: LinearGradient(
+                                            begin: Alignment.bottomLeft,
+                                            end: Alignment.topRight,
+                                            colors: [Color(0xff54a2fc), Color(0xff6bc2fa)]),
                                         borderRadius: BorderRadius.circular(
                                             16)),
-                                    child: Image(
-                                      image: NetworkImage(
-                                          userData[index]["avatar"]),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Image(
+                                          image: NetworkImage(
+                                              userData[index]["avatar"]),
+                                        ),
+                                        Text(
+                                          userData[index]["first_name"],
+                                          style: TextStyle(
+                                            fontSize: MediaQuery.of(context).size.width/20,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                      ],
                                     )
                                 )
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 5),
-                              child: Text(
-                                userData[index]["first_name"],
-                              ),
-                            ),
-                            Text(
-                              "234€",
-                              style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),

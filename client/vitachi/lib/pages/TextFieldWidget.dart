@@ -5,7 +5,7 @@ class TextFieldWidget extends StatelessWidget {
   final String hintText;
   final IconData prefixIconData;
   final bool obscureText;
-  final Color color = Color(0xFF3D6845);
+  final Color color = Color(0xff3f8ee9);
 
   TextFieldWidget({
       this.hintText,

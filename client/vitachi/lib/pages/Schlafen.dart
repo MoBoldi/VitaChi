@@ -12,7 +12,7 @@ class _SchlafenState extends State<Schlafen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final Color color =  Color(0xff28AA7D);
+    final Color color =  Color(0xff4D774E);
     return Scaffold(
       appBar: MyAppBarEingaben(context, 'VitaChi', null),
       backgroundColor: Colors.white,
@@ -23,10 +23,11 @@ class _SchlafenState extends State<Schlafen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image(
-                  width: size.height/3,
+                  width: size.height/4.5,
                   image: AssetImage('assets/sleep.png')
               ),
               Container(
+                margin: EdgeInsets.only(top: size.height/30),
                   child: Text("Schlaf", style: TextStyle(fontSize: size.width/12, fontWeight: FontWeight.bold), )
               ),
               Container(
@@ -46,7 +47,10 @@ class _SchlafenState extends State<Schlafen> {
                       width: size.width/1.3,
                       height: size.height/2.7,
                       decoration: new BoxDecoration(
-                          color: color,
+                          gradient: LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              colors: [Color(0xff3f8ee9), Color(0xff5db4ec)]),
                           borderRadius: new BorderRadius.only(
                             topLeft: const Radius.circular(40.0),
                             topRight: const Radius.circular(40.0),
