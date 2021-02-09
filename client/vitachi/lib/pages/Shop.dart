@@ -14,9 +14,8 @@ class _ShopState extends State<Shop> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(context, 'VitaChi', null),
-      drawer: MyDrawer(),
-      body: Body()
-    );
+        appBar: MyAppBar(context, 'VitaChi', null),
+        drawer: MyDrawer(),
+        body: Body());
   }
 }

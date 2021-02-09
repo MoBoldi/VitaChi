@@ -4,6 +4,7 @@ import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
 import 'package:vitachi/pages/Essen.dart';
 import 'package:vitachi/pages/ShopBody.dart';
+import 'package:intl/intl.dart';
 
 class Aufgabe extends StatefulWidget {
   @override
@@ -14,16 +15,24 @@ class _AufgabeState extends State<Aufgabe> {
   List tasks = List();
   String input = "";
 
+  DateTime _dateTime;
+  String formatedDate = "";
+
   @override
   void initState() {
     super.initState();
+  }
+
+  void SetDate(DateTime date) {
+    _dateTime = date;
+    formatedDate = DateFormat("yyyy-MM-dd").format(_dateTime);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(context, 'Vitachi', null),
-      backgroundColor: Color(0xff82b086),
+      backgroundColor: Color(0x8DB6CD),
       drawer: MyDrawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -41,15 +50,31 @@ class _AufgabeState extends State<Aufgabe> {
                   ),
                   actions: <Widget>[
                     FlatButton(
+                      child: Text("Datum auswählen"),
+                      color: Color(0xFFB5475A),
+                      onPressed: () {
+                        showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2001),
+                                lastDate: DateTime(2222))
+                            .then((date) {
+                          setState(() {
+                            SetDate(date);
+                          });
+                        });
+                      },
+                    ),
+                    FlatButton(
                         onPressed: () {
                           setState(() {
-                            tasks.add(input);
+                            String text = input + " | " + formatedDate;
+                            tasks.add(text);
                           });
                           Navigator.of(context).pop();
                         },
                         color: Color(0xFFB5475A),
-                        child: Text("hinzufügen")
-                    )
+                        child: Text("hinzufügen"))
                   ],
                 );
               });
@@ -73,7 +98,7 @@ class _AufgabeState extends State<Aufgabe> {
                   child: ListTile(
                     title: Text(tasks[index]),
                     trailing: IconButton(
-                        icon: Icon(Icons.delete),
+                        icon: Icon(Icons.check),
                         onPressed: () {
                           setState(() {
                             tasks.removeAt(index);

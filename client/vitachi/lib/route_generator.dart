@@ -5,17 +5,18 @@ import 'package:vitachi/pages/Arbeit.dart';
 import 'package:vitachi/pages/Bewegung.dart';
 import 'package:vitachi/pages/Essen.dart';
 import 'package:vitachi/pages/EssenNav.dart';
+import 'package:vitachi/pages/Freunde.dart';
 import 'package:vitachi/pages/Login.dart';
 import 'package:vitachi/pages/Register.dart';
 import 'package:vitachi/pages/Schlafen.dart';
 import 'package:vitachi/pages/Settings.dart';
 import 'package:vitachi/pages/Shop.dart';
 import 'package:vitachi/pages/aufgaben.dart';
+import 'package:vitachi/pages/detail_Freunde.dart';
 import 'package:vitachi/pages/detail_shop.dart';
 import 'package:vitachi/pages/home.dart';
 import 'package:vitachi/pages/statistics.dart';
 import 'package:vitachi/pages/statisticsNav.dart';
-
 import 'pages/Wellbeing.dart';
 
 class RouteGenerator {
