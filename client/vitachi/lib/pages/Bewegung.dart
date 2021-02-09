@@ -27,8 +27,8 @@ class _BewegungState extends State<Bewegung> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image(
-                width: size.height/5,
-                  image: AssetImage('assets/basketball.png')
+                height: size.height/4,
+                  image: AssetImage('assets/laufen.png')
               ),
               Container(
                   margin: EdgeInsets.only(top: size.height/30),
@@ -47,7 +47,7 @@ class _BewegungState extends State<Bewegung> {
                   Align(
                     alignment: Alignment.center,
                     child: Container(
-                      margin: EdgeInsets.only(top: size.height/9),
+                      margin: EdgeInsets.only(top: size.height/12),
                       width: size.width/1.3,
                       height: size.height/2.7,
                       decoration: new BoxDecoration(
@@ -138,10 +138,10 @@ class _BewegungState extends State<Bewegung> {
                   Align(
                     alignment: Alignment.center,
                     child: Container(
-                      margin: EdgeInsets.only(top: size.height/15),
+                      margin: EdgeInsets.only(top: size.height/24),
                       child: CircleAvatar(
                         backgroundColor: Colors.white,
-                        backgroundImage: AssetImage('assets/AvatarBlume.PNG'),
+                        backgroundImage: AssetImage('assets/CircleAvatar.png'),
                         radius: size.width/15,
                       ),
                     ),

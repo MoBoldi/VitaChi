@@ -31,7 +31,9 @@ class _EingabenNavState extends State<EingabenNav> {
                     gradient: LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
-                        colors: [Color(0xff54a2fc), Color(0xff6bc2fa)]),
+                        colors: [Color(0xff54a2fc), Color(0xff6bc2fa)]
+                    ),
+                    borderRadius: BorderRadius.circular(18),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -45,14 +47,17 @@ class _EingabenNavState extends State<EingabenNav> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Image(
-                        height: size.height/9,
-                        image: AssetImage('assets/essen.png'),
+                        height: size.height/8,
+                        width: size.width/8,
+                        image: AssetImage('assets/apfel.png'),
                       ),
                     Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                              child: Text('Essen', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold, color: Colors.white),
+                              child: Center(
+                                child: Text('Essen', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold, color: Colors.white),
+                                ),
                               )
                           ),
                         ],
@@ -65,7 +70,6 @@ class _EingabenNavState extends State<EingabenNav> {
                               Icons.arrow_forward_outlined,
                               color: Colors.white,
                               ),
-                          width: size.width/5,
                           height: size.height/5.5,
                         )
                       ],
@@ -85,7 +89,9 @@ class _EingabenNavState extends State<EingabenNav> {
                     gradient: LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
-                        colors: [Color(0xff54a2fc), Color(0xff6bc2fa)]),
+                        colors: [Color(0xff54a2fc), Color(0xff6bc2fa)]
+                    ),
+                    borderRadius: BorderRadius.circular(18),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -99,14 +105,17 @@ class _EingabenNavState extends State<EingabenNav> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Image(
-                      height: size.height/8,
-                      image: AssetImage('assets/basketball.png'),
+                      height: size.height/10,
+                      width: size.width/8,
+                      image: AssetImage('assets/laufen.png'),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                            child: Text('Bewegung', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold, color: Colors.white),
+                            child: Center(
+                              child: Text('Bewegung', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold, color: Colors.white),
+                              ),
                             )
                         ),
                       ],
@@ -119,7 +128,6 @@ class _EingabenNavState extends State<EingabenNav> {
                             Icons.arrow_forward_outlined,
                             color: Colors.white,
                           ),
-                          width: size.width/5,
                           height: size.height/5.5,
                         )
                       ],
@@ -139,7 +147,9 @@ class _EingabenNavState extends State<EingabenNav> {
                     gradient: LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
-                        colors: [Color(0xff54a2fc), Color(0xff6bc2fa)]),
+                        colors: [Color(0xff54a2fc), Color(0xff6bc2fa)]
+                    ),
+                    borderRadius: BorderRadius.circular(18),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -154,14 +164,17 @@ class _EingabenNavState extends State<EingabenNav> {
                   children: <Widget>[
                     Image(
                       height: size.height/8,
-                      image: AssetImage('assets/sleep.png'),
+                      width: size.width/8,
+                      image: AssetImage('assets/Bild_3.png'),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                            child: Text('Schlaf', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold, color: Colors.white),
-                            )
+                              child: Center(
+                                child: Text('Schlaf', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold, color: Colors.white),
+                            ),
+                              )
                         ),
                       ],
                     ),
@@ -173,7 +186,6 @@ class _EingabenNavState extends State<EingabenNav> {
                             Icons.arrow_forward_outlined,
                             color: Colors.white,
                           ),
-                          width: size.width/5,
                           height: size.height/5.5,
                         )
                       ],
@@ -193,7 +205,9 @@ class _EingabenNavState extends State<EingabenNav> {
                     gradient: LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
-                        colors: [Color(0xff54a2fc), Color(0xff6bc2fa)]),
+                        colors: [Color(0xff54a2fc), Color(0xff6bc2fa)]
+                    ),
+                    borderRadius: BorderRadius.circular(18),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -208,13 +222,16 @@ class _EingabenNavState extends State<EingabenNav> {
                   children: <Widget>[
                     Image(
                       height: size.height/8,
-                      image: AssetImage('assets/laptop.png'),
+                      width: size.width/8,
+                      image: AssetImage('assets/laptopneu.png'),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                            child: Text('Arbeit', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold, color: Colors.white),
+                            child: Center(
+                              child: Text('Arbeit', style: TextStyle(fontSize: size.width/17,fontWeight: FontWeight.bold, color: Colors.white),
+                              ),
                             )
                         ),
                       ],
@@ -227,7 +244,6 @@ class _EingabenNavState extends State<EingabenNav> {
                             Icons.arrow_forward_outlined,
                             color: Colors.white,
                           ),
-                          width: size.width/5,
                           height: size.height/5.5,
                         )
                       ],

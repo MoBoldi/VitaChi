@@ -26,8 +26,8 @@ class _EssenState extends State<Essen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image(
-                  width: size.height/4,
-                  image: AssetImage('assets/essen.png')
+                  height: size.height/4,
+                  image: AssetImage('assets/apfel.png')
               ),
               Container(
                   margin: EdgeInsets.only(top: size.height/20),
@@ -46,7 +46,7 @@ class _EssenState extends State<Essen> {
                   Align(
                     alignment: Alignment.center,
                     child: Container(
-                      margin: EdgeInsets.only(top: size.height/9),
+                      margin: EdgeInsets.only(top: size.height/12),
                       width: size.width/1.3,
                       height: size.height/2.7,
                       decoration: new BoxDecoration(
@@ -141,10 +141,10 @@ class _EssenState extends State<Essen> {
                   Align(
                     alignment: Alignment.center,
                     child: Container(
-                      margin: EdgeInsets.only(top: size.height/15),
+                      margin: EdgeInsets.only(top: size.height/24),
                       child: CircleAvatar(
                         backgroundColor: Colors.white,
-                        backgroundImage: AssetImage('assets/AvatarBlume.PNG'),
+                        backgroundImage: AssetImage('assets/CircleAvatar.png'),
                         radius: size.width/15,
                       ),
                     ),

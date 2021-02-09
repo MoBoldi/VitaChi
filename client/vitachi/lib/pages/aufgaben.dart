@@ -50,8 +50,8 @@ class _AufgabeState extends State<Aufgabe> {
                   ),
                   actions: <Widget>[
                     FlatButton(
-                      child: Text("Datum auswählen"),
-                      color: Color(0xFFB5475A),
+                      child: Text("Datum", style: TextStyle(color: Colors.white),),
+                      color: Color(0xff266cbe),
                       onPressed: () {
                         showDatePicker(
                                 context: context,
@@ -73,8 +73,13 @@ class _AufgabeState extends State<Aufgabe> {
                           });
                           Navigator.of(context).pop();
                         },
-                        color: Color(0xff266cbe),
-                        child: Text("hinzufügen"))
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Color(0xff266cbe),
+                          ),
+                        ),
+                        color: Colors.white,
+                        child: Text("Ok"))
                   ],
                 );
               });

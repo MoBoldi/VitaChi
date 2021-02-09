@@ -33,7 +33,7 @@ class _ArbeitState extends State<Arbeit> {
             children: [
               Image(
                   width: size.height/5,
-                  image: AssetImage('assets/laptop.png')
+                  image: AssetImage('assets/laptopneu.png')
               ),
               Container(
                   margin: EdgeInsets.only(top: size.height/30),
@@ -104,6 +104,7 @@ class _ArbeitState extends State<Arbeit> {
                                   'START',
                                   style: TextStyle(
                                     fontSize: size.width/20,
+                                    color: Colors.white
                                   ),
                                 ),
                               ),

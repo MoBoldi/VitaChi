@@ -24,7 +24,7 @@ class _SchlafenState extends State<Schlafen> {
             children: [
               Image(
                   width: size.height/4.5,
-                  image: AssetImage('assets/sleep.png')
+                  image: AssetImage('assets/Bild_3.png')
               ),
               Container(
                 margin: EdgeInsets.only(top: size.height/30),
@@ -137,7 +137,7 @@ class _SchlafenState extends State<Schlafen> {
                       margin: EdgeInsets.only(top: size.height/15),
                       child: CircleAvatar(
                         backgroundColor: Colors.white,
-                        backgroundImage: AssetImage('assets/AvatarBlume.PNG'),
+                        backgroundImage: AssetImage('assets/CircleAvatar.png'),
                         radius: size.width/15,
                       ),
                     ),
