@@ -40,24 +40,54 @@ public class VitaChiService {
     @Path("findAll/{Entity}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List findAll(@PathParam("Entity") String param) {
+    public List findAll(@PathParam("Entity") String entity) {
+        if(entity == "Accessoire") {
+            return VitaChiServiceAccessoire.findAll();
+        } else if (entity == "Arbeit") {
+            return VitaChiServiceArbeit.findAll();
+        } else if (entity == "Aufgaben") {
+            return VitaChiServiceAufgaben.findAll();
+        } else if (entity == "Eingabe") {
+            return VitaChiServiceEingabe.findAll();
+        } else {
+            return "VitaChi is here, but there is no entity with this name!";
+        }
         return repo.findAll(param);
     }
 
     // Ein Training senden
-    @Path("find/{id}")
+    @Path("find/{Entity}/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Object findAll(@PathParam("id") long id) {
-        return repo.find(id);
+    public Object findAll(@PathParam("Entity") String entity, @PathParam("id") long id) {
+        if(entity == "Accessoire") {
+            return VitaChiServiceAccessoire.find(id);
+        } else if (entity == "Arbeit") {
+            return VitaChiServiceArbeit.find(id);
+        } else if (entity == "Aufgaben") {
+            return VitaChiServiceAufgaben.find(id);
+        } else if (entity == "Eingabe") {
+            return VitaChiServiceEingabe.find(id);
+        } else {
+            return "VitaChi is here, but there is no entity with this name!";
+        }
     }
 
     // Ein Training löschen
     @Path("delete/{Entity}/{id}")
     @DELETE
-    public String deleteTraining(@PathParam("Entity") String param, @PathParam("id") long id) {
-        repo.delete(id);
-        return "training deleted";
+    public String deleteTraining(@PathParam("Entity") String entity, @PathParam("id") long id) {
+        if(entity == "Accessoire") {
+            return VitaChiServiceAccessoire.delete(id);
+        } else if (entity == "Arbeit") {
+            return VitaChiServiceArbeit.delete(id);
+        } else if (entity == "Aufgaben") {
+            return VitaChiServiceAufgaben.delete(id);
+        } else if (entity == "Eingabe") {
+            return VitaChiServiceEingabe.delete(id);
+        } else {
+            return "VitaChi is here, but there is no entity with this name!";
+        }
     }
 
     // Ein Training hinzufügen
@@ -65,10 +95,10 @@ public class VitaChiService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Object createTraining(Object updateObject) {
-        repo.create(updateObject);
+    public Object createTraining(Object newObject) {
+        repo.create(newObject);
         //System.out.println(training);
-        return updateObject;
+        return newObject;
     }
 
     // Ein Training ändern

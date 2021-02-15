@@ -22,20 +22,20 @@ public class VitaChiServiceArbeit extends VitaChiService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List findAll() {
-        return repo.findAll('Arbeit');
+        return repo.findAll("Arbeit");
     }
 
     // Ein Training senden
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Object findAll(long id) {
-        return repo.find('Arbeit', id);
+    public Object find(long id) {
+        return repo.find("Arbeit", id);
     }
 
     // Ein Training löschen
     @DELETE
     public String deleteArbeit(long id) {
-        repo.delete('Arbeit', id);
+        repo.delete("Arbeit", id);
         return "Arbeit deleted successfully!";
     }
 

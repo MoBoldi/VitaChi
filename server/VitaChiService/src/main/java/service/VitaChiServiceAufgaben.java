@@ -22,7 +22,7 @@ public class VitaChiServiceAufgaben extends VitaChiService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List findAll() {
-        return repo.findAll('Aufgaben');
+        return repo.findAll("Aufgaben");
     }
 
     // Ein Training senden
