@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
-import 'package:vitachi/pages/Essen.dart';
-import 'package:vitachi/pages/ShopBody.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/rendering.dart';
 
 class Aufgabe extends StatefulWidget {
   @override
@@ -14,6 +13,7 @@ class Aufgabe extends StatefulWidget {
 class _AufgabeState extends State<Aufgabe> {
   List tasks = List();
   String input = "";
+  final Color color = Color(0xff9DC88D);
 
   DateTime _dateTime;
   String formatedDate = "";
@@ -25,7 +25,7 @@ class _AufgabeState extends State<Aufgabe> {
 
   void SetDate(DateTime date) {
     _dateTime = date;
-    formatedDate = DateFormat("yyyy-MM-dd").format(_dateTime);
+    formatedDate = DateFormat("dd.MM.yyyy").format(_dateTime);
   }
 
   @override
@@ -98,12 +98,21 @@ class _AufgabeState extends State<Aufgabe> {
           itemBuilder: (BuildContext context, int index) {
             return Dismissible(
                 key: Key(tasks[index]),
-                child: Card(
-                  color: Color(0xff266cbe),
-                  elevation: 4,
+                child: Container(
+                  //color: Color(0xff266cbe),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18),
+                    gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [Color(0xff54a2fc), Color(0xff6bc2fa)]),
+                  ),
+                  //elevation: 4,
                   margin: EdgeInsets.all(8),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
+
+                  //shape: RoundedRectangleBorder(
+                  //   borderRadius: BorderRadius.circular(8)),
+
                   child: ListTile(
                     title: Text(tasks[index]),
                     trailing: IconButton(
