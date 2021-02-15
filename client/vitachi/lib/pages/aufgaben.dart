@@ -50,7 +50,10 @@ class _AufgabeState extends State<Aufgabe> {
                   ),
                   actions: <Widget>[
                     FlatButton(
-                      child: Text("Datum", style: TextStyle(color: Colors.white),),
+                      child: Text(
+                        "Datum",
+                        style: TextStyle(color: Colors.white),
+                      ),
                       color: Color(0xff266cbe),
                       onPressed: () {
                         showDatePicker(
@@ -96,6 +99,7 @@ class _AufgabeState extends State<Aufgabe> {
             return Dismissible(
                 key: Key(tasks[index]),
                 child: Card(
+                  color: Color(0xff266cbe),
                   elevation: 4,
                   margin: EdgeInsets.all(8),
                   shape: RoundedRectangleBorder(
