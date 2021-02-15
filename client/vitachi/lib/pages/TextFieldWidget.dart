@@ -22,8 +22,8 @@ class TextFieldWidget extends StatelessWidget {
 
       child: TextFormField(
         style: TextStyle(
-            color: color,
-            fontSize: 18
+            color: Colors.black,
+            fontSize: MediaQuery.of(context).size.width/25
         ),
         cursorColor: color,
         obscureText: obscureText,

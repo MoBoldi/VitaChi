@@ -53,10 +53,10 @@ class DetailShop extends StatelessWidget {
                                 Container(
                                     child: Row(
                                       children: [
-                                        Text("243", style: TextStyle(color: Colors.white, fontSize: size.width/20),),
+                                        Text("243 ", style: TextStyle(color: Colors.white, fontSize: size.width/20),),
                                         Icon(
-                                            Icons.monetization_on,
-                                            color: Color(0xffF1B24A),
+                                            Icons.monetization_on_outlined,
+                                            color: Colors.amberAccent,
                                         ),
                                       ],
                                     )
