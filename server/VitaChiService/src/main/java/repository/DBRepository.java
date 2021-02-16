@@ -21,7 +21,7 @@ public class DBRepository {
 
     // Löschen eines Trainings
     @Transactional
-    public void delete(long id) {
+    public void delete(String entity, long id) {
         em.remove(this.find(id));
     }
 
@@ -32,7 +32,7 @@ public class DBRepository {
     }
 
     // Lesen eines Trainings mit id
-    public Object find(long id) {
+    public Object find(String entity, long id) {
         return em.find(Accessoire.class, id);
     }
 

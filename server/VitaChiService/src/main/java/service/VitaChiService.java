@@ -19,94 +19,87 @@ public class VitaChiService {
     @Inject
     DBRepository repo;
 
+    VitaChiServiceAccessoire accessoire;
+    VitaChiServiceArbeit arbeit;
+    VitaChiServiceAufgaben aufgaben;
+    VitaChiServiceEingabe eingabe;
+
     @Path("test/{Entity}")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String test(@PathParam("Entity") String entity) {
         if(entity == "Accessoire") {
-            return VitaChiServiceAccessoire.test();
+            return accessoire.test();
         } else if (entity == "Arbeit") {
-            return VitaChiServiceArbeit.test();
+            return arbeit.test();
         } else if (entity == "Aufgaben") {
-            return VitaChiServiceAufgaben.test();
+            return aufgaben.test();
         } else if (entity == "Eingabe") {
-            return VitaChiServiceEingabe.test();
+            return eingabe.test();
         } else {
             return "VitaChi is here, but there is no entity with this name!";
         }
     }
 
-    // Liste aller Trainings senden
+    // Liste aller Objekte je nach Entität senden
     @Path("findAll/{Entity}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List findAll(@PathParam("Entity") String entity) {
-        if(entity == "Accessoire") {
-            return VitaChiServiceAccessoire.findAll();
-        } else if (entity == "Arbeit") {
-            return VitaChiServiceArbeit.findAll();
-        } else if (entity == "Aufgaben") {
-            return VitaChiServiceAufgaben.findAll();
-        } else if (entity == "Eingabe") {
-            return VitaChiServiceEingabe.findAll();
-        } else {
-            return "VitaChi is here, but there is no entity with this name!";
-        }
-        return repo.findAll(param);
+        return repo.findAll(entity);
     }
 
-    // Ein Training senden
+    // Ein Objekt je nach Entität senden
     @Path("find/{Entity}/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Object findAll(@PathParam("Entity") String entity, @PathParam("id") long id) {
+    public Object find(@PathParam("Entity") String entity, @PathParam("id") long id) {
         if(entity == "Accessoire") {
-            return VitaChiServiceAccessoire.find(id);
+            return accessoire.find(id);
         } else if (entity == "Arbeit") {
-            return VitaChiServiceArbeit.find(id);
+            return arbeit.find(id);
         } else if (entity == "Aufgaben") {
-            return VitaChiServiceAufgaben.find(id);
+            return aufgaben.find(id);
         } else if (entity == "Eingabe") {
-            return VitaChiServiceEingabe.find(id);
+            return eingabe.find(id);
         } else {
             return "VitaChi is here, but there is no entity with this name!";
         }
     }
 
-    // Ein Training löschen
+    // Ein Objekt je nach Entität löschen
     @Path("delete/{Entity}/{id}")
     @DELETE
-    public String deleteTraining(@PathParam("Entity") String entity, @PathParam("id") long id) {
+    public String deleteObject(@PathParam("Entity") String entity, @PathParam("id") long id) {
         if(entity == "Accessoire") {
-            return VitaChiServiceAccessoire.delete(id);
+            return accessoire.deleteAccessoire(id);
         } else if (entity == "Arbeit") {
-            return VitaChiServiceArbeit.delete(id);
+            return arbeit.deleteArbeit(id);
         } else if (entity == "Aufgaben") {
-            return VitaChiServiceAufgaben.delete(id);
+            return aufgaben.deleteAufgabe(id);
         } else if (entity == "Eingabe") {
-            return VitaChiServiceEingabe.delete(id);
+            return eingabe.deleteEingabe(id);
         } else {
             return "VitaChi is here, but there is no entity with this name!";
         }
     }
 
-    // Ein Training hinzufügen
+    // Ein Objekt je nach Typ des übergebenen Obejekts hinzufügen
     @Path("create")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Object createTraining(Object newObject) {
+    public Object createObject(Object newObject) {
         repo.create(newObject);
-        //System.out.println(training);
         return newObject;
     }
 
-    // Ein Training ändern
+    // Ein Objekt je nach Typ des übergebenen Objekts ändern
     @Path("update")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public String updateTraining(Object updateObject) {
+    public String updateObject(Object updateObject) {
         repo.update(updateObject);
-        return "training updated";
+        return "Object updated";
     }
 }
