@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:vitachi/pages/detail_freunde.dart';
-import 'package:vitachi/pages/detail_shop.dart';
 
 class Body extends StatefulWidget {
   @override
