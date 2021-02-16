@@ -49,12 +49,7 @@ Widget MyAppBarWhite(BuildContext context, String title, dynamic otherData) {
       color: Colors.black, //change your color here
     ),
     actions: <Widget>[
-      IconButton(
-        icon: Icon(Icons.add, color: Colors.black),
-        onPressed: () {
-          Navigator.pushReplacementNamed(context, '/eingabeNav');
-        },
-      )
+
     ],
   );
 }

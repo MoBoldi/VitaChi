@@ -25,7 +25,7 @@ class _SettingsState extends State<Settings> {
                   width: size.width,
                 ),
                 Container(
-                margin: EdgeInsets.fromLTRB(size.width/20, size.height/10, size.width/20,0),
+                margin: EdgeInsets.fromLTRB(size.width/20, size.height/15, size.width/20,0),
                 child: TextFormField(
                   initialValue: 'Benutzername',
                   style: TextStyle(
@@ -117,7 +117,7 @@ class _SettingsState extends State<Settings> {
                 child: Text("Hier kannst du deine E-Mail Adresse ändern.", style: TextStyle(fontSize: size.width/30, color: Colors.grey),),
               ),
               Container(
-                margin: EdgeInsets.only(top: size.height/10),
+                margin: EdgeInsets.only(top: size.height/20),
                 width: size.width/5,
                 child: SpinBox(
                   min: 1.0,
@@ -138,7 +138,31 @@ class _SettingsState extends State<Settings> {
                   style: TextStyle(fontSize: size.width/30, color: Colors.grey),
                 ),
               ),
+              Container(
+                margin: EdgeInsets.only(top: size.height/40),
+                width: size.width/3,
+                child: FlatButton(
+                    onPressed: (){
 
+                    },
+                    child: Text(
+                      "Bestätigen",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: size.width/25
+                      ),
+                    ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(10)
+                      ),
+                      side: BorderSide(
+                        color: color
+                      )
+                  ),
+                  color: Color(0xff5dacde),
+                ),
+              )
             ],
           ),
         )

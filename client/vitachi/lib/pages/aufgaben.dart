@@ -48,6 +48,7 @@ class _AufgabeState extends State<Aufgabe> {
                     onChanged: (String value) {
                       input = value;
                     },
+
                   ),
                   actions: <Widget>[
                     FlatButton(

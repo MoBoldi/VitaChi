@@ -72,7 +72,7 @@ class MyDrawer extends StatelessWidget {
               ],
             ),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushReplacementNamed(context, '/freunde');
             },
           ),
           ListTile(

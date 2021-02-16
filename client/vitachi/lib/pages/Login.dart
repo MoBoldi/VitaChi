@@ -47,7 +47,7 @@ class _LoginState extends State<Login> {
                   margin: EdgeInsets.fromLTRB(
                       0, MediaQuery.of(context).size.height / 25, 0, 0),
                   child: Image(
-                    image: AssetImage('assets/logo.png'),
+                    image: AssetImage('assets/Logo_Design_03.png'),
                     width: MediaQuery.of(context).size.width / 1.5,
                   ),
                 ),
@@ -98,7 +98,7 @@ class _LoginState extends State<Login> {
                                         ),
                                       ),*/
                             Container(
-                              height: MediaQuery.of(context).size.height / 15,
+                              height: MediaQuery.of(context).size.height / 10,
                             ),
                             SizedBox(
                               width: MediaQuery.of(context).size.width / 1.2,
@@ -119,7 +119,7 @@ class _LoginState extends State<Login> {
                                       style: TextStyle(color: Colors.white))),
                             ),
                             Container(
-                              height: MediaQuery.of(context).size.height / 90,
+                              height: MediaQuery.of(context).size.height / 70,
                             ),
                             SizedBox(
                               width: MediaQuery.of(context).size.width / 1.2,

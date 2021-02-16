@@ -45,7 +45,7 @@ class _RegisterState extends State<Register> {
 
                       margin: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height/25, 0, 0),
                       child: Image(
-                        image: AssetImage('assets/logo.png'),
+                        image: AssetImage('assets/Logo_Design_03.png'),
                         width: MediaQuery.of(context).size.width/1.5,
                       ),
                     ),
@@ -55,13 +55,12 @@ class _RegisterState extends State<Register> {
                     child: Column(
                       children: [
                         Container(
-                          //margin: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height/4, 0, MediaQuery.of(context).size.height/4),
+                          margin: EdgeInsets.only(top: size.height/40),
                           child:
                           Form(
                             key: eingaben,
                             child: Column(
                               children: [
-
                                 TextFieldWidget(
                                   hintText: 'Benutzername',
                                   prefixIconData: Icons.person_outline,
@@ -107,7 +106,7 @@ class _RegisterState extends State<Register> {
                                   ),
                                 ),
                                 Container(
-                                  height: MediaQuery.of(context).size.height/90,
+                                  height: MediaQuery.of(context).size.height/70,
                                 ),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width/1.2,
