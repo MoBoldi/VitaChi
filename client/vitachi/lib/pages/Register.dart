@@ -45,7 +45,7 @@ class _RegisterState extends State<Register> {
 
                       margin: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height/25, 0, 0),
                       child: Image(
-                        image: AssetImage('assets/logo.png'),
+                        image: AssetImage('assets/Logo_Design_03.png'),
                         width: MediaQuery.of(context).size.width/1.5,
                       ),
                     ),
