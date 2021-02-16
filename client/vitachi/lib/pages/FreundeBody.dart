@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:vitachi/pages/detail_freunde.dart';
 import 'package:vitachi/pages/detail_shop.dart';
 
 class Body extends StatefulWidget {
@@ -61,12 +62,11 @@ class _BodyState extends State<Body> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            //Navigator.pushNamed(context, '/detailShop');
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        DetailShop(data: userData[index])));
+                                        DetailFreunde(data: userData[index])));
                           },
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
