@@ -19,30 +19,30 @@ class _SettingsState extends State<Settings> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-                Container(
-                  margin: EdgeInsets.only(left: size.width/25),
-                  child: Text("SETTINGS", style: TextStyle(fontSize: size.width/15),),
-                  width: size.width,
+              Container(
+                margin: EdgeInsets.only(left: size.width / 25),
+                child: Text(
+                  "SETTINGS",
+                  style: TextStyle(fontSize: size.width / 15),
                 ),
-                Container(
-                margin: EdgeInsets.fromLTRB(size.width/20, size.height/15, size.width/20,0),
+                width: size.width,
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(
+                    size.width / 20, size.height / 15, size.width / 20, 0),
                 child: TextFormField(
                   initialValue: 'Benutzername',
-                  style: TextStyle(
-                      color: color,
-                      fontSize: 18
-                  ),
+                  style: TextStyle(color: color, fontSize: 18),
                   cursorColor: color,
                   obscureText: false,
                   decoration: InputDecoration(
                     errorStyle: TextStyle(height: 0),
                     focusedErrorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.red)
-                    ),
+                        borderSide: BorderSide(color: Colors.red)),
                     prefixIcon: Icon(
                       Icons.person,
-                      size: MediaQuery.of(context).size.height/35,
+                      size: MediaQuery.of(context).size.height / 35,
                       color: color,
                     ),
                     filled: true,
@@ -52,12 +52,9 @@ class _SettingsState extends State<Settings> {
                     ),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: color)
-                    ),
-
+                        borderSide: BorderSide(color: color)),
                     labelStyle: TextStyle(color: color),
                     focusColor: color,
-
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
@@ -68,27 +65,28 @@ class _SettingsState extends State<Settings> {
                 ),
               ),
               Container(
-                child: Text("Hier kannst du deinen Benutzernamen ändern.", style: TextStyle(fontSize: size.width/30, color: Colors.grey),),
+                child: Text(
+                  "Hier kannst du deinen Benutzernamen ändern.",
+                  style:
+                      TextStyle(fontSize: size.width / 30, color: Colors.grey),
+                ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(size.width/20, size.height/20, size.width/20,0),
+                margin: EdgeInsets.fromLTRB(
+                    size.width / 20, size.height / 20, size.width / 20, 0),
                 child: TextFormField(
                   initialValue: 'E-Mail',
-                  style: TextStyle(
-                      color: color,
-                      fontSize: 18
-                  ),
+                  style: TextStyle(color: color, fontSize: 18),
                   cursorColor: color,
                   obscureText: false,
                   decoration: InputDecoration(
                     errorStyle: TextStyle(height: 0),
                     focusedErrorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.red)
-                    ),
+                        borderSide: BorderSide(color: Colors.red)),
                     prefixIcon: Icon(
                       Icons.person,
-                      size: MediaQuery.of(context).size.height/35,
+                      size: MediaQuery.of(context).size.height / 35,
                       color: color,
                     ),
                     filled: true,
@@ -98,12 +96,9 @@ class _SettingsState extends State<Settings> {
                     ),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: color)
-                    ),
-
+                        borderSide: BorderSide(color: color)),
                     labelStyle: TextStyle(color: color),
                     focusColor: color,
-
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
@@ -114,11 +109,15 @@ class _SettingsState extends State<Settings> {
                 ),
               ),
               Container(
-                child: Text("Hier kannst du deine E-Mail Adresse ändern.", style: TextStyle(fontSize: size.width/30, color: Colors.grey),),
+                child: Text(
+                  "Hier kannst du deine E-Mail Adresse ändern.",
+                  style:
+                      TextStyle(fontSize: size.width / 30, color: Colors.grey),
+                ),
               ),
               Container(
-                margin: EdgeInsets.only(top: size.height/20),
-                width: size.width/5,
+                margin: EdgeInsets.only(top: size.height / 20),
+                width: size.width / 5,
                 child: SpinBox(
                   min: 1.0,
                   max: 168.0,
@@ -132,40 +131,33 @@ class _SettingsState extends State<Settings> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(size.width/20, 0, size.width/20,0),
-                child: Text("In den Statistiken wird Standardmäßig mit den Wert 38,5 Stunden Arbeitszeit pro Woche gerechnet. "
-                    "Hier kannst du einstellen wie viele Stunden du pro Woche arbeitest und somit die Statistik an dich anpassen.",
-                  style: TextStyle(fontSize: size.width/30, color: Colors.grey),
+                margin:
+                    EdgeInsets.fromLTRB(size.width / 20, 0, size.width / 20, 0),
+                child: Text(
+                  "In den Statistiken wird Standardmäßig mit den Wert 38,5 Stunden Arbeitszeit pro Woche gerechnet. "
+                  "Hier kannst du einstellen wie viele Stunden du pro Woche arbeitest und somit die Statistik an dich anpassen.",
+                  style:
+                      TextStyle(fontSize: size.width / 30, color: Colors.grey),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: size.height/40),
-                width: size.width/3,
+                margin: EdgeInsets.only(top: size.height / 40),
+                width: size.width / 3,
                 child: FlatButton(
-                    onPressed: (){
-
-                    },
-                    child: Text(
-                      "Bestätigen",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: size.width/25
-                      ),
-                    ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(10)
-                      ),
-                      side: BorderSide(
-                        color: color
-                      )
+                  onPressed: () {},
+                  child: Text(
+                    "Bestätigen",
+                    style: TextStyle(
+                        color: Colors.white, fontSize: size.width / 25),
                   ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      side: BorderSide(color: color)),
                   color: Color(0xff5dacde),
                 ),
               )
             ],
           ),
-        )
-    );
+        ));
   }
 }

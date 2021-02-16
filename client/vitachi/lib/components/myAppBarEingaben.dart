@@ -52,29 +52,6 @@ Widget MyAppBarWhite(BuildContext context, String title, dynamic otherData) {
   );
 }
 
-/*Widget MyAppBarFreunde(BuildContext context, String title, dynamic otherData) {
-  bool isSearching = false; //Boolean damit Suchleiste erscheint
-
-  return AppBar(
-    centerTitle: true,
-    title: !isSearching ? Text("Freunde") : Text("suche deine Freunde"),
-    backgroundColor: Colors.white,
-    elevation: 0.0,
-    iconTheme: IconThemeData(
-      color: Colors.black,
-    ),
-    actions: <Widget>[
-      IconButton(
-          icon: Icon(Icons.search),
-          onPressed: () {
-            setState(() {
-              this.isSearching = !this.isSearching;
-            });
-          })
-    ],
-  );
-}*/
-
 Widget MyAppBarArbeiten(BuildContext context, String title, dynamic otherData) {
   return AppBar(
     centerTitle: true,
