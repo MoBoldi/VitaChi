@@ -1,15 +1,11 @@
 package repository;
 
-import entity.Eingabe;
 import entity.Accessoire;
-import entity.Arbeit;
-import entity.Aufgaben;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.util.List;
 
 @ApplicationScoped
@@ -19,13 +15,13 @@ public class DBRepository {
     private EntityManager em;
 
     // Lesen aller Trainings
-    public List findAll(String param) {
-        return em.createQuery("select returnObject from " + param + " as returnObject").getResultList();
+    public List findAll(String entity) {
+        return em.createQuery("select returnObject from " + entity + " as returnObject").getResultList();
     }
 
     // Löschen eines Trainings
     @Transactional
-    public void delete(long id) {
+    public void delete(String entity, long id) {
         em.remove(this.find(id));
     }
 
@@ -36,7 +32,7 @@ public class DBRepository {
     }
 
     // Lesen eines Trainings mit id
-    public Object find(long id) {
+    public Object find(String entity, long id) {
         return em.find(Accessoire.class, id);
     }
 
