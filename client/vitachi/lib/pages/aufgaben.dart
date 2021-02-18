@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
+import 'package:http/http.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
 import 'package:intl/intl.dart';
@@ -98,8 +99,8 @@ class _AufgabeState extends State<Aufgabe> {
           itemCount: tasks.length,
           itemBuilder: (BuildContext context, int index) {
             return Dismissible(
-                key: Key(tasks[index]),
-                child: Container(
+              key: Key(tasks[index]),
+              child: Container(
                   //color: Color(0xff266cbe),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(18),
@@ -115,16 +116,29 @@ class _AufgabeState extends State<Aufgabe> {
                   //   borderRadius: BorderRadius.circular(8)),
 
                   child: ListTile(
-                    title: Text(tasks[index]),
-                    trailing: IconButton(
-                        icon: Icon(Icons.check),
-                        onPressed: () {
-                          setState(() {
-                            tasks.removeAt(index);
-                          });
-                        }),
-                  ),
-                ));
+                    title: Text(tasks[index],
+                        style: TextStyle(color: Colors.white)),
+                    trailing: Wrap(
+                      spacing: 6,
+                      children: <Widget>[
+                        IconButton(
+                            icon: Icon(Icons.delete),
+                            onPressed: () {
+                              setState(() {
+                                tasks.removeAt(index);
+                              });
+                            }),
+                        IconButton(
+                            icon: Icon(Icons.check),
+                            onPressed: () {
+                              setState(() {
+                                tasks.removeAt(index);
+                              });
+                            })
+                      ],
+                    ),
+                  )),
+            );
           }),
     );
   }
