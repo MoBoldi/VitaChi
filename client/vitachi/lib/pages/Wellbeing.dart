@@ -12,10 +12,10 @@ class Wellbeing extends StatefulWidget {
 }
 
 class _Wellbeing extends State<Wellbeing> {
-  final Color chartColor = Color(0xFF3D6845);
+  final Color chartColor = Color(0xff3f8ee9);
   final PassedData data = PassedData(
       chartData: ([
-        ChartData('Test', 2, Colors.blue),
+        ChartData('Test', 2, Color(0xff3f8ee9)),
         ChartData('', 3, Colors.grey[200]),
       ]),
       barChartData: ([

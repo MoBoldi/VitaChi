@@ -9,11 +9,11 @@ class Statistics extends StatefulWidget {
 }
 
 class _Statistics extends State<Statistics> {
-  final Color chartColor = Color(0xFF3D6845);
+  final Color chartColor = Color(0xFF4DA8DA);
   final PassedData data = PassedData(
       chartData: ([
-        ChartData('Test', 2, Color(0xFF3D6845)),
-        ChartData('', 3, Colors.grey[200]),
+        ChartData('Test', 2, Color(0xFF4DA8DA)),
+        ChartData('', 3, Color(0xFF9dc6dd)),
       ]),
       barChartData: ([
         ChartData('Mo', 3),
@@ -50,7 +50,7 @@ class _Statistics extends State<Statistics> {
             Container(
               margin: EdgeInsets.fromLTRB(
                   0, /*MediaQuery.of(context).size.height / 3*/ 0, 0, 0),
-              color: Color(0xff82b086),
+              color: Colors.white,
               height: MediaQuery.of(context).size.height / 3,
             ),
             Column(
@@ -64,7 +64,7 @@ class _Statistics extends State<Statistics> {
                           child: Text(
                             "${data.chartData[1].y}",
                             style: TextStyle(
-                              color: Color.fromRGBO(255, 255, 255, 1),
+                              color: Color.fromRGBO(0, 0, 0, 1),
                               fontSize: 25,
                             ),
                           ),
@@ -85,14 +85,28 @@ class _Statistics extends State<Statistics> {
                 ),
                 Card(
                   margin: EdgeInsets.fromLTRB(15, 0, 15, 20),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
-                    child: Center(
-                      child: AutoSizeText(
-                        '${data.title}',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [Color(0xff54a2fc), Color(0xff6bc2fa)],
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                      child: Center(
+                        child: AutoSizeText(
+                          '${data.title}',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
