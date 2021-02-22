@@ -16,7 +16,18 @@ public class DBRepository {
 
     // Lesen aller Trainings
     public List findAll(String entity) {
-        return em.createQuery("select returnObject from " + entity + " as returnObject").getResultList();
+
+        if(entity == "Accessoire") {
+            return em.createQuery("select returnObject from Accessoire as returnObject").getResultList();
+        } else if (entity == "Arbeit") {
+            return em.createQuery("select returnObject from Arbeit as returnObject").getResultList();
+        } else if (entity == "Aufgaben") {
+            return em.createQuery("select returnObject from Aufgaben as returnObject").getResultList();
+        } else if (entity == "Eingabe") {
+            return em.createQuery("select returnObject from Eingabe as returnObject").getResultList();
+        } else {
+            return em.createQuery("select returnObjectAc from " + entity + " as returnObject").getResultList();
+        }
     }
 
     // Löschen eines Trainings
