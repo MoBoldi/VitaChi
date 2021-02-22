@@ -1,4 +1,4 @@
-GET http://localhost:8080/vitaChi/test/Eingabe
+GET http://localhost:8080/vitaChi/test/Aufgaben
 ###
 GET http://localhost:8080/vitaChi/init
 ###

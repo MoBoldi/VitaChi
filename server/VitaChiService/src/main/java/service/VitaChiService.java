@@ -28,13 +28,13 @@ public class VitaChiService {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String test(@PathParam("Entity") String entity) {
-        if(entity == "Accessoire") {
+        if(entity.equals("Accessoire")) {
             return accessoire.test();
-        } else if (entity == "Arbeit") {
+        } else if (entity.equals("Arbeit")) {
             return arbeit.test();
-        } else if (entity == "Aufgaben") {
+        } else if (entity.equals("Aufgaben")) {
             return aufgaben.test();
-        } else if (entity == "Eingabe") {
+        } else if (entity.equals("Eingabe")) {
             return eingabe.test();
         } else {
             return "VitaChi is here, but there is no entity with this name!";

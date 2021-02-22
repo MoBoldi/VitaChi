@@ -1,6 +1,9 @@
 package repository;
 
 import entity.Accessoire;
+import entity.Arbeit;
+import entity.Aufgaben;
+import entity.Eingabe;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -26,14 +29,23 @@ public class DBRepository {
         } else if (entity == "Eingabe") {
             return em.createQuery("select returnObject from Eingabe as returnObject").getResultList();
         } else {
-            return em.createQuery("select returnObjectAc from " + entity + " as returnObject").getResultList();
+            return em.createQuery("select returnObjectAc, returnObjectAr, returnObjectAu, returnObjectEi " +
+                    "from Accessoire as returnObjectAc, Arbeit as returnObjectAr, Aufgaben as returnObjectAu, Eingabe as returnObjectEi").getResultList();
         }
     }
 
     // Löschen eines Trainings
     @Transactional
     public void delete(String entity, long id) {
-        em.remove(this.find(id));
+        if(entity == "Accessoire") {
+            em.remove(this.find("Accessoire", id));
+        } else if (entity == "Arbeit") {
+            em.remove(this.find("Arbeit", id));
+        } else if (entity == "Aufgaben") {
+            em.remove(this.find("Aufgaben", id));
+        } else if (entity == "Eingabe") {
+            em.remove(this.find("Eingabe", id));
+        }
     }
 
     // Einfügen eines Trainings
@@ -44,7 +56,16 @@ public class DBRepository {
 
     // Lesen eines Trainings mit id
     public Object find(String entity, long id) {
-        return em.find(Accessoire.class, id);
+        if(entity == "Accessoire") {
+            return em.find(Accessoire.class, id);
+        } else if (entity == "Arbeit") {
+            return em.find(Arbeit.class, id);
+        } else if (entity == "Aufgaben") {
+            return em.find(Aufgaben.class, id);
+        } else if (entity == "Eingabe") {
+            return em.find(Eingabe.class, id);
+        }
+        return null;
     }
 
     // Ändern eines Trainings mit id
