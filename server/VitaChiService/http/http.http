@@ -7,3 +7,5 @@ GET http://localhost:8080/vitaChi/findAll/Eingabe
 GET http://localhost:8080/vitaChi/find/Eingabe/1
 ###
 DELETE http://localhost:8080/vitaChi/delete/Eingabe/1
+
+POST http://localhost:8080/vitaChi/create

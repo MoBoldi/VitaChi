@@ -16,17 +16,17 @@ public class Eingabe {
     private int bewertung1;
     private int bewertung2;
     private LocalDate datum;
-    private long userID;
+    //private long userID;
 
 
     public Eingabe(){}
 
-    public Eingabe(String typ, int bewertung1, int bewertung2, LocalDate datum, long userID) {
+    public Eingabe(String typ, int bewertung1, int bewertung2, LocalDate datum) {
         this.typ = typ;
         this.bewertung1 = bewertung1;
         this.bewertung2 = bewertung2;
         this.datum =  datum;
-        this.userID = userID;
+        //this.userID = userID;
     }
 
     //<editor-fold desc="Getter und Setter">
@@ -63,13 +63,13 @@ public class Eingabe {
         this.datum = datum;
     }
 
-    public long getUserID() {
-        return userID;
-    }
+    //public long getUserID() {
+        //return userID;
+    //}
 
-    public void setUserID(long userID) {
-        this.userID = userID;
-    }
+    //public void setUserID(long userID) {
+        //this.userID = userID;
+    //}
 
     //</editor-fold>
 }
