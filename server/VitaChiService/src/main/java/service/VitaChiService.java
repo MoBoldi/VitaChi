@@ -45,7 +45,7 @@ public class VitaChiService {
     @Path("findAll/{Entity}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List findAll(@PathParam("Entity") String entity) {
+    public List<Object> findAll(@PathParam("Entity") String entity) {
         return repo.findAll(entity);
     }
 

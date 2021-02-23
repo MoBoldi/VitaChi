@@ -20,13 +20,13 @@ public class DBRepository {
     // Lesen aller Trainings
     public List findAll(String entity) {
 
-        if(entity == "Accessoire") {
-            return em.createQuery("select returnObject from Accessoire as returnObject").getResultList();
-        } else if (entity == "Arbeit") {
+        if(entity.equals("Accessoire")) {
+            return em.createQuery("select accessoire from Accessoire as accessoire").getResultList();
+        } else if (entity.equals("Arbeit")) {
             return em.createQuery("select returnObject from Arbeit as returnObject").getResultList();
-        } else if (entity == "Aufgaben") {
+        } else if (entity.equals("Aufgaben")) {
             return em.createQuery("select returnObject from Aufgaben as returnObject").getResultList();
-        } else if (entity == "Eingabe") {
+        } else if (entity.equals("Eingabe")) {
             return em.createQuery("select returnObject from Eingabe as returnObject").getResultList();
         } else {
             return em.createQuery("select returnObjectAc, returnObjectAr, returnObjectAu, returnObjectEi " +
