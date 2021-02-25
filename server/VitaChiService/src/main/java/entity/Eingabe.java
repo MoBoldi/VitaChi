@@ -64,11 +64,11 @@ public class Eingabe {
     }
 
     //public long getUserID() {
-        //return userID;
+    //return userID;
     //}
 
     //public void setUserID(long userID) {
-        //this.userID = userID;
+    //this.userID = userID;
     //}
 
     //</editor-fold>
