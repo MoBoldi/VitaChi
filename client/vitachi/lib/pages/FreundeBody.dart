@@ -61,9 +61,7 @@ class _BodyState extends State<Body> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
+                            Navigator.push(context, MaterialPageRoute(
                                     builder: (context) =>
                                         DetailFreunde(data: userData[index])));
                           },

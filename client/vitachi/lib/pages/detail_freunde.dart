@@ -31,8 +31,6 @@ class DetailFreunde extends StatelessWidget {
     data = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
-
-        //Color(0xff5bc7e3)
         appBar: MyAppBarWhite(context, 'VitaChi', null),
         body: Container(
           decoration: BoxDecoration(
@@ -113,7 +111,7 @@ class DetailFreunde extends StatelessWidget {
             ],
           ),
         ),
-        drawer: MyDrawer());
+    );
   }
 }
 

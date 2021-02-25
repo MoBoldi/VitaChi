@@ -11,6 +11,7 @@ import 'package:vitachi/pages/Register.dart';
 import 'package:vitachi/pages/Schlafen.dart';
 import 'package:vitachi/pages/Settings.dart';
 import 'package:vitachi/pages/Shop.dart';
+import 'package:vitachi/pages/Wohnzimmer.dart';
 import 'package:vitachi/pages/aufgaben.dart';
 import 'package:vitachi/pages/detail_freunde.dart';
 import 'package:vitachi/pages/detail_shop.dart';
@@ -56,8 +57,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Settings());
       case '/freunde':
         return MaterialPageRoute(builder: (_) => Freunde());
-      case '/detailFreunde':
-        return MaterialPageRoute(builder: (_) => DetailFreunde());
+      case '/wohnzimmer':
+        return MaterialPageRoute(builder: (_) => Wohnzimmer());
 
       default:
         return _errorRoute();
