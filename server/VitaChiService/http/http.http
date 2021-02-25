@@ -9,3 +9,10 @@ GET http://localhost:8080/vitaChi/find/Eingabe/1
 DELETE http://localhost:8080/vitaChi/delete/Eingabe/1
 
 POST http://localhost:8080/vitaChi/create
+Content-Type: application/json
+{
+  "BEWERTUNG1": "1",
+  "BEWERTUNG2": "2",
+  "DATUM": "28.01.2003",
+  "TYP": "1"
+}
