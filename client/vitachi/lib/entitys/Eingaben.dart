@@ -1,6 +1,8 @@
 class Eingaben{
   double eingabe1;
   double eingabe2;
+  String typ = "Essen";
+
 
   Eingaben(double eingabe1, double eingabe2){
       this.eingabe1 = eingabe1;
@@ -21,6 +23,19 @@ class Eingaben{
   }
   setAvg(){
     return (eingabe1+eingabe2)/2;
+  }
+
+
+  Eingaben.fromJson(Map<String, dynamic> json)
+      : eingabe1 = json['n'],
+        eingabe2 = json['u'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      '1': eingabe1,
+      '2': eingabe2,
+      '3': typ
+    };
   }
 
 

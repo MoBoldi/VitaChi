@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:vitachi/entitys/Eingaben.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart';
+
 
 class Essen extends StatefulWidget {
   @override
@@ -121,7 +125,11 @@ class _EssenState extends State<Essen> {
                                         topLeft: Radius.circular(15.0)
                                     )
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
+                                  String url = 'http://10.0.2.2:8080/vitaChi/create';
+                                  Map<String, String> headers = {"Content-type": "application/json"};
+                                  String json = jsonEncode(<String, Object>{'eingabe': essenEingaben});
+                                  Response response = await post(url, headers: headers, body: json);
                                   print(essenEingaben.setAvg());
                                   Navigator.pushReplacementNamed(context, '/',
                                       arguments: {'avg': essenEingaben.setAvg()});

@@ -21,11 +21,11 @@ public class Eingabe {
 
     public Eingabe(){}
 
-    public Eingabe(String typ, int bewertung1, int bewertung2, LocalDate datum) {
+    public Eingabe(String typ, int bewertung1, int bewertung2) {
         this.typ = typ;
         this.bewertung1 = bewertung1;
         this.bewertung2 = bewertung2;
-        this.datum =  datum;
+        this.datum = LocalDate.of(2020,12,12);
         //this.userID = userID;
     }
 

@@ -52,6 +52,19 @@ Widget MyAppBarWhite(BuildContext context, String title, dynamic otherData) {
   );
 }
 
+Widget MyAppBarWohnzimmer(BuildContext context, String title, dynamic otherData) {
+  return AppBar(
+    centerTitle: true,
+    backgroundColor: Color(0xFFf7eeda),
+    elevation: 0.0,
+    iconTheme: IconThemeData(
+      color: Colors.black, //change your color here
+    ),
+    actions: <Widget>[],
+  );
+
+}
+
 Widget MyAppBarArbeiten(BuildContext context, String title, dynamic otherData) {
   return AppBar(
     centerTitle: true,

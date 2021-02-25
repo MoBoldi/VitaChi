@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -18,11 +17,11 @@ class _BodyState extends State<Body> {
   List userData;
 
   Future<dynamic> getData() async {
-    Response response = await get('https://reqres.in/api/users?page=2');
-
+    Response response = await get('http://10.0.2.2:8080/vitaChi/findAll/Accessoire');
+    print("response" + response.body);
     data = json.decode(response.body);
-
-    userData = data["data"];
+    print(data);
+    userData = data[0];
     print(userData.toString());
   }
 
@@ -65,7 +64,6 @@ class _BodyState extends State<Body> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          //Navigator.pushNamed(context, '/detailShop');
                           Navigator.push(context, MaterialPageRoute(
                               builder: (context) =>
                                   DetailShop(data: userData[index])));

@@ -137,7 +137,23 @@ class MyDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pushReplacementNamed(context, '/login');
             },
-          )
+          ),
+          ListTile(
+            title: Row(
+              children: [
+                Icon(Icons.event_seat),
+                Text(
+                  " Wohnzimmer",
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              ],
+            ),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/wohnzimmer');
+            },
+          ),
         ],
       ),
     );
