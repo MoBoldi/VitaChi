@@ -50,8 +50,14 @@ public class DBRepository {
 
     // Einfügen eines Trainings
     @Transactional
-    public void create(Object newObject) {
-        em.persist(newObject);
+    public void createEingabe(Eingabe newEingabe) {
+        em.persist(newEingabe);
+    }
+
+    // Einfügen eines Trainings
+    @Transactional
+    public void createAufgabe(Aufgaben newAufgabe) {
+        em.persist(newAufgabe);
     }
 
     // Lesen eines Trainings mit id

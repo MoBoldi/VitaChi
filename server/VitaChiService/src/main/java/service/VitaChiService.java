@@ -85,13 +85,23 @@ public class VitaChiService {
     }
 
     // Ein Objekt je nach Typ des übergebenen Obejekts hinzufügen
-    @Path("create")
+    @Path("createEingabe")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Object createObject(Object newObject) {
-        repo.create(newObject);
-        return newObject;
+    public Object createEingabe(Eingabe newEingabe) {
+        repo.createEingabe(newEingabe);
+        return newEingabe;
+    }
+
+    // Ein Objekt je nach Typ des übergebenen Obejekts hinzufügen
+    @Path("createAufgabe")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Object createAufgaben(Aufgaben newAufgabe) {
+        repo.createAufgabe(newAufgabe);
+        return newAufgabe;
     }
 
     // Ein Objekt je nach Typ des übergebenen Objekts ändern
