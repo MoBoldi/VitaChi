@@ -26,10 +26,6 @@ class Eingaben{
   }
 
 
-  Eingaben.fromJson(Map<String, dynamic> json)
-      : eingabe1 = json['n'],
-        eingabe2 = json['u'];
-
   Map<String, dynamic> toJson() {
     return {
       '1': eingabe1,

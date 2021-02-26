@@ -45,7 +45,8 @@ public class VitaChiService {
     @Path("findAll/{Entity}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Object> findAll(@PathParam("Entity") String entity) {
+    public List<Accessoire> findAll(@PathParam("Entity") String entity) {
+        System.out.println("hallo2");
         return repo.findAll(entity);
     }
 
@@ -89,7 +90,9 @@ public class VitaChiService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Object createEingabe(Eingabe newEingabe) {
+    public Eingabe createEingabe(Eingabe newEingabe) {
+        System.out.println("hallo");
+        System.out.println(newEingabe);
         repo.createEingabe(newEingabe);
         return newEingabe;
     }

@@ -126,10 +126,11 @@ class _EssenState extends State<Essen> {
                                     )
                                 ),
                                 onPressed: () async {
-                                  String url = 'http://10.0.2.2:8080/vitaChi/create';
+                                  String url = 'http://10.0.2.2:8080/vitaChi/createEingabe';
                                   Map<String, String> headers = {"Content-type": "application/json"};
                                   String json = jsonEncode(<String, Object>{'eingabe': essenEingaben});
                                   Response response = await post(url, headers: headers, body: json);
+                                  print(response.statusCode);
                                   print(essenEingaben.setAvg());
                                   Navigator.pushReplacementNamed(context, '/',
                                       arguments: {'avg': essenEingaben.setAvg()});

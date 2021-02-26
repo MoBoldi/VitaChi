@@ -21,7 +21,7 @@ public class Eingabe {
 
     public Eingabe(){}
 
-    public Eingabe(String typ, int bewertung1, int bewertung2) {
+    public Eingabe(int bewertung1, int bewertung2, String typ) {
         this.typ = typ;
         this.bewertung1 = bewertung1;
         this.bewertung2 = bewertung2;
