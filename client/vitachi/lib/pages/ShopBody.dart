@@ -67,7 +67,7 @@ class _BodyState extends State<Body> {
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(
                   builder: (context) =>
-                      DetailShop()));
+                      DetailShop(data: products[index],)));
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
