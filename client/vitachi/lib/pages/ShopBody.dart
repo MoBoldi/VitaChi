@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:vitachi/entitys/Produkt.dart';
 import 'package:vitachi/pages/detail_shop.dart';
 
 class Body extends StatefulWidget {
@@ -13,22 +15,21 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
 
-  Map data;
-  List userData;
+  var products = List<Produkt>();
 
-  Future<dynamic> getData() async {
+  Future<List<Produkt>> getData() async {
     Response response = await get('http://10.0.2.2:8080/vitaChi/findAll/Accessoire');
     print("response" + response.body);
-    data = json.decode(response.body);
-    print(data);
-    userData = data[0];
-    print(userData.toString());
+    var productsJson = json.decode(response.body);
+    for(var productJson in productsJson){
+      products.add(Produkt.fromJson(productJson));
+    }
+    print(products[0].bildpfad);
   }
 
   @override
   void initState() {
     super.initState();
-    getData();
   }
 
   @override
@@ -46,7 +47,7 @@ class _BodyState extends State<Body> {
                 .copyWith(fontWeight: FontWeight.bold),
           ),
         ),
-        
+
         Expanded(
             child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -55,7 +56,7 @@ class _BodyState extends State<Body> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return GridView.builder(
-                    itemCount: userData.length,
+                    itemCount: products.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing: 20,
@@ -65,8 +66,8 @@ class _BodyState extends State<Body> {
                       return GestureDetector(
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(
-                              builder: (context) =>
-                                  DetailShop(data: userData[index])));
+                  builder: (context) =>
+                      DetailShop(data: products[index],)));
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,15 +86,14 @@ class _BodyState extends State<Body> {
                                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                                       children: [
                                         Image(
-                                          image: NetworkImage(
-                                              userData[index]["avatar"]),
+                                          image: AssetImage(products[index].bildpfad)
                                         ),
                                         Text(
-                                          userData[index]["first_name"],
+                                          products[index].bezeichnung,
                                           style: TextStyle(
-                                            fontSize: MediaQuery.of(context).size.width/20,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold
+                                              fontSize: MediaQuery.of(context).size.width/20,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold
                                           ),
                                         ),
                                       ],
@@ -114,45 +114,65 @@ class _BodyState extends State<Body> {
     );
   }
 }
-/*
-class ProduktKarte extends StatelessWidget {
-  final Produkt produkt;
 
-  ProduktKarte({Key key, this.produkt}) : super(key: key);
+class ProductsList extends StatelessWidget {
+  final List<Produkt> products;
+  ProductsList({Key key, this.products}) : super (key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-                color: Colors.lightBlue,
-                borderRadius: BorderRadius.circular(16)),
-            child: FittedBox(
-              child: Icon(
-                Icons.laptop_chromebook,
-                size: MediaQuery.of(context).size.height / 7,
-              ),
+    return GridView.builder(
+        itemCount: products.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 20,
+            crossAxisSpacing: 20,
+            childAspectRatio: 0.75),
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              /*Navigator.push(context, MaterialPageRoute(
+                  builder: (context) =>
+                      DetailShop(data: products[index])));*/
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                    child: Container(
+                        padding: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.bottomLeft,
+                                end: Alignment.topRight,
+                                colors: [Color(0xff54a2fc), Color(0xff6bc2fa)]),
+                            borderRadius: BorderRadius.circular(
+                                16)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Image(
+                              image: NetworkImage(
+                                  products[index].bildpfad),
+                            ),
+                            Text(
+                              products[index].bezeichnung,
+                              style: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.width/20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ],
+                        )
+                    )
+                ),
+              ],
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
-            child: Text(
-              produkt.title,
-            ),
-          ),
-          Text(
-            "234€",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
-    );
+          );
+        });;
   }
 }
-*/
+
 
 

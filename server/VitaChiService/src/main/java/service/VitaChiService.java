@@ -46,6 +46,7 @@ public class VitaChiService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Accessoire> findAll(@PathParam("Entity") String entity) {
+
         System.out.println("hallo2");
         return repo.findAll(entity);
     }
@@ -92,7 +93,7 @@ public class VitaChiService {
     @Produces(MediaType.APPLICATION_JSON)
     public Eingabe createEingabe(Eingabe newEingabe) {
         System.out.println("hallo");
-        System.out.println(newEingabe);
+        System.out.println(newEingabe.getBewertung1());
         repo.createEingabe(newEingabe);
         return newEingabe;
     }
