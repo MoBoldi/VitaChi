@@ -9,14 +9,17 @@ class StatisticsNav extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBar(context, 'Statistics', null),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            _myCard('Wohlbefinden pro Monat', '/wellbeing', context),
-            _myCard('Eingaben Schlaf', null, context),
-            _myCard('Eingaben Essen', null, context),
-            _myCard('Eingaben Bewegung', null, context),
-            _myCard('Arbeitszeit', null, context),
-          ],
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            children: <Widget>[
+              _myCard('Wohlbefinden pro Monat', '/wellbeing', context),
+              _myCard('Eingaben Schlaf', null, context),
+              _myCard('Eingaben Essen', null, context),
+              _myCard('Eingaben Bewegung', null, context),
+              _myCard('Arbeitszeit', null, context),
+            ],
+          ),
         ),
       ),
       drawer: MyDrawer(),
@@ -31,6 +34,7 @@ Widget _myCard(String text, String route, BuildContext context) {
   return GestureDetector(
       onTap: () => {Navigator.pushNamed(context, '$route')},
       child: Card(
+        elevation: 2,
         margin: EdgeInsets.all(5),
         child: Padding(
           padding: EdgeInsets.fromLTRB(15, 20, 15, 20),

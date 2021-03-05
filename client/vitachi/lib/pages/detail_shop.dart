@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:vitachi/entitys/Produkt.dart';
 
 class DetailShop extends StatelessWidget {
-  Map data;
+  Produkt data;
 
   DetailShop({@required this.data});
 
@@ -37,7 +38,7 @@ class DetailShop extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image(image: NetworkImage(data["avatar"]), height: MediaQuery.of(context).size.height/2,),
+                            Image(image: AssetImage(data.bildpfad), height: MediaQuery.of(context).size.height/2,),
                           ],
                         ),
                         SizedBox(
@@ -49,11 +50,11 @@ class DetailShop extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text(data["first_name"] + " " + data["last_name"], style: TextStyle(fontSize: size.height/30, color: Colors.white, fontWeight: FontWeight.bold),),
+                                Text(data.bezeichnung, style: TextStyle(fontSize: size.height/30, color: Colors.white, fontWeight: FontWeight.bold),),
                                 Container(
                                     child: Row(
                                       children: [
-                                        Text("243 ", style: TextStyle(color: Colors.white, fontSize: size.width/20),),
+                                        Text("${data.preis}", style: TextStyle(color: Colors.white, fontSize: size.width/20),),
                                         Icon(
                                             Icons.monetization_on_outlined,
                                             color: Colors.amberAccent,
@@ -78,7 +79,7 @@ class DetailShop extends StatelessWidget {
 
                         Padding(
                           padding: const EdgeInsets.fromLTRB(20,0,20,0),
-                          child: AutoSizeText("öllöksajdfsajfölksdj lk sdfljsaklöfj kjs dfölja sflöj salkf saldjf klsaj",
+                          child: AutoSizeText(data.beschreibung,
                               style: TextStyle(fontSize: 20, color: Colors.white), maxLines: 4,),
                         ),
                         SizedBox(

@@ -28,9 +28,9 @@ class Eingaben{
 
   Map<String, dynamic> toJson() {
     return {
-      '1': eingabe1,
-      '2': eingabe2,
-      '3': typ
+      'bewertung1': eingabe1,
+      'bewertung2': eingabe2,
+      'typ': typ
     };
   }
 

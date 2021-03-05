@@ -16,6 +16,7 @@ class _ShopState extends State<Shop> {
     return Scaffold(
         appBar: MyAppBar(context, 'VitaChi', null),
         drawer: MyDrawer(),
-        body: Body());
+        body: Body()
+    );
   }
 }
