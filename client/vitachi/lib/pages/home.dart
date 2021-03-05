@@ -43,7 +43,6 @@ class Home extends StatelessWidget {
     print(data);
 
     return Scaffold(
-
         //Color(0xff5bc7e3)
         appBar: MyAppBar(context, 'VitaChi', null),
         body: Container(

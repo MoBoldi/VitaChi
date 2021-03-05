@@ -39,7 +39,6 @@ class _Wellbeing extends State<Wellbeing> {
     return Scaffold(
       //backgroundColor: Color(0xff82b086),
       appBar: MyAppBar(context, 'VitaChi', null),
-      drawer: MyDrawer(),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
