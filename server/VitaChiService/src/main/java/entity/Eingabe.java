@@ -16,7 +16,6 @@ public class Eingabe {
     private int bewertung1;
     private int bewertung2;
     private LocalDate datum;
-    //private long userID;
 
 
     public Eingabe(){}
@@ -25,8 +24,7 @@ public class Eingabe {
         this.typ = typ;
         this.bewertung1 = bewertung1;
         this.bewertung2 = bewertung2;
-        this.datum = LocalDate.of(2020,12,12);
-        //this.userID = userID;
+        this.datum = LocalDate.now();
     }
 
     //<editor-fold desc="Getter und Setter">
@@ -39,7 +37,7 @@ public class Eingabe {
         this.typ = typ;
     }
 
-    public int getBewertung1() {
+    public double getBewertung1() {
         return bewertung1;
     }
 
@@ -47,7 +45,7 @@ public class Eingabe {
         this.bewertung1 = bewertung1;
     }
 
-    public int getBewertung2() {
+    public double getBewertung2() {
         return bewertung2;
     }
 
@@ -62,14 +60,6 @@ public class Eingabe {
     public void setDatum(LocalDate datum) {
         this.datum = datum;
     }
-
-    //public long getUserID() {
-    //return userID;
-    //}
-
-    //public void setUserID(long userID) {
-    //this.userID = userID;
-    //}
 
     //</editor-fold>
 }
