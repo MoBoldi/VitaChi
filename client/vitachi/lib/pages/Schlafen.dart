@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:vitachi/entitys/Eingaben.dart';
+import 'dart:convert';
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart';
 
 class Schlafen extends StatefulWidget {
   @override
@@ -9,6 +13,7 @@ class Schlafen extends StatefulWidget {
 }
 
 class _SchlafenState extends State<Schlafen> {
+  Eingaben schlafeingaben = new Eingaben(0, 0, "");
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -79,6 +84,7 @@ class _SchlafenState extends State<Schlafen> {
                                   color: Colors.amber,
                                 ),
                                 onRatingUpdate: (rating) {
+                                  schlafeingaben.setEingabe1(rating);
                                 },
                               ),
                             ),
@@ -102,6 +108,7 @@ class _SchlafenState extends State<Schlafen> {
                                   color: Colors.amber,
                                 ),
                                 onRatingUpdate: (rating) {
+                                  schlafeingaben.setEingabe2(rating);
                                 },
                               ),
                             ),
@@ -116,7 +123,14 @@ class _SchlafenState extends State<Schlafen> {
                                         topLeft: Radius.circular(15.0)
                                     )
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
+                                  schlafeingaben.setTyp("Schlaf");
+                                  String url = 'http://10.0.2.2:8080/vitaChi/createEingabe';
+                                  Map<String, String> headers = {"Content-type": "application/json"};
+                                  String json = jsonEncode(<String, Object>{'eingabe': schlafeingaben});
+                                  print(json);
+                                  Response response = await post(url, headers: headers, body: json);
+                                  print(response.statusCode);
                                   Navigator.pushReplacementNamed(context, '/',);
                                 },
                                 color: Color(0xFFB5475A),

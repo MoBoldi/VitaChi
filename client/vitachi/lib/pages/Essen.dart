@@ -14,7 +14,7 @@ class Essen extends StatefulWidget {
 }
 final Color color = Color(0xFF3D6845);
 class _EssenState extends State<Essen> {
-  Eingaben essenEingaben = new Eingaben(0, 0);
+  Eingaben essenEingaben = new Eingaben(0, 0, "");
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -126,6 +126,7 @@ class _EssenState extends State<Essen> {
                                     )
                                 ),
                                 onPressed: () async {
+                                  essenEingaben.setTyp("Essen");
                                   String url = 'http://10.0.2.2:8080/vitaChi/createEingabe';
                                   Map<String, String> headers = {"Content-type": "application/json"};
                                   String json = jsonEncode(<String, Object>{'eingabe': essenEingaben});

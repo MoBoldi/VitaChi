@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:vitachi/entitys/Eingaben.dart';
+import 'dart:convert';
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart';
 
 var eingaben = 0;
 var sterne = 3.0;
@@ -12,7 +16,7 @@ class Bewegung extends StatefulWidget {
 }
 
 class _BewegungState extends State<Bewegung> {
-
+  Eingaben bewegungeingaben = new Eingaben(0, 0, "");
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -83,6 +87,7 @@ class _BewegungState extends State<Bewegung> {
                                     color: Colors.amber,
                                   ),
                                 onRatingUpdate: (rating) {
+                                  bewegungeingaben.setEingabe1(rating);
                                 },
                               ),
                             ),
@@ -106,6 +111,7 @@ class _BewegungState extends State<Bewegung> {
                                   color: Colors.amber,
                                 ),
                                 onRatingUpdate: (rating) {
+                                  bewegungeingaben.setEingabe2(rating);
                                 },
                               ),
                             ),
@@ -120,7 +126,14 @@ class _BewegungState extends State<Bewegung> {
                                         topLeft: Radius.circular(15.0)
                                     )
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
+                                  bewegungeingaben.setTyp("Bewegung");
+                                  String url = 'http://10.0.2.2:8080/vitaChi/createEingabe';
+                                  Map<String, String> headers = {"Content-type": "application/json"};
+                                  String json = jsonEncode(<String, Object>{'eingabe': bewegungeingaben});
+                                  print(json);
+                                  Response response = await post(url, headers: headers, body: json);
+                                  print(response.statusCode);
                                   Navigator.pushReplacementNamed(context, '/',);
                                 },
                                 color: Color(0xFFB5475A),
