@@ -107,7 +107,7 @@ class _BodyState extends State<Body> {
                         );
                       });
                 }else{
-                  return Image(image: AssetImage('assets/logo.png'));
+                  return Image(image: AssetImage('assets/LogoSlider.png'));
                 }
               }
             ),
@@ -173,7 +173,7 @@ class ProductsList extends StatelessWidget {
               ],
             ),
           );
-        });;
+        });
   }
 }
 
