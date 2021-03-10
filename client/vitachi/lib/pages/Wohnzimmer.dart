@@ -7,69 +7,66 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 class Wohnzimmer extends StatefulWidget {
   @override
   _WohnzimmerState createState() => _WohnzimmerState();
-  Map data;
-  final List<ChartData> ges = [
-    ChartData('Wellbeing', 3, Color(0xFF4DA8DA)),
-    ChartData('', 2, Color(0xFF9dc6dd)),
-  ];
-
-  List<ChartData> food = [
-    ChartData('Food', 5, Color(0xFF4DA8DA)),
-    ChartData('', 1, Color(0xFF9dc6dd)),
-  ];
 }
 
 class _WohnzimmerState extends State<Wohnzimmer> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      appBar: MyAppBarWohnzimmer(context, 'VitaChi', null),
-      drawer: MyDrawer(),
-      body: Container(
-          foregroundDecoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/Blume_Placeholder.png"))),
+        appBar: MyAppBarWohnzimmer(context, 'VitaChi', null),
+        drawer: MyDrawer(),
+        body: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/boden.jpg"), fit: BoxFit.fill),
-          ),
+              image: DecorationImage(
+            image: AssetImage("assets/floor.png"),
+            fit: BoxFit.cover,
+          )),
           child: Stack(
-            children: <Widget>[
-              // Image(image: AssetImage("assets/Blume_Placeholder.png")),
-              Align(
-                alignment: Alignment.topCenter,
-                child: Material(
-                  elevation: 15.0,
-                  child: Container(
-                      height: size.height / 3, color: Color(0xFFf7eeda)),
-                ),
+            children: [
+              Container(
+                height: height * 0.36,
+                width: width,
+                color: Colors.transparent,
+              ),
+              DraggableScrollableSheet(
+                initialChildSize: 0.1,
+                minChildSize: 0.1,
+                maxChildSize: 0.6,
+                builder: (BuildContext context, myScrollController) {
+                  return Container(
+                    child: ListView(
+                      controller: myScrollController,
+                      children: [
+                        Container(
+                          height: 200.0,
+                          width: width,
+                          color: Colors.red,
+                        ),
+                        Container(
+                          height: 200.0,
+                          width: width,
+                          color: Colors.blue,
+                        ),
+                        Container(
+                          height: 200.0,
+                          width: width,
+                          color: Colors.pink,
+                        ),
+                        Container(
+                          height: 200.0,
+                          width: width,
+                          color: Colors.black,
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
             ],
-          )),
-    );
-  }
-}
-
-class ChartData {
-  ChartData(this.x, this.y, [this.color]);
-  final String x;
-  double y;
-  final Color color;
-}
-
-AssetImage getEmotion(double wellbeing) {
-  if (1 <= wellbeing && wellbeing < 2) {
-    return AssetImage('assets/Blume_1.png');
-  } else if (2 <= wellbeing && wellbeing < 3) {
-    return AssetImage('assets/Blume_2.png');
-  } else if (3 <= wellbeing && wellbeing < 4) {
-    return AssetImage('assets/Blume_3.png');
-  } else if (4 <= wellbeing && wellbeing < 4.5) {
-    return AssetImage('assets/Blume_4.png');
-  } else if (4.5 <= wellbeing && wellbeing <= 5) {
-    return AssetImage('assets/Blume_5.png');
-  } else {
-    return AssetImage('assets/Blume_3.png');
+          ),
+        ));
   }
 }
