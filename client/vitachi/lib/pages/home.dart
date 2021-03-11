@@ -14,7 +14,7 @@ class Home extends StatelessWidget {
   ];
   List<ChartData> food = [
     ChartData('Food', 5, Color(0xFF4DA8DA)),
-    ChartData('', 1,  Color(0xFF9dc6dd)),
+    ChartData('', 1, Color(0xFF9dc6dd)),
   ];
   final List<ChartData> movement = [
     ChartData('Movement', 3, Color(0xFF4DA8DA)),
@@ -54,6 +54,7 @@ class Home extends StatelessWidget {
           ),
           child: Stack(
             children: [
+              
               Container(
                 //Erster weißer Background
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 0),

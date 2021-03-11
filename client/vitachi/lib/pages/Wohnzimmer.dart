@@ -18,55 +18,61 @@ class _WohnzimmerState extends State<Wohnzimmer> {
     return Scaffold(
         appBar: MyAppBarWohnzimmer(context, 'VitaChi', null),
         drawer: MyDrawer(),
-        body: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            image: AssetImage("assets/floor.png"),
-            fit: BoxFit.cover,
-          )),
-          child: Stack(
-            children: [
-              Container(
-                height: height * 0.36,
-                width: width,
-                color: Colors.transparent,
-              ),
-              DraggableScrollableSheet(
-                initialChildSize: 0.1,
-                minChildSize: 0.1,
-                maxChildSize: 0.6,
-                builder: (BuildContext context, myScrollController) {
-                  return Container(
-                    child: ListView(
-                      controller: myScrollController,
-                      children: [
-                        Container(
-                          height: 200.0,
-                          width: width,
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 200.0,
-                          width: width,
-                          color: Colors.blue,
-                        ),
-                        Container(
-                          height: 200.0,
-                          width: width,
-                          color: Colors.pink,
-                        ),
-                        Container(
-                          height: 200.0,
-                          width: width,
-                          color: Colors.black,
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
+        body: Stack(
+          children: [
+            Container(
+              child: Image(image: AssetImage("assets/Blume_Placeholder.png")),
+              height: height,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                image: AssetImage("assets/floor.png"),
+                fit: BoxFit.cover,
+              )),
+            ),
+            Stack(
+              children: [
+                Container(
+                  height: height * 0.36,
+                  width: width,
+                  color: Colors.transparent,
+                ),
+                DraggableScrollableSheet(
+                  initialChildSize: 0.1,
+                  minChildSize: 0.1,
+                  maxChildSize: 0.6,
+                  builder: (BuildContext context, myScrollController) {
+                    return Container(
+                      child: ListView(
+                        controller: myScrollController,
+                        children: [
+                          Container(
+                            height: 200.0,
+                            width: width,
+                            color: Colors.red,
+                          ),
+                          Container(
+                            height: 200.0,
+                            width: width,
+                            color: Colors.blue,
+                          ),
+                          Container(
+                            height: 200.0,
+                            width: width,
+                            color: Colors.pink,
+                          ),
+                          Container(
+                            height: 200.0,
+                            width: width,
+                            color: Colors.black,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
         ));
   }
 }
