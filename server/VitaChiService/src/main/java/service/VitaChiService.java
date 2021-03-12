@@ -12,6 +12,8 @@ import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @ApplicationScoped
@@ -111,6 +113,25 @@ public class VitaChiService {
         return newAufgabe;
     }
 
+    @Path("createArbeit")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public JsonObject createArbeit(JsonObject json) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        LocalDateTime start = LocalDateTime.parse(json.getJsonObject("arbeit").getString("start"), formatter);
+        LocalDateTime stop = LocalDateTime.parse(json.getJsonObject("arbeit").getString("stop"), formatter);
+
+        repo.createArbeit(new Arbeit(
+                start,
+                stop
+        ));
+
+        return json;
+    }
+
     // Ein Objekt je nach Typ des übergebenen Objekts ändern
     @Path("update")
     @PUT
@@ -119,4 +140,5 @@ public class VitaChiService {
         repo.update(updateObject);
         return "Object updated";
     }
+
 }

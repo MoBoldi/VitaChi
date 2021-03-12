@@ -60,6 +60,11 @@ public class DBRepository {
         em.persist(newAufgabe);
     }
 
+    @Transactional
+    public void createArbeit(Arbeit newArbeit) {
+        em.persist(newArbeit);
+    }
+
     // Lesen eines Trainings mit id
     public Object find(String entity, long id) {
         if(entity == "Accessoire") {
@@ -78,5 +83,11 @@ public class DBRepository {
     @Transactional
     public void update(Object updateObject) {
         em.merge(updateObject);
+    }
+
+    //Wohlbefinden berechnen
+    @Transactional
+    public void getWohlbefinden(Eingabe newEingabe) {
+        em.persist(newEingabe);
     }
 }
