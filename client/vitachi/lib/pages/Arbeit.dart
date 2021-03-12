@@ -7,6 +7,7 @@ import 'package:http/http.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:vitachi/entitys/ArbeitClass.dart';
+import 'package:intl/intl.dart';
 
 
 class Arbeit extends StatefulWidget {
@@ -103,7 +104,7 @@ class _ArbeitState extends State<Arbeit> {
                                           (newTick % 60).floor().toString().padLeft(2, '0');
                                     });
                                   });
-                                  var start = DateTime.now();
+                                  var start = DateTime.now().toLocal();
                                   print(start);
                                   arbeit.setStart(start);
 
@@ -126,7 +127,7 @@ class _ArbeitState extends State<Arbeit> {
                                 onPressed: () {
                                   timerSubscription.cancel();
                                   timerStream = null;
-                                  var stop = DateTime.now();
+                                  var stop = DateTime.now().toLocal();
                                   print(stop);
                                   arbeit.setStop(stop);
                                 },
@@ -154,7 +155,7 @@ class _ArbeitState extends State<Arbeit> {
                                 ),
                                 onPressed: () async {
                                   print(arbeit.toString());
-                                  String url = 'http://10.0.2.2:8080/vitaChi/createEingabe';
+                                  String url = 'http://10.0.2.2:8080/vitaChi/createArbeit';
                                   Map<String, String> headers = {"Content-type": "application/json"};
                                   String json = jsonEncode(<String, Object>{'arbeit': arbeit});
                                   print(json);
