@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:shape_of_view/shape/arc.dart';
 import 'package:shape_of_view/shape_of_view.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
 
 class Home extends StatelessWidget {
-  final lightgreen = Color(0xFF28AA7D);
-
+  final blue = Color(0xFF4DA8DA);
+  final lightblue = Color(0xFF9dc6dd);
   final List<ChartData> ges = [
     ChartData('Wellbeing', 3, Color(0xFF4DA8DA)),
     ChartData('', 2, Color(0xFF9dc6dd)),
   ];
   List<ChartData> food = [
     ChartData('Food', 5, Color(0xFF4DA8DA)),
-    ChartData('', 1,  Color(0xFF9dc6dd)),
+    ChartData('', 1, Color(0xFF9dc6dd)),
   ];
   final List<ChartData> movement = [
     ChartData('Movement', 3, Color(0xFF4DA8DA)),
@@ -24,11 +25,18 @@ class Home extends StatelessWidget {
     ChartData('Sleep', 2, Color(0xFF4DA8DA)),
     ChartData('', 3, Color(0xFF9dc6dd)),
   ];
+  final List<ChartData> work = [
+    ChartData('Work', 30, Color(0xFF4DA8DA)),
+    ChartData('', 20, Color(0xFF9dc6dd)),
+  ];
 
   Map data = {};
 
   @override
   Widget build(BuildContext context) {
+    double chartWidth = MediaQuery.of(context).size.width / 5;
+    double chartHeight = MediaQuery.of(context).size.width / 5;
+
     data = ModalRoute.of(context).settings.arguments;
     if (data == null) {
       print('It is null');
@@ -57,7 +65,7 @@ class Home extends StatelessWidget {
               Container(
                 //Erster weißer Background
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                height: MediaQuery.of(context).size.height / 1.8,
+                height: MediaQuery.of(context).size.height / 1.65,
                 width: MediaQuery.of(context).size.width,
                 child: ShapeOfView(
                   elevation: 10,
@@ -66,10 +74,55 @@ class Home extends StatelessWidget {
                     position: ArcPosition.Bottom,
                     height: 20,
                   ),
-                  child: Container(
-                    child: Image(
-                      image: getEmotion(food[0].y),
-                    ),
+                  child: Row(
+                    children: [
+                      Image(
+                        width: MediaQuery.of(context).size.width * 0.75,
+                        image: getEmotion(food[0].y),
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height / 3,
+                        child: Stack(
+                          children: [
+                            StepProgressIndicator(
+                              direction: Axis.vertical,
+                              totalSteps: 5,
+                              currentStep: 0,
+                              unselectedSize: 20,
+                              selectedSize: 0,
+                              roundedEdges: Radius.circular(10),
+                              /*unselectedGradientColor: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              Colors.redAccent,
+                              Colors.yellow,
+                              Colors.green
+                            ],
+                          ),*/
+                              unselectedColor: Colors.grey,
+                            ),
+                            StepProgressIndicator(
+                              direction: Axis.vertical,
+                              totalSteps: 5,
+                              currentStep: 2,
+                              unselectedSize: 20,
+                              selectedSize: 0,
+                              roundedEdges: Radius.circular(10),
+                              gradientColor: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [
+                                  Colors.redAccent,
+                                  Colors.yellow,
+                                  Colors.green
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                     /*decoration: BoxDecoration(
                         boxShadow: 
                     ),*/
@@ -89,9 +142,9 @@ class Home extends StatelessWidget {
                 ),
               ),*/
               Container(
-                //Zweiter Runder Dunkel Grüner Hintergrund
+                //Zweiter Runder Hell Blauer Hintergrund
                 margin: EdgeInsets.fromLTRB(
-                    0, MediaQuery.of(context).size.height / 1.3, 0, 0),
+                    0, MediaQuery.of(context).size.height / 1.35, 0, 0),
                 height: MediaQuery.of(context).size.height / 3,
                 child: ShapeOfView(
                   elevation: 10,
@@ -106,7 +159,7 @@ class Home extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
+              /*Container(
                 //Gesamt Chart
                 width: MediaQuery.of(context).size.width / 4,
                 height: MediaQuery.of(context).size.width / 4,
@@ -120,14 +173,14 @@ class Home extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: Colors.white,
                 ),
-              ),
+              ),*/
               Container(
                 //Food chart
-                width: MediaQuery.of(context).size.width / 4,
-                height: MediaQuery.of(context).size.width / 4,
+                width: chartWidth,
+                height: chartHeight,
                 margin: EdgeInsets.fromLTRB(
-                    MediaQuery.of(context).size.width * 0.1,
-                    MediaQuery.of(context).size.height / 1.4,
+                    MediaQuery.of(context).size.width * 0.05,
+                    MediaQuery.of(context).size.height / 1.425,
                     0,
                     0),
                 child: getChart(food, context, "/essen"),
@@ -138,11 +191,11 @@ class Home extends StatelessWidget {
               ),
               Container(
                 //Bewegung Chart
-                width: MediaQuery.of(context).size.width / 4,
-                height: MediaQuery.of(context).size.width / 4,
+                width: chartWidth,
+                height: chartHeight,
                 margin: EdgeInsets.fromLTRB(
-                    MediaQuery.of(context).size.width * 0.4,
-                    MediaQuery.of(context).size.height / 1.45,
+                    MediaQuery.of(context).size.width * 0.285,
+                    MediaQuery.of(context).size.height / 1.475,
                     0,
                     0),
                 child: getChart(movement, context, "/bewegung"),
@@ -153,15 +206,29 @@ class Home extends StatelessWidget {
               ),
               Container(
                 //Schlaf chart
-                width: MediaQuery.of(context).size.width / 4,
-                height: MediaQuery.of(context).size.width / 4,
+                width: chartWidth,
+                height: chartHeight,
                 margin: EdgeInsets.fromLTRB(
-                  MediaQuery.of(context).size.width * 0.7,
-                  MediaQuery.of(context).size.height / 1.4,
+                  MediaQuery.of(context).size.width * 0.515,
+                  MediaQuery.of(context).size.height / 1.475,
                   0,
                   0,
                 ),
                 child: getChart(sleep, context, "/schlafen"),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                ),
+              ),
+              Container(
+                //Arbeit chart
+                width: chartWidth,
+                height: chartHeight,
+                margin: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.75,
+                  top: MediaQuery.of(context).size.height / 1.425,
+                ),
+                child: getChart(work, context, "/arbeit"),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white,
@@ -182,11 +249,12 @@ class ChartData {
 }
 
 class PassedData {
-  PassedData({ges, food, mov, sleep});
+  PassedData({ges, food, mov, sleep, work});
   ChartData ges;
   ChartData food;
   ChartData mov;
   ChartData sleep;
+  ChartData work;
 }
 
 InkWell getChart(List<ChartData> data, context, String route) {
@@ -228,6 +296,8 @@ IconData getIcon(String input) {
       return Icons.nights_stay;
     case 'WELLBEING':
       return Icons.favorite;
+    case 'WORK':
+      return Icons.work;
     default:
       return Icons.error;
   }

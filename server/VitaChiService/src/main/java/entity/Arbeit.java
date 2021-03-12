@@ -2,6 +2,7 @@ package entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @NamedQueries({
@@ -13,34 +14,33 @@ public class Arbeit {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long arbeitID;
 
-    private LocalDate startdatum;
-    private LocalDate enddatum;
+    private LocalDateTime startdatum;
+    private LocalDateTime enddatum;
     private long userID;
 
 
     public Arbeit(){}
 
-    public Arbeit(LocalDate startdatum, LocalDate enddatum, long userID) {
+    public Arbeit(LocalDateTime startdatum, LocalDateTime enddatum) {
         this.startdatum = startdatum;
         this.enddatum = enddatum;
-        this.userID = userID;
     }
 
     //<editor-fold desc="Getter und Setter">
 
-    public LocalDate getStartdatum() {
+    public LocalDateTime getStartdatum() {
         return startdatum;
     }
 
-    public void setStartdatum(LocalDate startdatum) {
+    public void setStartdatum(LocalDateTime startdatum) {
         this.startdatum = startdatum;
     }
 
-    public LocalDate getEnddatum() {
+    public LocalDateTime getEnddatum() {
         return enddatum;
     }
 
-    public void setEnddatum(LocalDate enddatum) {
+    public void setEnddatum(LocalDateTime enddatum) {
         this.enddatum = enddatum;
     }
 

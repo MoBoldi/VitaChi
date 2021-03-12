@@ -1,8 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:vitachi/entitys/ArbeitClass.dart';
+import 'package:intl/intl.dart';
 
 
 class Arbeit extends StatefulWidget {
@@ -17,6 +22,7 @@ class _ArbeitState extends State<Arbeit> {
   var minutesStr = '00';
   var secondsStr = '00';
   final Color color = Color(0xFF3D6845);
+  ArbeitClass arbeit = new ArbeitClass(DateTime.now(), DateTime.now());
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +104,10 @@ class _ArbeitState extends State<Arbeit> {
                                           (newTick % 60).floor().toString().padLeft(2, '0');
                                     });
                                   });
+                                  var start = DateTime.now().toLocal();
+                                  print(start);
+                                  arbeit.setStart(start);
+
                                 },
                                 color: Color(0xff82b086),
                                 child: Text(
@@ -117,6 +127,9 @@ class _ArbeitState extends State<Arbeit> {
                                 onPressed: () {
                                   timerSubscription.cancel();
                                   timerStream = null;
+                                  var stop = DateTime.now().toLocal();
+                                  print(stop);
+                                  arbeit.setStop(stop);
                                 },
                                 color: Color(0xFFB5475A),
                                 child: Text(
@@ -140,8 +153,15 @@ class _ArbeitState extends State<Arbeit> {
                                         topLeft: Radius.circular(15.0)
                                     )
                                 ),
-                                onPressed: () {
-                                  Navigator.pushReplacementNamed(context, '/');
+                                onPressed: () async {
+                                  print(arbeit.toString());
+                                  String url = 'http://10.0.2.2:8080/vitaChi/createArbeit';
+                                  Map<String, String> headers = {"Content-type": "application/json"};
+                                  String json = jsonEncode(<String, Object>{'arbeit': arbeit});
+                                  print(json);
+                                  Response response = await post(url, headers: headers, body: json);
+                                  print(response.statusCode);
+                                  Navigator.pushReplacementNamed(context, '/',);
                                 },
                                 color: Color(0xFFB5475A),
                                 child: Text(
