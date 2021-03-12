@@ -1,6 +1,6 @@
 class ArbeitClass{
-  var start;
-  var stop;
+  DateTime start;
+  DateTime stop;
 
 
   ArbeitClass(DateTime start, DateTime stop){
@@ -8,24 +8,31 @@ class ArbeitClass{
     this.stop = stop;
   }
 
-  int getStart(){
+  DateTime getStart(){
     return this.start;
   }
-  setStart (var start) {
+  setStart (DateTime start) {
     this.start = start;
   }
 
-  int getStop(){
+  DateTime getStop(){
     return this.stop;
   }
-  setStop (var stop) {
+  setStop (DateTime stop) {
     this.stop = stop;
+  }
+
+  String toStringStart() {
+    return '$start';
+  }
+  String toStringStop() {
+    return '$stop';
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'start': start,
-      'stop': stop
+      'start': toStringStart(),
+      'stop': toStringStop()
     };
   }
 
