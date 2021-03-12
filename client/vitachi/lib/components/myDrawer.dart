@@ -12,8 +12,8 @@ class MyDrawer extends StatelessWidget {
             child: Container(
               child: Center(
                 child: Image(
-                  image: AssetImage('assets/logo.png'),
-                  height: MediaQuery.of(context).size.height / 9,
+                  image: AssetImage("assets/LogoSlider.png"),
+                  height: MediaQuery.of(context).size.height / 8,
                 ),
               ),
             ),

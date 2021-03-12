@@ -9,6 +9,7 @@ import repository.DBRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -46,8 +47,6 @@ public class VitaChiService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Accessoire> findAll(@PathParam("Entity") String entity) {
-
-        System.out.println("hallo2");
         return repo.findAll(entity);
     }
 
@@ -91,11 +90,15 @@ public class VitaChiService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Eingabe createEingabe(Eingabe newEingabe) {
-        System.out.println("hallo");
-        System.out.println(newEingabe.getBewertung1());
-        repo.createEingabe(newEingabe);
-        return newEingabe;
+    public JsonObject createEingabe(JsonObject json) {
+
+        repo.createEingabe(new Eingabe(
+                json.getJsonObject("eingabe").getInt("bewertung1"),
+                json.getJsonObject("eingabe").getInt("bewertung2"),
+                json.getJsonObject("eingabe").getString("typ")
+        ));
+
+        return json;
     }
 
     // Ein Objekt je nach Typ des übergebenen Obejekts hinzufügen

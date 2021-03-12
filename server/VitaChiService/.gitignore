@@ -34,3 +34,4 @@ nb-configuration.xml
 # patch
 *.orig
 *.rej
+/db/vitaChiDB/

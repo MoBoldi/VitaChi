@@ -62,6 +62,7 @@ class Home extends StatelessWidget {
           ),
           child: Stack(
             children: [
+              
               Container(
                 //Erster weißer Background
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
