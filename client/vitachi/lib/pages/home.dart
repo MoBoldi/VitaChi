@@ -86,15 +86,19 @@ class Home extends StatelessWidget {
                           direction: Axis.vertical,
                           totalSteps: 5,
                           currentStep: 2,
-                          selectedColor: Colors.grey,
                           unselectedSize: 20,
                           selectedSize: 0,
                           roundedEdges: Radius.circular(10),
                           gradientColor: LinearGradient(
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
-                            colors: [Colors.redAccent, Colors.yellow, Colors.green],
+                            colors: [
+                              Colors.redAccent,
+                              Colors.yellow,
+                              Colors.green
+                            ],
                           ),
+                          selectedColor: Colors.grey,
                         ),
                       ),
                     ],
