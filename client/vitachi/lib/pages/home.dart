@@ -62,7 +62,6 @@ class Home extends StatelessWidget {
           ),
           child: Stack(
             children: [
-              
               Container(
                 //Erster weißer Background
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -83,14 +82,16 @@ class Home extends StatelessWidget {
                       ),
                       Container(
                         height: MediaQuery.of(context).size.height / 3,
-                        child: StepProgressIndicator(
-                          direction: Axis.vertical,
-                          totalSteps: 5,
-                          currentStep: 2,
-                          unselectedSize: 20,
-                          selectedSize: 0,
-                          roundedEdges: Radius.circular(10),
-                          gradientColor: LinearGradient(
+                        child: Stack(
+                          children: [
+                            StepProgressIndicator(
+                              direction: Axis.vertical,
+                              totalSteps: 5,
+                              currentStep: 0,
+                              unselectedSize: 20,
+                              selectedSize: 0,
+                              roundedEdges: Radius.circular(10),
+                              /*unselectedGradientColor: LinearGradient(
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
                             colors: [
@@ -98,8 +99,27 @@ class Home extends StatelessWidget {
                               Colors.yellow,
                               Colors.green
                             ],
-                          ),
-                          selectedColor: Colors.grey,
+                          ),*/
+                              unselectedColor: Colors.grey,
+                            ),
+                            StepProgressIndicator(
+                              direction: Axis.vertical,
+                              totalSteps: 5,
+                              currentStep: 2,
+                              unselectedSize: 20,
+                              selectedSize: 0,
+                              roundedEdges: Radius.circular(10),
+                              gradientColor: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [
+                                  Colors.redAccent,
+                                  Colors.yellow,
+                                  Colors.green
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
