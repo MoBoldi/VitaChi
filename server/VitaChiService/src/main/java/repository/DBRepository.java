@@ -60,6 +60,11 @@ public class DBRepository {
         em.persist(newAufgabe);
     }
 
+    @Transactional
+    public void createArbeit(Arbeit newArbeit) {
+        em.persist(newArbeit);
+    }
+
     // Lesen eines Trainings mit id
     public Object find(String entity, long id) {
         if(entity == "Accessoire") {
