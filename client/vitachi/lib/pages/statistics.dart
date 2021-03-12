@@ -9,38 +9,27 @@ class Statistics extends StatefulWidget {
 }
 
 class _Statistics extends State<Statistics> {
-  final Color chartColor = Color(0xFF4DA8DA);
-  final PassedData data = PassedData(
-      chartData: ([
-        ChartData('Test', 2, Color(0xFF4DA8DA)),
-        ChartData('', 3, Color(0xFF9dc6dd)),
-      ]),
-      barChartData: ([
-        ChartData('Mo', 3),
-        ChartData('Di', 4),
-        ChartData('Mi', 1),
-        ChartData('Do', 5),
-        ChartData('Fr', 2),
-        ChartData('Sa', 2),
-        ChartData('So', 1),
-      ]),
-      title: 'Schlafen',
-      star1: 15,
-      star2: 2,
-      star3: 4,
-      star4: 6,
-      star5: 20);
-
+  final Color chartColor = Color(0xFF4DA8DA); 
+  
   int getEntries() {
     try {
-      return data.star1 + data.star2 + data.star3 + data.star4 + data.star5;
+      return getData().star1 + getData().star2 + getData().star3 + getData().star4 + getData().star5;
     } catch (e) {
       return 0;
     }
   }
-
+  List<ChartData> cdata; 
+  void changeChart(String clicked) {
+    setState(() {switch (clicked.toUpperCase()) {
+      case "WEEK": cdata = getData().barChartDataWeek; break;
+      case "MONTH": cdata = getData().barChartDataMonth; break;
+      case "YEAR": cdata = getData().barChartDataYear; break;
+      default: cdata = getData().barChartDataWeek;
+    }});
+  }
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: MyAppBar(context, "VitaChi", null),
       backgroundColor: Colors.white,
@@ -62,7 +51,7 @@ class _Statistics extends State<Statistics> {
                       CircularChartAnnotation(
                         widget: Container(
                           child: Text(
-                            "${data.chartData[1].y}",
+                            "${getData().chartData[1].y}",
                             style: TextStyle(
                               color: Color.fromRGBO(0, 0, 0, 1),
                               fontSize: 25,
@@ -73,7 +62,7 @@ class _Statistics extends State<Statistics> {
                     ],
                     series: <CircularSeries>[
                       DoughnutSeries<ChartData, String>(
-                        dataSource: data.chartData,
+                        dataSource: getData().chartData,
                         xValueMapper: (ChartData data, _) => data.x,
                         yValueMapper: (ChartData data, _) => data.y,
                         innerRadius: '80%',
@@ -101,7 +90,7 @@ class _Statistics extends State<Statistics> {
                       padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
                       child: Center(
                         child: AutoSizeText(
-                          '${data.title}',
+                          '${getData().title}',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
@@ -134,8 +123,8 @@ class _Statistics extends State<Statistics> {
                       Column(
                         children: [
                           AutoSizeText('${getEntries()}'),
-                          AutoSizeText('${data.star1}'),
-                          AutoSizeText('${data.star5}'),
+                          AutoSizeText('${getData().star1}'),
+                          AutoSizeText('${getData().star5}'),
                         ],
                       ),
                     ],
@@ -155,7 +144,7 @@ class _Statistics extends State<Statistics> {
                           ),
                           series: <ChartSeries<ChartData, String>>[
                             ColumnSeries<ChartData, String>(
-                              dataSource: data.barChartData,
+                              dataSource: cdata,
                               xValueMapper: (ChartData rating, _) => rating.x,
                               yValueMapper: (ChartData rating, _) => rating.y,
                               color: chartColor,
@@ -168,15 +157,24 @@ class _Statistics extends State<Statistics> {
                           //mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             MaterialButton(
-                              onPressed: null,
+                              onPressed: (){
+                                changeChart("WEEK");
+                                print(cdata);
+                              },
                               child: Text("Woche"),
                             ),
                             MaterialButton(
-                              onPressed: null,
+                              onPressed: (){
+                                changeChart("Month");
+                                print(cdata);
+                              },
                               child: Text("Monat"),
                             ),
                             MaterialButton(
-                              onPressed: null,
+                              onPressed: (){
+                                changeChart("YEAR");
+                                print(cdata);
+                              },
                               child: Text("Jahr"),
                             ),
                           ],
@@ -193,7 +191,48 @@ class _Statistics extends State<Statistics> {
     );
   }
 }
-
+PassedData getData() {
+    return PassedData(
+      chartData: ([
+        ChartData('Test', 2, Color(0xFF4DA8DA)),
+        ChartData('', 3, Color(0xFF9dc6dd)),
+      ]),
+      barChartDataWeek: ([
+        ChartData('Mo', 3),
+        ChartData('Di', 4),
+        ChartData('Mi', 1),
+        ChartData('Do', 5),
+        ChartData('Fr', 2),
+        ChartData('Sa', 2),
+        ChartData('So', 1),
+      ]),
+      barChartDataMonth: ([
+        ChartData('Woche 1', 4),
+        ChartData('Woche 2', 4),
+        ChartData('Woche 3', 1),
+        ChartData('Woche 4', 5),
+      ]),
+      barChartDataYear: ([
+        ChartData('1', 3),
+        ChartData('2', 4),
+        ChartData('3', 1),
+        ChartData('4', 5),
+        ChartData('5', 2),
+        ChartData('6', 2),
+        ChartData('7', 1),
+        ChartData('8', 3),
+        ChartData('9', 4),
+        ChartData('10', 1),
+        ChartData('11', 5),
+        ChartData('12', 2),
+      ]),
+      title: 'Schlafen',
+      star1: 15,
+      star2: 2,
+      star3: 4,
+      star4: 6,
+      star5: 20);
+  }
 class ChartData {
   ChartData(this.x, this.y, [this.color]);
   final String x;
@@ -204,7 +243,9 @@ class ChartData {
 class PassedData {
   PassedData(
       {this.chartData,
-      this.barChartData,
+      this.barChartDataWeek,
+      this.barChartDataMonth,
+      this.barChartDataYear,
       this.title,
       this.star1,
       this.star2,
@@ -212,7 +253,9 @@ class PassedData {
       this.star4,
       this.star5});
   List<ChartData> chartData;
-  List<ChartData> barChartData;
+  List<ChartData> barChartDataWeek;
+  List<ChartData> barChartDataMonth;
+  List<ChartData> barChartDataYear;
   String title;
   int star1;
   int star2;
