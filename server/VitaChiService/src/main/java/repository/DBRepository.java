@@ -79,4 +79,10 @@ public class DBRepository {
     public void update(Object updateObject) {
         em.merge(updateObject);
     }
+
+    //Wohlbefinden berechnen
+    @Transactional
+    public void getWohlbefinden(Eingabe newEingabe) {
+        em.persist(newEingabe);
+    }
 }
