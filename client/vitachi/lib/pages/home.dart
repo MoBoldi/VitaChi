@@ -44,7 +44,6 @@ class Home extends StatelessWidget {
       wellbeing = double.parse(response.body);
     }
 
-    getData();
 
     double chartWidth = MediaQuery.of(context).size.width / 5;
     double chartHeight = MediaQuery.of(context).size.width / 5;
@@ -89,9 +88,12 @@ class Home extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Image(
-                        width: MediaQuery.of(context).size.width * 0.75,
-                        image: getEmotion(wellbeing),
+                      FutureBuilder(
+                        future: getData(),
+                        builder: (context, snapshot) => Image(
+                          width: MediaQuery.of(context).size.width * 0.75,
+                          image: getEmotion(wellbeing),
+                        ),
                       ),
                       Container(
                         height: MediaQuery.of(context).size.height / 3,
