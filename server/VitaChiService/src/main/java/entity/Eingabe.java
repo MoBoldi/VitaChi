@@ -5,7 +5,8 @@ import javax.persistence.*;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Eingabe.findAll", query = "SELECT e FROM Eingabe e")
+        @NamedQuery(name = "Eingabe.findAll", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e"),
+
 })
 public class Eingabe {
 

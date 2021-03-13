@@ -139,4 +139,10 @@ public class VitaChiService {
         return "Object updated";
     }
 
+    @Path("getWohlbefinden")
+    @GET
+    public Double getWohlbefinden() {
+        return repo.getWohlbefinden();
+    }
+
 }

@@ -8,6 +8,7 @@ import entity.Eingabe;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -32,6 +33,12 @@ public class DBRepository {
             return em.createQuery("select returnObjectAc, returnObjectAr, returnObjectAu, returnObjectEi " +
                     "from Accessoire as returnObjectAc, Arbeit as returnObjectAr, Aufgaben as returnObjectAu, Eingabe as returnObjectEi").getResultList();
         }
+    }
+
+    public Double getWohlbefinden() {
+        TypedQuery<Double> query = em.createNamedQuery("Eingabe.findAll", Double.class);
+        Double e = query.getSingleResult();
+        return e;
     }
 
     // Löschen eines Trainings
