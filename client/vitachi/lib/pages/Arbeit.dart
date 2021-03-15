@@ -105,6 +105,7 @@ class _ArbeitState extends State<Arbeit> {
                                     });
                                   });
                                   var start = DateTime.now().toLocal();
+                                  var timezone = DateTime.now().timeZoneName;
                                   print(start);
                                   arbeit.setStart(start);
 
