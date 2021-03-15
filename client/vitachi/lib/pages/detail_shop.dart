@@ -38,11 +38,11 @@ class DetailShop extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image(image: AssetImage(data.bildpfad), height: MediaQuery.of(context).size.height/2,),
+                            Image(image: AssetImage(data.bildpfad), height: MediaQuery.of(context).size.height/3,),
                           ],
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height / 20
+                            height: MediaQuery.of(context).size.height / 5
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

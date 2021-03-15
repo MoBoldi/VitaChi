@@ -324,6 +324,6 @@ AssetImage getEmotion(double wellbeing) {
   } else if (4.5 <= wellbeing && wellbeing <= 5) {
     return AssetImage('assets/Blume_5.png');
   } else {
-    return AssetImage('assets/Blume_3.png');
+    return AssetImage('assets/Vitachi.gif');
   }
 }

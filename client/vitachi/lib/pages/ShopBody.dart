@@ -156,7 +156,8 @@ class ProductsList extends StatelessWidget {
                           children: [
                             Image(
                               image: NetworkImage(
-                                  products[index].bildpfad),
+                                  products[index].bildpfad
+                              ),
                             ),
                             Text(
                               products[index].bezeichnung,
