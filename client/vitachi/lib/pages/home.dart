@@ -99,6 +99,7 @@ class Home extends StatelessWidget {
                         height: MediaQuery.of(context).size.height / 3,
                         child: Stack(
                           children: [
+                            //Do not touch.
                             StepProgressIndicator(
                               direction: Axis.vertical,
                               totalSteps: 5,
@@ -106,17 +107,10 @@ class Home extends StatelessWidget {
                               unselectedSize: 20,
                               selectedSize: 0,
                               roundedEdges: Radius.circular(10),
-                              /*unselectedGradientColor: LinearGradient(
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                            colors: [
-                              Colors.redAccent,
-                              Colors.yellow,
-                              Colors.green
-                            ],
-                          ),*/
+                              
                               unselectedColor: Colors.grey,
                             ),
+                            //Touch
                             StepProgressIndicator(
                               direction: Axis.vertical,
                               totalSteps: 5,
