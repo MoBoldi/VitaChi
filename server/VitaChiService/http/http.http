@@ -16,3 +16,5 @@ Content-Type: application/json
   "DATUM": "28.01.2003",
   "TYP": "1"
 }
+###
+GET http://localhost:8080/vitaChi/getWohlbefinden

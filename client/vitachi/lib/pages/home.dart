@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:shape_of_view/shape/arc.dart';
 import 'package:shape_of_view/shape_of_view.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
@@ -9,6 +10,7 @@ import 'package:vitachi/components/myDrawer.dart';
 class Home extends StatelessWidget {
   final blue = Color(0xFF4DA8DA);
   final lightblue = Color(0xFF9dc6dd);
+  var wellbeing = 0.0;
   final List<ChartData> ges = [
     ChartData('Wellbeing', 3, Color(0xFF4DA8DA)),
     ChartData('', 2, Color(0xFF9dc6dd)),
@@ -34,10 +36,20 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Future getData() async {
+      Response response = await get('http://10.0.2.2:8080/vitaChi/getWohlbefinden');
+      print(response.statusCode);
+      print("response: " + response.body);
+      wellbeing = double.parse(response.body);
+    }
+
+
     double chartWidth = MediaQuery.of(context).size.width / 5;
     double chartHeight = MediaQuery.of(context).size.width / 5;
 
     data = ModalRoute.of(context).settings.arguments;
+
     if (data == null) {
       print('It is null');
       data = {
@@ -76,9 +88,12 @@ class Home extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Image(
-                        width: MediaQuery.of(context).size.width * 0.75,
-                        image: getEmotion(food[0].y),
+                      FutureBuilder(
+                        future: getData(),
+                        builder: (context, snapshot) => Image(
+                          width: MediaQuery.of(context).size.width * 0.75,
+                          image: getEmotion(wellbeing),
+                        ),
                       ),
                       Container(
                         height: MediaQuery.of(context).size.height / 3,
@@ -303,7 +318,7 @@ AssetImage getEmotion(double wellbeing) {
   } else if (2 <= wellbeing && wellbeing < 3) {
     return AssetImage('assets/Blume_2.png');
   } else if (3 <= wellbeing && wellbeing < 4) {
-    return AssetImage('assets/Blume_3.png');
+    return AssetImage('assets/Vitachi.gif');
   } else if (4 <= wellbeing && wellbeing < 4.5) {
     return AssetImage('assets/Blume_4.png');
   } else if (4.5 <= wellbeing && wellbeing <= 5) {
