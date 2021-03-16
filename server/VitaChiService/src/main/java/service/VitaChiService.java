@@ -57,17 +57,7 @@ public class VitaChiService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Object find(@PathParam("Entity") String entity, @PathParam("id") long id) {
-        if(entity == "Accessoire") {
-            return accessoire.find(id);
-        } else if (entity == "Arbeit") {
-            return arbeit.find(id);
-        } else if (entity == "Aufgaben") {
-            return aufgaben.find(id);
-        } else if (entity == "Eingabe") {
-            return eingabe.find(id);
-        } else {
-            return "VitaChi is here, but there is no entity with this name!";
-        }
+        return repo.find(entity, id);
     }
 
     // Ein Objekt je nach Entität löschen
@@ -93,7 +83,6 @@ public class VitaChiService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public JsonObject createEingabe(JsonObject json) {
-
         repo.createEingabe(new Eingabe(
                 json.getJsonObject("eingabe").getInt("bewertung1"),
                 json.getJsonObject("eingabe").getInt("bewertung2"),
@@ -145,4 +134,9 @@ public class VitaChiService {
         return repo.getWohlbefinden();
     }
 
+    @Path("init")
+    @GET
+    public void init() {
+        repo.initDB();
+    }
 }

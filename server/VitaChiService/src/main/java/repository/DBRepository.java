@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @ApplicationScoped
@@ -74,13 +75,13 @@ public class DBRepository {
 
     // Lesen eines Trainings mit id
     public Object find(String entity, long id) {
-        if(entity == "Accessoire") {
+        if(entity.equals("Accessoire")) {
             return em.find(Accessoire.class, id);
-        } else if (entity == "Arbeit") {
+        } else if (entity.equals("Arbeit")) {
             return em.find(Arbeit.class, id);
-        } else if (entity == "Aufgaben") {
+        } else if (entity.equals("Aufgaben")) {
             return em.find(Aufgaben.class, id);
-        } else if (entity == "Eingabe") {
+        } else if (entity.equals("Eingabe")) {
             return em.find(Eingabe.class, id);
         }
         return null;
@@ -96,5 +97,35 @@ public class DBRepository {
     @Transactional
     public void getWohlbefinden(Eingabe newEingabe) {
         em.persist(newEingabe);
+    }
+
+    //Erste Testdatensätze einfügen
+    public void initDB() {
+        Eingabe e1 = new Eingabe(1,2,"Essen");
+        Eingabe e2 = new Eingabe(1,3,"Essen");
+
+        Eingabe e3 = new Eingabe(2,3,"Bewegung");
+        Eingabe e4 = new Eingabe(1,1,"Bewegung");
+
+        Eingabe e5 = new Eingabe(5,5,"Schlaf");
+        Eingabe e6 = new Eingabe(5,4, "Schlaf");
+
+        this.createEingabe(e1);
+        this.createEingabe(e2);
+        this.createEingabe(e3);
+        this.createEingabe(e4);
+        this.createEingabe(e5);
+        this.createEingabe(e6);
+
+        LocalDateTime t1a = LocalDateTime.of(2020, 12, 24, 15, 0, 0,0);
+        LocalDateTime t1e = LocalDateTime.of(2020, 12, 24, 18, 0, 0,0);
+        LocalDateTime t2a = LocalDateTime.of(2020, 12, 25, 10, 0, 0,0);
+        LocalDateTime t2e = LocalDateTime.of(2020, 12, 25, 14, 0, 0,0);
+
+        Arbeit a1 = new Arbeit(t1a, t1e);
+        Arbeit a2 = new Arbeit(t2a, t2e);
+
+        this.createArbeit(a1);
+        this.createArbeit(a2);
     }
 }
