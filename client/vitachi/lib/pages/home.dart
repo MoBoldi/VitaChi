@@ -318,12 +318,12 @@ AssetImage getEmotion(double wellbeing) {
   } else if (2 <= wellbeing && wellbeing < 3) {
     return AssetImage('assets/Blume_2.png');
   } else if (3 <= wellbeing && wellbeing < 4) {
-    return AssetImage('assets/Vitachi.gif');
+    return AssetImage('assets/Vitachi_Neutral.gif');
   } else if (4 <= wellbeing && wellbeing < 4.5) {
     return AssetImage('assets/Blume_4.png');
   } else if (4.5 <= wellbeing && wellbeing <= 5) {
     return AssetImage('assets/Blume_5.png');
   } else {
-    return AssetImage('assets/Vitachi.gif');
+    return AssetImage('assets/Vitachi_Neutral.gif');
   }
 }
