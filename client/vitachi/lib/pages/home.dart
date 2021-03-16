@@ -11,13 +11,14 @@ class Home extends StatelessWidget {
   final blue = Color(0xFF4DA8DA);
   final lightblue = Color(0xFF9dc6dd);
   var wellbeing = 0.0;
+  var essen = 0.0;
   final List<ChartData> ges = [
     ChartData('Wellbeing', 3, Color(0xFF4DA8DA)),
     ChartData('', 2, Color(0xFF9dc6dd)),
   ];
   List<ChartData> food = [
-    ChartData('Food', 5, Color(0xFF4DA8DA)),
-    ChartData('', 1, Color(0xFF9dc6dd)),
+    ChartData('Food', 0, Color(0xFF4DA8DA)),
+    ChartData('', 2.5, Color(0xFF9dc6dd)),
   ];
   final List<ChartData> movement = [
     ChartData('Movement', 3, Color(0xFF4DA8DA)),
@@ -44,6 +45,13 @@ class Home extends StatelessWidget {
       wellbeing = double.parse(response.body);
     }
 
+    Future getEssenAVG() async {
+      Response response = await get('http://10.0.2.2:8080/vitaChi/getEssenAVG');
+      print(response.statusCode);
+      print("response: " + response.body);
+      essen = double.parse(response.body);
+    }
+
 
     double chartWidth = MediaQuery.of(context).size.width / 5;
     double chartHeight = MediaQuery.of(context).size.width / 5;
@@ -57,8 +65,8 @@ class Home extends StatelessWidget {
       };
     } else {
       print('It is not null');
-      food[0].y = data['avg'];
-      food[1].y = 5 - data['avg'];
+      food[0].y = essen;
+      food[1].y = 5 - essen;
     }
     print(data);
 
@@ -184,20 +192,24 @@ class Home extends StatelessWidget {
                 ),
               ),*/
               Container(
-                //Food chart
-                width: chartWidth,
-                height: chartHeight,
-                margin: EdgeInsets.fromLTRB(
-                    MediaQuery.of(context).size.width * 0.05,
-                    MediaQuery.of(context).size.height / 1.425,
-                    0,
-                    0),
-                child: getChart(food, context, "/essen"),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
+                  //Food chart
+                  width: chartWidth,
+                  height: chartHeight,
+                  margin: EdgeInsets.fromLTRB(
+                      MediaQuery.of(context).size.width * 0.05,
+                      MediaQuery.of(context).size.height / 1.425,
+                      0,
+                      0),
+                  child: FutureBuilder(
+                    future: getEssenAVG(),
+                    builder: (context, snapshot) => getChart(food, context, "/essen"),
+                  ),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
+
               Container(
                 //Bewegung Chart
                 width: chartWidth,
