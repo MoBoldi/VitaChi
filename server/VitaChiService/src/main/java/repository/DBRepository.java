@@ -41,6 +41,21 @@ public class DBRepository {
         Double e = query.getSingleResult();
         return e;
     }
+    public Double getEssen() {
+        TypedQuery<Double> query = em.createNamedQuery("Eingabe.findEssen", Double.class);
+        Double e = query.getSingleResult();
+        return e;
+    }
+    public Double getBewegung() {
+        TypedQuery<Double> query = em.createNamedQuery("Eingabe.findBewegung", Double.class);
+        Double e = query.getSingleResult();
+        return e;
+    }
+    public Double getSchlaf() {
+        TypedQuery<Double> query = em.createNamedQuery("Eingabe.findSchlaf", Double.class);
+        Double e = query.getSingleResult();
+        return e;
+    }
 
     // Löschen eines Trainings
     @Transactional
@@ -128,4 +143,5 @@ public class DBRepository {
         this.createArbeit(a1);
         this.createArbeit(a2);
     }
+
 }
