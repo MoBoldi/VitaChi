@@ -11,6 +11,7 @@ class Home extends StatelessWidget {
   final blue = Color(0xFF4DA8DA);
   final lightblue = Color(0xFF9dc6dd);
   var wellbeing = 0.0;
+  var wellbeingSkala = 3;
   var essen = 0.0;
   final List<ChartData> ges = [
     ChartData('Wellbeing', 3, Color(0xFF4DA8DA)),
@@ -41,8 +42,8 @@ class Home extends StatelessWidget {
     Future getData() async {
       Response response = await get('http://10.0.2.2:8080/vitaChi/getWohlbefinden');
       print(response.statusCode);
-      print("response: " + response.body);
       wellbeing = double.parse(response.body);
+      wellbeingSkala = wellbeing.toInt();
     }
 
     Future getEssenAVG() async {
@@ -103,40 +104,43 @@ class Home extends StatelessWidget {
                           image: getEmotion(wellbeing),
                         ),
                       ),
-                      Container(
-                        height: MediaQuery.of(context).size.height / 3,
-                        child: Stack(
-                          children: [
-                            //Do not touch.
-                            StepProgressIndicator(
-                              direction: Axis.vertical,
-                              totalSteps: 5,
-                              currentStep: 0,
-                              unselectedSize: 20,
-                              selectedSize: 0,
-                              roundedEdges: Radius.circular(10),
-                              
-                              unselectedColor: Colors.grey,
-                            ),
-                            //Touch
-                            StepProgressIndicator(
-                              direction: Axis.vertical,
-                              totalSteps: 5,
-                              currentStep: 2,
-                              unselectedSize: 20,
-                              selectedSize: 0,
-                              roundedEdges: Radius.circular(10),
-                              gradientColor: LinearGradient(
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                                colors: [
-                                  Colors.redAccent,
-                                  Colors.yellow,
-                                  Colors.green
-                                ],
+                      FutureBuilder(
+                        future: getData(),
+                        builder:(context, snapshot) =>  Container(
+                          height: MediaQuery.of(context).size.height / 3,
+                          child: Stack(
+                            children: [
+                              //Do not touch.
+                              StepProgressIndicator(
+                                direction: Axis.vertical,
+                                totalSteps: 5,
+                                currentStep: 0,
+                                unselectedSize: 20,
+                                selectedSize: 0,
+                                roundedEdges: Radius.circular(10),
+
+                                unselectedColor: Colors.grey,
                               ),
-                            ),
-                          ],
+                              //Touch
+                              StepProgressIndicator(
+                                direction: Axis.vertical,
+                                totalSteps: 5,
+                                currentStep: 5-wellbeingSkala,
+                                unselectedSize: 20,
+                                selectedSize: 0,
+                                roundedEdges: Radius.circular(10),
+                                gradientColor: LinearGradient(
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter,
+                                  colors: [
+                                    Colors.redAccent,
+                                    Colors.yellow,
+                                    Colors.green
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -191,24 +195,24 @@ class Home extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),*/
-              Container(
-                  //Food chart
-                  width: chartWidth,
-                  height: chartHeight,
-                  margin: EdgeInsets.fromLTRB(
-                      MediaQuery.of(context).size.width * 0.05,
-                      MediaQuery.of(context).size.height / 1.425,
-                      0,
-                      0),
-                  child: FutureBuilder(
-                    future: getEssenAVG(),
-                    builder: (context, snapshot) => getChart(food, context, "/essen"),
+              FutureBuilder(
+                future: getEssenAVG(),
+                builder:(context, snapshot) =>  Container(
+                    //Food chart
+                    width: chartWidth,
+                    height: chartHeight,
+                    margin: EdgeInsets.fromLTRB(
+                        MediaQuery.of(context).size.width * 0.05,
+                        MediaQuery.of(context).size.height / 1.425,
+                        0,
+                        0),
+                    child: getChart(food, context, "/essen"),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                    ),
                   ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                  ),
-                ),
+              ),
 
               Container(
                 //Bewegung Chart
