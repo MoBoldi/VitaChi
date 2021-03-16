@@ -145,4 +145,23 @@ public class VitaChiService {
         return repo.getWohlbefinden();
     }
 
+    @Path("getEssenAVG")
+    @GET
+    public Double getEssen() {
+
+        return repo.getEssen();
+    }
+
+    @Path("getBewegungAVG")
+    @GET
+    public Double getBewegung() {
+        return repo.getBewegung();
+    }
+
+    @Path("getSchlafAVG")
+    @GET
+    public Double getSchlaf() {
+        return repo.getSchlaf();
+    }
+
 }

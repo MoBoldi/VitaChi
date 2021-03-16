@@ -6,7 +6,9 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Eingabe.findAll", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e"),
-
+        @NamedQuery(name = "Eingabe.findEssen", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e where e.typ='Essen'"),
+        @NamedQuery(name = "Eingabe.findBewegung", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e where e.typ='Bewegung'"),
+        @NamedQuery(name = "Eingabe.findSchlaf", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e where e.typ='Schlaf'"),
 })
 public class Eingabe {
 

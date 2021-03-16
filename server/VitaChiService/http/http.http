@@ -18,3 +18,9 @@ Content-Type: application/json
 }
 ###
 GET http://localhost:8080/vitaChi/getWohlbefinden
+###
+GET http://localhost:8080/vitaChi/getEssenAVG
+###
+GET http://localhost:8080/vitaChi/getBewegungAVG
+###
+GET http://localhost:8080/vitaChi/getSchlafAVG
