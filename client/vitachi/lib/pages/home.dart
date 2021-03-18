@@ -51,25 +51,14 @@ class Home extends StatelessWidget {
       print(response.statusCode);
       print("response: " + response.body);
       essen = double.parse(response.body);
+      food[0].y = essen;
+      food[1].y = 5 - essen;
     }
 
 
     double chartWidth = MediaQuery.of(context).size.width / 5;
     double chartHeight = MediaQuery.of(context).size.width / 5;
 
-    data = ModalRoute.of(context).settings.arguments;
-
-    if (data == null) {
-      print('It is null');
-      data = {
-        'arg': food[0].y,
-      };
-    } else {
-      print('It is not null');
-      food[0].y = essen;
-      food[1].y = 5 - essen;
-    }
-    print(data);
 
     return Scaffold(
         //Color(0xff5bc7e3)
@@ -332,13 +321,13 @@ AssetImage getEmotion(double wellbeing) {
   if (1 <= wellbeing && wellbeing < 2) {
     return AssetImage('assets/Blume_1.png');
   } else if (2 <= wellbeing && wellbeing < 3) {
-    return AssetImage('assets/Blume_2.png');
+    return AssetImage('assets/4_traurig.gif');
   } else if (3 <= wellbeing && wellbeing < 4) {
     return AssetImage('assets/Vitachi_Neutral.gif');
   } else if (4 <= wellbeing && wellbeing < 4.5) {
-    return AssetImage('assets/Blume_4.png');
+    return AssetImage('assets/2_glücklich.gif');
   } else if (4.5 <= wellbeing && wellbeing <= 5) {
-    return AssetImage('assets/Blume_5.png');
+    return AssetImage('assets/1_glücklich.gif');
   } else {
     return AssetImage('assets/Vitachi_Neutral.gif');
   }
