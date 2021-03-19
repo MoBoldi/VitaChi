@@ -13,21 +13,23 @@ class Home extends StatelessWidget {
   var wellbeing = 0.0;
   var wellbeingSkala = 3;
   var essen = 0.0;
+  var bewegung = 0.0;
+  var schlafen = 0.0;
   final List<ChartData> ges = [
     ChartData('Wellbeing', 3, Color(0xFF4DA8DA)),
     ChartData('', 2, Color(0xFF9dc6dd)),
   ];
   List<ChartData> food = [
     ChartData('Food', 0, Color(0xFF4DA8DA)),
-    ChartData('', 2.5, Color(0xFF9dc6dd)),
+    ChartData('', 0.1, Color(0xFF9dc6dd)),
   ];
   final List<ChartData> movement = [
-    ChartData('Movement', 3, Color(0xFF4DA8DA)),
-    ChartData('', 2, Color(0xFF9dc6dd)),
+    ChartData('Movement', 0, Color(0xFF4DA8DA)),
+    ChartData('', 0.1, Color(0xFF9dc6dd)),
   ];
   final List<ChartData> sleep = [
-    ChartData('Sleep', 2, Color(0xFF4DA8DA)),
-    ChartData('', 3, Color(0xFF9dc6dd)),
+    ChartData('Sleep', 0, Color(0xFF4DA8DA)),
+    ChartData('', 0.1, Color(0xFF9dc6dd)),
   ];
   final List<ChartData> work = [
     ChartData('Work', 30, Color(0xFF4DA8DA)),
@@ -53,6 +55,24 @@ class Home extends StatelessWidget {
       essen = double.parse(response.body);
       food[0].y = essen;
       food[1].y = 5 - essen;
+    }
+
+    Future getBewegungAVG() async {
+      Response response = await get('http://10.0.2.2:8080/vitaChi/getBewegungAVG');
+      print(response.statusCode);
+      print("response: " + response.body);
+      bewegung = double.parse(response.body);
+      movement[0].y = bewegung;
+      movement[1].y = 5 - bewegung;
+    }
+
+    Future getSchlafAVG() async {
+      Response response = await get('http://10.0.2.2:8080/vitaChi/getSchlafAVG');
+      print(response.statusCode);
+      print("response: " + response.body);
+      schlafen = double.parse(response.body);
+      sleep[0].y = schlafen;
+      sleep[1].y = 5 - schlafen;
     }
 
 
@@ -203,35 +223,41 @@ class Home extends StatelessWidget {
                   ),
               ),
 
-              Container(
-                //Bewegung Chart
-                width: chartWidth,
-                height: chartHeight,
-                margin: EdgeInsets.fromLTRB(
-                    MediaQuery.of(context).size.width * 0.285,
-                    MediaQuery.of(context).size.height / 1.475,
-                    0,
-                    0),
-                child: getChart(movement, context, "/bewegung"),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
+              FutureBuilder(
+                future: getBewegungAVG(),
+                builder:(context, snapshot) =>  Container(
+                  //Bewegung Chart
+                  width: chartWidth,
+                  height: chartHeight,
+                  margin: EdgeInsets.fromLTRB(
+                      MediaQuery.of(context).size.width * 0.285,
+                      MediaQuery.of(context).size.height / 1.475,
+                      0,
+                      0),
+                  child: getChart(movement, context, "/bewegung"),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-              Container(
-                //Schlaf chart
-                width: chartWidth,
-                height: chartHeight,
-                margin: EdgeInsets.fromLTRB(
-                  MediaQuery.of(context).size.width * 0.515,
-                  MediaQuery.of(context).size.height / 1.475,
-                  0,
-                  0,
-                ),
-                child: getChart(sleep, context, "/schlafen"),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
+              FutureBuilder(
+                future: getSchlafAVG(),
+                builder: (context, snapshot) => Container(
+                  //Schlaf chart
+                  width: chartWidth,
+                  height: chartHeight,
+                  margin: EdgeInsets.fromLTRB(
+                    MediaQuery.of(context).size.width * 0.515,
+                    MediaQuery.of(context).size.height / 1.475,
+                    0,
+                    0,
+                  ),
+                  child: getChart(sleep, context, "/schlafen"),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               Container(
