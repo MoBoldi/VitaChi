@@ -109,7 +109,7 @@ public class VitaChiService {
     public JsonObject createArbeit(JsonObject json) {
 
         LocalDateTime start = LocalDateTime.parse(json.getJsonObject("arbeit").getString("start"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
-        LocalDateTime stop = LocalDateTime.parse(json.getJsonObject("arbeit").getString("stop"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
+        LocalDateTime stop = LocalDateTime.parse(json.getJsonObject("arbeit").getString("dauer"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
 
         repo.createArbeit(new Arbeit(
                 start,

@@ -15,15 +15,15 @@ public class Arbeit {
     private long arbeitID;
 
     private LocalDateTime startdatum;
-    private LocalDateTime enddatum;
+    private LocalDateTime dauer;
     private long userID;
 
 
     public Arbeit(){}
 
-    public Arbeit(LocalDateTime startdatum, LocalDateTime enddatum) {
+    public Arbeit(LocalDateTime startdatum, LocalDateTime dauer) {
         this.startdatum = startdatum;
-        this.enddatum = enddatum;
+        this.dauer = dauer;
     }
 
     //<editor-fold desc="Getter und Setter">
@@ -36,12 +36,12 @@ public class Arbeit {
         this.startdatum = startdatum;
     }
 
-    public LocalDateTime getEnddatum() {
-        return enddatum;
+    public LocalDateTime getDauer() {
+        return dauer;
     }
 
-    public void setEnddatum(LocalDateTime enddatum) {
-        this.enddatum = enddatum;
+    public void setDauer(LocalDateTime dauer) {
+        this.dauer = dauer;
     }
 
     public long getUserID() {

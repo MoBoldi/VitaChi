@@ -137,11 +137,11 @@ public class DBRepository {
         LocalDateTime t2a = LocalDateTime.of(2020, 12, 25, 10, 0, 0,0);
         LocalDateTime t2e = LocalDateTime.of(2020, 12, 25, 14, 0, 0,0);
 
-        Arbeit a1 = new Arbeit(t1a, t1e);
-        Arbeit a2 = new Arbeit(t2a, t2e);
+/*        Arbeit a1 = new Arbeit(t1a, );
+        Arbeit a2 = new Arbeit(t2a, );
 
         this.createArbeit(a1);
-        this.createArbeit(a2);
+        this.createArbeit(a2);*/
     }
 
 }
