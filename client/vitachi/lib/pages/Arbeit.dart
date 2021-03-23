@@ -21,6 +21,8 @@ class _ArbeitState extends State<Arbeit> {
   var hoursStr = '00';
   var minutesStr = '00';
   var secondsStr = '00';
+  var start;
+  var stop;
   final Color color = Color(0xFF3D6845);
   ArbeitClass arbeit = new ArbeitClass(DateTime.now(), DateTime.now());
 
@@ -104,7 +106,7 @@ class _ArbeitState extends State<Arbeit> {
                                           (newTick % 60).floor().toString().padLeft(2, '0');
                                     });
                                   });
-                                  var start = DateTime.now().toLocal();
+                                  start = DateTime.now().toLocal();
                                   var timezone = DateTime.now().timeZoneName;
                                   print(start);
                                   arbeit.setStart(start);
@@ -128,9 +130,8 @@ class _ArbeitState extends State<Arbeit> {
                                 onPressed: () {
                                   timerSubscription.cancel();
                                   timerStream = null;
-                                  var stop = DateTime.now().toLocal();
-                                  print(stop);
-                                  arbeit.setStop(stop);
+                                  stop = DateTime.now();
+                                  arbeit.setDauer(stop);
                                 },
                                 color: Color(0xFFB5475A),
                                 child: Text(
