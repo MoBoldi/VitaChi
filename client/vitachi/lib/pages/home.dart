@@ -15,6 +15,9 @@ class Home extends StatelessWidget {
   var essen = 0.0;
   var bewegung = 0.0;
   var schlafen = 0.0;
+  var urlgetStats = '';
+
+
   final List<ChartData> ges = [
     ChartData('Wellbeing', 3, Color(0xFF4DA8DA)),
     ChartData('', 2, Color(0xFF9dc6dd)),
