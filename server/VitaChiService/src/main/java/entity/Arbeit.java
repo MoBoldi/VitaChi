@@ -26,6 +26,11 @@ public class Arbeit {
         this.dauer = dauer;
     }
 
+    public Arbeit(long arbeitID, LocalDateTime startdatum, LocalDateTime dauer) {
+        this.arbeitID = arbeitID;
+        this.startdatum = startdatum;
+        this.dauer = dauer;
+    }
     //<editor-fold desc="Getter und Setter">
 
     public LocalDateTime getStartdatum() {
@@ -50,6 +55,10 @@ public class Arbeit {
 
     public void setUserID(long userID) {
         this.userID = userID;
+    }
+
+    public long getArbeitID() {
+        return arbeitID;
     }
 
     //</editor-fold>
