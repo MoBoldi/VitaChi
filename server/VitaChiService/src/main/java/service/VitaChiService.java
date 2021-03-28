@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -109,11 +110,12 @@ public class VitaChiService {
     public JsonObject createArbeit(JsonObject json) {
 
         LocalDateTime start = LocalDateTime.parse(json.getJsonObject("arbeit").getString("start"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
-        LocalDateTime stop = LocalDateTime.parse(json.getJsonObject("arbeit").getString("stop"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
+
+        //int d = stop.getSecond()-start.getSecond();
 
         repo.createArbeit(new Arbeit(
                 start,
-                stop
+                null
         ));
 
         return json;
@@ -125,6 +127,18 @@ public class VitaChiService {
     @Consumes(MediaType.APPLICATION_JSON)
     public String updateObject(Object updateObject) {
         repo.update(updateObject);
+        return "Object updated";
+    }
+
+    @Path("updateArbeit")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String updateArbeit(JsonObject json) {
+        List<Arbeit> l = repo.findLastEntry();
+        Arbeit a = l.get(0);
+        LocalDateTime dauer = LocalDateTime.parse(json.getJsonObject("arbeit").getString("dauer"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
+        Arbeit aa = new Arbeit(a.getArbeitID(),a.getStartdatum(), dauer);
+        repo.updateArbeit(aa);
         return "Object updated";
     }
 

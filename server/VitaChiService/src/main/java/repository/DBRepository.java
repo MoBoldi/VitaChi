@@ -108,6 +108,17 @@ public class DBRepository {
         em.merge(updateObject);
     }
 
+    @Transactional
+    public void updateArbeit(Object updateObject) {
+        em.merge(updateObject);
+    }
+
+    @Transactional
+    public List<Arbeit> findLastEntry(){
+        return em.createQuery("select a from Arbeit as a order by a.arbeitID desc").setMaxResults(1).getResultList();
+    }
+
+
     //Wohlbefinden berechnen
     @Transactional
     public void getWohlbefinden(Eingabe newEingabe) {

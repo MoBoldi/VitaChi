@@ -15,17 +15,22 @@ public class Arbeit {
     private long arbeitID;
 
     private LocalDateTime startdatum;
-    private LocalDateTime enddatum;
+    private LocalDateTime dauer;
     private long userID;
 
 
     public Arbeit(){}
 
-    public Arbeit(LocalDateTime startdatum, LocalDateTime enddatum) {
+    public Arbeit(LocalDateTime startdatum, LocalDateTime dauer) {
         this.startdatum = startdatum;
-        this.enddatum = enddatum;
+        this.dauer = dauer;
     }
 
+    public Arbeit(long arbeitID, LocalDateTime startdatum, LocalDateTime dauer) {
+        this.arbeitID = arbeitID;
+        this.startdatum = startdatum;
+        this.dauer = dauer;
+    }
     //<editor-fold desc="Getter und Setter">
 
     public LocalDateTime getStartdatum() {
@@ -36,12 +41,12 @@ public class Arbeit {
         this.startdatum = startdatum;
     }
 
-    public LocalDateTime getEnddatum() {
-        return enddatum;
+    public LocalDateTime getDauer() {
+        return dauer;
     }
 
-    public void setEnddatum(LocalDateTime enddatum) {
-        this.enddatum = enddatum;
+    public void setDauer(LocalDateTime dauer) {
+        this.dauer = dauer;
     }
 
     public long getUserID() {
@@ -50,6 +55,10 @@ public class Arbeit {
 
     public void setUserID(long userID) {
         this.userID = userID;
+    }
+
+    public long getArbeitID() {
+        return arbeitID;
     }
 
     //</editor-fold>

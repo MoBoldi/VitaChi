@@ -1,13 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:vitachi/entitys/ArbeitClass.dart';
-import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Arbeit extends StatefulWidget {
@@ -21,13 +18,14 @@ class _ArbeitState extends State<Arbeit> {
   var hoursStr = '00';
   var minutesStr = '00';
   var secondsStr = '00';
+  var start;
+  var stop;
   final Color color = Color(0xFF3D6845);
   ArbeitClass arbeit = new ArbeitClass(DateTime.now(), DateTime.now());
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final Color color =  Color(0xff28AA7D);
     return Scaffold(
       appBar: MyAppBarArbeiten(context, 'VitaChi', null),
       backgroundColor: Colors.white,
@@ -88,8 +86,8 @@ class _ArbeitState extends State<Arbeit> {
                               RaisedButton(
                                 padding:
                                 EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                                onPressed: () {
-                                  timerStream = stopWatchStream();
+                                onPressed: () async {
+                                  /*timerStream = stopWatchStream();
                                   timerSubscription = timerStream.listen((int newTick) {
                                     setState(() {
                                       hoursStr = ((newTick / (60 * 60)) % 60)
@@ -103,12 +101,22 @@ class _ArbeitState extends State<Arbeit> {
                                       secondsStr =
                                           (newTick % 60).floor().toString().padLeft(2, '0');
                                     });
-                                  });
-                                  var start = DateTime.now().toLocal();
-                                  var timezone = DateTime.now().timeZoneName;
-                                  print(start);
-                                  arbeit.setStart(start);
+                                  });*/
 
+                                  start = DateTime.now().toLocal();
+                                  arbeit.setStart(start);
+                                  arbeit.setDauer(start);
+                                  String url = 'http://10.0.2.2:8080/vitaChi/createArbeit';
+                                  Map<String, String> headers = {"Content-type": "application/json"};
+                                  String json = jsonEncode(<String, Object>{'arbeit': arbeit});
+                                  Response response = await post(url, headers: headers, body: json);
+                                  print(response.statusCode);
+
+
+                                  /*SharedPreferences.setMockInitialValues({});
+                                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                                  prefs.setString("start", arbeit.toStringStart(start));
+                                  print(prefs.getString("start"));*/
                                 },
                                 color: Color(0xff82b086),
                                 child: Text(
@@ -125,12 +133,21 @@ class _ArbeitState extends State<Arbeit> {
                               RaisedButton(
                                 padding:
                                 EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                                onPressed: () {
-                                  timerSubscription.cancel();
-                                  timerStream = null;
-                                  var stop = DateTime.now().toLocal();
-                                  print(stop);
-                                  arbeit.setStop(stop);
+                                onPressed: () async {
+                                  //timerSubscription.cancel();
+                                  //timerStream = null;
+                                  /*SharedPreferences prefs = await SharedPreferences.getInstance();
+                                  start=prefs.getString("start");
+                                  print(prefs.getString("start"));*/
+                                  stop = DateTime.now().toLocal();
+                                  arbeit.setStart(stop);
+                                  arbeit.setDauer(stop);
+                                  String url = 'http://10.0.2.2:8080/vitaChi/updateArbeit';
+                                  Map<String, String> headers = {"Content-type": "application/json"};
+                                  String json = jsonEncode(<String, Object>{'arbeit': arbeit});
+                                  Response response = await put(url, headers: headers, body: json);
+                                  print(response.statusCode);
+
                                 },
                                 color: Color(0xFFB5475A),
                                 child: Text(

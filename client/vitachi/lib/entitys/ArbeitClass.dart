@@ -1,11 +1,11 @@
 class ArbeitClass{
   DateTime start;
-  DateTime stop;
+  DateTime dauer;
 
 
-  ArbeitClass(DateTime start, DateTime stop){
+  ArbeitClass(DateTime start, DateTime dauer){
     this.start = start;
-    this.stop = stop;
+    this.dauer = dauer;
   }
 
   DateTime getStart(){
@@ -15,30 +15,30 @@ class ArbeitClass{
     this.start = start;
   }
 
-  DateTime getStop(){
-    return this.stop;
+  DateTime getDauer(){
+    return this.dauer;
   }
-  setStop (DateTime stop) {
-    this.stop = stop;
+  setDauer (DateTime dauer) {
+    this.dauer = dauer;
   }
 
-  String toStringStart() {
+  String toStringStart(DateTime start) {
     return '$start';
   }
-  String toStringStop() {
-    return '$stop';
+  String toStringDauer(DateTime dauer) {
+    return '$dauer';
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'start': toStringStart(),
-      'stop': toStringStop()
+      'start': toStringStart(start),
+      'dauer': toStringDauer(dauer),
     };
   }
 
   @override
   String toString() {
-    return 'Arbeit{start: $start, stop: $stop}';
+    return 'Arbeit{start: $start, dauer: $dauer}';
   }
 
 }
