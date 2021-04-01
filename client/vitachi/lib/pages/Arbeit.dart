@@ -5,7 +5,7 @@ import 'package:http/http.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:vitachi/entitys/ArbeitClass.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
 class Arbeit extends StatefulWidget {
   @override
@@ -83,7 +83,24 @@ class _ArbeitState extends State<Arbeit> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              RaisedButton(
+                              Container(
+                                child: LiteRollingSwitch(
+                                  value: true,
+                                  textOn: "Start",
+                                  textOff: "Stop",
+                                  colorOn: Color(0xff82b086),
+                                  colorOff: Color(0xFFB5475A),
+                                  iconOn: Icons.play_arrow_outlined,
+                                  iconOff: Icons.stop,
+                                  onChanged: (bool position){
+                                    print("The button is $position");
+                                  },
+                                ),
+                                margin: EdgeInsets.only(bottom: size.height/11),
+                              ),
+                            ]
+                          ),
+                              /*RaisedButton(
                                 padding:
                                 EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                                 onPressed: () async {
@@ -159,7 +176,10 @@ class _ArbeitState extends State<Arbeit> {
                                 ),
                               ),
                             ],
-                          ),
+                          ),*/
+
+                          /*
+                          Alte Methode Absende Button
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Container(
@@ -188,7 +208,7 @@ class _ArbeitState extends State<Arbeit> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),*/
                         ],
                       ),
 
