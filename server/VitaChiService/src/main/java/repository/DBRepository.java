@@ -118,6 +118,17 @@ public class DBRepository {
         return em.createQuery("select a from Arbeit as a order by a.arbeitID desc").setMaxResults(1).getResultList();
     }
 
+    @Transactional
+    public Boolean activeArbeit(){
+        List<Arbeit> a = findLastEntry();
+        if (a.get(0).getDauer() == null) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 
     //Wohlbefinden berechnen
     @Transactional

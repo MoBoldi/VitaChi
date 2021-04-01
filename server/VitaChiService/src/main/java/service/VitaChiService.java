@@ -153,11 +153,18 @@ public class VitaChiService {
     public void init() {
         repo.initDB();
     }
+
     @Path("getEssenAVG")
     @GET
     public Double getEssen() {
 
         return repo.getEssen();
+    }
+
+    @Path("activeArbeit")
+    @GET
+    public Boolean activeArbeit() {
+        return repo.activeArbeit();
     }
 
     @Path("getBewegungAVG")
