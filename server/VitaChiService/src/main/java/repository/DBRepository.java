@@ -120,12 +120,17 @@ public class DBRepository {
 
     @Transactional
     public Boolean activeArbeit(){
+        LocalDateTime date = LocalDateTime.of(0,1,1,0,0,0,0);
         List<Arbeit> a = findLastEntry();
-        if (a.get(0).getDauer() == null) {
+        if (a.isEmpty()==true){
             return true;
-        }
-        else{
-            return false;
+        }else{
+            if (a.get(0).getDauer() == null) {
+                return false;
+            }
+            else{
+                return true;
+            }
         }
     }
 

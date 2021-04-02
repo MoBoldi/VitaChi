@@ -4,6 +4,7 @@ import entity.Eingabe;
 import entity.Accessoire;
 import entity.Arbeit;
 import entity.Aufgaben;
+import org.apache.derby.client.am.DateTime;
 import org.jboss.resteasy.annotations.Query;
 import repository.DBRepository;
 
@@ -110,8 +111,7 @@ public class VitaChiService {
     public JsonObject createArbeit(JsonObject json) {
 
         LocalDateTime start = LocalDateTime.parse(json.getJsonObject("arbeit").getString("start"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
-
-        //int d = stop.getSecond()-start.getSecond();
+        LocalDateTime date = LocalDateTime.of(2001,1,1,0,0,0,0);
 
         repo.createArbeit(new Arbeit(
                 start,
