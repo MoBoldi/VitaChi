@@ -40,12 +40,7 @@ class _ArbeitState extends State<Arbeit> {
     return Scaffold(
       appBar: MyAppBarArbeiten(context, 'VitaChi', null),
       backgroundColor: Colors.white,
-      body: FutureBuilder(
-        future: getData(),
-        // ignore: missing_return
-        builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-            return SingleChildScrollView(
+      body: SingleChildScrollView(
               child: Container(
                 width: size.width,
                 child: Column(
@@ -103,57 +98,74 @@ class _ArbeitState extends State<Arbeit> {
                                 Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Container(
-                                        child: LiteRollingSwitch(
-                                          value: status,
-                                          textOn: "Start",
-                                          textOff: "Stop",
-                                          colorOn: Color(0xff82b086),
-                                          colorOff: Color(0xFFB5475A),
-                                          iconOn: Icons.play_arrow_outlined,
-                                          iconOff: Icons.stop,
-                                          onTap: () async {
-                                            if (status == true) {
-                                              start = DateTime.now().toLocal();
-                                              arbeit.setStart(start);
-                                              arbeit.setDauer(start);
-                                              String url = 'http://10.0.2.2:8080/vitaChi/createArbeit';
-                                              Map<String, String> headers = {
-                                                "Content-type": "application/json"
-                                              };
-                                              String json = jsonEncode(
-                                                  <String, Object>{
-                                                    'arbeit': arbeit
-                                                  });
-                                              Response response = await post(
-                                                  url, headers: headers,
-                                                  body: json);
-                                              print(response.statusCode);
-                                            } else {
-                                              stop = DateTime.now().toLocal();
-                                              arbeit.setStart(stop);
-                                              arbeit.setDauer(stop);
-                                              String url = 'http://10.0.2.2:8080/vitaChi/updateArbeit';
-                                              Map<String, String> headers = {
-                                                "Content-type": "application/json"
-                                              };
-                                              String json = jsonEncode(
-                                                  <String, Object>{
-                                                    'arbeit': arbeit
-                                                  });
-                                              Response response = await put(
-                                                  url, headers: headers,
-                                                  body: json);
-                                              print(response.statusCode);
-                                            }
-                                          },
-                                          onChanged: (bool position) {
-                                            print("The button is $position");
-                                          },
-                                        ),
-                                        margin: EdgeInsets.only(
-                                            bottom: size.height / 11),
-                                      ),
+
+                                      FutureBuilder(
+                                          future: getData(),
+                                          // ignore: missing_return, missing_return, missing_return
+                                          builder: (context, snapshot) {
+                                          if (snapshot.connectionState == ConnectionState.done) {
+                                            return Container(
+                                              child: LiteRollingSwitch(
+                                                value: status,
+                                                textOn: "Start",
+                                                textOff: "Stop",
+                                                colorOn: Color(0xff82b086),
+                                                colorOff: Color(0xFFB5475A),
+                                                iconOn: Icons
+                                                    .play_arrow_outlined,
+                                                iconOff: Icons.stop,
+                                                onTap: () async {
+                                                  if (status == true) {
+                                                    start = DateTime.now()
+                                                        .toLocal();
+                                                    arbeit.setStart(start);
+                                                    arbeit.setDauer(start);
+                                                    String url = 'http://10.0.2.2:8080/vitaChi/createArbeit';
+                                                    Map<String,
+                                                        String> headers = {
+                                                      "Content-type": "application/json"
+                                                    };
+                                                    String json = jsonEncode(
+                                                        <String, Object>{
+                                                          'arbeit': arbeit
+                                                        });
+                                                    Response response = await post(
+                                                        url, headers: headers,
+                                                        body: json);
+                                                    print(response.statusCode);
+                                                    await Future.delayed(Duration(seconds: 1));
+                                                    Navigator.pushReplacementNamed(context, '/',);
+                                                  } else {
+                                                    stop = DateTime.now()
+                                                        .toLocal();
+                                                    arbeit.setStart(stop);
+                                                    arbeit.setDauer(stop);
+                                                    String url = 'http://10.0.2.2:8080/vitaChi/updateArbeit';
+                                                    Map<String,
+                                                        String> headers = {
+                                                      "Content-type": "application/json"
+                                                    };
+                                                    String json = jsonEncode(
+                                                        <String, Object>{
+                                                          'arbeit': arbeit
+                                                        });
+                                                    Response response = await put(
+                                                        url, headers: headers,
+                                                        body: json);
+                                                    print(response.statusCode);
+                                                    //get Dauer from Server
+                                                  }
+                                                },
+                                                onChanged: (bool position) {
+                                                  print(
+                                                      "The button is $position");
+                                                },
+                                              ),
+                                              margin: EdgeInsets.only(
+                                                  bottom: size.height / 11),
+                                            );
+                                          }
+                                          })
                                     ]
                                 ),
                                 /*RaisedButton(
@@ -279,9 +291,7 @@ class _ArbeitState extends State<Arbeit> {
               ),
 
 
-            );
-          }
-        }),
+            ),
     );
   }
 }
