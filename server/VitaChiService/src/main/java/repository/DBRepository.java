@@ -119,6 +119,13 @@ public class DBRepository {
     }
 
     @Transactional
+    public int getWorkingTime(){
+        List<Arbeit> a = findLastEntry();
+        int dauer = a.get(0).getDauer().getSecond() - a.get(0).getStartdatum().getSecond();
+        return dauer;
+    }
+
+    @Transactional
     public Boolean activeArbeit(){
         LocalDateTime date = LocalDateTime.of(0,1,1,0,0,0,0);
         List<Arbeit> a = findLastEntry();

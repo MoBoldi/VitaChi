@@ -127,7 +127,14 @@ public class VitaChiService {
     @Consumes(MediaType.APPLICATION_JSON)
     public String updateObject(Object updateObject) {
         repo.update(updateObject);
-        return "Object updated";
+        return "Updated";
+    }
+
+    @Path("getWorkingTime")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public int getWorkingTime() {
+        return repo.getWorkingTime();
     }
 
     @Path("updateArbeit")
