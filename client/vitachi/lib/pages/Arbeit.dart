@@ -18,6 +18,7 @@ class _ArbeitState extends State<Arbeit> {
   var hoursStr = '00';
   var minutesStr = '00';
   var secondsStr = '00';
+  var timestring="";
   var start;
   var stop;
   var status;
@@ -27,10 +28,21 @@ class _ArbeitState extends State<Arbeit> {
   Future<bool> getData() async {
     Response response = await get('http://10.0.2.2:8080/vitaChi/activeArbeit');
     print("response" + response.body);
-    if(response.body=='true'){
-      status = true;
+      if(response.body=='true'){
+        status = true;
+      }else if (response.body == 'false'){
+        status = false;
+      }else{
+        status=true;
+      }
+  }
+
+  Future<String> getWorkingTime() async {
+    Response response = await get('http://10.0.2.2:8080/vitaChi/getWorkingTime');
+    print("response" + response.body);
+    if (response.body.startsWith("<!")){
     }else{
-      status = false;
+      timestring=response.body;
     }
   }
 
@@ -68,7 +80,7 @@ class _ArbeitState extends State<Arbeit> {
                         Align(
                           alignment: Alignment.center,
                           child: Container(
-                            margin: EdgeInsets.only(top: size.height / 9),
+                            margin: EdgeInsets.only(top: size.height / 30),
                             width: size.width / 1.3,
                             height: size.height / 2.7,
                             decoration: new BoxDecoration(
@@ -86,19 +98,12 @@ class _ArbeitState extends State<Arbeit> {
                                 )
                             ),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  "$hoursStr:$minutesStr:$secondsStr",
-                                  style: TextStyle(
-                                      fontSize: size.width / 6,
-                                      color: Colors.white
-                                  ),
-                                ),
                                 Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-
                                       FutureBuilder(
                                           future: getData(),
                                           // ignore: missing_return, missing_return, missing_return
@@ -153,7 +158,7 @@ class _ArbeitState extends State<Arbeit> {
                                                         url, headers: headers,
                                                         body: json);
                                                     print(response.statusCode);
-                                                    //get Dauer from Server
+                                                    Navigator.pushReplacementNamed(context, '/arbeit',);
                                                   }
                                                 },
                                                 onChanged: (bool position) {
@@ -161,122 +166,37 @@ class _ArbeitState extends State<Arbeit> {
                                                       "The button is $position");
                                                 },
                                               ),
-                                              margin: EdgeInsets.only(
-                                                  bottom: size.height / 11),
+                                              margin: EdgeInsets.only(top: size.height/15),
                                             );
+                                          }else{
+                                            return Image(image: AssetImage('assets/LogoSlider.png'));
                                           }
-                                          })
+                                        }
+                                      ),
                                     ]
                                 ),
-                                /*RaisedButton(
-                                  padding:
-                                  EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                                  onPressed: () async {
-                                    /*timerStream = stopWatchStream();
-                                    timerSubscription = timerStream.listen((int newTick) {
-                                      setState(() {
-                                        hoursStr = ((newTick / (60 * 60)) % 60)
-                                            .floor()
-                                            .toString()
-                                            .padLeft(2, '0');
-                                        minutesStr = ((newTick / 60) % 60)
-                                            .floor()
-                                            .toString()
-                                            .padLeft(2, '0');
-                                        secondsStr =
-                                            (newTick % 60).floor().toString().padLeft(2, '0');
-                                      });
-                                    });*/
 
-                                    start = DateTime.now().toLocal();
-                                    arbeit.setStart(start);
-                                    arbeit.setDauer(start);
-                                    String url = 'http://10.0.2.2:8080/vitaChi/createArbeit';
-                                    Map<String, String> headers = {"Content-type": "application/json"};
-                                    String json = jsonEncode(<String, Object>{'arbeit': arbeit});
-                                    Response response = await post(url, headers: headers, body: json);
-                                    print(response.statusCode);
-
-
-                                    /*SharedPreferences.setMockInitialValues({});
-                                    SharedPreferences prefs = await SharedPreferences.getInstance();
-                                    prefs.setString("start", arbeit.toStringStart(start));
-                                    print(prefs.getString("start"));*/
+                                FutureBuilder(
+                                  future: getWorkingTime(),
+                                  // ignore: missing_return
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState == ConnectionState.done) {
+                                      return Container(
+                                        child: Text(
+                                          "$timestring",
+                                          style: TextStyle(
+                                            fontSize: size.width / 8,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        margin: EdgeInsets.only(top: size.height/30),
+                                      );
+                                    }else{
+                                      return Image(image: AssetImage('assets/LogoSlider.png'));
+                                    }
                                   },
-                                  color: Color(0xff82b086),
-                                  child: Text(
-                                    'START',
-                                    style: TextStyle(
-                                      fontSize: size.width/20,
-                                      color: Colors.white
-                                    ),
-                                  ),
                                 ),
-                                SizedBox(
-                                  width: size.width/15,
-                                ),
-                                RaisedButton(
-                                  padding:
-                                  EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                                  onPressed: () async {
-                                    //timerSubscription.cancel();
-                                    //timerStream = null;
-                                    /*SharedPreferences prefs = await SharedPreferences.getInstance();
-                                    start=prefs.getString("start");
-                                    print(prefs.getString("start"));*/
-                                    stop = DateTime.now().toLocal();
-                                    arbeit.setStart(stop);
-                                    arbeit.setDauer(stop);
-                                    String url = 'http://10.0.2.2:8080/vitaChi/updateArbeit';
-                                    Map<String, String> headers = {"Content-type": "application/json"};
-                                    String json = jsonEncode(<String, Object>{'arbeit': arbeit});
-                                    Response response = await put(url, headers: headers, body: json);
-                                    print(response.statusCode);
 
-                                  },
-                                  color: Color(0xFFB5475A),
-                                  child: Text(
-                                    'STOP',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: size.width/20,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),*/
-
-                                /*
-                            Alte Methode Absende Button
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: Container(
-                                margin: EdgeInsets.only(top: size.height/18),
-                                height: size.height/20,
-                                child: FlatButton(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(15.0)
-                                      )
-                                  ),
-                                  onPressed: () async {
-                                    print(arbeit.toString());
-                                    String url = 'http://10.0.2.2:8080/vitaChi/createArbeit';
-                                    Map<String, String> headers = {"Content-type": "application/json"};
-                                    String json = jsonEncode(<String, Object>{'arbeit': arbeit});
-                                    print(json);
-                                    Response response = await post(url, headers: headers, body: json);
-                                    print(response.statusCode);
-                                    Navigator.pushReplacementNamed(context, '/',);
-                                  },
-                                  color: Color(0xFFB5475A),
-                                  child: Text(
-                                    "Absenden",
-                                    style: TextStyle(fontSize: size.width/30, color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ),*/
                               ],
                             ),
 
@@ -296,36 +216,3 @@ class _ArbeitState extends State<Arbeit> {
   }
 }
 
-Stream<int> stopWatchStream() {
-  StreamController<int> streamController;
-  Timer timer;
-  Duration timerInterval = Duration(seconds: 1);
-  int counter = 0;
-
-  void stopTimer() {
-    if (timer != null) {
-      timer.cancel();
-      timer = null;
-      counter = 0;
-      streamController.close();
-    }
-  }
-
-  void tick(_) {
-    counter++;
-    streamController.add(counter);
-  }
-
-  void startTimer() {
-    timer = Timer.periodic(timerInterval, tick);
-  }
-
-  streamController = StreamController<int>(
-    onListen: startTimer,
-    onCancel: stopTimer,
-    onResume: startTimer,
-    onPause: stopTimer,
-  );
-
-  return streamController.stream;
-}

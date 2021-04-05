@@ -133,7 +133,7 @@ public class VitaChiService {
     @Path("getWorkingTime")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public int getWorkingTime() {
+    public String getWorkingTime() {
         return repo.getWorkingTime();
     }
 
@@ -170,7 +170,7 @@ public class VitaChiService {
 
     @Path("activeArbeit")
     @GET
-    public Boolean activeArbeit() {
+    public String activeArbeit() {
         return repo.activeArbeit();
     }
 
