@@ -338,17 +338,17 @@ IconData getIcon(String input) {
 int getRating(double wellbeing) {
   print("WELLBEING: " + wellbeing.toString());
   if (1 <= wellbeing && wellbeing < 2) {
-    return 0;
-  } else if (2 <= wellbeing && wellbeing < 3) {
     return 1;
-  } else if (3 <= wellbeing && wellbeing < 4) {
+  } else if (2 <= wellbeing && wellbeing < 3) {
     return 2;
-  } else if (4 <= wellbeing && wellbeing < 4.5) {
+  } else if (3 <= wellbeing && wellbeing < 4) {
     return 3;
+  } else if (4 <= wellbeing && wellbeing < 4.5) {
+    return 4;
   } else if (4.5 <= wellbeing && wellbeing <= 5) {
-    return 4;
+    return 5;
   } else {
-    return 4;
+    return 0;
   }
 }
 
