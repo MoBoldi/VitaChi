@@ -10,8 +10,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
 public class DBRepository {
@@ -107,6 +110,52 @@ public class DBRepository {
     public void update(Object updateObject) {
         em.merge(updateObject);
     }
+
+    @Transactional
+    public void updateArbeit(Object updateObject) {
+        em.merge(updateObject);
+    }
+
+    @Transactional
+    public List<Arbeit> findLastEntry(){
+        return em.createQuery("select a from Arbeit as a order by a.arbeitID desc").setMaxResults(1).getResultList();
+    }
+
+    @Transactional
+    public String getWorkingTime(){
+        List<Arbeit> a = findLastEntry();
+
+        LocalDateTime start = a.get(0).getStartdatum();
+        LocalDateTime ende = a.get(0).getDauer();
+
+        long millis = Duration.between(start, ende).toMillis();
+
+        String result = String.format("%02d:%02d:%02d",
+                TimeUnit.MILLISECONDS.toHours(millis),
+                TimeUnit.MILLISECONDS.toMinutes(millis) -
+                        TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                TimeUnit.MILLISECONDS.toSeconds(millis) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+
+        return result;
+    }
+
+    @Transactional
+    public String activeArbeit(){
+        LocalDateTime date = LocalDateTime.of(0,1,1,0,0,0,0);
+        List<Arbeit> a = findLastEntry();
+        if (a.isEmpty()==true){
+            return "empty";
+        }else{
+            if (a.get(0).getDauer() == null) {
+                return "false";
+            }
+            else{
+                return "true";
+            }
+        }
+    }
+
 
     //Wohlbefinden berechnen
     @Transactional

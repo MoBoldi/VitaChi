@@ -20,9 +20,9 @@ Widget MyAppBar(BuildContext context, String title, dynamic otherData) {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("243 ",
-              style: TextStyle(color: Colors.white, fontSize: size.width/23)),
+              style: TextStyle(color: Colors.white, fontSize: size.width/23, fontWeight: FontWeight.bold)),
             Icon(
-              Icons.monetization_on_outlined,
+              Icons.monetization_on_sharp,
               color: Colors.amberAccent,
             ),
           ],

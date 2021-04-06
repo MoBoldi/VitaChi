@@ -15,6 +15,8 @@ class Home extends StatelessWidget {
   var essen = 0.0;
   var bewegung = 0.0;
   var schlafen = 0.0;
+  var urlgetStats = '';
+
   final List<ChartData> ges = [
     ChartData('Wellbeing', 3, Color(0xFF4DA8DA)),
     ChartData('', 2, Color(0xFF9dc6dd)),
@@ -43,14 +45,11 @@ class Home extends StatelessWidget {
     Future getData() async {
       Response response =
           await get('http://10.0.2.2:8080/vitaChi/getWohlbefinden');
-      print(response.statusCode);
       wellbeing = double.parse(response.body);
     }
 
     Future getEssenAVG() async {
       Response response = await get('http://10.0.2.2:8080/vitaChi/getEssenAVG');
-      print(response.statusCode);
-      print("response: " + response.body);
       essen = double.parse(response.body);
       food[0].y = essen;
       food[1].y = 5 - essen;
@@ -59,8 +58,6 @@ class Home extends StatelessWidget {
     Future getBewegungAVG() async {
       Response response =
           await get('http://10.0.2.2:8080/vitaChi/getBewegungAVG');
-      print(response.statusCode);
-      print("response: " + response.body);
       bewegung = double.parse(response.body);
       movement[0].y = bewegung;
       movement[1].y = 5 - bewegung;
@@ -69,8 +66,6 @@ class Home extends StatelessWidget {
     Future getSchlafAVG() async {
       Response response =
           await get('http://10.0.2.2:8080/vitaChi/getSchlafAVG');
-      print(response.statusCode);
-      print("response: " + response.body);
       schlafen = double.parse(response.body);
       sleep[0].y = schlafen;
       sleep[1].y = 5 - schlafen;

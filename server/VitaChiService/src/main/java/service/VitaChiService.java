@@ -4,6 +4,7 @@ import entity.Eingabe;
 import entity.Accessoire;
 import entity.Arbeit;
 import entity.Aufgaben;
+import org.apache.derby.client.am.DateTime;
 import org.jboss.resteasy.annotations.Query;
 import repository.DBRepository;
 
@@ -12,6 +13,7 @@ import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -109,11 +111,11 @@ public class VitaChiService {
     public JsonObject createArbeit(JsonObject json) {
 
         LocalDateTime start = LocalDateTime.parse(json.getJsonObject("arbeit").getString("start"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
-        LocalDateTime stop = LocalDateTime.parse(json.getJsonObject("arbeit").getString("stop"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
+        LocalDateTime date = LocalDateTime.of(2001,1,1,0,0,0,0);
 
         repo.createArbeit(new Arbeit(
                 start,
-                stop
+                null
         ));
 
         return json;
@@ -125,6 +127,25 @@ public class VitaChiService {
     @Consumes(MediaType.APPLICATION_JSON)
     public String updateObject(Object updateObject) {
         repo.update(updateObject);
+        return "Updated";
+    }
+
+    @Path("getWorkingTime")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getWorkingTime() {
+        return repo.getWorkingTime();
+    }
+
+    @Path("updateArbeit")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String updateArbeit(JsonObject json) {
+        List<Arbeit> l = repo.findLastEntry();
+        Arbeit a = l.get(0);
+        LocalDateTime dauer = LocalDateTime.parse(json.getJsonObject("arbeit").getString("dauer"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
+        Arbeit aa = new Arbeit(a.getArbeitID(),a.getStartdatum(), dauer);
+        repo.updateArbeit(aa);
         return "Object updated";
     }
 
@@ -139,11 +160,18 @@ public class VitaChiService {
     public void init() {
         repo.initDB();
     }
+
     @Path("getEssenAVG")
     @GET
     public Double getEssen() {
 
         return repo.getEssen();
+    }
+
+    @Path("activeArbeit")
+    @GET
+    public String activeArbeit() {
+        return repo.activeArbeit();
     }
 
     @Path("getBewegungAVG")
