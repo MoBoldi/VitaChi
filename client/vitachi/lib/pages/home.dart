@@ -40,12 +40,11 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     Future getData() async {
-      Response response = await get('http://10.0.2.2:8080/vitaChi/getWohlbefinden');
+      Response response =
+          await get('http://10.0.2.2:8080/vitaChi/getWohlbefinden');
       print(response.statusCode);
       wellbeing = double.parse(response.body);
-      wellbeingSkala = wellbeing.toInt();
     }
 
     Future getEssenAVG() async {
@@ -58,7 +57,8 @@ class Home extends StatelessWidget {
     }
 
     Future getBewegungAVG() async {
-      Response response = await get('http://10.0.2.2:8080/vitaChi/getBewegungAVG');
+      Response response =
+          await get('http://10.0.2.2:8080/vitaChi/getBewegungAVG');
       print(response.statusCode);
       print("response: " + response.body);
       bewegung = double.parse(response.body);
@@ -67,7 +67,8 @@ class Home extends StatelessWidget {
     }
 
     Future getSchlafAVG() async {
-      Response response = await get('http://10.0.2.2:8080/vitaChi/getSchlafAVG');
+      Response response =
+          await get('http://10.0.2.2:8080/vitaChi/getSchlafAVG');
       print(response.statusCode);
       print("response: " + response.body);
       schlafen = double.parse(response.body);
@@ -75,10 +76,8 @@ class Home extends StatelessWidget {
       sleep[1].y = 5 - schlafen;
     }
 
-
     double chartWidth = MediaQuery.of(context).size.width / 5;
     double chartHeight = MediaQuery.of(context).size.width / 5;
-
 
     return Scaffold(
         //Color(0xff5bc7e3)
@@ -115,7 +114,7 @@ class Home extends StatelessWidget {
                       ),
                       FutureBuilder(
                         future: getData(),
-                        builder:(context, snapshot) =>  Container(
+                        builder: (context, snapshot) => Container(
                           height: MediaQuery.of(context).size.height / 3,
                           child: Stack(
                             children: [
@@ -127,14 +126,13 @@ class Home extends StatelessWidget {
                                 unselectedSize: 20,
                                 selectedSize: 0,
                                 roundedEdges: Radius.circular(10),
-
                                 unselectedColor: Colors.grey,
                               ),
                               //Touch
                               StepProgressIndicator(
                                 direction: Axis.vertical,
                                 totalSteps: 5,
-                                currentStep: 5-wellbeingSkala,
+                                currentStep: 5 - getRating(wellbeing),
                                 unselectedSize: 20,
                                 selectedSize: 0,
                                 roundedEdges: Radius.circular(10),
@@ -206,26 +204,25 @@ class Home extends StatelessWidget {
               ),*/
               FutureBuilder(
                 future: getEssenAVG(),
-                builder:(context, snapshot) =>  Container(
-                    //Food chart
-                    width: chartWidth,
-                    height: chartHeight,
-                    margin: EdgeInsets.fromLTRB(
-                        MediaQuery.of(context).size.width * 0.05,
-                        MediaQuery.of(context).size.height / 1.425,
-                        0,
-                        0),
-                    child: getChart(food, context, "/essen"),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
+                builder: (context, snapshot) => Container(
+                  //Food chart
+                  width: chartWidth,
+                  height: chartHeight,
+                  margin: EdgeInsets.fromLTRB(
+                      MediaQuery.of(context).size.width * 0.05,
+                      MediaQuery.of(context).size.height / 1.425,
+                      0,
+                      0),
+                  child: getChart(food, context, "/essen"),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
                   ),
+                ),
               ),
-
               FutureBuilder(
                 future: getBewegungAVG(),
-                builder:(context, snapshot) =>  Container(
+                builder: (context, snapshot) => Container(
                   //Bewegung Chart
                   width: chartWidth,
                   height: chartHeight,
@@ -340,6 +337,23 @@ IconData getIcon(String input) {
       return Icons.work;
     default:
       return Icons.error;
+  }
+}
+
+int getRating(double wellbeing) {
+  print("WELLBEING: " + wellbeing.toString());
+  if (1 <= wellbeing && wellbeing < 2) {
+    return 0;
+  } else if (2 <= wellbeing && wellbeing < 3) {
+    return 1;
+  } else if (3 <= wellbeing && wellbeing < 4) {
+    return 2;
+  } else if (4 <= wellbeing && wellbeing < 4.5) {
+    return 3;
+  } else if (4.5 <= wellbeing && wellbeing <= 5) {
+    return 4;
+  } else {
+    return 4;
   }
 }
 
