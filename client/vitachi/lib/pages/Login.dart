@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vitachi/ChangeListener/loginListener.dart';
 import 'package:vitachi/pages/TextFieldWidget.dart';
+import 'package:flutter_appauth/flutter_appauth.dart';
 
 import 'WaveWidget.dart';
 
@@ -15,6 +16,32 @@ final Color color = Color(0xff3f8ee9);
 
 class _LoginState extends State<Login> {
   final eingaben = GlobalKey<FormState>();
+
+  bool _isBusy = false;
+  final FlutterAppAuth _appAuth = FlutterAppAuth();
+  String _codeVerifier;
+  String _authorizationCode;
+  String _refreshToken;
+  String _accessToken;
+
+  final String _clientId = 'vitachi-client';
+  final String _redirectUrl = 'http://localhost:8080';
+  final String _issuer = 'http://localhost:8080/auth/realms/vitachi';
+  final String _discoveryUrl =
+      'http://localhost:8080/auth/realms/vitachi/.well-known/openid-configuration';
+  final List<String> _scopes = <String>[
+    'openid',
+    'profile',
+    'email',
+    'offline_access',
+    'api'
+  ];
+
+  final AuthorizationServiceConfiguration _serviceConfiguration =
+  AuthorizationServiceConfiguration(
+      'http://localhost:8080/auth/realms/vitachi/protocol/openid-connect/auth',
+      'http://localhost:8080/auth/realms/vitachi/protocol/openid-connect/token');
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
