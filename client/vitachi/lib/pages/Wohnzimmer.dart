@@ -41,6 +41,9 @@ class Wohnzimmer extends StatefulWidget {
 }
 
 class _WohnzimmerState extends State<Wohnzimmer> {
+
+  Offset position = Offset(0, 0);
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -49,13 +52,14 @@ class _WohnzimmerState extends State<Wohnzimmer> {
 
     Future<List<Produkt>> getData() async {
       Response response =
-          await get('http://10.0.2.2:8080/vitaChi/findAll/Accessoire');
-      print("response" + response.body);
+          await get('http://localhost:8080/vitaChi/findAll/Accessoire');
+     print("response" + response.body);
       var productsJson = json.decode(response.body);
       for (var productJson in productsJson) {
         products.add(Produkt.fromJson(productJson));
       }
-      print(products[0].bildpfad);
+      //print(products[0].bildpfad);
+      return productsJson;
     }
 
     /*data = ModalRoute.of(context).settings.arguments;
@@ -76,30 +80,100 @@ class _WohnzimmerState extends State<Wohnzimmer> {
         drawer: MyDrawer(),
         body: Stack(
           children: [
-            DragTarget<String>(
-              builder: (
-                BuildContext context,
-                data,
-                rejected,
-              ) {
-                return Container(
-                  child:
-                      Image(image: AssetImage("assets/Blume_Placeholder.png")),
-                  height: height * 0.8,
+            
+               Container(
+                 height: height * 0.8,
                   width: width,
                   margin: EdgeInsets.only(top: height * 0.2),
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("assets/boden.jpg"),
                           fit: BoxFit.fill)),
+                  child:
+                  Stack(
+                    children: [
+                      Image(image: AssetImage("assets/Blume_Placeholder.png")),
+                      DragTarget<int>(
+                        builder: (
+                            BuildContext context,
+                         data,
+                        rejected,                     
+              ) {
+                return Container(
+                    width: 120,
+                 margin: EdgeInsets.only(top: 0),
+                    height: 200,
+                    color: Colors.transparent,
+                    child:Container(
+                        width: 120,
+                        margin: EdgeInsets.only(top: 130),
+                         height: 70,
+                       decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blueAccent)
+                        ),
+                    )
+
                 );
               },
-              onAccept: (String data) {
-                setState(() {
-                  return Image.asset('assets/test2.png');
-                });
+              onWillAccept: (int data) {
+                    print("HOVERED OVER DRAG TARGET1");
+             //Get Request ob der Slot bereits mit diesem Element belegt ist (IF) wenn nicht return true
+
+                      return true;               
               },
-            ),
+              onAccept: (int data) {
+                int slot1 =1;
+                print("onAccept 1");
+                print("Dropped item NR  $data  on Slot $slot1");
+
+                // einen post request mit dem Slot und der ID des Elements an Server schicken(data is die ID)
+                //funktion getData aufrufen um alle Slots mit den belegten Objekten zu bekommen und diese anzuzeigen
+
+              }
+                      ), 
+                         DragTarget<int>(
+                        builder: (
+                            BuildContext context,
+                         data,
+                        rejected,                     
+              ) {
+                return Container(
+                    width: 120,
+                 margin: EdgeInsets.only(top: 0, left: 300),
+                    height: 200,
+                    color: Colors.transparent,
+                    child:Container(
+                        width: 120,
+                        margin: EdgeInsets.only(top: 130),
+                         height: 70,
+                       decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blueAccent)
+                        ),
+                    )
+
+                );
+              },
+              onWillAccept: (int data) {
+                    print("HOVERED OVER DRAG TARGET2");
+                      return true;
+                   
+              },
+              onAccept: (int data) {
+                int slot2 =2;
+                print("onAccept 2");
+                print("Dropped item NR  $data  on Slot $slot2");
+
+
+
+              }
+                      )
+
+                    ],
+                  )
+            
+                ),
+             
+            
 
             /* Container(
               /*child: Image(
@@ -113,7 +187,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("assets/boden.jpg"), fit: BoxFit.fill)),
-            ),*/
+            ,*/
             Stack(
               children: [
                 Container(
@@ -141,14 +215,19 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                     color: Colors.red,
                                     child: Row(
                                       children: [
-                                        Draggable(
+                                       LongPressDraggable<int>(
+                                          data:index,
                                           child: Image(
                                               image: AssetImage(
                                                   products[index].bildpfad)),
                                           feedback: Image(
+                                            
                                               image: AssetImage(
-                                                  products[index].bildpfad)),
-                                          onDraggableCanceled: ,
+                                                  products[index].bildpfad),
+                                                width: 200.0,
+                                                height:200.0),
+                                                                  
+                                         // onDraggableCanceled: ,
                                         ),
                                         Text(products[index].bezeichnung),
                                       ],
