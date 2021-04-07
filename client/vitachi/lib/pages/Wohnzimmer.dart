@@ -148,7 +148,9 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                           feedback: Image(
                                               image: AssetImage(
                                                   products[index].bildpfad)),
-                                        )
+                                          onDraggableCanceled: ,
+                                        ),
+                                        Text(products[index].bezeichnung),
                                       ],
                                     ),
                                   );
