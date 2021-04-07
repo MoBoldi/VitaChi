@@ -62,7 +62,6 @@ class Home extends StatelessWidget {
           ),
           child: Stack(
             children: [
-              
               Container(
                 //Erster weißer Background
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -77,6 +76,16 @@ class Home extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
+                      Container(
+                        padding: EdgeInsets.fromLTRB(5, 25, 10, 10),
+                        child: RaisedButton.icon(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.event_seat,
+                            ),
+                            label: Text("Wohnzimmer"),
+                            color: Colors.red),
+                      ),
                       Image(
                         width: MediaQuery.of(context).size.width * 0.75,
                         image: getEmotion(food[0].y),

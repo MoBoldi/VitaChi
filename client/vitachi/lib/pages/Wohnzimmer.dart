@@ -126,7 +126,36 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                   minChildSize: 0.1,
                   maxChildSize: 0.3,
                   builder: (BuildContext context, myScrollController) {
-                    return Container(
+                    return FutureBuilder(
+                        future: getData(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return ListView.builder(
+                                itemCount: products.length,
+                                controller: myScrollController,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    height: 200.0,
+                                    width: width,
+                                    color: Colors.red,
+                                    child: Row(
+                                      children: [
+                                        Draggable(
+                                          child: Image(
+                                              image: AssetImage(
+                                                  products[index].bildpfad)),
+                                          feedback: Image(
+                                              image: AssetImage(
+                                                  products[index].bildpfad)),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                });
+                          }
+                        });
+                    /*Container(
                       child: ListView(
                         controller: myScrollController,
                         children: [
@@ -170,7 +199,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                           ),
                         ],
                       ),
-                    );
+                    );*/
                   },
                 ),
               ],
