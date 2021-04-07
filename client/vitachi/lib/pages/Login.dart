@@ -25,10 +25,10 @@ class _LoginState extends State<Login> {
   String _accessToken;
 
   final String _clientId = 'vitachi-client';
-  final String _redirectUrl = 'http://localhost:8080';
-  final String _issuer = 'http://localhost:8080/auth/realms/vitachi';
+  final String _redirectUrl = 'http://10.0.2.2:8080';
+  final String _issuer = 'http://10.0.2.2:8080/auth/realms/vitachi';
   final String _discoveryUrl =
-      'http://localhost:8080/auth/realms/vitachi/.well-known/openid-configuration';
+      'http://10.0.2.2:8080/auth/realms/vitachi/.well-known/openid-configuration';
   final List<String> _scopes = <String>[
     'openid',
     'profile',
@@ -39,8 +39,8 @@ class _LoginState extends State<Login> {
 
   final AuthorizationServiceConfiguration _serviceConfiguration =
   AuthorizationServiceConfiguration(
-      'http://localhost:8080/auth/realms/vitachi/protocol/openid-connect/auth',
-      'http://localhost:8080/auth/realms/vitachi/protocol/openid-connect/token');
+      'http://10.0.2.2:8080/auth/realms/vitachi/protocol/openid-connect/auth',
+      'http://10.0.2.2:8080/auth/realms/vitachi/protocol/openid-connect/token');
 
   @override
   Widget build(BuildContext context) {
