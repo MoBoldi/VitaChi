@@ -149,7 +149,6 @@ public class DBRepository {
         for (Arbeit a : al){
             if(a.getStartdatum().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)==kalenderWoche){
                 workingHours += Duration.between(a.getStartdatum(), a.getDauer()).toHours();
-                System.out.println("Dauer:"+Duration.between(a.getStartdatum(), a.getDauer()).toHours());
             }
         }
         return workingHours;
