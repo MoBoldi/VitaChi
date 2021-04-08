@@ -43,6 +43,13 @@ class Wohnzimmer extends StatefulWidget {
 class _WohnzimmerState extends State<Wohnzimmer> {
 
   Offset position = Offset(0, 0);
+    bool Slot1Displayed = false;
+    int Slot1ImageNumber = 1000;
+    String Slot1ImagePfad ="";
+
+
+
+     bool Slot2Displayed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -80,11 +87,12 @@ class _WohnzimmerState extends State<Wohnzimmer> {
         drawer: MyDrawer(),
         body: Stack(
           children: [
-            
+            Image(image: AssetImage("assets/tapete.png")),
                Container(
                  height: height * 0.8,
                   width: width,
                   margin: EdgeInsets.only(top: height * 0.2),
+
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("assets/boden.jpg"),
@@ -92,7 +100,11 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                   child:
                   Stack(
                     children: [
-                      Image(image: AssetImage("assets/Blume_Placeholder.png")),
+                      Image(image: AssetImage("assets/Blume_Placeholder.png"),
+                      
+                      ),
+                      
+                      
                       DragTarget<int>(
                         builder: (
                             BuildContext context,
@@ -100,19 +112,31 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                         rejected,                     
               ) {
                 return Container(
-                    width: 120,
-                 margin: EdgeInsets.only(top: 0),
+                    width: 200,
+                 margin: EdgeInsets.only(top: 0, left:0),
                     height: 200,
-                    color: Colors.transparent,
-                    child:Container(
-                        width: 120,
-                        margin: EdgeInsets.only(top: 130),
-                         height: 70,
-                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blueAccent)
+                    decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blueAccent),
+                          color: Colors.transparent,
                         ),
+                    child:Container(
+                        width: 200,
+                         height: 200,
+                         child:Slot1Displayed?Container(
+                        width: 200,
+                        height: 200,
+                        child: Image(
+                          image: AssetImage(Slot1ImagePfad),
+                         fit: BoxFit.fill
+                        )
+                         ):Container(
+                        width: 200,
+                         height: 200,
+                          decoration: BoxDecoration(
+                          //color: Colors.green,
+                        )
+                    )      
                     )
-
                 );
               },
               onWillAccept: (int data) {
@@ -125,12 +149,19 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                 int slot1 =1;
                 print("onAccept 1");
                 print("Dropped item NR  $data  on Slot $slot1");
+                
+                 setState(() {
+                  Slot1Displayed = true;
+                  Slot1ImageNumber = data;
+                  Slot1ImagePfad = products[Slot1ImageNumber].bildpfad;
+                });
 
+                
+          
                 // einen post request mit dem Slot und der ID des Elements an Server schicken(data is die ID)
                 //funktion getData aufrufen um alle Slots mit den belegten Objekten zu bekommen und diese anzuzeigen
-
               }
-                      ), 
+                      )/*, 
                          DragTarget<int>(
                         builder: (
                             BuildContext context,
@@ -155,18 +186,21 @@ class _WohnzimmerState extends State<Wohnzimmer> {
               },
               onWillAccept: (int data) {
                     print("HOVERED OVER DRAG TARGET2");
-                      return true;
-                   
+                      return true;   
               },
               onAccept: (int data) {
                 int slot2 =2;
                 print("onAccept 2");
                 print("Dropped item NR  $data  on Slot $slot2");
-
+     
+                 setState(() {
+                  Slot1Displayed = true;
+                });
+              print(Slot1Displayed);
 
 
               }
-                      )
+                      )*/
 
                     ],
                   )
@@ -289,6 +323,8 @@ class _WohnzimmerState extends State<Wohnzimmer> {
         ));
   }
 }
+
+
 
 AssetImage getEmotion(double wellbeing) {
   if (1 <= wellbeing && wellbeing < 2) {
