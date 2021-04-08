@@ -186,4 +186,10 @@ public class VitaChiService {
         return repo.getSchlaf();
     }
 
+    @Path("getWokringPerWeek")
+    @GET
+    public Double getWokringPerWeek(){
+        return repo.getWorkingPerWeek();
+    }
+
 }

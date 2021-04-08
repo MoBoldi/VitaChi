@@ -24,8 +24,6 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/vitaChi/test/Aufgaben
 ###
-GET http://localhost:8080/vitaChi/init
-###
 GET http://localhost:8080/vitaChi/findAll/Eingabe
 ###
 GET http://localhost:8080/vitaChi/find/Eingabe/1
@@ -44,6 +42,8 @@ Content-Type: application/json
   }
 }
 ###
+GET http://localhost:8080/vitaChi/init
+###
 GET http://localhost:8080/vitaChi/getWohlbefinden
 ###
 GET http://localhost:8080/vitaChi/getEssenAVG
@@ -53,3 +53,5 @@ GET http://localhost:8080/vitaChi/getBewegungAVG
 GET http://localhost:8080/vitaChi/getSchlafAVG
 ###
 GET http://localhost:8080/vitaChi/getWorkingTime
+###
+GET http://localhost:8080/vitaChi/getWokringPerWeek

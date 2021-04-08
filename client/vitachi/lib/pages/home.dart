@@ -35,8 +35,8 @@ class Home extends StatelessWidget {
     ChartData('', 0.1, Color(0xFF9dc6dd)),
   ];
   final List<ChartData> work = [
-    ChartData('Work', 30, Color(0xFF4DA8DA)),
-    ChartData('', 20, Color(0xFF9dc6dd)),
+    ChartData('Work', 7.7, Color(0xFF4DA8DA)),
+    ChartData('', 0.1, Color(0xFF9dc6dd)),
   ];
 
   Map data = {};
