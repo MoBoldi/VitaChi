@@ -133,6 +133,9 @@ class _ArbeitState extends State<Arbeit> {
                                                         <String, Object>{
                                                           'arbeit': arbeit
                                                         });
+                                                    setState(() {
+                                                      timestring="";
+                                                    });
                                                     Response response = await post(
                                                         url, headers: headers,
                                                         body: json);
