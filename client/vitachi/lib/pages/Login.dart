@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:vitachi/ChangeListener/loginListener.dart';
 import 'package:vitachi/pages/TextFieldWidget.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
+import 'package:http/http.dart' as http;
 
 import 'WaveWidget.dart';
 
@@ -16,31 +17,6 @@ final Color color = Color(0xff3f8ee9);
 
 class _LoginState extends State<Login> {
   final eingaben = GlobalKey<FormState>();
-
-  bool _isBusy = false;
-  final FlutterAppAuth _appAuth = FlutterAppAuth();
-  String _codeVerifier;
-  String _authorizationCode;
-  String _refreshToken;
-  String _accessToken;
-
-  final String _clientId = 'vitachi-client';
-  final String _redirectUrl = 'http://10.0.2.2:8080';
-  final String _issuer = 'http://10.0.2.2:8080/auth/realms/vitachi';
-  final String _discoveryUrl =
-      'http://10.0.2.2:8080/auth/realms/vitachi/.well-known/openid-configuration';
-  final List<String> _scopes = <String>[
-    'openid',
-    'profile',
-    'email',
-    'offline_access',
-    'api'
-  ];
-
-  final AuthorizationServiceConfiguration _serviceConfiguration =
-  AuthorizationServiceConfiguration(
-      'http://10.0.2.2:8080/auth/realms/vitachi/protocol/openid-connect/auth',
-      'http://10.0.2.2:8080/auth/realms/vitachi/protocol/openid-connect/token');
 
   @override
   Widget build(BuildContext context) {
@@ -181,4 +157,22 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+}
+
+Future<Null> getData() async {
+
+  var url = "http://192.168.1.23:7070/api/v2/token";
+  http.post(url, body:{
+    "grant_type": "string",
+    "branchcode": "string",
+    "password": "string",
+    "username": "string",
+    "dbname": "string",
+    "dbuser": "string",
+    "dbpassword": "string",
+    "dbtype": "string"
+  }).then((response){
+    print("Response Status: ${response.statusCode}");
+    print("Response Body: ${response.body}");
+  });
 }
