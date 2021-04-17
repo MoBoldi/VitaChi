@@ -197,36 +197,40 @@ public class VitaChiService {
     @Path("registerNewUser")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public boolean registerNewUser(String username, String vorname, String nachname, String password, String email) {
+    public boolean registerNewUser(JsonObject json) {
 
         Keycloak kc = KeycloakBuilder.builder()
-                .serverUrl("http://10.0.2.2:8080/auth/realms/vitachi/protocol/openid-connect/auth")
-                .realm("vitachi")
+                .serverUrl("http://localhost:8010/auth")
+                .realm("master")
                 .username("admin")
                 .password("Pa55w0rd")
-                .clientId("vitachi-client")
+                .clientId("admin-cli")
                 .resteasyClient(new ResteasyClientBuilderImpl().connectionPoolSize(10).build())
                 .build();
 
         CredentialRepresentation credential = new CredentialRepresentation();
         credential.setType(CredentialRepresentation.PASSWORD);
-        credential.setValue(password);
+        credential.setValue(json.getString("password"));
 
         UserRepresentation user = new UserRepresentation();
-        user.setUsername(username);
-        user.setFirstName(vorname);
-        user.setLastName(nachname);
-        user.setEmail(email);
+        user.setUsername(json.getString("username"));
+        user.setFirstName(json.getString("vorname"));
+        user.setLastName(json.getString("nachname"));
+        user.setEmail(json.getString("email"));
         user.setCredentials(Arrays.asList(credential));
         user.setEnabled(true);
         user.setEmailVerified(true);
-        user.setRealmRoles(Arrays.asList("user"));
+        //user.setRealmRoles(Arrays.asList("user"));
+
+        System.out.println(user.getEmail());
 
         // Create testuser
         Response result = kc.realm("vitachi").users().create(user);
         if (result.getStatus() != 201) {
+            System.out.println("Hansi");
             return true;
         }else{
+            System.out.println("Hinterseer");
             return false;
         }
     }

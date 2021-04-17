@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vitachi/pages/TextFieldWidget.dart';
 import 'package:vitachi/pages/WaveWidget.dart';
+import 'package:http/http.dart' as http;
 
 
 class Register extends StatefulWidget {
@@ -97,6 +100,7 @@ class _RegisterState extends State<Register> {
                                       ),
 
                                       onPressed: () {
+                                        registerNewUser();
                                         if (eingaben.currentState.validate()) {
                                           // Process data.
                                           Navigator.pushNamed(context, '/');
@@ -149,5 +153,19 @@ class _RegisterState extends State<Register> {
 }
 
 Future<void> registerNewUser() async {
-  
+   Future<http.Response> r = http.post(
+    Uri.http('10.0.2.2:8080', 'vitaChi/registerNewUser'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'username': "User1",
+      'vorname': "User",
+      'nachname': "Test",
+      'password': "Passwort",
+      'email': "test@user.com"
+    }),
+  );
+
+   print(r.runtimeType);
 }

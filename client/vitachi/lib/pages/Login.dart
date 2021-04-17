@@ -163,7 +163,7 @@ class _LoginState extends State<Login> {
 Future<void> getData() async {
 
   final authorizationEndpoint =
-  Uri.parse('http://10.0.2.2:8080/auth/realms/vitachi/protocol/openid-connect/token');
+  Uri.parse('http://10.0.2.2:8010/auth/realms/vitachi/protocol/openid-connect/token');
 
   final username = 'testuser2';
   final password = 'Test1234';

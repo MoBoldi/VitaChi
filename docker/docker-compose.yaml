@@ -39,7 +39,7 @@ services:
         KEYCLOAK_PASSWORD: Pa55w0rd
         KEYCLOAK_STATISTICS: all
       ports:
-        - 8080:8080
+        - 8010:8080
       volumes:
         - keycloak_data:/var/lib/keycloak/data
 #        - ./realm:/opt/jboss/keycloak/realm-config
