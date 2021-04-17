@@ -175,5 +175,5 @@ Future<void> getData() async {
       authorizationEndpoint, username, password,
       identifier: identifier, secret: secret);
 
-  print(client.credentials.);
+  print(client.credentials.accessToken);
 }

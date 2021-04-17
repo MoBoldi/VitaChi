@@ -6,6 +6,12 @@ import entity.Arbeit;
 import entity.Aufgaben;
 import org.apache.derby.client.am.DateTime;
 import org.jboss.resteasy.annotations.Query;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.internal.ResteasyClientBuilderImpl;
+import org.keycloak.admin.client.Keycloak;
+import org.keycloak.admin.client.KeycloakBuilder;
+import org.keycloak.representations.idm.CredentialRepresentation;
+import org.keycloak.representations.idm.UserRepresentation;
 import repository.DBRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -13,9 +19,11 @@ import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 
 @ApplicationScoped
@@ -184,6 +192,43 @@ public class VitaChiService {
     @GET
     public Double getSchlaf() {
         return repo.getSchlaf();
+    }
+
+    @Path("registerNewUser")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public boolean registerNewUser(String username, String vorname, String nachname, String password, String email) {
+
+        Keycloak kc = KeycloakBuilder.builder()
+                .serverUrl("http://10.0.2.2:8080/auth/realms/vitachi/protocol/openid-connect/auth")
+                .realm("vitachi")
+                .username("admin")
+                .password("Pa55w0rd")
+                .clientId("vitachi-client")
+                .resteasyClient(new ResteasyClientBuilderImpl().connectionPoolSize(10).build())
+                .build();
+
+        CredentialRepresentation credential = new CredentialRepresentation();
+        credential.setType(CredentialRepresentation.PASSWORD);
+        credential.setValue(password);
+
+        UserRepresentation user = new UserRepresentation();
+        user.setUsername(username);
+        user.setFirstName(vorname);
+        user.setLastName(nachname);
+        user.setEmail(email);
+        user.setCredentials(Arrays.asList(credential));
+        user.setEnabled(true);
+        user.setEmailVerified(true);
+        user.setRealmRoles(Arrays.asList("user"));
+
+        // Create testuser
+        Response result = kc.realm("vitachi").users().create(user);
+        if (result.getStatus() != 201) {
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

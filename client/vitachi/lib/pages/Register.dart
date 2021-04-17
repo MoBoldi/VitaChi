@@ -147,3 +147,7 @@ class _RegisterState extends State<Register> {
     );
   }
 }
+
+Future<void> registerNewUser() async {
+  
+}
