@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:vitachi/ChangeListener/loginListener.dart';
 import 'package:vitachi/pages/TextFieldWidget.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
-import 'package:http/http.dart' as http;
+import 'package:oauth2/oauth2.dart' as oauth2;
 
 import 'WaveWidget.dart';
 
@@ -113,6 +113,7 @@ class _LoginState extends State<Login> {
                                           borderRadius:
                                               BorderRadius.circular(50))),
                                   onPressed: () {
+                                    getData();
                                     if (eingaben.currentState.validate()) {
                                       // Process data.
                                       Navigator.pushNamed(context, '/');
@@ -159,20 +160,20 @@ class _LoginState extends State<Login> {
   }
 }
 
-Future<Null> getData() async {
+Future<void> getData() async {
 
-  var url = "http://192.168.1.23:7070/api/v2/token";
-  http.post(url, body:{
-    "grant_type": "string",
-    "branchcode": "string",
-    "password": "string",
-    "username": "string",
-    "dbname": "string",
-    "dbuser": "string",
-    "dbpassword": "string",
-    "dbtype": "string"
-  }).then((response){
-    print("Response Status: ${response.statusCode}");
-    print("Response Body: ${response.body}");
-  });
+  final authorizationEndpoint =
+  Uri.parse('http://10.0.2.2:8080/auth/realms/vitachi/protocol/openid-connect/token');
+
+  final username = 'testuser2';
+  final password = 'Test1234';
+
+  final identifier = 'vitachi-client';
+  final secret = '6c6151b2-ea27-42fc-97fd-b05c42eebf4f';
+
+  var client = await oauth2.resourceOwnerPasswordGrant(
+      authorizationEndpoint, username, password,
+      identifier: identifier, secret: secret);
+
+  print(client.credentials.);
 }
