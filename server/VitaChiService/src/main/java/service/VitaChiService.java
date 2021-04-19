@@ -1,9 +1,6 @@
 package service;
 
-import entity.Eingabe;
-import entity.Accessoire;
-import entity.Arbeit;
-import entity.Aufgaben;
+import entity.*;
 import org.apache.derby.client.am.DateTime;
 import org.jboss.resteasy.annotations.Query;
 import repository.DBRepository;
@@ -190,6 +187,14 @@ public class VitaChiService {
     @GET
     public Double getWokringPerWeek(){
         return repo.getWorkingPerWeek();
+    }
+
+    @Path("createBenutzerAccessoire")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public BenutzerAccessoire createBenutzerAccessoire(BenutzerAccessoire benutzerAccessoire) {
+        repo.createBenutzerAccessoire(benutzerAccessoire);
+        return benutzerAccessoire;
     }
 
 }

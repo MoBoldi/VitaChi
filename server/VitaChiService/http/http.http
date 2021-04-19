@@ -1,3 +1,9 @@
+POST http://localhost:8080/vitaChi/createBenutzerAccessoire
+Content-Type: application/json
+
+{"userID": 1, "accessoire": 3}
+
+###
 POST http://localhost:8080/vitaChi/createEingabe
 Content-Type: application/json
 
@@ -55,3 +61,5 @@ GET http://localhost:8080/vitaChi/getSchlafAVG
 GET http://localhost:8080/vitaChi/getWorkingTime
 ###
 GET http://localhost:8080/vitaChi/getWokringPerWeek
+###
+

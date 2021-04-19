@@ -1,9 +1,6 @@
 package repository;
 
-import entity.Accessoire;
-import entity.Arbeit;
-import entity.Aufgaben;
-import entity.Eingabe;
+import entity.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -169,6 +166,13 @@ public class DBRepository {
             }
         }
     }
+
+    @Transactional
+    public BenutzerAccessoire createBenutzerAccessoire(BenutzerAccessoire benutzerAccessoire){
+        em.persist(benutzerAccessoire);
+        return benutzerAccessoire;
+    }
+
 
 
     //Wohlbefinden berechnen

@@ -10,15 +10,13 @@ public class BenutzerAccessoire {
     @Id
     @GeneratedValue
     private long benutzerAccessoireID;
-
     private long userID;
-    @ManyToOne
-    private Accessoire accessoire;
+    private long accessoire;
 
     public BenutzerAccessoire() {
     }
 
-    public BenutzerAccessoire(long userID, Accessoire accessoire) {
+    public BenutzerAccessoire(long userID, long accessoire) {
         this.userID = userID;
         this.accessoire = accessoire;
     }
@@ -39,11 +37,11 @@ public class BenutzerAccessoire {
         this.userID = userID;
     }
 
-    public Accessoire getAccessoire() {
+    public long getAccessoire() {
         return accessoire;
     }
 
-    public void setAccessoire(Accessoire accessoire) {
+    public void setAccessoire(long accessoire) {
         this.accessoire = accessoire;
     }
 }
