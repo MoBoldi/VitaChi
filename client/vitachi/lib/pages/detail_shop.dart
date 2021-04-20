@@ -89,7 +89,9 @@ class DetailShop extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FlatButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                print('ID: ${data.id}');
+                              },
                               child: Text(
                                       "Kaufen",
                                       style: TextStyle(
