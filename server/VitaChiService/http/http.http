@@ -62,4 +62,4 @@ GET http://localhost:8080/vitaChi/getWorkingTime
 ###
 GET http://localhost:8080/vitaChi/getWokringPerWeek
 ###
-
+GET http://localhost:8080/vitaChi/findAll/Accessoire
