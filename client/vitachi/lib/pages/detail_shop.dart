@@ -4,9 +4,11 @@ import 'package:flutter/rendering.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:vitachi/entitys/Produkt.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailShop extends StatelessWidget {
   Produkt data;
+  int id;
 
   DetailShop({@required this.data});
 
@@ -89,7 +91,10 @@ class DetailShop extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FlatButton(
-                              onPressed: () {
+                              onPressed: () async {
+                                SharedPreferences prefs = await SharedPreferences.getInstance();
+                                int iid = prefs.getInt("UserID");
+                                print('UserID: $iid');
                                 print('ID: ${data.id}');
                               },
                               child: Text(

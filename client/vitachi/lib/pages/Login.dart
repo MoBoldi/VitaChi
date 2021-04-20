@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vitachi/ChangeListener/loginListener.dart';
 import 'package:vitachi/pages/TextFieldWidget.dart';
 
@@ -109,9 +110,11 @@ class _LoginState extends State<Login> {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(50))),
-                                  onPressed: () {
+                                  onPressed: () async {
                                     if (eingaben.currentState.validate()) {
                                       // Process data.
+                                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                                      prefs.setInt("UserID", 2);
                                       Navigator.pushNamed(context, '/');
                                     }
                                   },
