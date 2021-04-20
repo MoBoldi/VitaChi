@@ -19,12 +19,10 @@ class _BodyState extends State<Body> {
 
   Future<List<Produkt>> getData() async {
     Response response = await get('http://10.0.2.2:8080/vitaChi/findAll/Accessoire');
-    print("response" + response.body);
     var productsJson = json.decode(response.body);
     for(var productJson in productsJson){
       products.add(Produkt.fromJson(productJson));
     }
-    print(products[0].bildpfad);
   }
 
   @override

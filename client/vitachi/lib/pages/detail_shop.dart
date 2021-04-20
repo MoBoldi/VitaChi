@@ -1,21 +1,24 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:http/http.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:vitachi/entitys/BenutzerAccessoire.dart';
 import 'package:vitachi/entitys/Produkt.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailShop extends StatelessWidget {
   Produkt data;
-  int id;
 
   DetailShop({@required this.data});
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    BenutzerAccessoire benutzerAccessoire = new BenutzerAccessoire(1,1);
     return Scaffold(
         appBar: MyAppBarWhite(context, 'VitaChi', null),
         backgroundColor:  Colors.white,
@@ -93,9 +96,15 @@ class DetailShop extends StatelessWidget {
                             FlatButton(
                               onPressed: () async {
                                 SharedPreferences prefs = await SharedPreferences.getInstance();
-                                int iid = prefs.getInt("UserID");
-                                print('UserID: $iid');
-                                print('ID: ${data.id}');
+                                int id = prefs.getInt("UserID");
+                                print('UserID: $id');
+                                benutzerAccessoire.setUID(id);
+                                benutzerAccessoire.setPID(data.id);
+                                String url = 'http://10.0.2.2:8080/vitaChi/createBenutzerAccessoire';
+                                Map<String, String> headers = {"Content-type": "application/json"};
+                                String json = jsonEncode(<String, Object>{'BenutzerAccessoire': benutzerAccessoire});
+                                Response response = await post(url, headers: headers, body: json);
+                                print(response.statusCode);
                               },
                               child: Text(
                                       "Kaufen",
