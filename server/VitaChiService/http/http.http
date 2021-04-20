@@ -1,7 +1,7 @@
 POST http://localhost:8080/vitaChi/createBenutzerAccessoire
 Content-Type: application/json
 
-{"userID": 1, "accessoire": 3}
+{"BenutzerAccessoire": {"userID": 1, "accessoire": 3}}
 
 ###
 POST http://localhost:8080/vitaChi/createEingabe

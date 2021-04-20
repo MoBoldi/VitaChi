@@ -192,8 +192,8 @@ public class VitaChiService {
     @Path("createBenutzerAccessoire")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public BenutzerAccessoire createBenutzerAccessoire(BenutzerAccessoire benutzerAccessoire) {
-        repo.createBenutzerAccessoire(benutzerAccessoire);
+    public JsonObject createBenutzerAccessoire(JsonObject benutzerAccessoire) {
+        repo.createBenutzerAccessoire(new BenutzerAccessoire(benutzerAccessoire.getJsonObject("BenutzerAccessoire").getInt("userID"), benutzerAccessoire.getJsonObject("BenutzerAccessoire").getInt("accessoire")));
         return benutzerAccessoire;
     }
 
