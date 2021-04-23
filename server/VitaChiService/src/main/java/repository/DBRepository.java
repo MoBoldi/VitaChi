@@ -4,8 +4,8 @@ import entity.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.management.Query;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.awt.geom.Area;
@@ -171,6 +171,13 @@ public class DBRepository {
     public BenutzerAccessoire createBenutzerAccessoire(BenutzerAccessoire benutzerAccessoire){
         em.persist(benutzerAccessoire);
         return benutzerAccessoire;
+    }
+
+    @Transactional
+    public List<Accessoire> getOpenAccessoires(long userid){
+        Query q =  em.createQuery("select a from Accessoire as a where a NOT IN (select ba.accessoire from BenutzerAccessoire as ba where ba.userID = ?1)");
+        q.setParameter(1, userid);
+        return q.getResultList();
     }
 
 

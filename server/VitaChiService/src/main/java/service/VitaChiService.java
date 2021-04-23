@@ -3,7 +3,9 @@ package service;
 import entity.*;
 import org.apache.derby.client.am.DateTime;
 import org.jboss.resteasy.annotations.Query;
+import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import repository.DBRepository;
+import org.jboss.resteasy.annotations.jaxrs.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -195,6 +197,13 @@ public class VitaChiService {
     public JsonObject createBenutzerAccessoire(JsonObject benutzerAccessoire) {
         repo.createBenutzerAccessoire(new BenutzerAccessoire(benutzerAccessoire.getJsonObject("BenutzerAccessoire").getInt("userID"), benutzerAccessoire.getJsonObject("BenutzerAccessoire").getInt("accessoire")));
         return benutzerAccessoire;
+    }
+
+    @Path("getOpenAccessoire/{userid}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Accessoire> getOpenAccessoire (@PathParam long userid){
+        return repo.getOpenAccessoires(userid);
     }
 
 }
