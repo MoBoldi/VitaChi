@@ -11,6 +11,10 @@ import 'package:vitachi/pages/Register.dart';
 import 'package:vitachi/pages/Schlafen.dart';
 import 'package:vitachi/pages/Settings.dart';
 import 'package:vitachi/pages/Shop.dart';
+import 'package:vitachi/pages/StatsArbeit.dart';
+import 'package:vitachi/pages/StatsBewegung.dart';
+import 'package:vitachi/pages/StatsEssen.dart';
+import 'package:vitachi/pages/StatsSchlafen.dart';
 import 'package:vitachi/pages/Wohnzimmer.dart';
 import 'package:vitachi/pages/aufgaben.dart';
 import 'package:vitachi/pages/detail_freunde.dart';
@@ -33,8 +37,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => EingabenNav());
       case '/essen':
         return MaterialPageRoute(builder: (_) => Essen());
-      case '/statistics':
-        return MaterialPageRoute(builder: (_) => Statistics());
       case '/wellbeing':
         return MaterialPageRoute(builder: (_) => Wellbeing());
       case '/bewegung':
@@ -59,7 +61,14 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Freunde());
       case '/wohnzimmer':
         return MaterialPageRoute(builder: (_) => Wohnzimmer());
-
+      case '/statsEssen':
+        return MaterialPageRoute(builder: (_) => StatsEssen());
+      case '/statsBewegung':
+        return MaterialPageRoute(builder: (_) => StatsBewegung());
+      case '/statsSchlafen':
+        return MaterialPageRoute(builder: (_) => StatsSchlafen());
+      case '/statsArbeit':
+        return MaterialPageRoute(builder: (_) => StatsArbeit());
       default:
         return _errorRoute();
     }

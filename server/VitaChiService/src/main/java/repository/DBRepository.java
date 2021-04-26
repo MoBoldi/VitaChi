@@ -8,11 +8,15 @@ import entity.Eingabe;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -193,4 +197,35 @@ public class DBRepository {
         this.createArbeit(a2);
     }
 
+    public List<Eingabe> findInputByType(String type) {
+        TypedQuery<Eingabe> query = em.createNamedQuery("Eingabe.findByType", Eingabe.class);
+        query.setParameter("type", type);
+        List<Eingabe> e = query.getResultList();
+        return e;
+    }
+
+    public List<Object> getStats(String type) {
+        String bewertung11 = "SELECT (count(e.bewertung1)) from Eingabe e where e.typ = '"+type+"' and e.bewertung1 = 1";
+        String bewertung21 = "SELECT (count(e.bewertung2)) from Eingabe e where e.typ = '"+type+"' and e.bewertung2 = 1";
+        String bewertung15 = "SELECT (count(e.bewertung1)) from Eingabe e where e.typ = '"+type+"' and e.bewertung1 = 5";
+        String bewertung25 = "SELECT (count(e.bewertung2)) from Eingabe e where e.typ = '"+type+"' and e.bewertung2 = 5";
+        Query query11 = em.createNativeQuery(bewertung11);
+        Query query21 = em.createNativeQuery(bewertung15);
+        Query query15 = em.createNativeQuery(bewertung21);
+        Query query25 = em.createNativeQuery(bewertung25);
+        Object result11 = query11.getSingleResult();
+        Object result15 = query15.getSingleResult();
+        Object result21 = query21.getSingleResult();
+        Object result25 = query25.getSingleResult();
+        System.out.println(result11);
+        System.out.println(result15);
+        System.out.println(result21);
+        System.out.println(result25);
+
+        List<Object> result = new LinkedList<>();
+        result.add((int)result11 + (int) result21);
+        result.add((int) result15 + (int) result25);
+
+        return result;
+    }
 }

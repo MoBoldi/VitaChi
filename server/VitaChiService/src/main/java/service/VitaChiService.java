@@ -54,12 +54,28 @@ public class VitaChiService {
         return repo.findAll(entity);
     }
 
+    // Liste aller Objekte je nach Entität senden
+    @Path("findInputByType/{Type}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Eingabe> findInputByType(@PathParam("Type") String type) {
+        return repo.findInputByType(type);
+    }
+
     // Ein Objekt je nach Entität senden
     @Path("find/{Entity}/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Object find(@PathParam("Entity") String entity, @PathParam("id") long id) {
         return repo.find(entity, id);
+    }
+
+    // Daten für Statistikseite senden
+    @Path("getStats/{type}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Object> getStats(@PathParam("type") String type) {
+        return repo.getStats(type);
     }
 
     // Ein Objekt je nach Entität löschen

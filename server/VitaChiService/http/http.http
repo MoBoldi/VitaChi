@@ -53,3 +53,7 @@ GET http://localhost:8080/vitaChi/getBewegungAVG
 GET http://localhost:8080/vitaChi/getSchlafAVG
 ###
 GET http://localhost:8080/vitaChi/getWorkingTime
+###
+GET http://localhost:8080/vitaChi/findInputByType/Essen
+###
+GET http://localhost:8080/vitaChi/getStats/Essen

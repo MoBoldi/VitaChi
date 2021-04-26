@@ -14,10 +14,10 @@ class StatisticsNav extends StatelessWidget {
           child: Column(
             children: <Widget>[
               _myCard('Wohlbefinden pro Monat', '/wellbeing', context),
-              _myCard('Eingaben Schlaf', null, context),
-              _myCard('Eingaben Essen', null, context),
-              _myCard('Eingaben Bewegung', null, context),
-              _myCard('Arbeitszeit', null, context),
+              _myCard('Eingaben Schlaf', '/statsSchlafen', context),
+              _myCard('Eingaben Essen', '/statsEssen', context),
+              _myCard('Eingaben Bewegung', '/statsBewegung', context),
+              _myCard('Arbeitszeit', '/statsArbeit', context),
             ],
           ),
         ),
@@ -28,9 +28,6 @@ class StatisticsNav extends StatelessWidget {
 }
 
 Widget _myCard(String text, String route, BuildContext context) {
-  if (route == null) {
-    route = '/statistics';
-  }
   return GestureDetector(
       onTap: () => {Navigator.pushNamed(context, '$route')},
       child: Card(
