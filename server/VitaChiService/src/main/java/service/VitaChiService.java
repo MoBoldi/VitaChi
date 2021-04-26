@@ -7,7 +7,7 @@ import entity.Aufgaben;
 import org.apache.derby.client.am.DateTime;
 import org.jboss.resteasy.annotations.Query;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.internal.ResteasyClientBuilderImpl;
+import org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
 import org.keycloak.representations.idm.CredentialRepresentation;
@@ -205,8 +205,8 @@ public class VitaChiService {
                 .username("admin")
                 .password("Pa55w0rd")
                 .clientId("admin-cli")
-                .resteasyClient(new ResteasyClientBuilderImpl().connectionPoolSize(10).build())
-                .build();
+                .clientSecret("df8dab35-291e-486a-a3ee-f743566b9ad5")
+                .resteasyClient(new ResteasyClientBuilder().connectionPoolSize(10).build()).build();
 
         CredentialRepresentation credential = new CredentialRepresentation();
         credential.setType(CredentialRepresentation.PASSWORD);

@@ -17,6 +17,7 @@ final Color color = Color(0xff3f8ee9);
 
 class _LoginState extends State<Login> {
   final eingaben = GlobalKey<FormState>();
+  final myController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +114,7 @@ class _LoginState extends State<Login> {
                                           borderRadius:
                                               BorderRadius.circular(50))),
                                   onPressed: () {
-                                    getData();
+                                    getData(eingaben);
                                     if (eingaben.currentState.validate()) {
                                       // Process data.
                                       Navigator.pushNamed(context, '/');
@@ -160,7 +161,7 @@ class _LoginState extends State<Login> {
   }
 }
 
-Future<void> getData() async {
+Future<void> getData(eingaben) async {
 
   final authorizationEndpoint =
   Uri.parse('http://10.0.2.2:8010/auth/realms/vitachi/protocol/openid-connect/token');
