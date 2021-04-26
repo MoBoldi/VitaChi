@@ -1,3 +1,9 @@
+POST http://localhost:8080/vitaChi/createBenutzerAccessoire
+Content-Type: application/json
+
+{"BenutzerAccessoire": {"userID": 1, "accessoire": 3}}
+
+###
 POST http://localhost:8080/vitaChi/createEingabe
 Content-Type: application/json
 
@@ -24,25 +30,13 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/vitaChi/test/Aufgaben
 ###
-GET http://localhost:8080/vitaChi/init
-###
 GET http://localhost:8080/vitaChi/findAll/Eingabe
 ###
 GET http://localhost:8080/vitaChi/find/Eingabe/1
 ###
 DELETE http://localhost:8080/vitaChi/delete/Eingabe/1
 ###
-POST http://localhost:8080/vitaChi/createEingabe
-Content-Type: application/json
-
-{
-  "eingabe":
-  {
-  "bewertung1": "1",
-  "bewertung2": "2",
-  "typ": "1"
-  }
-}
+GET http://localhost:8080/vitaChi/init
 ###
 GET http://localhost:8080/vitaChi/getWohlbefinden
 ###
@@ -57,3 +51,9 @@ GET http://localhost:8080/vitaChi/getWorkingTime
 GET http://localhost:8080/vitaChi/findInputByType/Essen
 ###
 GET http://localhost:8080/vitaChi/getStats/Essen
+###
+GET http://localhost:8080/vitaChi/getWokringPerWeek
+###
+GET http://localhost:8080/vitaChi/findAll/Accessoire
+###
+GET http://localhost:8080/vitaChi/getOpenAccessoire/1

@@ -39,7 +39,6 @@ class _ArbeitState extends State<Arbeit> {
 
   Future<String> getWorkingTime() async {
     Response response = await get('http://10.0.2.2:8080/vitaChi/getWorkingTime');
-    print("response" + response.body);
     if (response.body.startsWith("<!")){
     }else{
       timestring=response.body;
@@ -134,10 +133,12 @@ class _ArbeitState extends State<Arbeit> {
                                                         <String, Object>{
                                                           'arbeit': arbeit
                                                         });
+                                                    setState(() {
+                                                      timestring="";
+                                                    });
                                                     Response response = await post(
                                                         url, headers: headers,
                                                         body: json);
-                                                    print(response.statusCode);
                                                     await Future.delayed(Duration(seconds: 1));
                                                     Navigator.pushReplacementNamed(context, '/',);
                                                   } else {
@@ -157,7 +158,6 @@ class _ArbeitState extends State<Arbeit> {
                                                     Response response = await put(
                                                         url, headers: headers,
                                                         body: json);
-                                                    print(response.statusCode);
                                                     Navigator.pushReplacementNamed(context, '/arbeit',);
                                                   }
                                                 },
@@ -169,7 +169,7 @@ class _ArbeitState extends State<Arbeit> {
                                               margin: EdgeInsets.only(top: size.height/15),
                                             );
                                           }else{
-                                            return Image(image: AssetImage('assets/LogoSlider.png'));
+                                            return Image(image: AssetImage('assets/LogoSlider.png'), width: size.width/4);
                                           }
                                         }
                                       ),
@@ -192,7 +192,7 @@ class _ArbeitState extends State<Arbeit> {
                                         margin: EdgeInsets.only(top: size.height/30),
                                       );
                                     }else{
-                                      return Image(image: AssetImage('assets/LogoSlider.png'));
+                                      return Image(image: AssetImage('assets/LogoSlider.png'), width: size.width/5);
                                     }
                                   },
                                 ),

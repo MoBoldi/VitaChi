@@ -31,6 +31,15 @@ public class Accessoire {
 
     //<editor-fold desc="Getter und Setter">
 
+
+    public long getAccessoireID() {
+        return accessoireID;
+    }
+
+    public void setAccessoireID(long accessoireID) {
+        this.accessoireID = accessoireID;
+    }
+
     public String getBezeichnung() {
         return bezeichnung;
     }
@@ -70,6 +79,8 @@ public class Accessoire {
     public void setBild_pfad(String bild_pfad) {
         this.bild_pfad = bild_pfad;
     }
+
+
     //</editor-fold>
 }
 

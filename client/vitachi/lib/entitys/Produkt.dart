@@ -1,7 +1,8 @@
 class Produkt{
   String beschreibung, bezeichnung, details, bildpfad;
-  int preis;
+  int preis, id;
   Produkt({
+    this.id,
     this.beschreibung,
     this.bezeichnung,
     this.details,
@@ -12,6 +13,7 @@ class Produkt{
 
   factory Produkt.fromJson(Map<String, dynamic> json) {
     return Produkt(
+      id: json["accessoireID"],
       bezeichnung: json["bezeichnung"],
       beschreibung: json["beschreibung"],
       preis: json["preis"],

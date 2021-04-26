@@ -1,9 +1,6 @@
 package repository;
 
-import entity.Accessoire;
-import entity.Arbeit;
-import entity.Aufgaben;
-import entity.Eingabe;
+import entity.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -13,10 +10,15 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
+import java.awt.geom.Area;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+<<<<<<< HEAD
 import java.util.LinkedList;
+=======
+import java.time.temporal.IsoFields;
+>>>>>>> 0cd2dbb84401e76f9d39c3088521e16e9bf71502
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -136,12 +138,23 @@ public class DBRepository {
 
         String result = String.format("%02d:%02d:%02d",
                 TimeUnit.MILLISECONDS.toHours(millis),
-                TimeUnit.MILLISECONDS.toMinutes(millis) -
-                        TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-                TimeUnit.MILLISECONDS.toSeconds(millis) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+                TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
 
         return result;
+    }
+
+    public double getWorkingPerWeek(){
+        double workingHours = 0.0;
+        LocalDateTime localDateTime = LocalDateTime.now();
+        int kalenderWoche = localDateTime.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+        List<Arbeit> al = em.createQuery("select a from Arbeit as a").getResultList();
+        for (Arbeit a : al){
+            if(a.getStartdatum().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)==kalenderWoche){
+                workingHours += Duration.between(a.getStartdatum(), a.getDauer()).toHours();
+            }
+        }
+        return workingHours;
     }
 
     @Transactional
@@ -159,6 +172,20 @@ public class DBRepository {
             }
         }
     }
+
+    @Transactional
+    public BenutzerAccessoire createBenutzerAccessoire(BenutzerAccessoire benutzerAccessoire){
+        em.persist(benutzerAccessoire);
+        return benutzerAccessoire;
+    }
+
+    @Transactional
+    public List<Accessoire> getOpenAccessoires(long userid){
+        Query q =  em.createQuery("select a from Accessoire as a where a NOT IN (select ba.accessoire from BenutzerAccessoire as ba where ba.userID = ?1)");
+        q.setParameter(1, userid);
+        return q.getResultList();
+    }
+
 
 
     //Wohlbefinden berechnen
@@ -190,11 +217,20 @@ public class DBRepository {
         LocalDateTime t2a = LocalDateTime.of(2020, 12, 25, 10, 0, 0,0);
         LocalDateTime t2e = LocalDateTime.of(2020, 12, 25, 14, 0, 0,0);
 
+        LocalDateTime t3a = LocalDateTime.of(2021, 4, 4, 15, 0, 0,0);
+        LocalDateTime t3e = LocalDateTime.of(2021, 4, 4, 18, 0, 0,0);
+        LocalDateTime t4a = LocalDateTime.of(2021, 4, 8, 10, 0, 0,0);
+        LocalDateTime t4e = LocalDateTime.of(2021, 4, 8, 14, 0, 0,0);
+
         Arbeit a1 = new Arbeit(t1a, t1e);
         Arbeit a2 = new Arbeit(t2a, t2e);
+        Arbeit a3 = new Arbeit(t3a, t3e);
+        Arbeit a4 = new Arbeit(t4a, t4e);
 
         this.createArbeit(a1);
         this.createArbeit(a2);
+        this.createArbeit(a3);
+        this.createArbeit(a4);
     }
 
     public List<Eingabe> findInputByType(String type) {

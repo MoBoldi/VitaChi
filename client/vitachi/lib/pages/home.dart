@@ -15,6 +15,7 @@ class Home extends StatelessWidget {
   var essen = 0.0;
   var bewegung = 0.0;
   var schlafen = 0.0;
+  var arbeit = 0.0;
   var urlgetStats = '';
 
   final List<ChartData> ges = [
@@ -34,8 +35,8 @@ class Home extends StatelessWidget {
     ChartData('', 0.1, Color(0xFF9dc6dd)),
   ];
   final List<ChartData> work = [
-    ChartData('Work', 30, Color(0xFF4DA8DA)),
-    ChartData('', 20, Color(0xFF9dc6dd)),
+    ChartData('Work', 0, Color(0xFF4DA8DA)),
+    ChartData('', 0.1, Color(0xFF9dc6dd)),
   ];
 
   Map data = {};
@@ -69,6 +70,14 @@ class Home extends StatelessWidget {
       schlafen = double.parse(response.body);
       sleep[0].y = schlafen;
       sleep[1].y = 5 - schlafen;
+    }
+
+    Future getWorkingHours() async {
+      Response response =
+      await get('http://10.0.2.2:8080/vitaChi/getWokringPerWeek');
+      arbeit = double.parse(response.body);
+      work[0].y = arbeit;
+      work[1].y = 38.5-arbeit;
     }
 
     double chartWidth = MediaQuery.of(context).size.width / 5;
@@ -252,18 +261,21 @@ class Home extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                //Arbeit chart
-                width: chartWidth,
-                height: chartHeight,
-                margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.75,
-                  top: MediaQuery.of(context).size.height / 1.425,
-                ),
-                child: getChart(work, context, "/arbeit"),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
+              FutureBuilder(
+                future: getWorkingHours(),
+                builder: (context, snapshot) => Container(
+                  //Arbeit chart
+                  width: chartWidth,
+                  height: chartHeight,
+                  margin: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.75,
+                    top: MediaQuery.of(context).size.height / 1.425,
+                  ),
+                  child: getChart(work, context, "/arbeit"),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
@@ -354,7 +366,7 @@ int getRating(double wellbeing) {
 
 AssetImage getEmotion(double wellbeing) {
   if (1 <= wellbeing && wellbeing < 2) {
-    return AssetImage('assets/Blume_1.png');
+    return AssetImage('assets/5_traurig.gif');
   } else if (2 <= wellbeing && wellbeing < 3) {
     return AssetImage('assets/4_traurig.gif');
   } else if (3 <= wellbeing && wellbeing < 4) {
