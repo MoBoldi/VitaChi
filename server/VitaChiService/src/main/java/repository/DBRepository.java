@@ -14,11 +14,8 @@ import java.awt.geom.Area;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-<<<<<<< HEAD
 import java.util.LinkedList;
-=======
 import java.time.temporal.IsoFields;
->>>>>>> 0cd2dbb84401e76f9d39c3088521e16e9bf71502
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
