@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -13,6 +16,7 @@ class Wellbeing extends StatefulWidget {
 
 class _Wellbeing extends State<Wellbeing> {
   final Color chartColor = Color(0xff3f8ee9);
+  List<ChartData> cdata = [];
   final PassedData data = PassedData(
       chartData: ([
         ChartData('Test', 2, Color(0xff3f8ee9)),
@@ -36,6 +40,19 @@ class _Wellbeing extends State<Wellbeing> {
 
   @override
   Widget build(BuildContext context) {
+    Future getStats() async {
+      Response response =
+          await get('http://10.0.2.2:8080/vitaChi/getWellbeingStats');
+      List<dynamic> statsJson = json.decode(response.body);
+      List list = statsJson;
+      cdata = [];
+      for (var d in list) {
+        ChartData c = new ChartData(d[1], d[0]);
+        cdata.add(c);
+      }
+    }
+
+    getStats();
     return Scaffold(
       //backgroundColor: Color(0xff82b086),
       appBar: MyAppBar(context, 'VitaChi', null),
@@ -59,24 +76,28 @@ class _Wellbeing extends State<Wellbeing> {
               ),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 20),
-              child: SfCartesianChart(
-                primaryXAxis: CategoryAxis(),
-                primaryYAxis: NumericAxis(
-                  minimum: 0,
-                  maximum: 5.5,
-                  isVisible: false,
-                ),
-                series: <ChartSeries<ChartData, String>>[
-                  ColumnSeries<ChartData, String>(
-                    dataSource: data.barChartData,
-                    xValueMapper: (ChartData rating, _) => rating.x,
-                    yValueMapper: (ChartData rating, _) => rating.y,
-                    color: chartColor,
-                  ),
-                ],
-              ),
-            ),
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 20),
+                child: FutureBuilder(
+                  future: getStats(),
+                  builder: (context, snapshot) {
+                    return SfCartesianChart(
+                      primaryXAxis: CategoryAxis(),
+                      primaryYAxis: NumericAxis(
+                        minimum: 0,
+                        maximum: 5.5,
+                        isVisible: false,
+                      ),
+                      series: <ChartSeries<ChartData, String>>[
+                        ColumnSeries<ChartData, String>(
+                          dataSource: cdata,
+                          xValueMapper: (ChartData rating, _) => rating.x,
+                          yValueMapper: (ChartData rating, _) => rating.y,
+                          color: chartColor,
+                        ),
+                      ],
+                    );
+                  },
+                )),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

@@ -17,7 +17,6 @@ class StatisticsNav extends StatelessWidget {
               _myCard('Eingaben Schlaf', '/statsSchlafen', context),
               _myCard('Eingaben Essen', '/statsEssen', context),
               _myCard('Eingaben Bewegung', '/statsBewegung', context),
-              _myCard('Arbeitszeit', '/statsArbeit', context),
             ],
           ),
         ),

@@ -242,23 +242,34 @@ public class DBRepository {
         String bewertung21 = "SELECT (count(e.bewertung2)) from Eingabe e where e.typ = '"+type+"' and e.bewertung2 = 1";
         String bewertung15 = "SELECT (count(e.bewertung1)) from Eingabe e where e.typ = '"+type+"' and e.bewertung1 = 5";
         String bewertung25 = "SELECT (count(e.bewertung2)) from Eingabe e where e.typ = '"+type+"' and e.bewertung2 = 5";
+        String ges = "SELECT count(e.bewertung1) + count(e.bewertung2) from Eingabe e where e.typ = '" + type + "'";
         Query query11 = em.createNativeQuery(bewertung11);
         Query query21 = em.createNativeQuery(bewertung15);
         Query query15 = em.createNativeQuery(bewertung21);
         Query query25 = em.createNativeQuery(bewertung25);
+        Query queryGes = em.createNativeQuery(ges);
         Object result11 = query11.getSingleResult();
         Object result15 = query15.getSingleResult();
         Object result21 = query21.getSingleResult();
         Object result25 = query25.getSingleResult();
+        Object resultGes = queryGes.getSingleResult();
         System.out.println(result11);
         System.out.println(result15);
         System.out.println(result21);
         System.out.println(result25);
-
+        System.out.println(resultGes);
         List<Object> result = new LinkedList<>();
-        result.add((int)result11 + (int) result21);
+        result.add((int) result11 + (int) result21);
         result.add((int) result15 + (int) result25);
+        result.add((int) resultGes);
+        return result;
+    }
 
+    public List<Object> getWellbeingStats() {
+        String sql1 = "SELECT SUM((bewertung1 + BEWERTUNG2) / 2.0)/Count(*), DATUM from EINGABE group by DATUM";
+        Query query1 = em.createNativeQuery(sql1);
+        List<Object> result = query1.getResultList();
+        System.out.println(result);
         return result;
     }
 }

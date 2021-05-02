@@ -57,3 +57,6 @@ GET http://localhost:8080/vitaChi/getWokringPerWeek
 GET http://localhost:8080/vitaChi/findAll/Accessoire
 ###
 GET http://localhost:8080/vitaChi/getOpenAccessoire/1
+###
+GET http://localhost:8080/vitaChi/getWellbeingStats
+###

@@ -61,6 +61,11 @@ public class VitaChiService {
         return repo.findInputByType(type);
     }
 
+    @Path("getWellbeingStats")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Object> getWellbeingStats() {return repo.getWellbeingStats();}
+
     // Ein Objekt je nach Entität senden
     @Path("find/{Entity}/{id}")
     @GET
