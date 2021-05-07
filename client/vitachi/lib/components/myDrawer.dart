@@ -61,7 +61,7 @@ class MyDrawer extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/statisticsNav');
             },
           ),
-          ListTile(
+          /*ListTile(
             title: Row(
               children: [
                 Icon(Icons.person_add),
@@ -74,7 +74,7 @@ class MyDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pushReplacementNamed(context, '/freunde');
             },
-          ),
+          ),*/
           ListTile(
             title: Row(
               children: [
@@ -105,7 +105,7 @@ class MyDrawer extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/aufgaben');
             },
           ),
-          ListTile(
+          /*ListTile(
             title: Row(
               children: [
                 Icon(Icons.settings),
@@ -119,6 +119,22 @@ class MyDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pushReplacementNamed(context, '/settings');
+            },
+          ),*/
+          ListTile(
+            title: Row(
+              children: [
+                Icon(Icons.event_seat),
+                Text(
+                  " Wohnzimmer",
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              ],
+            ),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/wohnzimmer');
             },
           ),
           ListTile(
@@ -136,22 +152,6 @@ class MyDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pushReplacementNamed(context, '/login');
-            },
-          ),
-          ListTile(
-            title: Row(
-              children: [
-                Icon(Icons.event_seat),
-                Text(
-                  " Wohnzimmer",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ],
-            ),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/wohnzimmer');
             },
           ),
         ],
