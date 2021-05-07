@@ -104,7 +104,9 @@ class DetailShop extends StatelessWidget {
                                 Map<String, String> headers = {"Content-type": "application/json"};
                                 String json = jsonEncode(<String, Object>{'BenutzerAccessoire': benutzerAccessoire});
                                 Response response = await post(url, headers: headers, body: json);
-                                print(response.statusCode);
+                                if (response.statusCode == 200){
+                                  Navigator.pushReplacementNamed(context, "/shop");
+                                }
                               },
                               child: Text(
                                       "Kaufen",
