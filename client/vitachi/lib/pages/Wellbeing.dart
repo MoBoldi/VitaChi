@@ -76,44 +76,28 @@ class _Wellbeing extends State<Wellbeing> {
               ),
             ),
             Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 10, 20),
-                child: FutureBuilder(
-                  future: getStats(),
-                  builder: (context, snapshot) {
-                    return SfCartesianChart(
-                      primaryXAxis: CategoryAxis(),
-                      primaryYAxis: NumericAxis(
-                        minimum: 0,
-                        maximum: 5.5,
-                        isVisible: false,
+              padding: EdgeInsets.fromLTRB(10, 0, 10, 20),
+              child: FutureBuilder(
+                future: getStats(),
+                builder: (context, snapshot) {
+                  return SfCartesianChart(
+                    primaryXAxis: CategoryAxis(),
+                    primaryYAxis: NumericAxis(
+                      minimum: 0,
+                      maximum: 5.5,
+                      isVisible: false,
+                    ),
+                    series: <ChartSeries<ChartData, String>>[
+                      ColumnSeries<ChartData, String>(
+                        dataSource: cdata,
+                        xValueMapper: (ChartData rating, _) => rating.x,
+                        yValueMapper: (ChartData rating, _) => rating.y,
+                        color: chartColor,
                       ),
-                      series: <ChartSeries<ChartData, String>>[
-                        ColumnSeries<ChartData, String>(
-                          dataSource: cdata,
-                          xValueMapper: (ChartData rating, _) => rating.x,
-                          yValueMapper: (ChartData rating, _) => rating.y,
-                          color: chartColor,
-                        ),
-                      ],
-                    );
-                  },
-                )),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MaterialButton(
-                  onPressed: null,
-                  child: Text("Woche"),
-                ),
-                MaterialButton(
-                  onPressed: null,
-                  child: Text("Monat"),
-                ),
-                MaterialButton(
-                  onPressed: null,
-                  child: Text("Jahr"),
-                ),
-              ],
+                    ],
+                  );
+                },
+              ),
             ),
           ],
         ),

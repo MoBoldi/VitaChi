@@ -11,7 +11,6 @@ import 'package:vitachi/pages/Register.dart';
 import 'package:vitachi/pages/Schlafen.dart';
 import 'package:vitachi/pages/Settings.dart';
 import 'package:vitachi/pages/Shop.dart';
-import 'package:vitachi/pages/StatsArbeit.dart';
 import 'package:vitachi/pages/StatsBewegung.dart';
 import 'package:vitachi/pages/StatsEssen.dart';
 import 'package:vitachi/pages/StatsSchlafen.dart';
@@ -67,8 +66,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => StatsBewegung());
       case '/statsSchlafen':
         return MaterialPageRoute(builder: (_) => StatsSchlafen());
-      case '/statsArbeit':
-        return MaterialPageRoute(builder: (_) => StatsArbeit());
       default:
         return _errorRoute();
     }

@@ -135,35 +135,6 @@ class _Statistics extends State<Statistics> {
                         }
                       }),
                 ),
-                Card(
-                  margin: EdgeInsets.fromLTRB(15, 0, 15, 20),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [Color(0xff54a2fc), Color(0xff6bc2fa)],
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
-                      child: Center(
-                        child: AutoSizeText(
-                          '${widget.type}',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
                 Container(
                   padding: EdgeInsets.fromLTRB(0, 30, 0, 50),
                   child: Row(
