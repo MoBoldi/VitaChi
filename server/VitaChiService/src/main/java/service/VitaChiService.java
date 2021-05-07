@@ -222,4 +222,11 @@ public class VitaChiService {
         return repo.getOpenAccessoires(userid);
     }
 
+    @Path("getStartOfWorking")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Arbeit> getStartOfWorking(){
+        return repo.findLastEntry();
+    }
+
 }
