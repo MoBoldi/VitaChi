@@ -22,15 +22,6 @@ class _Statistics extends State<Statistics> {
     ChartData('', 0, Color(0xFF4DA8DA)),
     ChartData('', 5, Color(0xFF9dc6dd)),
   ];
-  int getEntries() {
-    try {
-      print("----------------- entries.length --------------");
-      print(entries.length);
-      return entries.length;
-    } catch (e) {
-      return 0;
-    }
-  }
 
   getChartData() {
     var i = 1;
@@ -83,16 +74,15 @@ class _Statistics extends State<Statistics> {
       List list = statsJson;
       int star1 = int.parse(list.elementAt(0).toString());
       int star5 = int.parse(list.elementAt(1).toString());
+      int ges = int.parse(list.elementAt(2).toString());
       stats = [];
       stats.add(star1);
       stats.add(star5);
+      stats.add(ges);
       print('---------------- Stats ------------------');
       print(stats);
     }
 
-    getStats();
-    getAvgData();
-    getDBData();
     return Scaffold(
       appBar: MyAppBar(context, "VitaChi", null),
       backgroundColor: Colors.white,
@@ -109,31 +99,41 @@ class _Statistics extends State<Statistics> {
               children: [
                 Container(
                   height: MediaQuery.of(context).size.height / 3.5,
-                  child: SfCircularChart(
-                    annotations: <CircularChartAnnotation>[
-                      CircularChartAnnotation(
-                        widget: Container(
-                          child: Text(
-                            avg[0].x,
-                            style: TextStyle(
-                              color: Color.fromRGBO(0, 0, 0, 1),
-                              fontSize: 25,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                    series: <CircularSeries>[
-                      DoughnutSeries<ChartData, String>(
-                        dataSource: avg,
-                        xValueMapper: (ChartData data, _) => data.x,
-                        yValueMapper: (ChartData data, _) => data.y,
-                        innerRadius: '80%',
-                        radius: '80%',
-                        pointColorMapper: (ChartData data, _) => data.color,
-                      ),
-                    ],
-                  ),
+                  child: FutureBuilder(
+                      future: getAvgData(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          return SfCircularChart(
+                            annotations: <CircularChartAnnotation>[
+                              CircularChartAnnotation(
+                                widget: Container(
+                                  child: Text(
+                                    avg[0].x,
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(0, 0, 0, 1),
+                                      fontSize: 25,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                            series: <CircularSeries>[
+                              DoughnutSeries<ChartData, String>(
+                                dataSource: avg,
+                                xValueMapper: (ChartData data, _) => data.x,
+                                yValueMapper: (ChartData data, _) => data.y,
+                                innerRadius: '80%',
+                                radius: '80%',
+                                pointColorMapper: (ChartData data, _) =>
+                                    data.color,
+                              ),
+                            ],
+                          );
+                        } else {
+                          return Image(
+                              image: AssetImage('assets/LogoSlider.png'));
+                        }
+                      }),
                 ),
                 Card(
                   margin: EdgeInsets.fromLTRB(15, 0, 15, 20),
@@ -183,12 +183,23 @@ class _Statistics extends State<Statistics> {
                           ),
                         ],
                       ),
-                      Column(
-                        children: [
-                          AutoSizeText('${getEntries()}'),
-                          AutoSizeText('${stats[0]}'),
-                          AutoSizeText('${stats[1]}'),
-                        ],
+                      FutureBuilder(
+                        future: getStats(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return Column(
+                              children: [
+                                AutoSizeText('${stats[2]}'),
+                                AutoSizeText('${stats[0]}'),
+                                AutoSizeText('${stats[1]}'),
+                              ],
+                            );
+                          } else {
+                            return Image(
+                                image: AssetImage('assets/LogoSlider.png'));
+                          }
+                        },
                       ),
                     ],
                   ),
@@ -198,22 +209,34 @@ class _Statistics extends State<Statistics> {
                     children: [
                       Container(
                         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: SfCartesianChart(
-                          primaryXAxis: CategoryAxis(),
-                          primaryYAxis: NumericAxis(
-                            minimum: 0,
-                            maximum: 5.5,
-                            isVisible: false,
-                          ),
-                          series: <ChartSeries<ChartData, String>>[
-                            ColumnSeries<ChartData, String>(
-                              dataSource: cdata,
-                              xValueMapper: (ChartData rating, _) => rating.x,
-                              yValueMapper: (ChartData rating, _) => rating.y,
-                              color: chartColor,
-                            ),
-                          ],
-                        ),
+                        child: FutureBuilder(
+                            future: getDBData(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                return SfCartesianChart(
+                                  primaryXAxis: CategoryAxis(),
+                                  primaryYAxis: NumericAxis(
+                                    minimum: 0,
+                                    maximum: 5.5,
+                                    isVisible: false,
+                                  ),
+                                  series: <ChartSeries<ChartData, String>>[
+                                    ColumnSeries<ChartData, String>(
+                                      dataSource: cdata,
+                                      xValueMapper: (ChartData rating, _) =>
+                                          rating.x,
+                                      yValueMapper: (ChartData rating, _) =>
+                                          rating.y,
+                                      color: chartColor,
+                                    ),
+                                  ],
+                                );
+                              } else {
+                                return Image(
+                                    image: AssetImage('assets/LogoSlider.png'));
+                              }
+                            }),
                       ),
                     ],
                   ),
