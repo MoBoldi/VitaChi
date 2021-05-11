@@ -4,17 +4,6 @@ import entity.Eingabe;
 import entity.Accessoire;
 import entity.Arbeit;
 import entity.Aufgaben;
-import org.apache.derby.client.am.DateTime;
-import org.jboss.resteasy.annotations.Query;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider;
-import org.keycloak.admin.client.Keycloak;
-import org.keycloak.admin.client.KeycloakBuilder;
-import org.keycloak.admin.client.resource.RealmResource;
-import org.keycloak.admin.client.resource.UsersResource;
-import org.keycloak.representations.idm.CredentialRepresentation;
-import org.keycloak.representations.idm.UserRepresentation;
 import repository.DBRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -197,52 +186,6 @@ public class VitaChiService {
     @GET
     public Double getSchlaf() {
         return repo.getSchlaf();
-    }
-
-    @Path("registerNewUser")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public boolean registerNewUser(JsonObject json) {
-
-        Keycloak kc = KeycloakBuilder.builder()
-                .serverUrl("http://localhost:8010/auth")
-                .realm("master")
-                .username("admin")
-                .password("Pa55w0rd")
-                .clientId("admin-cli")
-                .clientSecret("df8dab35-291e-486a-a3ee-f743566b9ad5")
-                .resteasyClient(new ResteasyClientBuilder().connectionPoolSize(10).build()).build();
-
-        CredentialRepresentation credential = new CredentialRepresentation();
-        credential.setType(CredentialRepresentation.PASSWORD);
-        credential.setValue(json.getString("password"));
-
-        UserRepresentation user = new UserRepresentation();
-        user.setUsername(json.getString("username"));
-        user.setFirstName(json.getString("vorname"));
-        user.setLastName(json.getString("nachname"));
-        user.setEmail(json.getString("email"));
-        user.setCredentials(Arrays.asList(credential));
-        user.setEnabled(true);
-        user.setEmailVerified(true);
-        //user.setRealmRoles(Arrays.asList("user"));
-
-        System.out.println(user.getEmail());
-
-        // Create testuser
-        RealmResource rs = kc.realm("vitachi");
-        UsersResource us = rs.users();
-        Response result = us.create(user);
-        //Response result = kc.realm("vitachi").users().create(user);
-        /*if (result.getStatus() != 201) {
-            System.out.println("Hansi");
-            return true;
-        }else{
-            System.out.println("Hinterseer");
-            return false;
-        }*/
-
-        return true;
     }
 
 }
