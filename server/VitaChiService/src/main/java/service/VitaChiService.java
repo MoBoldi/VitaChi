@@ -6,10 +6,13 @@ import entity.Arbeit;
 import entity.Aufgaben;
 import org.apache.derby.client.am.DateTime;
 import org.jboss.resteasy.annotations.Query;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
+import org.keycloak.admin.client.resource.RealmResource;
+import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import repository.DBRepository;
@@ -18,6 +21,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
+import javax.ws.rs.client.Client;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.time.Duration;
@@ -25,6 +29,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
 @Path("/vitaChi")
@@ -225,14 +230,19 @@ public class VitaChiService {
         System.out.println(user.getEmail());
 
         // Create testuser
-        Response result = kc.realm("vitachi").users().create(user);
-        if (result.getStatus() != 201) {
+        RealmResource rs = kc.realm("vitachi");
+        UsersResource us = rs.users();
+        Response result = us.create(user);
+        //Response result = kc.realm("vitachi").users().create(user);
+        /*if (result.getStatus() != 201) {
             System.out.println("Hansi");
             return true;
         }else{
             System.out.println("Hinterseer");
             return false;
-        }
+        }*/
+
+        return true;
     }
 
 }
