@@ -7,6 +7,7 @@ import 'package:vitachi/entitys/Eingaben.dart';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 var eingaben = 0;
 var sterne = 3.0;
@@ -16,7 +17,7 @@ class Bewegung extends StatefulWidget {
 }
 
 class _BewegungState extends State<Bewegung> {
-  Eingaben bewegungeingaben = new Eingaben(0, 0, "");
+  Eingaben bewegungeingaben = new Eingaben(0, 0, "",0);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -128,6 +129,9 @@ class _BewegungState extends State<Bewegung> {
                                 ),
                                 onPressed: () async {
                                   bewegungeingaben.setTyp("Bewegung");
+                                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                                  int id = prefs.getInt("UserID");
+                                  bewegungeingaben.setUserid(id);
                                   String url = 'http://10.0.2.2:8080/vitaChi/createEingabe';
                                   Map<String, String> headers = {"Content-type": "application/json"};
                                   String json = jsonEncode(<String, Object>{'eingabe': bewegungeingaben});

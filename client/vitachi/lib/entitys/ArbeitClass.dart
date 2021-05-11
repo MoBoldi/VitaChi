@@ -1,11 +1,12 @@
 class ArbeitClass{
   DateTime start;
   DateTime dauer;
+  int userid;
 
-
-  ArbeitClass(DateTime start, DateTime dauer){
+  ArbeitClass(DateTime start, DateTime dauer, int userid){
     this.start = start;
     this.dauer = dauer;
+    this.userid = userid;
   }
 
   DateTime getStart(){
@@ -22,6 +23,13 @@ class ArbeitClass{
     this.dauer = dauer;
   }
 
+  int getUserid(){
+    return this.userid;
+  }
+  setUserid(int userid){
+    this.userid = userid;
+  }
+
   String toStringStart(DateTime start) {
     return '$start';
   }
@@ -33,12 +41,13 @@ class ArbeitClass{
     return {
       'start': toStringStart(start),
       'dauer': toStringDauer(dauer),
+      'userid': userid
     };
   }
 
   @override
   String toString() {
-    return 'Arbeit{start: $start, dauer: $dauer}';
+    return 'Arbeit{start: $start, dauer: $dauer, userid: $userid}';
   }
 
 }

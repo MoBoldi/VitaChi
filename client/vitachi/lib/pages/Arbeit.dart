@@ -23,7 +23,7 @@ class _ArbeitState extends State<Arbeit> {
   var stop;
   var status;
   final Color color = Color(0xFF3D6845);
-  ArbeitClass arbeit = new ArbeitClass(DateTime.now(), DateTime.now());
+  ArbeitClass arbeit = new ArbeitClass(DateTime.now(), DateTime.now(),0);
 
   Future<bool> getData() async {
     Response response = await get('http://10.0.2.2:8080/vitaChi/activeArbeit');
@@ -119,6 +119,9 @@ class _ArbeitState extends State<Arbeit> {
                                                     .play_arrow_outlined,
                                                 iconOff: Icons.stop,
                                                 onTap: () async {
+                                                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                                                  int id = prefs.getInt("UserID");
+                                                  arbeit.setUserid(id);
                                                   if (status == true) {
                                                     start = DateTime.now()
                                                         .toLocal();

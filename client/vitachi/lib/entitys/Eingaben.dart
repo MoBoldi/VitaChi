@@ -3,11 +3,13 @@ class Eingaben {
   double eingabe2;
   String typ;
   DateTime date;
+  int userid;
 
-  Eingaben(double eingabe1, double eingabe2, String typ) {
+  Eingaben(double eingabe1, double eingabe2, String typ, int userid) {
     this.eingabe1 = eingabe1;
     this.eingabe2 = eingabe2;
     this.typ = typ;
+    this.userid = userid;
   }
 
   DateTime getDate() {
@@ -16,6 +18,14 @@ class Eingaben {
 
   void setDate(String datum) {
     date = DateTime.parse(datum + " 00:00:00");
+  }
+
+  void setUserid(int userid) {
+    this.userid = userid;
+  }
+
+  int getUserid() {
+    return userid;
   }
 
   double getEingabe1() {
@@ -47,7 +57,7 @@ class Eingaben {
   }
 
   Map<String, dynamic> toJson() {
-    return {'bewertung1': eingabe1, 'bewertung2': eingabe2, 'typ': typ};
+    return {'bewertung1': eingabe1, 'bewertung2': eingabe2, 'typ': typ, 'userid':userid};
   }
 
   factory Eingaben.fromJson(Map<String, dynamic> json) {
@@ -55,6 +65,7 @@ class Eingaben {
       json["bewertung1"],
       json["bewertung2"],
       json["typ"],
+      json["userid"]
     );
     e.setDate(json["datum"]);
     return e;
