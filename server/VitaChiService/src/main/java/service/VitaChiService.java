@@ -133,10 +133,12 @@ public class VitaChiService {
 
         LocalDateTime start = LocalDateTime.parse(json.getJsonObject("arbeit").getString("start"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
         LocalDateTime date = LocalDateTime.of(2001,1,1,0,0,0,0);
+        int userid = json.getJsonObject("arbeit").getInt("userid");
 
         repo.createArbeit(new Arbeit(
                 start,
-                null
+                null,
+                userid
         ));
 
         return json;
@@ -165,7 +167,8 @@ public class VitaChiService {
         List<Arbeit> l = repo.findLastEntry();
         Arbeit a = l.get(0);
         LocalDateTime dauer = LocalDateTime.parse(json.getJsonObject("arbeit").getString("dauer"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
-        Arbeit aa = new Arbeit(a.getArbeitID(),a.getStartdatum(), dauer);
+        int userid = json.getJsonObject("arbeit").getInt("userid");
+        Arbeit aa = new Arbeit(a.getArbeitID(),a.getStartdatum(), dauer, userid);
         repo.updateArbeit(aa);
         return "Object updated";
     }
