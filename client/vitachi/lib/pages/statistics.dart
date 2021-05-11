@@ -144,7 +144,7 @@ class _Statistics extends State<Statistics> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           AutoSizeText(
-                            'Eingaben Gesamt:',
+                            'Bewertungen Gesamt:',
                           ),
                           AutoSizeText(
                             '1 Stern:',
