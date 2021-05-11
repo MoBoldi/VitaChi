@@ -131,7 +131,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                           height: 200,
                           decoration: BoxDecoration(
                             //border: Border.all(color: Colors.blueAccent),
-                            color: Colors.transparent,
+                            color: Colors.black,
                           ),
                           child: Container(
                               width: 230,
@@ -151,20 +151,19 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                           ))));
                     }, onWillAccept: (int data) {
                       print("HOVERED OVER DRAG TARGET1");
-                      Slot1ImagePfad = null;
                       //Get Request ob der Slot bereits mit diesem Element belegt ist (IF) wenn nicht return true
+
+                      if(Slot1ImageNumber == data ){
+                        return false;
+                      }else{return true;}
                     }, onAccept: (int data) async {
                       int slot1 = 1;
                       print("onAccept 1");
                       print("Dropped item NR  $data  on Slot $slot1");
 
-                      print("Elseimagenumber");
-                      setState(
-                        () {
-                          Slot1ImagePfad.evict();
+                      setState(() {
                           Slot1Displayed = true;
                           Slot1ImageNumber = data;
-
                           Slot1ImagePfad =
                               AssetImage(products[Slot1ImageNumber].bildpfad);
                         },
