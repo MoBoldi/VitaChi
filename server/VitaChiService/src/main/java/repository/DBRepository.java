@@ -193,14 +193,14 @@ public class DBRepository {
 
     //Erste Testdatensätze einfügen
     public void initDB() {
-        Eingabe e1 = new Eingabe(1,2,"Essen");
-        Eingabe e2 = new Eingabe(1,3,"Essen");
+        Eingabe e1 = new Eingabe(1,2,"Essen",2);
+        Eingabe e2 = new Eingabe(1,3,"Essen",2);
 
-        Eingabe e3 = new Eingabe(2,3,"Bewegung");
-        Eingabe e4 = new Eingabe(1,1,"Bewegung");
+        Eingabe e3 = new Eingabe(2,3,"Bewegung",2);
+        Eingabe e4 = new Eingabe(1,1,"Bewegung",2);
 
-        Eingabe e5 = new Eingabe(5,5,"Schlaf");
-        Eingabe e6 = new Eingabe(5,4, "Schlaf");
+        Eingabe e5 = new Eingabe(5,5,"Schlaf",2);
+        Eingabe e6 = new Eingabe(5,4, "Schlaf",2);
 
         this.createEingabe(e1);
         this.createEingabe(e2);

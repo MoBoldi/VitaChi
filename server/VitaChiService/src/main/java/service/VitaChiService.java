@@ -108,7 +108,8 @@ public class VitaChiService {
         repo.createEingabe(new Eingabe(
                 json.getJsonObject("eingabe").getInt("bewertung1"),
                 json.getJsonObject("eingabe").getInt("bewertung2"),
-                json.getJsonObject("eingabe").getString("typ")
+                json.getJsonObject("eingabe").getString("typ"),
+                json.getJsonObject("eingabe").getInt("userid")
         ));
 
         return json;

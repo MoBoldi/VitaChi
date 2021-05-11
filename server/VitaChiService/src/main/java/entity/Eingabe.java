@@ -23,18 +23,29 @@ public class Eingabe {
     private int bewertung1;
     private int bewertung2;
     private LocalDate datum;
+    private int userid;
 
 
     public Eingabe(){}
 
-    public Eingabe(int bewertung1, int bewertung2, String typ) {
+    public Eingabe(int bewertung1, int bewertung2, String typ, int userid) {
         this.typ = typ;
         this.bewertung1 = bewertung1;
         this.bewertung2 = bewertung2;
         this.datum = LocalDate.now();
+        this.userid = userid;
     }
 
     //<editor-fold desc="Getter und Setter">
+
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
 
     public String getTyp() {
         return typ;
