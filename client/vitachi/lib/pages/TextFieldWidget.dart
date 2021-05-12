@@ -6,11 +6,13 @@ class TextFieldWidget extends StatelessWidget {
   final IconData prefixIconData;
   final bool obscureText;
   final Color color = Color(0xff3f8ee9);
+  final TextEditingController controller;
 
   TextFieldWidget({
       this.hintText,
       this.prefixIconData,
       this.obscureText,
+      this.controller
   });
 
 
@@ -50,8 +52,8 @@ class TextFieldWidget extends StatelessWidget {
           ),
           labelStyle: TextStyle(color: color),
           focusColor: color,
-
         ),
+        controller: controller,
         validator: (value) {
           if (value.isEmpty) {
             return '';

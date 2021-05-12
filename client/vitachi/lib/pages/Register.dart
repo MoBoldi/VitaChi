@@ -32,6 +32,7 @@ class _RegisterState extends State<Register> {
       if (mounted && url != selectedUrl) {
         setState(() {
           flutterWebViewPlugin.close();
+          Navigator.pushReplacementNamed(context, '/login');
         });
       }
     });
