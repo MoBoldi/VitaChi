@@ -219,10 +219,10 @@ public class DBRepository {
         LocalDateTime t4a = LocalDateTime.of(2021, 4, 8, 10, 0, 0,0);
         LocalDateTime t4e = LocalDateTime.of(2021, 4, 8, 14, 0, 0,0);
 
-        Arbeit a1 = new Arbeit(t1a, t1e);
-        Arbeit a2 = new Arbeit(t2a, t2e);
-        Arbeit a3 = new Arbeit(t3a, t3e);
-        Arbeit a4 = new Arbeit(t4a, t4e);
+        Arbeit a1 = new Arbeit(t1a, t1e,2);
+        Arbeit a2 = new Arbeit(t2a, t2e,2);
+        Arbeit a3 = new Arbeit(t3a, t3e,2);
+        Arbeit a4 = new Arbeit(t4a, t4e,2);
 
         this.createArbeit(a1);
         this.createArbeit(a2);
