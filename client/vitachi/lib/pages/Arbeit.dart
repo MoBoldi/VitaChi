@@ -26,7 +26,9 @@ class _ArbeitState extends State<Arbeit> {
   ArbeitClass arbeit = new ArbeitClass(DateTime.now(), DateTime.now(),0);
 
   Future<bool> getData() async {
-    Response response = await get('http://10.0.2.2:8080/vitaChi/activeArbeit');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int id = prefs.getInt("UserID");
+    Response response = await get('http://10.0.2.2:8080/vitaChi/activeArbeit/$id');
     print("response" + response.body);
       if(response.body=='true'){
         status = true;
@@ -38,7 +40,10 @@ class _ArbeitState extends State<Arbeit> {
   }
 
   Future<String> getWorkingTime() async {
-    Response response = await get('http://10.0.2.2:8080/vitaChi/getWorkingTime');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int id = prefs.getInt("UserID");
+    Response response = await get('http://10.0.2.2:8080/vitaChi/getWorkingTime/$id');
+    print(response.statusCode);
     if (response.body.startsWith("<!")){
     }else{
       timestring=response.body;
@@ -149,7 +154,7 @@ class _ArbeitState extends State<Arbeit> {
                                                         .toLocal();
                                                     arbeit.setStart(stop);
                                                     arbeit.setDauer(stop);
-                                                    String url = 'http://10.0.2.2:8080/vitaChi/updateArbeit';
+                                                    String url = 'http://10.0.2.2:8080/vitaChi/updateArbeit/$id';
                                                     Map<String,
                                                         String> headers = {
                                                       "Content-type": "application/json"
@@ -191,7 +196,7 @@ class _ArbeitState extends State<Arbeit> {
                                         child: Text(
                                           "$timestring",
                                           style: TextStyle(
-                                            fontSize: size.width / 8,
+                                            fontSize: size.width / 16,
                                             color: Colors.white,
                                           ),
                                         ),

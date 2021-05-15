@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:vitachi/entitys/Produkt.dart';
 import 'package:vitachi/pages/detail_shop.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -18,7 +19,9 @@ class _BodyState extends State<Body> {
   var products = List<Produkt>();
 
   Future<List<Produkt>> getData() async {
-    Response response = await get('http://10.0.2.2:8080/vitaChi/getOpenAccessoire/1');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int id = prefs.getInt("UserID");
+    Response response = await get('http://10.0.2.2:8080/vitaChi/getOpenAccessoire/$id');
     var productsJson = json.decode(response.body);
     for(var productJson in productsJson){
       products.add(Produkt.fromJson(productJson));

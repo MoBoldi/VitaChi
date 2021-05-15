@@ -6,6 +6,7 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatelessWidget {
   final blue = Color(0xFF4DA8DA);
@@ -17,6 +18,7 @@ class Home extends StatelessWidget {
   var schlafen = 0.0;
   var arbeit = 0.0;
   var urlgetStats = '';
+  var url = "http://10.0.2.2:8080/vitaChi";
 
   final List<ChartData> ges = [
     ChartData('Wellbeing', 3, Color(0xFF4DA8DA)),
@@ -43,38 +45,49 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     Future getData() async {
-      Response response =
-          await get('http://10.0.2.2:8080/vitaChi/getWohlbefinden');
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
+      Response response = await get(url+'/getWohlbefinden/$id');
       wellbeing = double.parse(response.body);
     }
 
     Future getEssenAVG() async {
-      Response response = await get('http://10.0.2.2:8080/vitaChi/getEssenAVG');
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
+      Response response = await get(url+'/getEssenAVG/$id');
       essen = double.parse(response.body);
       food[0].y = essen;
       food[1].y = 5 - essen;
     }
 
     Future getBewegungAVG() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
       Response response =
-          await get('http://10.0.2.2:8080/vitaChi/getBewegungAVG');
+          await get(url+'/getBewegungAVG/$id');
       bewegung = double.parse(response.body);
       movement[0].y = bewegung;
       movement[1].y = 5 - bewegung;
     }
 
     Future getSchlafAVG() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
       Response response =
-          await get('http://10.0.2.2:8080/vitaChi/getSchlafAVG');
+          await get(url+'/getSchlafAVG/$id');
       schlafen = double.parse(response.body);
       sleep[0].y = schlafen;
       sleep[1].y = 5 - schlafen;
     }
 
     Future getWorkingHours() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
       Response response =
-      await get('http://10.0.2.2:8080/vitaChi/getWokringPerWeek');
+      await get(url+'/getWokringPerWeek/$id');
+      print(response.statusCode);
       arbeit = double.parse(response.body);
       work[0].y = arbeit;
       work[1].y = 38.5-arbeit;
