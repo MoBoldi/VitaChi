@@ -42,6 +42,8 @@ class Wohnzimmer extends StatefulWidget {
 
 class _WohnzimmerState extends State<Wohnzimmer> {
   Offset position = Offset(0, 0);
+
+  String userID ="2";
   bool Slot1Displayed = false;
   int Slot1ImageNumber = 1000;
   AssetImage Slot1ImagePfad;
@@ -161,11 +163,18 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                       print("onAccept 1");
                       print("Dropped item NR  $data  on Slot $slot1");
 
-                      setState(() {
+                      setState(() async{
                           Slot1Displayed = true;
                           Slot1ImageNumber = data;
                           Slot1ImagePfad =
                               AssetImage(products[Slot1ImageNumber].bildpfad);
+
+
+                              String url = 'http://10.0.2.2:8080/vitaChi/placeMoebel/$userID/$Slot1ImageNumber/$slot1';
+                             Map<String, String> headers = {"Content-type": "application/json"};
+
+                              Response response = await post(url, headers: headers, body: json);
+
                         },
                       );
 
