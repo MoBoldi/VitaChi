@@ -6,6 +6,7 @@ import 'package:vitachi/entitys/Eingaben.dart';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Schlafen extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class Schlafen extends StatefulWidget {
 }
 
 class _SchlafenState extends State<Schlafen> {
-  Eingaben schlafeingaben = new Eingaben(0, 0, "");
+  Eingaben schlafeingaben = new Eingaben(0, 0, "", 0);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -125,6 +126,9 @@ class _SchlafenState extends State<Schlafen> {
                                 ),
                                 onPressed: () async {
                                   schlafeingaben.setTyp("Schlaf");
+                                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                                  int id = prefs.getInt("UserID");
+                                  schlafeingaben.setUserid(id);
                                   String url = 'http://10.0.2.2:8080/vitaChi/createEingabe';
                                   Map<String, String> headers = {"Content-type": "application/json"};
                                   String json = jsonEncode(<String, Object>{'eingabe': schlafeingaben});

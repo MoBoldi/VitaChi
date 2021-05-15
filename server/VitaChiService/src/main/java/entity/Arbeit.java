@@ -21,15 +21,17 @@ public class Arbeit {
 
     public Arbeit(){}
 
-    public Arbeit(LocalDateTime startdatum, LocalDateTime dauer) {
+    public Arbeit(LocalDateTime startdatum, LocalDateTime dauer, int userID) {
         this.startdatum = startdatum;
         this.dauer = dauer;
+        this.userID = userID;
     }
 
-    public Arbeit(long arbeitID, LocalDateTime startdatum, LocalDateTime dauer) {
+    public Arbeit(long arbeitID, LocalDateTime startdatum, LocalDateTime dauer, int userID) {
         this.arbeitID = arbeitID;
         this.startdatum = startdatum;
         this.dauer = dauer;
+        this.userID = userID;
     }
     //<editor-fold desc="Getter und Setter">
 
