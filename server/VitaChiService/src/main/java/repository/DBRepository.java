@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import java.awt.geom.Area;
+import java.lang.reflect.Type;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -42,23 +43,27 @@ public class DBRepository {
         }
     }
 
-    public Double getWohlbefinden() {
+    public Double getWohlbefinden(int id) {
         TypedQuery<Double> query = em.createNamedQuery("Eingabe.findAll", Double.class);
+        query.setParameter(1, id);
         Double e = query.getSingleResult();
         return e;
     }
-    public Double getEssen() {
+    public Double getEssen(int id) {
         TypedQuery<Double> query = em.createNamedQuery("Eingabe.findEssen", Double.class);
+        query.setParameter(1, id);
         Double e = query.getSingleResult();
         return e;
     }
-    public Double getBewegung() {
+    public Double getBewegung(int id) {
         TypedQuery<Double> query = em.createNamedQuery("Eingabe.findBewegung", Double.class);
+        query.setParameter("uid", id);
         Double e = query.getSingleResult();
         return e;
     }
-    public Double getSchlaf() {
+    public Double getSchlaf(int id) {
         TypedQuery<Double> query = em.createNamedQuery("Eingabe.findSchlaf", Double.class);
+        query.setParameter("uid", id);
         Double e = query.getSingleResult();
         return e;
     }
@@ -120,32 +125,45 @@ public class DBRepository {
     }
 
     @Transactional
-    public List<Arbeit> findLastEntry(){
-        return em.createQuery("select a from Arbeit as a order by a.arbeitID desc").setMaxResults(1).getResultList();
+    public List<Arbeit> findLastEntry(long id){
+        TypedQuery<Arbeit> query = em.createQuery("select a from Arbeit as a where a.userID=:uid order by a.arbeitID desc", Arbeit.class);
+        query.setParameter("uid", id);
+        return query.setMaxResults(1).getResultList();
     }
 
     @Transactional
-    public String getWorkingTime(){
-        List<Arbeit> a = findLastEntry();
+    public String getWorkingTime(long id){
+        List<Arbeit> a = findLastEntry(id);
 
         LocalDateTime start = a.get(0).getStartdatum();
         LocalDateTime ende = a.get(0).getDauer();
 
-        long millis = Duration.between(start, ende).toMillis();
+        if (ende!=null){
 
-        String result = String.format("%02d:%02d:%02d",
-                TimeUnit.MILLISECONDS.toHours(millis),
-                TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+            long millis = Duration.between(start, ende).toMillis();
 
-        return result;
+            String result = String.format("%02d:%02d:%02d",
+                    TimeUnit.MILLISECONDS.toHours(millis),
+                    TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                    TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+            return result;
+        }else{
+            return "Started at " + a.get(0).getStartdatum().getHour() + ":" + a.get(0).getStartdatum().getMinute() + ":" + a.get(0).getStartdatum().getSecond();
+        }
+
+
+
+
+
     }
 
-    public double getWorkingPerWeek(){
+    public double getWorkingPerWeek(long id){
         double workingHours = 0.0;
         LocalDateTime localDateTime = LocalDateTime.now();
         int kalenderWoche = localDateTime.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
-        List<Arbeit> al = em.createQuery("select a from Arbeit as a").getResultList();
+        TypedQuery query = em.createQuery("select a from Arbeit as a where a.userID=:id", Arbeit.class);
+        query.setParameter("id",id);
+        List<Arbeit> al = query.getResultList();
         for (Arbeit a : al){
             if(a.getStartdatum().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)==kalenderWoche){
                 workingHours += Duration.between(a.getStartdatum(), a.getDauer()).toHours();
@@ -155,9 +173,9 @@ public class DBRepository {
     }
 
     @Transactional
-    public String activeArbeit(){
+    public String activeArbeit(long id){
         LocalDateTime date = LocalDateTime.of(0,1,1,0,0,0,0);
-        List<Arbeit> a = findLastEntry();
+        List<Arbeit> a = findLastEntry(id);
         if (a.isEmpty()==true){
             return "empty";
         }else{

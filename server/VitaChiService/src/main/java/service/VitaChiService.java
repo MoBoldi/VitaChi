@@ -1,18 +1,13 @@
 package service;
 
 import entity.*;
-import org.apache.derby.client.am.DateTime;
-import org.jboss.resteasy.annotations.Query;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import repository.DBRepository;
-import org.jboss.resteasy.annotations.jaxrs.*;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -153,18 +148,19 @@ public class VitaChiService {
         return "Updated";
     }
 
-    @Path("getWorkingTime")
+    @Path("getWorkingTime/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getWorkingTime() {
-        return repo.getWorkingTime();
+    public String getWorkingTime(@PathParam long id) {
+        return repo.getWorkingTime(id);
     }
 
-    @Path("updateArbeit")
+    @Path("updateArbeit/{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public String updateArbeit(JsonObject json) {
-        List<Arbeit> l = repo.findLastEntry();
+    @Produces(MediaType.TEXT_PLAIN)
+    public String updateArbeit(@PathParam("id") long id, JsonObject json) {
+        List<Arbeit> l = repo.findLastEntry(id);
         Arbeit a = l.get(0);
         LocalDateTime dauer = LocalDateTime.parse(json.getJsonObject("arbeit").getString("dauer"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
         int userid = json.getJsonObject("arbeit").getInt("userid");
@@ -173,10 +169,10 @@ public class VitaChiService {
         return "Object updated";
     }
 
-    @Path("getWohlbefinden")
+    @Path("getWohlbefinden/{id}")
     @GET
-    public Double getWohlbefinden() {
-        return repo.getWohlbefinden();
+    public Double getWohlbefinden(@PathParam int id) {
+        return repo.getWohlbefinden(id);
     }
 
     @Path("init")
@@ -185,35 +181,35 @@ public class VitaChiService {
         repo.initDB();
     }
 
-    @Path("getEssenAVG")
+    @Path("getEssenAVG/{id}")
     @GET
-    public Double getEssen() {
+    public Double getEssen(@PathParam int id) {
 
-        return repo.getEssen();
+        return repo.getEssen(id);
     }
 
-    @Path("activeArbeit")
+    @Path("activeArbeit/{id}")
     @GET
-    public String activeArbeit() {
-        return repo.activeArbeit();
+    public String activeArbeit(@PathParam long id) {
+        return repo.activeArbeit(id);
     }
 
-    @Path("getBewegungAVG")
+    @Path("getBewegungAVG/{id}")
     @GET
-    public Double getBewegung() {
-        return repo.getBewegung();
+    public Double getBewegung(@PathParam int id) {
+        return repo.getBewegung(id);
     }
 
-    @Path("getSchlafAVG")
+    @Path("getSchlafAVG/{id}")
     @GET
-    public Double getSchlaf() {
-        return repo.getSchlaf();
+    public Double getSchlaf(@PathParam int id) {
+        return repo.getSchlaf(id);
     }
 
-    @Path("getWokringPerWeek")
+    @Path("getWokringPerWeek/{id}")
     @GET
-    public Double getWokringPerWeek(){
-        return repo.getWorkingPerWeek();
+    public Double getWokringPerWeek(@PathParam long id){
+        return repo.getWorkingPerWeek(id);
     }
 
     @Path("createBenutzerAccessoire")
@@ -235,7 +231,7 @@ public class VitaChiService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Arbeit> getStartOfWorking(){
-        return repo.findLastEntry();
+        return repo.findLastEntry(2);
     }
 
 }
