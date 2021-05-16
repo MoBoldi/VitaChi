@@ -9,6 +9,7 @@ import repository.DBRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.json.JsonObject;
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.core.MediaType;
@@ -17,6 +18,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -191,8 +193,16 @@ public class VitaChiService {
     @Path("newUser")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void newUser(String token) {
-        System.out.println(token);
+    @Produces(MediaType.APPLICATION_JSON)
+    public JsonObject newUser(JsonObject json) {
+
+        String token = json.getString("token");
+
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getDecoder();
+        String payload = new String(decoder.decode(chunks[1]));
+
+        return json;
     }
 
 }

@@ -95,24 +95,4 @@ class _RegisterState extends State<Register> {
       )
     );
   }
-
-  void getCookies() async {
-    final gotCookies = await cookieManager.getCookies("http://10.0.2.2:8010/auth/realms/vitachi/");
-    print(getCookies.toString());
-    /*for (var item in gotCookies) {
-      print("Seas: ");
-      print(item);
-    }*/
-  }
-
-  /*String getCookies(String cookies) {
-    if (null == cookies || cookies.isEmpty) {
-      return null;
-    }
-    final List<String> cookieList = cookies.split(';');
-    final Iterable<Text> cookieWidgets = cookieList.map(
-          (String cookie) => Text(cookie),
-    );
-    return cookieList.first;
-  }*/
 }
