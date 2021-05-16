@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class User implements Serializable {
+public class UserEnt implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,9 +15,9 @@ public class User implements Serializable {
 
     private String keycloakId;
 
-    public User() {}
+    public UserEnt() {}
 
-    public User(String keycloakId) {
+    public UserEnt(String keycloakId) {
         this.keycloakId = keycloakId;
     }
 

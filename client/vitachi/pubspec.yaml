@@ -44,6 +44,7 @@ dependencies:
   webview_flutter: ^0.1.1
   url_launcher: ^4.0.2
   flutter_webview_plugin: ^0.3.11
+  webview_cookie_manager: ^2.0.0
 
 
 dev_dependencies:

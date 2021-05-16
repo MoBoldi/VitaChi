@@ -9,6 +9,7 @@ import 'package:vitachi/pages/WaveWidget.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_cookie_manager/webview_cookie_manager.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -17,9 +18,11 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
 
+  final cookieManager = WebviewCookieManager();
   final Color color = Color(0xff3f8ee9);
   final flutterWebViewPlugin = FlutterWebviewPlugin();
 
+  String token;
   String selectedUrl = 'http://10.0.2.2:8010/auth/realms/vitachi/protocol/openid-connect/registrations?client_id=account&response_type=code&scope=email&kc_locale=de';
 
   StreamSubscription<String> _onUrlChanged;
@@ -32,19 +35,22 @@ class _RegisterState extends State<Register> {
     _onUrlChanged = flutterWebViewPlugin.onUrlChanged.listen((String url) async {
       if (mounted && url != selectedUrl) {
 
-          final String cookies = await flutterWebViewPlugin.evalJavascript('document.cookie.split(";")');
+        final gotCookies = await cookieManager.getCookies("http://10.0.2.2:8010/auth/realms/vitachi/");
 
-          print(cookies);
+        for (var item in gotCookies) {
+          if(item.name == "KEYCLOAK_IDENTITY_LEGACY") {
+            token = item.value;
+          }
+        }
 
-          /*String url = 'http://10.0.2.2:8080/vitaChi/createEingabe';
-          Map<String, String> headers = {"Content-type": "application/json"};
-          String json = jsonEncode(<String, Object>{'token': essenEingaben});
-          print(json);
-          Response response = await post(url, headers: headers, body: json);
-          print(response.statusCode);*/
+        String url = 'http://10.0.2.2:8080/vitaChi/newUser';
+        Map<String, String> headers = {"Content-type": "application/json"};
+        String json = jsonEncode(<String, Object>{'token': token});
+        Response response = await post(url, headers: headers, body: json);
+        print(response.statusCode);
 
-          //flutterWebViewPlugin.close();
-          //Navigator.pushReplacementNamed(context, '/login');
+        flutterWebViewPlugin.close();
+        Navigator.pushReplacementNamed(context, '/login');
       }
     });
   }
@@ -90,7 +96,16 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  String getCookies(String cookies) {
+  void getCookies() async {
+    final gotCookies = await cookieManager.getCookies("http://10.0.2.2:8010/auth/realms/vitachi/");
+    print(getCookies.toString());
+    /*for (var item in gotCookies) {
+      print("Seas: ");
+      print(item);
+    }*/
+  }
+
+  /*String getCookies(String cookies) {
     if (null == cookies || cookies.isEmpty) {
       return null;
     }
@@ -99,5 +114,5 @@ class _RegisterState extends State<Register> {
           (String cookie) => Text(cookie),
     );
     return cookieList.first;
-  }
+  }*/
 }
