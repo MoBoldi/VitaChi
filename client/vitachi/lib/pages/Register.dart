@@ -38,10 +38,12 @@ class _RegisterState extends State<Register> {
         final gotCookies = await cookieManager.getCookies("http://10.0.2.2:8010/auth/realms/vitachi/");
 
         for (var item in gotCookies) {
-          if(item.name == "KEYCLOAK_IDENTITY_LEGACY") {
+          if(item.name == "KEYCLOAK_IDENTITY_LEGACY" || item.name == "KEYCLOAK_IDENTITY") {
             token = item.value;
           }
         }
+
+        print("Token: " + token);
 
         String url = 'http://10.0.2.2:8080/vitaChi/newUser';
         Map<String, String> headers = {"Content-type": "application/json"};

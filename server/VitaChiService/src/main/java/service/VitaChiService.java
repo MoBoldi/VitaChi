@@ -4,6 +4,9 @@ import entity.Eingabe;
 import entity.Accessoire;
 import entity.Arbeit;
 import entity.Aufgaben;
+import org.jose4j.json.internal.json_simple.JSONObject;
+import org.jose4j.json.internal.json_simple.parser.JSONParser;
+import org.jose4j.json.internal.json_simple.parser.ParseException;
 import repository.DBRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -202,7 +205,40 @@ public class VitaChiService {
         Base64.Decoder decoder = Base64.getDecoder();
         String payload = new String(decoder.decode(chunks[1]));
 
+        JSONParser parser = new JSONParser();
+        JSONObject payloadObject = new JSONObject();
+        try {
+            payloadObject = (JSONObject) parser.parse(payload);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        repo.newUser(payloadObject.get("sub").toString());
+
         return json;
+    }
+
+    @Path("getUser")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public int getUser(JsonObject json) {
+
+        String token = json.getString("token");
+
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getDecoder();
+        String payload = new String(decoder.decode(chunks[1]));
+
+        JSONParser parser = new JSONParser();
+        JSONObject payloadObject = new JSONObject();
+        try {
+            payloadObject = (JSONObject) parser.parse(payload);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return repo.getUser(payloadObject.get("sub").toString());
+
     }
 
 }
