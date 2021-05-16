@@ -188,4 +188,11 @@ public class VitaChiService {
         return repo.getSchlaf();
     }
 
+    @Path("newUser")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void newUser(String token) {
+        System.out.println(token);
+    }
+
 }

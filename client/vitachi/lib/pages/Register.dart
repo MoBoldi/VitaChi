@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:vitachi/pages/TextFieldWidget.dart';
 import 'package:vitachi/pages/WaveWidget.dart';
 import 'package:http/http.dart' as http;
@@ -28,12 +29,22 @@ class _RegisterState extends State<Register> {
     super.initState();
     flutterWebViewPlugin.close();
 
-    _onUrlChanged = flutterWebViewPlugin.onUrlChanged.listen((String url) {
+    _onUrlChanged = flutterWebViewPlugin.onUrlChanged.listen((String url) async {
       if (mounted && url != selectedUrl) {
-        setState(() {
-          flutterWebViewPlugin.close();
-          Navigator.pushReplacementNamed(context, '/login');
-        });
+
+          final String cookies = await flutterWebViewPlugin.evalJavascript('document.cookie.split(";")');
+
+          print(cookies);
+
+          /*String url = 'http://10.0.2.2:8080/vitaChi/createEingabe';
+          Map<String, String> headers = {"Content-type": "application/json"};
+          String json = jsonEncode(<String, Object>{'token': essenEingaben});
+          print(json);
+          Response response = await post(url, headers: headers, body: json);
+          print(response.statusCode);*/
+
+          //flutterWebViewPlugin.close();
+          //Navigator.pushReplacementNamed(context, '/login');
       }
     });
   }
@@ -77,5 +88,16 @@ class _RegisterState extends State<Register> {
         ],
       )
     );
+  }
+
+  String getCookies(String cookies) {
+    if (null == cookies || cookies.isEmpty) {
+      return null;
+    }
+    final List<String> cookieList = cookies.split(';');
+    final Iterable<Text> cookieWidgets = cookieList.map(
+          (String cookie) => Text(cookie),
+    );
+    return cookieList.first;
   }
 }
