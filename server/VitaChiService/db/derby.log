@@ -1,7 +1,7 @@
-Mon May 17 08:08:39 CEST 2021 : Apache Derby Network Server - 10.15.2.0 - (1873585) started and ready to accept connections on port 1527
+Mon May 17 19:46:41 CEST 2021 : Apache Derby Network Server - 10.15.2.0 - (1873585) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Mon May 17 08:08:54 CEST 2021:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0179-78f0-d1e9-00005d376287 
+Mon May 17 19:47:09 CEST 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0179-7b6f-e43e-00005d376287 
 on database directory C:\Users\Markus Stadler\Documents\HTL\4.Klasse\ITP\Projekt2021\VitaChi\server\VitaChiService\db\vitaChiDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a 
 Loaded from file:/C:/opt/db-derby-10.15.2.0-bin/lib/derby.jar
 java.vendor=Oracle Corporation
