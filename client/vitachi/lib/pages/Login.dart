@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vitachi/ChangeListener/loginListener.dart';
 import 'package:vitachi/pages/TextFieldWidget.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
+import 'package:webview_cookie_manager/webview_cookie_manager.dart';
 
 import 'WaveWidget.dart';
 
@@ -171,6 +173,10 @@ class _LoginState extends State<Login> {
 
 Future<bool> getData() async {
 
+  final cookieManager = WebviewCookieManager();
+
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   final authorizationEndpoint =
   Uri.parse('http://10.0.2.2:8010/auth/realms/vitachi/protocol/openid-connect/token');
 
@@ -186,6 +192,19 @@ Future<bool> getData() async {
         identifier: identifier, secret: secret);
 
     print(client.credentials.accessToken);
+
+    print(client.credentials.refreshToken);
+
+    final gotCookies = await cookieManager.getCookies("http://10.0.2.2:8010/auth/realms/vitachi/");
+
+    for (var item in gotCookies) {
+      if(item.name == "KEYCLOAK_SESSION_LEGACY" || item.name == "KEYCLOAK_SESSION") {
+        print(item.value);
+      }
+    }
+
+    final SharedPreferences prefs = await _prefs;
+    prefs.setString("accessToken", client.credentials.accessToken);
 
     return true;
   } catch (error) {

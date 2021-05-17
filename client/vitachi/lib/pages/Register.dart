@@ -43,8 +43,6 @@ class _RegisterState extends State<Register> {
           }
         }
 
-        print("Token: " + token);
-
         String url = 'http://10.0.2.2:8080/vitaChi/newUser';
         Map<String, String> headers = {"Content-type": "application/json"};
         String json = jsonEncode(<String, Object>{'token': token});
@@ -52,7 +50,7 @@ class _RegisterState extends State<Register> {
         print(response.statusCode);
 
         flutterWebViewPlugin.close();
-        Navigator.pushReplacementNamed(context, '/login');
+        Navigator.pushReplacementNamed(context, '/');
       }
     });
   }
