@@ -1,14 +1,17 @@
 package entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import javax.inject.Named;
 import javax.persistence.*;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Eingabe.findAll", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e"),
-        @NamedQuery(name = "Eingabe.findEssen", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e where e.typ='Essen'"),
-        @NamedQuery(name = "Eingabe.findBewegung", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e where e.typ='Bewegung'"),
-        @NamedQuery(name = "Eingabe.findSchlaf", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e where e.typ='Schlaf'"),
+        @NamedQuery(name = "Eingabe.findAll", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e where e.userid=?1"),
+        @NamedQuery(name = "Eingabe.findEssen", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e where e.typ='Essen' and e.userid=?1"),
+        @NamedQuery(name = "Eingabe.findBewegung", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e where e.typ='Bewegung'and e.userid= :uid"),
+        @NamedQuery(name = "Eingabe.findSchlaf", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e where e.typ='Schlaf'and e.userid= :uid"),
+        @NamedQuery(name = "Eingabe.findByType", query = "SELECT e from Eingabe e where e.typ = :type"),
+        @NamedQuery(name = "Eingabe.getStats", query = "SELECT count(e.bewertung1), count(e.bewertung2) FROM Eingabe e where e.typ = :type"),
 })
 public class Eingabe {
 
@@ -20,18 +23,29 @@ public class Eingabe {
     private int bewertung1;
     private int bewertung2;
     private LocalDate datum;
+    private int userid;
 
 
     public Eingabe(){}
 
-    public Eingabe(int bewertung1, int bewertung2, String typ) {
+    public Eingabe(int bewertung1, int bewertung2, String typ, int userid) {
         this.typ = typ;
         this.bewertung1 = bewertung1;
         this.bewertung2 = bewertung2;
         this.datum = LocalDate.now();
+        this.userid = userid;
     }
 
     //<editor-fold desc="Getter und Setter">
+
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
 
     public String getTyp() {
         return typ;

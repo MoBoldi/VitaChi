@@ -23,10 +23,12 @@ class _ArbeitState extends State<Arbeit> {
   var stop;
   var status;
   final Color color = Color(0xFF3D6845);
-  ArbeitClass arbeit = new ArbeitClass(DateTime.now(), DateTime.now());
+  ArbeitClass arbeit = new ArbeitClass(DateTime.now(), DateTime.now(),0);
 
   Future<bool> getData() async {
-    Response response = await get('http://10.0.2.2:8080/vitaChi/activeArbeit');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int id = prefs.getInt("UserID");
+    Response response = await get('http://10.0.2.2:8080/vitaChi/activeArbeit/$id');
     print("response" + response.body);
       if(response.body=='true'){
         status = true;
@@ -38,8 +40,10 @@ class _ArbeitState extends State<Arbeit> {
   }
 
   Future<String> getWorkingTime() async {
-    Response response = await get('http://10.0.2.2:8080/vitaChi/getWorkingTime');
-    print("response" + response.body);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int id = prefs.getInt("UserID");
+    Response response = await get('http://10.0.2.2:8080/vitaChi/getWorkingTime/$id');
+    print(response.statusCode);
     if (response.body.startsWith("<!")){
     }else{
       timestring=response.body;
@@ -120,6 +124,9 @@ class _ArbeitState extends State<Arbeit> {
                                                     .play_arrow_outlined,
                                                 iconOff: Icons.stop,
                                                 onTap: () async {
+                                                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                                                  int id = prefs.getInt("UserID");
+                                                  arbeit.setUserid(id);
                                                   if (status == true) {
                                                     start = DateTime.now()
                                                         .toLocal();
@@ -134,10 +141,12 @@ class _ArbeitState extends State<Arbeit> {
                                                         <String, Object>{
                                                           'arbeit': arbeit
                                                         });
+                                                    setState(() {
+                                                      timestring="";
+                                                    });
                                                     Response response = await post(
                                                         url, headers: headers,
                                                         body: json);
-                                                    print(response.statusCode);
                                                     await Future.delayed(Duration(seconds: 1));
                                                     Navigator.pushReplacementNamed(context, '/',);
                                                   } else {
@@ -145,7 +154,7 @@ class _ArbeitState extends State<Arbeit> {
                                                         .toLocal();
                                                     arbeit.setStart(stop);
                                                     arbeit.setDauer(stop);
-                                                    String url = 'http://10.0.2.2:8080/vitaChi/updateArbeit';
+                                                    String url = 'http://10.0.2.2:8080/vitaChi/updateArbeit/$id';
                                                     Map<String,
                                                         String> headers = {
                                                       "Content-type": "application/json"
@@ -157,7 +166,9 @@ class _ArbeitState extends State<Arbeit> {
                                                     Response response = await put(
                                                         url, headers: headers,
                                                         body: json);
-                                                    print(response.statusCode);
+
+
+
                                                     Navigator.pushReplacementNamed(context, '/arbeit',);
                                                   }
                                                 },
@@ -169,7 +180,7 @@ class _ArbeitState extends State<Arbeit> {
                                               margin: EdgeInsets.only(top: size.height/15),
                                             );
                                           }else{
-                                            return Image(image: AssetImage('assets/LogoSlider.png'));
+                                            return Image(image: AssetImage('assets/LogoSlider.png'), width: size.width/4);
                                           }
                                         }
                                       ),
@@ -185,14 +196,14 @@ class _ArbeitState extends State<Arbeit> {
                                         child: Text(
                                           "$timestring",
                                           style: TextStyle(
-                                            fontSize: size.width / 8,
+                                            fontSize: size.width / 16,
                                             color: Colors.white,
                                           ),
                                         ),
                                         margin: EdgeInsets.only(top: size.height/30),
                                       );
                                     }else{
-                                      return Image(image: AssetImage('assets/LogoSlider.png'));
+                                      return Image(image: AssetImage('assets/LogoSlider.png'), width: size.width/5);
                                     }
                                   },
                                 ),

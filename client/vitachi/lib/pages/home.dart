@@ -6,6 +6,7 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatelessWidget {
   final blue = Color(0xFF4DA8DA);
@@ -15,7 +16,9 @@ class Home extends StatelessWidget {
   var essen = 0.0;
   var bewegung = 0.0;
   var schlafen = 0.0;
+  var arbeit = 0.0;
   var urlgetStats = '';
+  var url = "http://10.0.2.2:8080/vitaChi";
 
   final List<ChartData> ges = [
     ChartData('Wellbeing', 3, Color(0xFF4DA8DA)),
@@ -34,41 +37,60 @@ class Home extends StatelessWidget {
     ChartData('', 0.1, Color(0xFF9dc6dd)),
   ];
   final List<ChartData> work = [
-    ChartData('Work', 30, Color(0xFF4DA8DA)),
-    ChartData('', 20, Color(0xFF9dc6dd)),
+    ChartData('Work', 0, Color(0xFF4DA8DA)),
+    ChartData('', 0.1, Color(0xFF9dc6dd)),
   ];
 
   Map data = {};
 
   @override
   Widget build(BuildContext context) {
+
     Future getData() async {
-      Response response =
-          await get('http://10.0.2.2:8080/vitaChi/getWohlbefinden');
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
+      Response response = await get(url+'/getWohlbefinden/$id');
       wellbeing = double.parse(response.body);
     }
 
     Future getEssenAVG() async {
-      Response response = await get('http://10.0.2.2:8080/vitaChi/getEssenAVG');
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
+      Response response = await get(url+'/getEssenAVG/$id');
       essen = double.parse(response.body);
       food[0].y = essen;
       food[1].y = 5 - essen;
     }
 
     Future getBewegungAVG() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
       Response response =
-          await get('http://10.0.2.2:8080/vitaChi/getBewegungAVG');
+          await get(url+'/getBewegungAVG/$id');
       bewegung = double.parse(response.body);
       movement[0].y = bewegung;
       movement[1].y = 5 - bewegung;
     }
 
     Future getSchlafAVG() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
       Response response =
-          await get('http://10.0.2.2:8080/vitaChi/getSchlafAVG');
+          await get(url+'/getSchlafAVG/$id');
       schlafen = double.parse(response.body);
       sleep[0].y = schlafen;
       sleep[1].y = 5 - schlafen;
+    }
+
+    Future getWorkingHours() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
+      Response response =
+      await get(url+'/getWokringPerWeek/$id');
+      print(response.statusCode);
+      arbeit = double.parse(response.body);
+      work[0].y = arbeit;
+      work[1].y = 38.5-arbeit;
     }
 
     double chartWidth = MediaQuery.of(context).size.width / 5;
@@ -252,18 +274,21 @@ class Home extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                //Arbeit chart
-                width: chartWidth,
-                height: chartHeight,
-                margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.75,
-                  top: MediaQuery.of(context).size.height / 1.425,
-                ),
-                child: getChart(work, context, "/arbeit"),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
+              FutureBuilder(
+                future: getWorkingHours(),
+                builder: (context, snapshot) => Container(
+                  //Arbeit chart
+                  width: chartWidth,
+                  height: chartHeight,
+                  margin: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.75,
+                    top: MediaQuery.of(context).size.height / 1.425,
+                  ),
+                  child: getChart(work, context, "/arbeit"),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
@@ -354,7 +379,7 @@ int getRating(double wellbeing) {
 
 AssetImage getEmotion(double wellbeing) {
   if (1 <= wellbeing && wellbeing < 2) {
-    return AssetImage('assets/Blume_1.png');
+    return AssetImage('assets/5_traurig.gif');
   } else if (2 <= wellbeing && wellbeing < 3) {
     return AssetImage('assets/4_traurig.gif');
   } else if (3 <= wellbeing && wellbeing < 4) {

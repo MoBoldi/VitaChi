@@ -119,13 +119,20 @@ class _LoginState extends State<Login> {
                                       primary: Color(0xff3f8ee9),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(50))),
+                                          BorderRadius.circular(50))),
                                   onPressed: () {
                                     Future<bool> response = getData();
                                     response.then((value) => {
                                       if (eingaben.currentState.validate() && value == true) {
+<<<<<<< HEAD
                                         usernameController.clear(),
                                         passwordController.clear(),
+=======
+
+                                        usernameController.clear(),
+                                        passwordController.clear(),
+
+>>>>>>> bccab8da340b88f77aec29a3abf8257183cb6e24
                                         Navigator.pushNamed(context, '/')
                                       }
                                     });
@@ -173,8 +180,11 @@ class _LoginState extends State<Login> {
 
 Future<bool> getData() async {
 
+<<<<<<< HEAD
   final cookieManager = WebviewCookieManager();
 
+=======
+>>>>>>> bccab8da340b88f77aec29a3abf8257183cb6e24
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   final authorizationEndpoint =
@@ -192,6 +202,7 @@ Future<bool> getData() async {
         identifier: identifier, secret: secret);
 
     print(client.credentials.accessToken);
+<<<<<<< HEAD
 
     print(client.credentials.refreshToken);
 
@@ -205,9 +216,19 @@ Future<bool> getData() async {
 
     final SharedPreferences prefs = await _prefs;
     prefs.setString("accessToken", client.credentials.accessToken);
+=======
+    print(client.credentials.refreshToken);
+
+    final SharedPreferences prefs = await _prefs;
+    prefs.setInt("UserID", 1);
+>>>>>>> bccab8da340b88f77aec29a3abf8257183cb6e24
 
     return true;
   } catch (error) {
     return false;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> bccab8da340b88f77aec29a3abf8257183cb6e24

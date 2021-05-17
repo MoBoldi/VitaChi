@@ -1,14 +1,18 @@
 package service;
 
+<<<<<<< HEAD
 import entity.Eingabe;
 import entity.Accessoire;
 import entity.Arbeit;
 import entity.Aufgaben;
+=======
+import entity.*;
+import org.jboss.resteasy.annotations.jaxrs.PathParam;
+>>>>>>> bccab8da340b88f77aec29a3abf8257183cb6e24
 import org.jose4j.json.internal.json_simple.JSONObject;
 import org.jose4j.json.internal.json_simple.parser.JSONParser;
 import org.jose4j.json.internal.json_simple.parser.ParseException;
 import repository.DBRepository;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.json.JsonObject;
@@ -16,11 +20,16 @@ import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.core.MediaType;
+<<<<<<< HEAD
 import javax.ws.rs.core.Response;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+=======
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+>>>>>>> bccab8da340b88f77aec29a3abf8257183cb6e24
 import java.util.Base64;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -61,12 +70,33 @@ public class VitaChiService {
         return repo.findAll(entity);
     }
 
+    // Liste aller Objekte je nach Entität senden
+    @Path("findInputByType/{Type}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Eingabe> findInputByType(@PathParam("Type") String type) {
+        return repo.findInputByType(type);
+    }
+
+    @Path("getWellbeingStats")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Object> getWellbeingStats() {return repo.getWellbeingStats();}
+
     // Ein Objekt je nach Entität senden
     @Path("find/{Entity}/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Object find(@PathParam("Entity") String entity, @PathParam("id") long id) {
         return repo.find(entity, id);
+    }
+
+    // Daten für Statistikseite senden
+    @Path("getStats/{type}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Object> getStats(@PathParam("type") String type) {
+        return repo.getStats(type);
     }
 
     // Ein Objekt je nach Entität löschen
@@ -95,7 +125,8 @@ public class VitaChiService {
         repo.createEingabe(new Eingabe(
                 json.getJsonObject("eingabe").getInt("bewertung1"),
                 json.getJsonObject("eingabe").getInt("bewertung2"),
-                json.getJsonObject("eingabe").getString("typ")
+                json.getJsonObject("eingabe").getString("typ"),
+                json.getJsonObject("eingabe").getInt("userid")
         ));
 
         return json;
@@ -119,10 +150,12 @@ public class VitaChiService {
 
         LocalDateTime start = LocalDateTime.parse(json.getJsonObject("arbeit").getString("start"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
         LocalDateTime date = LocalDateTime.of(2001,1,1,0,0,0,0);
+        int userid = json.getJsonObject("arbeit").getInt("userid");
 
         repo.createArbeit(new Arbeit(
                 start,
-                null
+                null,
+                userid
         ));
 
         return json;
@@ -137,29 +170,31 @@ public class VitaChiService {
         return "Updated";
     }
 
-    @Path("getWorkingTime")
+    @Path("getWorkingTime/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getWorkingTime() {
-        return repo.getWorkingTime();
+    public String getWorkingTime(@PathParam long id) {
+        return repo.getWorkingTime(id);
     }
 
-    @Path("updateArbeit")
+    @Path("updateArbeit/{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public String updateArbeit(JsonObject json) {
-        List<Arbeit> l = repo.findLastEntry();
+    @Produces(MediaType.TEXT_PLAIN)
+    public String updateArbeit(@PathParam("id") long id, JsonObject json) {
+        List<Arbeit> l = repo.findLastEntry(id);
         Arbeit a = l.get(0);
         LocalDateTime dauer = LocalDateTime.parse(json.getJsonObject("arbeit").getString("dauer"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
-        Arbeit aa = new Arbeit(a.getArbeitID(),a.getStartdatum(), dauer);
+        int userid = json.getJsonObject("arbeit").getInt("userid");
+        Arbeit aa = new Arbeit(a.getArbeitID(),a.getStartdatum(), dauer, userid);
         repo.updateArbeit(aa);
         return "Object updated";
     }
 
-    @Path("getWohlbefinden")
+    @Path("getWohlbefinden/{id}")
     @GET
-    public Double getWohlbefinden() {
-        return repo.getWohlbefinden();
+    public Double getWohlbefinden(@PathParam int id) {
+        return repo.getWohlbefinden(id);
     }
 
     @Path("init")
@@ -168,29 +203,105 @@ public class VitaChiService {
         repo.initDB();
     }
 
-    @Path("getEssenAVG")
+    @Path("getEssenAVG/{id}")
     @GET
-    public Double getEssen() {
+    public Double getEssen(@PathParam int id) {
 
-        return repo.getEssen();
+        return repo.getEssen(id);
     }
 
-    @Path("activeArbeit")
+    @Path("activeArbeit/{id}")
     @GET
-    public String activeArbeit() {
-        return repo.activeArbeit();
+    public String activeArbeit(@PathParam long id) {
+        return repo.activeArbeit(id);
     }
 
-    @Path("getBewegungAVG")
+    @Path("getBewegungAVG/{id}")
     @GET
-    public Double getBewegung() {
-        return repo.getBewegung();
+    public Double getBewegung(@PathParam int id) {
+        return repo.getBewegung(id);
     }
 
-    @Path("getSchlafAVG")
+    @Path("getSchlafAVG/{id}")
     @GET
-    public Double getSchlaf() {
-        return repo.getSchlaf();
+    public Double getSchlaf(@PathParam int id) {
+        return repo.getSchlaf(id);
+    }
+
+    @Path("getWokringPerWeek/{id}")
+    @GET
+    public Double getWokringPerWeek(@PathParam long id){
+        return repo.getWorkingPerWeek(id);
+    }
+
+    @Path("createBenutzerAccessoire")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public JsonObject createBenutzerAccessoire(JsonObject benutzerAccessoire) {
+        repo.createBenutzerAccessoire(new BenutzerAccessoire(benutzerAccessoire.getJsonObject("BenutzerAccessoire").getInt("userID"), benutzerAccessoire.getJsonObject("BenutzerAccessoire").getInt("accessoire")));
+        return benutzerAccessoire;
+    }
+
+    @Path("getOpenAccessoire/{userid}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Accessoire> getOpenAccessoire (@PathParam long userid){
+        return repo.getOpenAccessoires(userid);
+    }
+
+    @Path("getStartOfWorking")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Arbeit> getStartOfWorking(){
+        return repo.findLastEntry(2);
+    }
+
+    @Path("newUser")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public JsonObject newUser(JsonObject json) {
+
+        String token = json.getString("token");
+
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getDecoder();
+        String payload = new String(decoder.decode(chunks[1]));
+
+        JSONParser parser = new JSONParser();
+        JSONObject payloadObject = new JSONObject();
+        try {
+            payloadObject = (JSONObject) parser.parse(payload);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        repo.newUser(payloadObject.get("sub").toString());
+
+        return json;
+    }
+
+    @Path("getUser")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public int getUser(JsonObject json) {
+
+        String token = json.getString("token");
+
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getDecoder();
+        String payload = new String(decoder.decode(chunks[1]));
+
+        JSONParser parser = new JSONParser();
+        JSONObject payloadObject = new JSONObject();
+        try {
+            payloadObject = (JSONObject) parser.parse(payload);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return repo.getUser(payloadObject.get("sub").toString());
+
     }
 
     @Path("newUser")

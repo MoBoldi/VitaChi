@@ -5,11 +5,18 @@ import entity.*;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
+import java.awt.geom.Area;
+import java.lang.reflect.Type;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.LinkedList;
+import java.time.temporal.IsoFields;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -36,23 +43,27 @@ public class DBRepository {
         }
     }
 
-    public Double getWohlbefinden() {
+    public Double getWohlbefinden(int id) {
         TypedQuery<Double> query = em.createNamedQuery("Eingabe.findAll", Double.class);
+        query.setParameter(1, id);
         Double e = query.getSingleResult();
         return e;
     }
-    public Double getEssen() {
+    public Double getEssen(int id) {
         TypedQuery<Double> query = em.createNamedQuery("Eingabe.findEssen", Double.class);
+        query.setParameter(1, id);
         Double e = query.getSingleResult();
         return e;
     }
-    public Double getBewegung() {
+    public Double getBewegung(int id) {
         TypedQuery<Double> query = em.createNamedQuery("Eingabe.findBewegung", Double.class);
+        query.setParameter("uid", id);
         Double e = query.getSingleResult();
         return e;
     }
-    public Double getSchlaf() {
+    public Double getSchlaf(int id) {
         TypedQuery<Double> query = em.createNamedQuery("Eingabe.findSchlaf", Double.class);
+        query.setParameter("uid", id);
         Double e = query.getSingleResult();
         return e;
     }
@@ -124,33 +135,57 @@ public class DBRepository {
     }
 
     @Transactional
-    public List<Arbeit> findLastEntry(){
-        return em.createQuery("select a from Arbeit as a order by a.arbeitID desc").setMaxResults(1).getResultList();
+    public List<Arbeit> findLastEntry(long id){
+        TypedQuery<Arbeit> query = em.createQuery("select a from Arbeit as a where a.userID=:uid order by a.arbeitID desc", Arbeit.class);
+        query.setParameter("uid", id);
+        return query.setMaxResults(1).getResultList();
     }
 
     @Transactional
-    public String getWorkingTime(){
-        List<Arbeit> a = findLastEntry();
+    public String getWorkingTime(long id){
+        List<Arbeit> a = findLastEntry(id);
 
         LocalDateTime start = a.get(0).getStartdatum();
         LocalDateTime ende = a.get(0).getDauer();
 
-        long millis = Duration.between(start, ende).toMillis();
+        if (ende!=null){
 
-        String result = String.format("%02d:%02d:%02d",
-                TimeUnit.MILLISECONDS.toHours(millis),
-                TimeUnit.MILLISECONDS.toMinutes(millis) -
-                        TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-                TimeUnit.MILLISECONDS.toSeconds(millis) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+            long millis = Duration.between(start, ende).toMillis();
 
-        return result;
+            String result = String.format("%02d:%02d:%02d",
+                    TimeUnit.MILLISECONDS.toHours(millis),
+                    TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                    TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+            return result;
+        }else{
+            return "Started at " + a.get(0).getStartdatum().getHour() + ":" + a.get(0).getStartdatum().getMinute() + ":" + a.get(0).getStartdatum().getSecond();
+        }
+
+
+
+
+
+    }
+
+    public double getWorkingPerWeek(long id){
+        double workingHours = 0.0;
+        LocalDateTime localDateTime = LocalDateTime.now();
+        int kalenderWoche = localDateTime.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+        TypedQuery query = em.createQuery("select a from Arbeit as a where a.userID=:id", Arbeit.class);
+        query.setParameter("id",id);
+        List<Arbeit> al = query.getResultList();
+        for (Arbeit a : al){
+            if(a.getStartdatum().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)==kalenderWoche){
+                workingHours += Duration.between(a.getStartdatum(), a.getDauer()).toHours();
+            }
+        }
+        return workingHours;
     }
 
     @Transactional
-    public String activeArbeit(){
+    public String activeArbeit(long id){
         LocalDateTime date = LocalDateTime.of(0,1,1,0,0,0,0);
-        List<Arbeit> a = findLastEntry();
+        List<Arbeit> a = findLastEntry(id);
         if (a.isEmpty()==true){
             return "empty";
         }else{
@@ -163,6 +198,20 @@ public class DBRepository {
         }
     }
 
+    @Transactional
+    public BenutzerAccessoire createBenutzerAccessoire(BenutzerAccessoire benutzerAccessoire){
+        em.persist(benutzerAccessoire);
+        return benutzerAccessoire;
+    }
+
+    @Transactional
+    public List<Accessoire> getOpenAccessoires(long userid){
+        Query q =  em.createQuery("select a from Accessoire as a where a NOT IN (select ba.accessoire from BenutzerAccessoire as ba where ba.userID = ?1)");
+        q.setParameter(1, userid);
+        return q.getResultList();
+    }
+
+
 
     //Wohlbefinden berechnen
     @Transactional
@@ -172,14 +221,14 @@ public class DBRepository {
 
     //Erste Testdatensätze einfügen
     public void initDB() {
-        Eingabe e1 = new Eingabe(1,2,"Essen");
-        Eingabe e2 = new Eingabe(1,3,"Essen");
+        Eingabe e1 = new Eingabe(1,2,"Essen",2);
+        Eingabe e2 = new Eingabe(1,3,"Essen",2);
 
-        Eingabe e3 = new Eingabe(2,3,"Bewegung");
-        Eingabe e4 = new Eingabe(1,1,"Bewegung");
+        Eingabe e3 = new Eingabe(2,3,"Bewegung",2);
+        Eingabe e4 = new Eingabe(1,1,"Bewegung",2);
 
-        Eingabe e5 = new Eingabe(5,5,"Schlaf");
-        Eingabe e6 = new Eingabe(5,4, "Schlaf");
+        Eingabe e5 = new Eingabe(5,5,"Schlaf",2);
+        Eingabe e6 = new Eingabe(5,4, "Schlaf",2);
 
         this.createEingabe(e1);
         this.createEingabe(e2);
@@ -193,11 +242,62 @@ public class DBRepository {
         LocalDateTime t2a = LocalDateTime.of(2020, 12, 25, 10, 0, 0,0);
         LocalDateTime t2e = LocalDateTime.of(2020, 12, 25, 14, 0, 0,0);
 
-        Arbeit a1 = new Arbeit(t1a, t1e);
-        Arbeit a2 = new Arbeit(t2a, t2e);
+        LocalDateTime t3a = LocalDateTime.of(2021, 4, 4, 15, 0, 0,0);
+        LocalDateTime t3e = LocalDateTime.of(2021, 4, 4, 18, 0, 0,0);
+        LocalDateTime t4a = LocalDateTime.of(2021, 4, 8, 10, 0, 0,0);
+        LocalDateTime t4e = LocalDateTime.of(2021, 4, 8, 14, 0, 0,0);
+
+        Arbeit a1 = new Arbeit(t1a, t1e,2);
+        Arbeit a2 = new Arbeit(t2a, t2e,2);
+        Arbeit a3 = new Arbeit(t3a, t3e,2);
+        Arbeit a4 = new Arbeit(t4a, t4e,2);
 
         this.createArbeit(a1);
         this.createArbeit(a2);
+        this.createArbeit(a3);
+        this.createArbeit(a4);
     }
 
+    public List<Eingabe> findInputByType(String type) {
+        TypedQuery<Eingabe> query = em.createNamedQuery("Eingabe.findByType", Eingabe.class);
+        query.setParameter("type", type);
+        List<Eingabe> e = query.getResultList();
+        return e;
+    }
+
+    public List<Object> getStats(String type) {
+        String bewertung11 = "SELECT (count(e.bewertung1)) from Eingabe e where e.typ = '"+type+"' and e.bewertung1 = 1";
+        String bewertung21 = "SELECT (count(e.bewertung2)) from Eingabe e where e.typ = '"+type+"' and e.bewertung2 = 1";
+        String bewertung15 = "SELECT (count(e.bewertung1)) from Eingabe e where e.typ = '"+type+"' and e.bewertung1 = 5";
+        String bewertung25 = "SELECT (count(e.bewertung2)) from Eingabe e where e.typ = '"+type+"' and e.bewertung2 = 5";
+        String ges = "SELECT count(e.bewertung1) + count(e.bewertung2) from Eingabe e where e.typ = '" + type + "'";
+        Query query11 = em.createNativeQuery(bewertung11);
+        Query query21 = em.createNativeQuery(bewertung15);
+        Query query15 = em.createNativeQuery(bewertung21);
+        Query query25 = em.createNativeQuery(bewertung25);
+        Query queryGes = em.createNativeQuery(ges);
+        Object result11 = query11.getSingleResult();
+        Object result15 = query15.getSingleResult();
+        Object result21 = query21.getSingleResult();
+        Object result25 = query25.getSingleResult();
+        Object resultGes = queryGes.getSingleResult();
+        System.out.println(result11);
+        System.out.println(result15);
+        System.out.println(result21);
+        System.out.println(result25);
+        System.out.println(resultGes);
+        List<Object> result = new LinkedList<>();
+        result.add((int) result11 + (int) result21);
+        result.add((int) result15 + (int) result25);
+        result.add((int) resultGes);
+        return result;
+    }
+
+    public List<Object> getWellbeingStats() {
+        String sql1 = "SELECT SUM((bewertung1 + BEWERTUNG2) / 2.0)/Count(*), DATUM from EINGABE group by DATUM";
+        Query query1 = em.createNativeQuery(sql1);
+        List<Object> result = query1.getResultList();
+        System.out.println(result);
+        return result;
+    }
 }
