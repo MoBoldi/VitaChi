@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:webview_cookie_manager/webview_cookie_manager.dart';
 
 class MyDrawer extends StatelessWidget {
   @override
@@ -151,11 +156,44 @@ class MyDrawer extends StatelessWidget {
               ],
             ),
             onTap: () {
+              logout();
               Navigator.pushReplacementNamed(context, '/login');
             },
           ),
         ],
       ),
     );
+  }
+
+  void logout() async {
+
+    final cookieManager = WebviewCookieManager();
+    String token;
+    String refresh;
+    Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+    final gotCookies = await cookieManager.getCookies("http://10.0.2.2:8010/auth/realms/vitachi/");
+
+    for (var item in gotCookies) {
+      if(item.name == "KEYCLOAK_IDENTITY_LEGACY" || item.name == "KEYCLOAK_IDENTITY") {
+        token = item.value;
+      }
+    }
+
+    if (token == null) {
+      await _prefs.then((value) => () {
+        token = value.getString("accessToken");
+        print("Seas");
+      });
+    }
+
+    print(token);
+
+    String url = 'http://10.0.2.2:8010/auth/admin/realms/vitachi/sessions/';
+    Map<String, String> headers = {"Content-type": "application/json", "Authorization": "Bearer " + token};
+    Response response = await delete(url, headers: headers);
+    print(response.statusCode);
+
+    cookieManager.clearCookies();
   }
 }

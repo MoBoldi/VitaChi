@@ -68,6 +68,13 @@ public class DBRepository {
         return e;
     }
 
+    public int getUser(String keycloakId) {
+        TypedQuery<Integer> query = em.createNamedQuery("UserEnt.findUser", Integer.class);
+        query.setParameter("keycloakId", keycloakId);
+        int e = query.getSingleResult();
+        return e;
+    }
+
     // Löschen eines Trainings
     @Transactional
     public void delete(String entity, long id) {
@@ -98,6 +105,9 @@ public class DBRepository {
     public void createArbeit(Arbeit newArbeit) {
         em.persist(newArbeit);
     }
+
+    @Transactional
+    public void newUser(String keycloakId) { em.persist(new UserEnt(keycloakId)); }
 
     // Lesen eines Trainings mit id
     public Object find(String entity, long id) {

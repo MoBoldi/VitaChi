@@ -4,6 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vitachi/ChangeListener/loginListener.dart';
 import 'package:vitachi/pages/TextFieldWidget.dart';
+import 'package:flutter_appauth/flutter_appauth.dart';
+import 'package:oauth2/oauth2.dart' as oauth2;
+import 'package:webview_cookie_manager/webview_cookie_manager.dart';
 
 import 'WaveWidget.dart';
 
@@ -14,11 +17,16 @@ class Login extends StatefulWidget {
 
 final Color color = Color(0xff3f8ee9);
 
+TextEditingController usernameController = new TextEditingController();
+TextEditingController passwordController = new TextEditingController();
+
 class _LoginState extends State<Login> {
   final eingaben = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -70,6 +78,7 @@ class _LoginState extends State<Login> {
                               hintText: 'Benutzername',
                               prefixIconData: Icons.person_outline,
                               obscureText: false,
+                              controller: usernameController,
                             ),
                             Container(
                               height: MediaQuery.of(context).size.height / 32,
@@ -78,6 +87,7 @@ class _LoginState extends State<Login> {
                               hintText: 'Passwort',
                               prefixIconData: Icons.lock_outline,
                               obscureText: true,
+                              controller: passwordController,
                             ),
                             /*SizedBox(
                                         width: MediaQuery.of(context).size.width/1.2,
@@ -109,14 +119,18 @@ class _LoginState extends State<Login> {
                                       primary: Color(0xff3f8ee9),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(50))),
-                                  onPressed: () async {
-                                    if (eingaben.currentState.validate()) {
-                                      // Process data.
-                                      SharedPreferences prefs = await SharedPreferences.getInstance();
-                                      prefs.setInt("UserID", 1);
-                                      Navigator.pushNamed(context, '/');
-                                    }
+                                          BorderRadius.circular(50))),
+                                  onPressed: () {
+                                    Future<bool> response = getData();
+                                    response.then((value) => {
+                                      if (eingaben.currentState.validate() && value == true) {
+
+                                        usernameController.clear(),
+                                        passwordController.clear(),
+
+                                        Navigator.pushNamed(context, '/')
+                                      }
+                                    });
                                   },
                                   child: Text('Login',
                                       style: TextStyle(color: Colors.white))),
@@ -156,5 +170,35 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+}
+
+Future<bool> getData() async {
+
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  final authorizationEndpoint =
+  Uri.parse('http://10.0.2.2:8010/auth/realms/vitachi/protocol/openid-connect/token');
+
+  final username = usernameController.text;
+  final password = passwordController.text;
+
+  final identifier = 'vitachi-client';
+  final secret = '6c6151b2-ea27-42fc-97fd-b05c42eebf4f';
+
+  try {
+    var client = await oauth2.resourceOwnerPasswordGrant(
+        authorizationEndpoint, username, password,
+        identifier: identifier, secret: secret);
+
+    print(client.credentials.accessToken);
+    print(client.credentials.refreshToken);
+
+    final SharedPreferences prefs = await _prefs;
+    prefs.setInt("UserID", 1);
+
+    return true;
+  } catch (error) {
+    return false;
   }
 }
