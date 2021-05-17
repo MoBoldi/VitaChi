@@ -9,10 +9,10 @@ class TextFieldWidget extends StatelessWidget {
   final TextEditingController controller;
 
   TextFieldWidget({
-      this.hintText,
-      this.prefixIconData,
-      this.obscureText,
-      this.controller
+    this.hintText,
+    this.prefixIconData,
+    this.obscureText,
+    this.controller
   });
 
 
@@ -52,6 +52,7 @@ class TextFieldWidget extends StatelessWidget {
           ),
           labelStyle: TextStyle(color: color),
           focusColor: color,
+
         ),
         controller: controller,
         validator: (value) {

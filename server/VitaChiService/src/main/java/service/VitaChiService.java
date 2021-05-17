@@ -1,14 +1,7 @@
 package service;
 
-<<<<<<< HEAD
-import entity.Eingabe;
-import entity.Accessoire;
-import entity.Arbeit;
-import entity.Aufgaben;
-=======
 import entity.*;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
->>>>>>> bccab8da340b88f77aec29a3abf8257183cb6e24
 import org.jose4j.json.internal.json_simple.JSONObject;
 import org.jose4j.json.internal.json_simple.parser.JSONParser;
 import org.jose4j.json.internal.json_simple.parser.ParseException;
@@ -16,23 +9,12 @@ import repository.DBRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.json.JsonObject;
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
-import javax.ws.rs.client.Client;
 import javax.ws.rs.core.MediaType;
-<<<<<<< HEAD
-import javax.ws.rs.core.Response;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-=======
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
->>>>>>> bccab8da340b88f77aec29a3abf8257183cb6e24
 import java.util.Base64;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
 @Path("/vitaChi")
@@ -254,54 +236,6 @@ public class VitaChiService {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Arbeit> getStartOfWorking(){
         return repo.findLastEntry(2);
-    }
-
-    @Path("newUser")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public JsonObject newUser(JsonObject json) {
-
-        String token = json.getString("token");
-
-        String[] chunks = token.split("\\.");
-        Base64.Decoder decoder = Base64.getDecoder();
-        String payload = new String(decoder.decode(chunks[1]));
-
-        JSONParser parser = new JSONParser();
-        JSONObject payloadObject = new JSONObject();
-        try {
-            payloadObject = (JSONObject) parser.parse(payload);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        repo.newUser(payloadObject.get("sub").toString());
-
-        return json;
-    }
-
-    @Path("getUser")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public int getUser(JsonObject json) {
-
-        String token = json.getString("token");
-
-        String[] chunks = token.split("\\.");
-        Base64.Decoder decoder = Base64.getDecoder();
-        String payload = new String(decoder.decode(chunks[1]));
-
-        JSONParser parser = new JSONParser();
-        JSONObject payloadObject = new JSONObject();
-        try {
-            payloadObject = (JSONObject) parser.parse(payload);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return repo.getUser(payloadObject.get("sub").toString());
-
     }
 
     @Path("newUser")

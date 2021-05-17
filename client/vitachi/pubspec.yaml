@@ -45,10 +45,6 @@ dependencies:
   url_launcher: ^4.0.2
   flutter_webview_plugin: ^0.3.11
   webview_cookie_manager: ^2.0.0
-<<<<<<< HEAD
-
-=======
->>>>>>> bccab8da340b88f77aec29a3abf8257183cb6e24
 
 dev_dependencies:
   flutter_test:

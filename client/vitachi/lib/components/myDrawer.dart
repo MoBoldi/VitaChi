@@ -139,12 +139,7 @@ class MyDrawer extends StatelessWidget {
               ],
             ),
             onTap: () {
-<<<<<<< HEAD
-              logout();
-              Navigator.pushReplacementNamed(context, '/login');
-=======
               Navigator.pushReplacementNamed(context, '/wohnzimmer');
->>>>>>> bccab8da340b88f77aec29a3abf8257183cb6e24
             },
           ),
           ListTile(

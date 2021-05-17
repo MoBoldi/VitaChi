@@ -124,15 +124,10 @@ class _LoginState extends State<Login> {
                                     Future<bool> response = getData();
                                     response.then((value) => {
                                       if (eingaben.currentState.validate() && value == true) {
-<<<<<<< HEAD
-                                        usernameController.clear(),
-                                        passwordController.clear(),
-=======
 
                                         usernameController.clear(),
                                         passwordController.clear(),
 
->>>>>>> bccab8da340b88f77aec29a3abf8257183cb6e24
                                         Navigator.pushNamed(context, '/')
                                       }
                                     });
@@ -180,11 +175,6 @@ class _LoginState extends State<Login> {
 
 Future<bool> getData() async {
 
-<<<<<<< HEAD
-  final cookieManager = WebviewCookieManager();
-
-=======
->>>>>>> bccab8da340b88f77aec29a3abf8257183cb6e24
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   final authorizationEndpoint =
@@ -202,33 +192,13 @@ Future<bool> getData() async {
         identifier: identifier, secret: secret);
 
     print(client.credentials.accessToken);
-<<<<<<< HEAD
-
-    print(client.credentials.refreshToken);
-
-    final gotCookies = await cookieManager.getCookies("http://10.0.2.2:8010/auth/realms/vitachi/");
-
-    for (var item in gotCookies) {
-      if(item.name == "KEYCLOAK_SESSION_LEGACY" || item.name == "KEYCLOAK_SESSION") {
-        print(item.value);
-      }
-    }
-
-    final SharedPreferences prefs = await _prefs;
-    prefs.setString("accessToken", client.credentials.accessToken);
-=======
     print(client.credentials.refreshToken);
 
     final SharedPreferences prefs = await _prefs;
     prefs.setInt("UserID", 1);
->>>>>>> bccab8da340b88f77aec29a3abf8257183cb6e24
 
     return true;
   } catch (error) {
     return false;
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> bccab8da340b88f77aec29a3abf8257183cb6e24
