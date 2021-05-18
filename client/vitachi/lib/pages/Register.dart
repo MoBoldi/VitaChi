@@ -34,9 +34,8 @@ class _RegisterState extends State<Register> {
     flutterWebViewPlugin.close();
 
     _onUrlChanged = flutterWebViewPlugin.onUrlChanged.listen((String url) async {
-      if (mounted && url != selectedUrl && url.contains("logout") == false) {
 
-        flutterWebViewPlugin.hide();
+      if (mounted && url != selectedUrl && url.contains("log") == false) {
 
         final gotCookies = await cookieManager.getCookies("http://10.0.2.2:8010/auth/realms/vitachi/");
 
@@ -50,14 +49,11 @@ class _RegisterState extends State<Register> {
         Map<String, String> headers = {"Content-type": "application/json"};
         String json = jsonEncode(<String, Object>{'token': token});
         Response response = await post(url, headers: headers, body: json);
-        print(response.statusCode);
 
+        _onUrlChanged.cancel();
         await flutterWebViewPlugin.reloadUrl(url2);
-      }
 
-      if(url.contains("logout") == true) {
         flutterWebViewPlugin.close();
-        print("Servus Jungs!");
         Navigator.pushReplacementNamed(context, '/login');
       }
     });
