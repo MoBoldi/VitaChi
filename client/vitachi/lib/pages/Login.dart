@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vitachi/ChangeListener/loginListener.dart';
@@ -192,10 +195,16 @@ Future<bool> getData() async {
         identifier: identifier, secret: secret);
 
     print(client.credentials.accessToken);
+    print("Hahahaha");
     print(client.credentials.refreshToken);
 
-    final SharedPreferences prefs = await _prefs;
-    prefs.setInt("UserID", 1);
+    /*String url = 'http://10.0.2.2:8080/vitaChi/getUser';
+    Map<String, String> headers = {"Content-type": "application/json"};
+    String json = jsonEncode(<String, Object>{'token': client.credentials.accessToken});
+    Response response = await post(url, headers: headers, body: json);*/
+
+    /*final SharedPreferences prefs = await _prefs;
+    prefs.setInt("UserID", response.body.);*/
 
     return true;
   } catch (error) {

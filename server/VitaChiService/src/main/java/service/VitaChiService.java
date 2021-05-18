@@ -266,7 +266,7 @@ public class VitaChiService {
     @Path("getUser")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public int getUser(JsonObject json) {
+    public Long getUser(JsonObject json) {
 
         String token = json.getString("token");
 

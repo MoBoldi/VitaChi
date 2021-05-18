@@ -24,6 +24,7 @@ class _RegisterState extends State<Register> {
 
   String token;
   String selectedUrl = 'http://10.0.2.2:8010/auth/realms/vitachi/protocol/openid-connect/registrations?client_id=account&response_type=code&scope=email&kc_locale=de';
+  String url2 = 'http://10.0.2.2:8010/auth/realms/vitachi/protocol/openid-connect/logout?redirect_uri=http%3A%2F%2F10.0.2.2%3A8010%2Fauth%2Frealms%2Fvitachi%2Faccount%2Flog';
 
   StreamSubscription<String> _onUrlChanged;
 
@@ -33,7 +34,9 @@ class _RegisterState extends State<Register> {
     flutterWebViewPlugin.close();
 
     _onUrlChanged = flutterWebViewPlugin.onUrlChanged.listen((String url) async {
-      if (mounted && url != selectedUrl) {
+      if (mounted && url != selectedUrl && url.contains("logout") == false) {
+
+        flutterWebViewPlugin.hide();
 
         final gotCookies = await cookieManager.getCookies("http://10.0.2.2:8010/auth/realms/vitachi/");
 
@@ -49,8 +52,13 @@ class _RegisterState extends State<Register> {
         Response response = await post(url, headers: headers, body: json);
         print(response.statusCode);
 
+        await flutterWebViewPlugin.reloadUrl(url2);
+      }
+
+      if(url.contains("logout") == true) {
         flutterWebViewPlugin.close();
-        Navigator.pushReplacementNamed(context, '/');
+        print("Servus Jungs!");
+        Navigator.pushReplacementNamed(context, '/login');
       }
     });
   }

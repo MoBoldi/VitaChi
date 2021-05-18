@@ -68,11 +68,10 @@ public class DBRepository {
         return e;
     }
 
-    public int getUser(String keycloakId) {
-        TypedQuery<Integer> query = em.createNamedQuery("UserEnt.findUser", Integer.class);
+    public Long getUser(String keycloakId) {
+        TypedQuery<Long> query = em.createNamedQuery("UserEnt.findUser", Long.class);
         query.setParameter("keycloakId", keycloakId);
-        int e = query.getSingleResult();
-        return e;
+        return query.getSingleResult();
     }
 
     // Löschen eines Trainings
