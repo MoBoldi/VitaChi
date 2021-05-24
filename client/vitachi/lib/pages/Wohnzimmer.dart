@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -6,34 +7,15 @@ import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:vitachi/components/myDrawer.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:vitachi/entitys/AccessoirePlatz.dart';
 import 'package:vitachi/entitys/Produkt.dart';
 import 'package:vitachi/pages/home.dart';
 import 'package:shape_of_view/shape/arc.dart';
 import 'package:shape_of_view/shape_of_view.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+//import "package:json_object/json_object.dart";
 
 class Wohnzimmer extends StatefulWidget {
-  final List<ChartData> ges = [
-    ChartData('Wellbeing', 3, Color(0xFF4DA8DA)),
-    ChartData('', 2, Color(0xFF9dc6dd)),
-  ];
-  List<ChartData> food = [
-    ChartData('Food', 5, Color(0xFF4DA8DA)),
-    ChartData('', 1, Color(0xFF9dc6dd)),
-  ];
-  final List<ChartData> movement = [
-    ChartData('Movement', 3, Color(0xFF4DA8DA)),
-    ChartData('', 2, Color(0xFF9dc6dd)),
-  ];
-  final List<ChartData> sleep = [
-    ChartData('Sleep', 2, Color(0xFF4DA8DA)),
-    ChartData('', 3, Color(0xFF9dc6dd)),
-  ];
-  final List<ChartData> work = [
-    ChartData('Work', 30, Color(0xFF4DA8DA)),
-    ChartData('', 20, Color(0xFF9dc6dd)),
-  ];
-
   Map data = {};
 
   @override
@@ -43,22 +25,16 @@ class Wohnzimmer extends StatefulWidget {
 class _WohnzimmerState extends State<Wohnzimmer> {
   Offset position = Offset(0, 0);
 
-  String userID ="2";
+  int userID = 2;
   bool Slot1Displayed = false;
-  int Slot1ImageNumber = 1000;
-  AssetImage Slot1ImagePfad;
+  int Slot1ImageNumber;
+  String Slot1ImagePfad;
 
-  bool Slot2Displayed = false;
-  int Slot2ImageNumber = 1000;
-  String Slot2ImagePfad = "";
-
-  bool Slot3Displayed = false;
-  int Slot3ImageNumber = 1000;
-  String Slot3ImagePfad = "";
-
-  bool Slot4Displayed = false;
-  int Slot4ImageNumber = 1000;
-  String Slot4ImagePfad = "";
+  @override
+  void initState() {
+    super.initState();
+    getSetAccessoire(userID);
+  }
 
   final List<ChartData> ges = [
     ChartData('Wellbeing', 3, Color(0xFF4DA8DA)),
@@ -81,8 +57,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
     ChartData('', 20, Color(0xFF9dc6dd)),
   ];
 
-  Map data = {};
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -90,16 +64,31 @@ class _WohnzimmerState extends State<Wohnzimmer> {
     var products = List<Produkt>();
 
     Future<List<Produkt>> getData() async {
+
       Response response =
-          await get('http://localhost:8080/vitaChi/findAll/Accessoire');
+      await get('http://10.0.2.2:8080/vitaChi/findAll/Accessoire');
       print("response" + response.body);
       var productsJson = json.decode(response.body);
       for (var productJson in productsJson) {
         products.add(Produkt.fromJson(productJson));
       }
+
       //print(products[0].bildpfad);
       return productsJson;
     }
+
+    /*data = ModalRoute.of(context).settings.arguments;
+    if (data == null) {
+      print('It is null');
+      data = {
+        'arg': food[0].y,
+      };
+    } else {
+      print('It is not null');
+      food[0].y = data['avg'];
+      food[1].y = 5 - data['avg'];
+    }
+    print(data);*/
 
     return Scaffold(
         appBar: MyAppBarWohnzimmer(context, 'VitaChi', null),
@@ -123,253 +112,91 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                       image: getEmotion(food[0].y),
                     ),
                     DragTarget<int>(builder: (
-                      BuildContext context,
-                      data,
-                      rejected,
-                    ) {
+                        BuildContext context,
+                        data,
+                        rejected,
+                        ) {
                       return Container(
-                          width: 230,
-                          margin: EdgeInsets.only(top: 0, left: 0),
+                          width: 200,
+                          margin: EdgeInsets.only(top: 5, left: 205),
                           height: 200,
                           decoration: BoxDecoration(
-                            //border: Border.all(color: Colors.blueAccent),
-                            color: Colors.black,
+                            border: Border.all(color: Colors.blueAccent),
+                            color: Colors.transparent,
                           ),
                           child: Container(
-                              width: 230,
+                              width: 200,
                               height: 200,
                               child: Slot1Displayed
                                   ? Container(
-                                      width: 230,
-                                      height: 200,
-                                      child: Image(
-                                          image: Slot1ImagePfad,
-                                          fit: BoxFit.fill))
+                                  width: 200,
+                                  height: 200,
+                                  child: Image(
+                                      image: AssetImage(Slot1ImagePfad),
+                                      fit: BoxFit.fill))
                                   : Container(
-                                      width: 230,
-                                      height: 200,
-                                      decoration: BoxDecoration(
-                                          //color: Colors.green,
-                                          ))));
+                                  width: 200,
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    //color: Colors.green,
+                                  ))));
                     }, onWillAccept: (int data) {
                       print("HOVERED OVER DRAG TARGET1");
                       //Get Request ob der Slot bereits mit diesem Element belegt ist (IF) wenn nicht return true
 
-                      if(Slot1ImageNumber == data ){
-                        return false;
-                      }else{return true;}
-                    }, onAccept: (int data) async {
+                      return true;
+                    }, onAccept: (int data) {
                       int slot1 = 1;
                       print("onAccept 1");
                       print("Dropped item NR  $data  on Slot $slot1");
 
-                      setState(() async{
-                          Slot1Displayed = true;
-                          Slot1ImageNumber = data;
-                          Slot1ImagePfad =
-                              AssetImage(products[Slot1ImageNumber].bildpfad);
-
-
-                              String url = 'http://10.0.2.2:8080/vitaChi/placeMoebel/$userID/$Slot1ImageNumber/$slot1';
-                             Map<String, String> headers = {"Content-type": "application/json"};
-
-                              Response response = await post(url, headers: headers, body: json);
-
-                        },
-                      );
-
-                      // Response response = await post(url, headers: headers, body: json);
-
-                      // einen post request mit dem Slot und der ID des Elements an Server schicken(data is die ID)
-                      //funktion getData aufrufen um alle Slots mit den belegten Objekten zu bekommen und diese anzuzeigen
-                    }),
-                    DragTarget<int>(builder: (
-                      BuildContext context,
-                      data,
-                      rejected,
-                    ) {
-                      return Container(
-                          width: 230,
-                          margin: EdgeInsets.only(top: 0, left: 230),
-                          height: 200,
-                          decoration: BoxDecoration(
-                            //border: Border.all(color: Colors.red),
-                            color: Colors.transparent,
-                          ),
-                          child: Container(
-                              width: 230,
-                              height: 200,
-                              child: Slot2Displayed
-                                  ? Container(
-                                      width: 230,
-                                      height: 200,
-                                      child: Image(
-                                          image: AssetImage(Slot2ImagePfad),
-                                          fit: BoxFit.fill))
-                                  : Container(
-                                      width: 230,
-                                      height: 200,
-                                      decoration: BoxDecoration(
-                                          //color: Colors.green,
-                                          ))));
-                    }, onWillAccept: (int data) {
-                      print("HOVERED OVER DRAG TARGET1");
-                      //Get Request ob der Slot bereits mit diesem Element belegt ist (IF) wenn nicht return true
-
-                      return true;
-                    }, onAccept: (int data) {
-                      int slot2 = 1;
-                      print("onAccept 2");
-                      print("Dropped item NR  $data  on Slot $slot2");
-
-                      setState(() {
-                        Slot2Displayed = true;
-                        Slot2ImageNumber = data;
-                        Slot2ImagePfad = products[Slot2ImageNumber].bildpfad;
-                      });
-
-                      // einen post request mit dem Slot und der ID des Elements an Server schicken(data is die ID)
-                      //funktion getData aufrufen um alle Slots mit den belegten Objekten zu bekommen und diese anzuzeigen
-                    }),
-                    DragTarget<int>(builder: (
-                      BuildContext context,
-                      data,
-                      rejected,
-                    ) {
-                      return Container(
-                          width: 230,
-                          margin: EdgeInsets.only(top: 200, left: 0),
-                          height: 200,
-                          decoration: BoxDecoration(
-                            //border: Border.all(color: Colors.greenAccent),
-                            color: Colors.transparent,
-                          ),
-                          child: Container(
-                              width: 230,
-                              height: 200,
-                              child: Slot3Displayed
-                                  ? Container(
-                                      width: 230,
-                                      height: 200,
-                                      child: Image(
-                                          image: AssetImage(Slot3ImagePfad),
-                                          fit: BoxFit.fill))
-                                  : Container(
-                                      width: 230,
-                                      height: 200,
-                                      decoration: BoxDecoration(
-                                          //color: Colors.green,
-                                          ))));
-                    }, onWillAccept: (int data) {
-                      print("HOVERED OVER DRAG TARGET1");
-                      //Get Request ob der Slot bereits mit diesem Element belegt ist (IF) wenn nicht return true
-
-                      return true;
-                    }, onAccept: (int data) {
-                      int slot3 = 1;
-                      print("onAccept 1");
-                      print("Dropped item NR  $data  on Slot $slot3");
-
-                      setState(() {
-                        Slot3Displayed = true;
-                        Slot3ImageNumber = data;
-                        Slot3ImagePfad = products[Slot3ImageNumber].bildpfad;
-                      });
-
-                      // einen post request mit dem Slot und der ID des Elements an Server schicken(data is die ID)
-                      //funktion getData aufrufen um alle Slots mit den belegten Objekten zu bekommen und diese anzuzeigen
-                    }),
-                    DragTarget<int>(builder: (
-                      BuildContext context,
-                      data,
-                      rejected,
-                    ) {
-                      return Container(
-                          width: 230,
-                          margin: EdgeInsets.only(top: 200, left: 230),
-                          height: 200,
-                          decoration: BoxDecoration(
-                            //border: Border.all(color: Colors.blueAccent),
-                            color: Colors.transparent,
-                          ),
-                          child: Container(
-                              width: 230,
-                              height: 200,
-                              child: Slot4Displayed
-                                  ? Container(
-                                      width: 230,
-                                      height: 200,
-                                      child: Image(
-                                          image: AssetImage(Slot4ImagePfad),
-                                          fit: BoxFit.fill))
-                                  : Container(
-                                      width: 230,
-                                      height: 200,
-                                      decoration: BoxDecoration(
-                                          //color: Colors.green,
-                                          ))));
-                    }, onWillAccept: (int data) {
-                      print("HOVERED OVER DRAG TARGET1");
-                      //Get Request ob der Slot bereits mit diesem Element belegt ist (IF) wenn nicht return true
-
-                      return true;
-                    }, onAccept: (int data) {
-                      int slot4 = 1;
-                      print("onAccept 1");
-                      print("Dropped item NR  $data  on Slot $slot4");
-
-                      setState(() {
-                        Slot4Displayed = true;
-                        Slot4ImageNumber = data;
-                        Slot4ImagePfad = products[Slot1ImageNumber].bildpfad;
-                      });
-
-                      // einen post request mit dem Slot und der ID des Elements an Server schicken(data is die ID)
-                      //funktion getData aufrufen um alle Slots mit den belegten Objekten zu bekommen und diese anzuzeigen
-                    }),
-                    /*Container(
-                      margin: EdgeInsets.only(top: 430, left: 270),
-                      child: FlatButton(
-                          onPressed: null,
-                          color: Colors.white,
-                          textColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(color: Colors.redAccent),
-                          ),
-                          hoverColor: Colors.red,
-                          child: Text("Bearbeiten")),
-                    ),*/
-
-                    /*DragTarget<int>(builder: (
-                      BuildContext context,
-                      data,
-                      rejected,
-                    ) {
-                      return Container(
-                          width: 200,
-                          margin: EdgeInsets.only(top: 0, left: 1),
-                          height: 200,
-                          color: Colors.transparent,
-                          child: Container(
-                            width: 200,
-                            margin: EdgeInsets.only(top: 130),
-                            height: 200,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.red)),
-                          ));
-                    }, onWillAccept: (int data) {
-                      print("HOVERED OVER DRAG TARGET2");
-                      return true;
-                    }, onAccept: (int data) {
-                      int slot2 = 2;
-                      print("onAccept 2");
-                      print("Dropped item NR  $data  on Slot $slot2");
-
                       setState(() {
                         Slot1Displayed = true;
+                        Slot1ImageNumber = data;
+                        Slot1ImagePfad = products[Slot1ImageNumber].bildpfad;
+                        postAccessoirePlatz(userID, Slot1ImageNumber, slot1);
                       });
-                      print(Slot1Displayed);
-                    })*/
+                    }),
+                    /*,
+                         DragTarget<int>(
+                        builder: (
+                            BuildContext context,
+                         data,
+                        rejected,
+              ) {
+                return Container(
+                    width: 120,
+                 margin: EdgeInsets.only(top: 0, left: 300),
+                    height: 200,
+                    color: Colors.transparent,
+                    child:Container(
+                        width: 120,
+                        margin: EdgeInsets.only(top: 130),
+                         height: 70,
+                       decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blueAccent)
+                        ),
+                    )
+
+                );
+              },
+              onWillAccept: (int data) {
+                    print("HOVERED OVER DRAG TARGET2");
+                      return true;
+              },
+              onAccept: (int data) {
+                int slot2 =2;
+                print("onAccept 2");
+                print("Dropped item NR  $data  on Slot $slot2");
+
+                 setState(() {
+                  Slot1Displayed = true;
+                });
+              print(Slot1Displayed);
+
+
+              }
+                      )*/
                   ],
                 )),
 
@@ -408,7 +235,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                 controller: myScrollController,
                                 itemBuilder: (context, index) {
                                   return Container(
-                                    height: 200,
+                                    height: 200.0,
                                     width: width,
                                     color: Colors.white,
                                     child: Row(
@@ -416,34 +243,23 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                         LongPressDraggable<int>(
                                           data: index,
                                           child: Image(
-                                            image: AssetImage(
-                                              products[index].bildpfad,
-                                            ),
-                                            width: 150,
-                                            height: 150,
-                                          ),
+                                              image: AssetImage(
+                                                  products[index].bildpfad)),
                                           feedback: Image(
                                               image: AssetImage(
                                                   products[index].bildpfad),
-                                              width: 150.0,
-                                              height: 150.0),
+                                              width: 200.0,
+                                              height: 200.0),
 
                                           // onDraggableCanceled: ,
                                         ),
-                                        Padding(
-                                            padding: EdgeInsets.only(left: 60),
-                                            child: Text(
-                                              products[index].bezeichnung,
-                                              style: TextStyle(fontSize: 30),
-                                            )),
+                                        Text(products[index].bezeichnung),
                                       ],
                                     ),
                                   );
                                 });
-                          } else {
-                            return Image(
-                                image: AssetImage('assets/LogoSlider.png'));
                           }
+
                         });
                     /*Container(
                       child: ListView(
@@ -496,6 +312,50 @@ class _WohnzimmerState extends State<Wohnzimmer> {
             ),
           ],
         ));
+  }
+
+  void postAccessoirePlatz(int userID, int slot1ImageNumber, int slot1) async {
+    String url = 'http://10.0.2.2:8080/vitaChi/createAccessoirePlatz';
+    Map<String, String> headers = {"Content-type": "application/json"};
+    String json = jsonEncode(<String, Object>{'userID': userID, 'slot1ImageNumber': slot1ImageNumber, 'slot1': slot1});
+    Response response = await post(url, headers: headers, body: json);
+
+    getSetAccessoire(userID);
+  }
+
+  void getSetAccessoire(int userID) async {
+    List<dynamic> accessoires;
+    var products = List<Produkt>();
+
+    Response response =
+    await get('http://10.0.2.2:8080/vitaChi/findAll/Accessoire');
+    print("response" + response.body);
+    var productsJson = json.decode(response.body);
+    for (var productJson in productsJson) {
+      products.add(Produkt.fromJson(productJson));
+    }
+
+    String url = 'http://10.0.2.2:8080/vitaChi/getSetAccessoire/$userID';
+    Map<String, String> headers = {"Content-type": "application/json"};
+    response = await get(url, headers: headers);
+
+    accessoires = jsonDecode(response.body);
+
+    List<AccessoirePlatz> accessoirePlatzList = new List();
+
+    for(var accessoire in accessoires) {
+      accessoirePlatzList.add(AccessoirePlatz.fromJson(accessoire));
+    }
+
+    for (var accessoire in accessoirePlatzList) {
+      if(accessoire.slot_it == 1) {
+        Slot1ImageNumber = accessoire.accessoire_id;
+      }
+    }
+
+    Slot1ImagePfad = products[Slot1ImageNumber].bildpfad;
+
+    //Switch für mehrere Slots - Überprüfen von Slot jenachdem SlotImage dann 1, 2, 3 mit ID besetzen und Bildpfad erstellen
   }
 }
 

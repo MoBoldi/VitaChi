@@ -203,8 +203,8 @@ Future<bool> getData() async {
     String json = jsonEncode(<String, Object>{'token': client.credentials.accessToken});
     Response response = await post(url, headers: headers, body: json);*/
 
-    /*final SharedPreferences prefs = await _prefs;
-    prefs.setInt("UserID", response.body.);*/
+    final SharedPreferences prefs = await _prefs;
+    prefs.setInt("UserID", 2);
 
     return true;
   } catch (error) {

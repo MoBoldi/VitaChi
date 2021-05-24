@@ -5,6 +5,7 @@ import entity.*;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -182,6 +183,14 @@ public class DBRepository {
     }
 
     @Transactional
+    public List<AccessoirePlatz> getSetAccessoire(long userID) {
+        TypedQuery<AccessoirePlatz> query = em.createNamedQuery(AccessoirePlatz.FINDALLBYUSER, AccessoirePlatz.class);
+        query.setParameter("benutzer_id", userID);
+
+        return query.getResultList();
+    }
+
+    @Transactional
     public String activeArbeit(long id){
         LocalDateTime date = LocalDateTime.of(0,1,1,0,0,0,0);
         List<Arbeit> a = findLastEntry(id);
@@ -201,6 +210,24 @@ public class DBRepository {
     public BenutzerAccessoire createBenutzerAccessoire(BenutzerAccessoire benutzerAccessoire){
         em.persist(benutzerAccessoire);
         return benutzerAccessoire;
+    }
+
+    @Transactional
+    public AccessoirePlatz createAccessoirePlatz(AccessoirePlatz accessoirePlatz) {
+        Query query = em.createQuery("Select ap from AccessoirePlatz as ap where ap.benutzer_id = :benutzer_id and ap.slot_it = :slot_it");
+        query.setParameter("benutzer_id", accessoirePlatz.getBenutzer_id());
+        query.setParameter("slot_it", accessoirePlatz.getSlot_it());
+
+        List<AccessoirePlatz> aplist = query.getResultList();
+
+        if(aplist.size() == 0) {
+            em.persist(accessoirePlatz);
+        } else {
+            em.remove(aplist.get(0));
+            em.persist(accessoirePlatz);
+        }
+
+        return accessoirePlatz;
     }
 
     @Transactional

@@ -49,6 +49,7 @@ public class VitaChiService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Accessoire> findAll(@PathParam("Entity") String entity) {
+        System.out.println("Seas");
         return repo.findAll(entity);
     }
 
@@ -224,11 +225,31 @@ public class VitaChiService {
         return benutzerAccessoire;
     }
 
+    @Path("createAccessoirePlatz")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public JsonObject createAccessoirePlatz(JsonObject accessoirePlatz) {
+
+        System.out.println(accessoirePlatz);
+
+        repo.createAccessoirePlatz(new AccessoirePlatz(accessoirePlatz.getInt("userID"), accessoirePlatz.getInt("slot1"), accessoirePlatz.getInt("slot1ImageNumber")));
+        return accessoirePlatz;
+    }
+
     @Path("getOpenAccessoire/{userid}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Accessoire> getOpenAccessoire (@PathParam long userid){
         return repo.getOpenAccessoires(userid);
+    }
+
+    @Path("getSetAccessoire/{userid}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<AccessoirePlatz> getSetAccessoire (@PathParam long userid) {
+        System.out.println(userid);
+        System.out.println(repo.getSetAccessoire(userid));
+        return repo.getSetAccessoire(userid);
     }
 
     @Path("getStartOfWorking")
