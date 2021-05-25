@@ -195,16 +195,17 @@ Future<bool> getData() async {
         identifier: identifier, secret: secret);
 
     print(client.credentials.accessToken);
-    print("Hahahaha");
     print(client.credentials.refreshToken);
 
-    /*String url = 'http://10.0.2.2:8080/vitaChi/getUser';
+    String url = 'http://10.0.2.2:8080/vitaChi/getUser';
     Map<String, String> headers = {"Content-type": "application/json"};
     String json = jsonEncode(<String, Object>{'token': client.credentials.accessToken});
-    Response response = await post(url, headers: headers, body: json);*/
+    Response response = await post(url, headers: headers, body: json);
+
+    print(jsonDecode(response.body));
 
     final SharedPreferences prefs = await _prefs;
-    prefs.setInt("UserID", 2);
+    prefs.setInt("UserID", jsonDecode(response.body));
 
     return true;
   } catch (error) {

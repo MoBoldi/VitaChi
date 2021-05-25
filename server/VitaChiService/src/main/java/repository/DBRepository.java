@@ -284,19 +284,20 @@ public class DBRepository {
         this.createArbeit(a4);
     }
 
-    public List<Eingabe> findInputByType(String type) {
+    public List<Eingabe> findInputByType(String type, int userID) {
         TypedQuery<Eingabe> query = em.createNamedQuery("Eingabe.findByType", Eingabe.class);
         query.setParameter("type", type);
+        query.setParameter("userID", userID);
         List<Eingabe> e = query.getResultList();
         return e;
     }
 
-    public List<Object> getStats(String type) {
-        String bewertung11 = "SELECT (count(e.bewertung1)) from Eingabe e where e.typ = '"+type+"' and e.bewertung1 = 1";
-        String bewertung21 = "SELECT (count(e.bewertung2)) from Eingabe e where e.typ = '"+type+"' and e.bewertung2 = 1";
-        String bewertung15 = "SELECT (count(e.bewertung1)) from Eingabe e where e.typ = '"+type+"' and e.bewertung1 = 5";
-        String bewertung25 = "SELECT (count(e.bewertung2)) from Eingabe e where e.typ = '"+type+"' and e.bewertung2 = 5";
-        String ges = "SELECT count(e.bewertung1) + count(e.bewertung2) from Eingabe e where e.typ = '" + type + "'";
+    public List<Object> getStats(String type, int userID) {
+        String bewertung11 = "SELECT (count(e.bewertung1)) from Eingabe e where e.typ = '"+type+"' and e.bewertung1 = 1 and e.userid = " + userID;
+        String bewertung21 = "SELECT (count(e.bewertung2)) from Eingabe e where e.typ = '"+type+"' and e.bewertung2 = 1 and e.userid = " + userID;
+        String bewertung15 = "SELECT (count(e.bewertung1)) from Eingabe e where e.typ = '"+type+"' and e.bewertung1 = 5 and e.userid = " + userID;
+        String bewertung25 = "SELECT (count(e.bewertung2)) from Eingabe e where e.typ = '"+type+"' and e.bewertung2 = 5 and e.userid = " + userID;
+        String ges = "SELECT count(e.bewertung1) + count(e.bewertung2) from Eingabe e where e.typ = '" + type + "' and e.userid = " + userID;
         Query query11 = em.createNativeQuery(bewertung11);
         Query query21 = em.createNativeQuery(bewertung15);
         Query query15 = em.createNativeQuery(bewertung21);
@@ -319,8 +320,8 @@ public class DBRepository {
         return result;
     }
 
-    public List<Object> getWellbeingStats() {
-        String sql1 = "SELECT SUM((bewertung1 + BEWERTUNG2) / 2.0)/Count(*), DATUM from EINGABE group by DATUM";
+    public List<Object> getWellbeingStats(int userID) {
+        String sql1 = "SELECT SUM((bewertung1 + BEWERTUNG2) / 2.0)/Count(*), DATUM from EINGABE where userid = " + userID + " group by DATUM";
         Query query1 = em.createNativeQuery(sql1);
         List<Object> result = query1.getResultList();
         System.out.println(result);

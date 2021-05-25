@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myDrawer.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -41,8 +42,10 @@ class _Wellbeing extends State<Wellbeing> {
   @override
   Widget build(BuildContext context) {
     Future getStats() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
       Response response =
-          await get('http://10.0.2.2:8080/vitaChi/getWellbeingStats');
+          await get('http://10.0.2.2:8080/vitaChi/getWellbeingStats/$id');
       List<dynamic> statsJson = json.decode(response.body);
       List list = statsJson;
       cdata = [];

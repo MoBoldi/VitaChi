@@ -10,7 +10,7 @@ import javax.persistence.*;
         @NamedQuery(name = "Eingabe.findEssen", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e where e.typ='Essen' and e.userid=?1"),
         @NamedQuery(name = "Eingabe.findBewegung", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e where e.typ='Bewegung'and e.userid= :uid"),
         @NamedQuery(name = "Eingabe.findSchlaf", query = "SELECT (avg(e.bewertung1) + avg(e.bewertung2))/2 FROM Eingabe e where e.typ='Schlaf'and e.userid= :uid"),
-        @NamedQuery(name = "Eingabe.findByType", query = "SELECT e from Eingabe e where e.typ = :type"),
+        @NamedQuery(name = "Eingabe.findByType", query = "SELECT e from Eingabe e where e.typ = :type and e.userid = :userID"),
         @NamedQuery(name = "Eingabe.getStats", query = "SELECT count(e.bewertung1), count(e.bewertung2) FROM Eingabe e where e.typ = :type"),
 })
 public class Eingabe {

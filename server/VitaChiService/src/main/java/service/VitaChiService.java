@@ -54,17 +54,17 @@ public class VitaChiService {
     }
 
     // Liste aller Objekte je nach Entität senden
-    @Path("findInputByType/{Type}")
+    @Path("findInputByType/{Type}/{userID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Eingabe> findInputByType(@PathParam("Type") String type) {
-        return repo.findInputByType(type);
+    public List<Eingabe> findInputByType(@PathParam("Type") String type, @PathParam("userID") int userID) {
+        return repo.findInputByType(type, userID);
     }
 
-    @Path("getWellbeingStats")
+    @Path("getWellbeingStats/{userID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Object> getWellbeingStats() {return repo.getWellbeingStats();}
+    public List<Object> getWellbeingStats(@PathParam int userID) {return repo.getWellbeingStats(userID);}
 
     // Ein Objekt je nach Entität senden
     @Path("find/{Entity}/{id}")
@@ -75,11 +75,11 @@ public class VitaChiService {
     }
 
     // Daten für Statistikseite senden
-    @Path("getStats/{type}")
+    @Path("getStats/{type}/{userID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Object> getStats(@PathParam("type") String type) {
-        return repo.getStats(type);
+    public List<Object> getStats(@PathParam("type") String type, @PathParam("userID") int userID) {
+        return repo.getStats(type, userID);
     }
 
     // Ein Objekt je nach Entität löschen
@@ -252,11 +252,12 @@ public class VitaChiService {
         return repo.getSetAccessoire(userid);
     }
 
-    @Path("getStartOfWorking")
+    @Path("getStartOfWorking/{userID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Arbeit> getStartOfWorking(){
-        return repo.findLastEntry(2);
+    public List<Arbeit> getStartOfWorking(@PathParam("uerID") long userID){
+        System.out.println("Ich werde aufgerufen");
+        return repo.findLastEntry(userID);
     }
 
     @Path("newUser")
@@ -287,6 +288,7 @@ public class VitaChiService {
     @Path("getUser")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Long getUser(JsonObject json) {
 
         String token = json.getString("token");

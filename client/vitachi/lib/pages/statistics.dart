@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -39,8 +40,10 @@ class _Statistics extends State<Statistics> {
   @override
   Widget build(BuildContext context) {
     Future getDBData() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
       Response response = await get(
-          'http://10.0.2.2:8080/vitaChi/findInputByType/' + widget.type);
+          'http://10.0.2.2:8080/vitaChi/findInputByType/' + widget.type + '/$id');
       var entriesJson = json.decode(response.body);
       entries = [];
       cdata = [];
@@ -51,8 +54,10 @@ class _Statistics extends State<Statistics> {
     }
 
     Future getAvgData() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
       Response response =
-          await get('http://10.0.2.2:8080/vitaChi/get' + widget.type + 'AVG');
+          await get('http://10.0.2.2:8080/vitaChi/get' + widget.type + 'AVG/$id');
       print('--------------- AVG ----------------');
       print(response.body);
       avg = [
@@ -66,8 +71,10 @@ class _Statistics extends State<Statistics> {
     }
 
     Future getStats() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
       Response response =
-          await get('http://10.0.2.2:8080/vitaChi/getStats/' + widget.type);
+          await get('http://10.0.2.2:8080/vitaChi/getStats/' + widget.type + '/$id');
       List<dynamic> statsJson = json.decode(response.body);
       print('------------ StatsJson ------------');
       print(statsJson);
