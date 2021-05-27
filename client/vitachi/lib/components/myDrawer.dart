@@ -175,13 +175,16 @@ class MyDrawer extends StatelessWidget {
     final cookieManager = WebviewCookieManager();
     String token;
     String refresh;
-    Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String accessToken = prefs.getString("accessToken");
+    String refreshToken = prefs.getString("refreshToken");
 
-    print(token);
+    String url = 'http://10.0.2.2:8010/auth/realms/vitachi/protocol/openid-connect/logout?response_type=code';
+    Map<String, String> headers = {"Authorization": "Bearer $accessToken", "Content-type": "application/json"};
+    String json = jsonEncode(<String, Object>{'client_id': "vitachi-client",'client_secret': "6c6151b2-ea27-42fc-97fd-b05c42eebf4f",'refresh_token': refreshToken});
+    print(json);
+    Response response = await post(url, headers: headers, body: json);
 
-    String url = 'http://10.0.2.2:8010/auth/realms/vitachi/protocol/openid-connect/logout?client_id=account&response_type=code';
-    Map<String, String> headers = {"Authorization": "Bearer ${token}"};
-    Response response = await delete(url, headers: headers);
     print(response.statusCode);
 
     cookieManager.clearCookies();

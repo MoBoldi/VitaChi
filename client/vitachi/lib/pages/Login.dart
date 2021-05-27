@@ -194,18 +194,21 @@ Future<bool> getData() async {
         authorizationEndpoint, username, password,
         identifier: identifier, secret: secret);
 
-    print(client.credentials.accessToken);
-    print(client.credentials.refreshToken);
-
     String url = 'http://10.0.2.2:8080/vitaChi/getUser';
     Map<String, String> headers = {"Content-type": "application/json"};
     String json = jsonEncode(<String, Object>{'token': client.credentials.accessToken});
     Response response = await post(url, headers: headers, body: json);
 
-    print(jsonDecode(response.body));
-
     final SharedPreferences prefs = await _prefs;
+
+    prefs.remove("UserID");
+    prefs.remove("accessToken");
+    prefs.remove("refreshToken");
+    prefs.commit();
+
     prefs.setInt("UserID", jsonDecode(response.body));
+    prefs.setString("accessToken", client.credentials.accessToken);
+    prefs.setString("refreshToken", client.credentials.refreshToken);
 
     return true;
   } catch (error) {

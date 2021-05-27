@@ -27,14 +27,11 @@ class _Statistics extends State<Statistics> {
   getChartData() {
     var i = 1;
     for (var entry in entries) {
-      print(entry);
       ChartData c =
           new ChartData(i.toString(), entry.eingabe1 + entry.eingabe2);
       cdata.add(c);
       i++;
     }
-    print("------------- cdata --------------");
-    print(cdata);
   }
 
   @override
@@ -58,8 +55,6 @@ class _Statistics extends State<Statistics> {
       int id = prefs.getInt("UserID");
       Response response =
           await get('http://10.0.2.2:8080/vitaChi/get' + widget.type + 'AVG/$id');
-      print('--------------- AVG ----------------');
-      print(response.body);
       avg = [
         ChartData('', 0, Color(0xFF4DA8DA)),
         ChartData('', 5, Color(0xFF9dc6dd)),
@@ -67,7 +62,6 @@ class _Statistics extends State<Statistics> {
       avg[0].x = widget.type;
       avg[0].y = double.parse(response.body);
       avg[1].y = 5 - avg[0].y;
-      print(avg);
     }
 
     Future getStats() async {
@@ -76,8 +70,6 @@ class _Statistics extends State<Statistics> {
       Response response =
           await get('http://10.0.2.2:8080/vitaChi/getStats/' + widget.type + '/$id');
       List<dynamic> statsJson = json.decode(response.body);
-      print('------------ StatsJson ------------');
-      print(statsJson);
       List list = statsJson;
       int star1 = int.parse(list.elementAt(0).toString());
       int star5 = int.parse(list.elementAt(1).toString());
@@ -86,8 +78,6 @@ class _Statistics extends State<Statistics> {
       stats.add(star1);
       stats.add(star5);
       stats.add(ges);
-      print('---------------- Stats ------------------');
-      print(stats);
     }
 
     return Scaffold(

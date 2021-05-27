@@ -308,11 +308,7 @@ public class DBRepository {
         Object result21 = query21.getSingleResult();
         Object result25 = query25.getSingleResult();
         Object resultGes = queryGes.getSingleResult();
-        System.out.println(result11);
-        System.out.println(result15);
-        System.out.println(result21);
-        System.out.println(result25);
-        System.out.println(resultGes);
+
         List<Object> result = new LinkedList<>();
         result.add((int) result11 + (int) result21);
         result.add((int) result15 + (int) result25);
@@ -324,7 +320,6 @@ public class DBRepository {
         String sql1 = "SELECT SUM((bewertung1 + BEWERTUNG2) / 2.0)/Count(*), DATUM from EINGABE where userid = " + userID + " group by DATUM";
         Query query1 = em.createNativeQuery(sql1);
         List<Object> result = query1.getResultList();
-        System.out.println(result);
         return result;
     }
 }

@@ -97,7 +97,6 @@ class DetailShop extends StatelessWidget {
                               onPressed: () async {
                                 SharedPreferences prefs = await SharedPreferences.getInstance();
                                 int id = prefs.getInt("UserID");
-                                print('UserID: $id');
                                 benutzerAccessoire.setUID(id);
                                 benutzerAccessoire.setPID(data.id);
                                 String url = 'http://10.0.2.2:8080/vitaChi/createBenutzerAccessoire';

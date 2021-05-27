@@ -67,28 +67,23 @@ class _WohnzimmerState extends State<Wohnzimmer> {
 
       Response response =
       await get('http://10.0.2.2:8080/vitaChi/findAll/Accessoire');
-      print("response" + response.body);
       var productsJson = json.decode(response.body);
       for (var productJson in productsJson) {
         products.add(Produkt.fromJson(productJson));
       }
 
-      //print(products[0].bildpfad);
       return productsJson;
     }
 
     /*data = ModalRoute.of(context).settings.arguments;
     if (data == null) {
-      print('It is null');
       data = {
         'arg': food[0].y,
       };
     } else {
-      print('It is not null');
       food[0].y = data['avg'];
       food[1].y = 5 - data['avg'];
-    }
-    print(data);*/
+    }*/
 
     return Scaffold(
         appBar: MyAppBarWohnzimmer(context, 'VitaChi', null),
@@ -141,14 +136,11 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                     //color: Colors.green,
                                   ))));
                     }, onWillAccept: (int data) {
-                      print("HOVERED OVER DRAG TARGET1");
                       //Get Request ob der Slot bereits mit diesem Element belegt ist (IF) wenn nicht return true
 
                       return true;
                     }, onAccept: (int data) {
                       int slot1 = 1;
-                      print("onAccept 1");
-                      print("Dropped item NR  $data  on Slot $slot1");
 
                       setState(() {
                         Slot1Displayed = true;
@@ -329,7 +321,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
 
     Response response =
     await get('http://10.0.2.2:8080/vitaChi/findAll/Accessoire');
-    print("response" + response.body);
     var productsJson = json.decode(response.body);
     for (var productJson in productsJson) {
       products.add(Produkt.fromJson(productJson));
