@@ -62,7 +62,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     var products = List<Produkt>();
-
+    final size = MediaQuery.of(context).size;
     Future<List<Produkt>> getData() async {
 
       Response response =
@@ -71,6 +71,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
       for (var productJson in productsJson) {
         products.add(Produkt.fromJson(productJson));
       }
+
 
       return productsJson;
     }
@@ -119,22 +120,20 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                             border: Border.all(color: Colors.blueAccent),
                             color: Colors.transparent,
                           ),
-                          child: Container(
+                          child:
+
+
+                          Container(
                               width: 200,
                               height: 200,
-                              child: Slot1Displayed
-                                  ? Container(
+
+                              child:  Container(
                                   width: 200,
                                   height: 200,
                                   child: Image(
                                       image: AssetImage(Slot1ImagePfad),
                                       fit: BoxFit.fill))
-                                  : Container(
-                                  width: 200,
-                                  height: 200,
-                                  decoration: BoxDecoration(
-                                    //color: Colors.green,
-                                  ))));
+                                  ));
                     }, onWillAccept: (int data) {
                       //Get Request ob der Slot bereits mit diesem Element belegt ist (IF) wenn nicht return true
 
@@ -234,18 +233,29 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                       children: [
                                         LongPressDraggable<int>(
                                           data: index,
-                                          child: Image(
-                                              image: AssetImage(
-                                                  products[index].bildpfad)),
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: size.width/8,
+                                              ),
+                                              Image(
+                                                  image: AssetImage(
+                                                      products[index].bildpfad), width: size.width/3,),
+                                              SizedBox(
+                                                width: size.width/8,
+                                              )
+                                            ],
+                                          ),
                                           feedback: Image(
                                               image: AssetImage(
                                                   products[index].bildpfad),
-                                              width: 200.0,
-                                              height: 200.0),
+                                              width: size.width/3),
 
                                           // onDraggableCanceled: ,
                                         ),
-                                        Text(products[index].bezeichnung),
+                                        Text(products[index].bezeichnung, style: TextStyle(
+                                          fontSize: size.width/20
+                                        ),),
                                       ],
                                     ),
                                   );
@@ -343,8 +353,11 @@ class _WohnzimmerState extends State<Wohnzimmer> {
         Slot1ImageNumber = accessoire.accessoire_id;
       }
     }
+    setState(() {
+      Slot1ImagePfad = products[Slot1ImageNumber].bildpfad;
+      print("pfad $Slot1ImagePfad");
+    });
 
-    Slot1ImagePfad = products[Slot1ImageNumber].bildpfad;
 
     //Switch für mehrere Slots - Überprüfen von Slot jenachdem SlotImage dann 1, 2, 3 mit ID besetzen und Bildpfad erstellen
   }

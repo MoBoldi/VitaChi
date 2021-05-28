@@ -65,5 +65,6 @@ GET http://localhost:8080/vitaChi/getStartOfWorking
 ###
 GET http://localhost:8080/vitaChi/getWellbeingStats
 ###
+GET http://localhost:8080/vitaChi/getBoughtAccessoire/1
 
 
