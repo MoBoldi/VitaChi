@@ -28,7 +28,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
   int userID = 2;
   bool Slot1Displayed = false;
   int Slot1ImageNumber;
-  String Slot1ImagePfad;
+  String Slot1ImagePfad = "";
 
   @override
   void initState() {
@@ -91,22 +91,25 @@ class _WohnzimmerState extends State<Wohnzimmer> {
         drawer: MyDrawer(),
         body: Stack(
           children: [
-            Image(image: AssetImage("assets/tapete.png")),
+
             Container(
-                height: height * 0.8,
+                height: height*0.75,
                 width: width,
-                margin: EdgeInsets.only(top: height * 0.2),
+
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/boden.jpg"),
+                        image: AssetImage("assets/background1.jpg"),
                         fit: BoxFit.fill)),
                 child: Stack(
                   children: [
-                    Image(
-                      width: MediaQuery.of(context).size.width * 0.75,
+                    Container(
+                        margin: EdgeInsets.only(top: 310, left: 5),
+                    child: Image(
+                      width: MediaQuery.of(context).size.width * 0.60,
+
                       alignment: Alignment.center,
                       image: getEmotion(food[0].y),
-                    ),
+                    )),
                     DragTarget<int>(builder: (
                         BuildContext context,
                         data,
@@ -114,10 +117,11 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                         ) {
                       return Container(
                           width: 200,
-                          margin: EdgeInsets.only(top: 5, left: 205),
+                          margin: EdgeInsets.only(top: 20, left: 25),
                           height: 200,
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blueAccent),
+                            border: Border.all(width: 3, color: Colors.grey),
+
                             color: Colors.transparent,
                           ),
                           child:
@@ -206,15 +210,11 @@ class _WohnzimmerState extends State<Wohnzimmer> {
             ,*/
             Stack(
               children: [
-                Container(
-                  height: height * 0.36,
-                  width: width,
-                  color: Colors.transparent,
-                ),
+
                 DraggableScrollableSheet(
-                  initialChildSize: 0.3,
-                  minChildSize: 0.3,
-                  maxChildSize: 0.3,
+                  initialChildSize: 0.2,
+                  minChildSize: 0.2,
+                  maxChildSize: 0.2,
                   builder: (BuildContext context, myScrollController) {
                     return FutureBuilder(
                         future: getData(),
@@ -226,7 +226,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                 controller: myScrollController,
                                 itemBuilder: (context, index) {
                                   return Container(
-                                    height: 200.0,
+                                    height:200.0,
                                     width: width,
                                     color: Colors.white,
                                     child: Row(
@@ -365,16 +365,16 @@ class _WohnzimmerState extends State<Wohnzimmer> {
 
 AssetImage getEmotion(double wellbeing) {
   if (1 <= wellbeing && wellbeing < 2) {
-    return AssetImage('assets/Blume_1.png');
-  } else if (2 <= wellbeing && wellbeing < 3) {
-    return AssetImage('assets/Blume_2.png');
+    return AssetImage('assets/5_traurig.gif');
+  } else if (2 <= wellbeing && wellbeing < 3){
+    return AssetImage('assets/4_traurig.gif');
   } else if (3 <= wellbeing && wellbeing < 4) {
-    return AssetImage('assets/Blume_3.png');
+    return AssetImage('assets/Vitachi_Neutral.gif');
   } else if (4 <= wellbeing && wellbeing < 4.5) {
-    return AssetImage('assets/Blume_4.png');
+    return AssetImage('assets/2_glücklich.gif');
   } else if (4.5 <= wellbeing && wellbeing <= 5) {
-    return AssetImage('assets/Blume_5.png');
+    return AssetImage('assets/1_glücklich.gif');
   } else {
-    return AssetImage('assets/Blume_3.png');
+    return AssetImage('assets/Vitachi_Neutral.gif');
   }
 }

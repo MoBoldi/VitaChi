@@ -180,12 +180,10 @@ class MyDrawer extends StatelessWidget {
     String refreshToken = prefs.getString("refreshToken");
 
     String url = 'http://10.0.2.2:8010/auth/realms/vitachi/protocol/openid-connect/logout?response_type=code';
-    Map<String, String> headers = {"Authorization": "Bearer $accessToken", "Content-type": "application/json"};
-    String json = jsonEncode(<String, Object>{'client_id': "vitachi-client",'client_secret': "6c6151b2-ea27-42fc-97fd-b05c42eebf4f",'refresh_token': refreshToken});
-    print(json);
-    Response response = await post(url, headers: headers, body: json);
-
-    print(response.statusCode);
+    Map<String, String> headers = {"Authorization": "Bearer $accessToken", "Content-type": "application/x-www-form-urlencoded"};
+    String body = "client_id=vitachi-client&client_secret=6c6151b2-ea27-42fc-97fd-b05c42eebf4f&refresh_token=$refreshToken";
+    
+    await post(url, headers: headers, body: body);
 
     cookieManager.clearCookies();
   }
