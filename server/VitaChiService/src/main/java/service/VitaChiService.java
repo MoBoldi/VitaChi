@@ -240,6 +240,13 @@ public class VitaChiService {
         return repo.getOpenAccessoires(userid);
     }
 
+    @Path("getBoughtAccessoire/{userid}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Accessoire> getBoughtAccessoire (@PathParam long userid) {
+        return repo.getBoughtAccessoire(userid);
+    }
+
     @Path("getSetAccessoire/{userid}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

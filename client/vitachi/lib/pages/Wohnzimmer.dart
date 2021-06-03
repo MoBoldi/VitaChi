@@ -28,7 +28,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
   int userID = 2;
   bool Slot1Displayed = false;
   int Slot1ImageNumber;
-  String Slot1ImagePfad;
+  String Slot1ImagePfad = "";
 
   @override
   void initState() {
@@ -62,7 +62,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     var products = List<Produkt>();
-
+    final size = MediaQuery.of(context).size;
     Future<List<Produkt>> getData() async {
 
       Response response =
@@ -71,6 +71,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
       for (var productJson in productsJson) {
         products.add(Produkt.fromJson(productJson));
       }
+
 
       return productsJson;
     }
@@ -90,22 +91,25 @@ class _WohnzimmerState extends State<Wohnzimmer> {
         drawer: MyDrawer(),
         body: Stack(
           children: [
-            Image(image: AssetImage("assets/tapete.png")),
+
             Container(
-                height: height * 0.8,
+                height: height*0.75,
                 width: width,
-                margin: EdgeInsets.only(top: height * 0.2),
+
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/boden.jpg"),
+                        image: AssetImage("assets/background1.jpg"),
                         fit: BoxFit.fill)),
                 child: Stack(
                   children: [
-                    Image(
-                      width: MediaQuery.of(context).size.width * 0.75,
+                    Container(
+                        margin: EdgeInsets.only(top: 310, left: 5),
+                    child: Image(
+                      width: MediaQuery.of(context).size.width * 0.60,
+
                       alignment: Alignment.center,
                       image: getEmotion(food[0].y),
-                    ),
+                    )),
                     DragTarget<int>(builder: (
                         BuildContext context,
                         data,
@@ -113,28 +117,27 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                         ) {
                       return Container(
                           width: 200,
-                          margin: EdgeInsets.only(top: 5, left: 205),
+                          margin: EdgeInsets.only(top: 20, left: 25),
                           height: 200,
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blueAccent),
+                            border: Border.all(width: 3, color: Colors.grey),
+
                             color: Colors.transparent,
                           ),
-                          child: Container(
+                          child:
+
+
+                          Container(
                               width: 200,
                               height: 200,
-                              child: Slot1Displayed
-                                  ? Container(
+
+                              child:  Container(
                                   width: 200,
                                   height: 200,
                                   child: Image(
                                       image: AssetImage(Slot1ImagePfad),
                                       fit: BoxFit.fill))
-                                  : Container(
-                                  width: 200,
-                                  height: 200,
-                                  decoration: BoxDecoration(
-                                    //color: Colors.green,
-                                  ))));
+                                  ));
                     }, onWillAccept: (int data) {
                       //Get Request ob der Slot bereits mit diesem Element belegt ist (IF) wenn nicht return true
 
@@ -207,15 +210,11 @@ class _WohnzimmerState extends State<Wohnzimmer> {
             ,*/
             Stack(
               children: [
-                Container(
-                  height: height * 0.36,
-                  width: width,
-                  color: Colors.transparent,
-                ),
+
                 DraggableScrollableSheet(
-                  initialChildSize: 0.3,
-                  minChildSize: 0.3,
-                  maxChildSize: 0.3,
+                  initialChildSize: 0.2,
+                  minChildSize: 0.2,
+                  maxChildSize: 0.2,
                   builder: (BuildContext context, myScrollController) {
                     return FutureBuilder(
                         future: getData(),
@@ -227,25 +226,36 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                 controller: myScrollController,
                                 itemBuilder: (context, index) {
                                   return Container(
-                                    height: 200.0,
+                                    height:200.0,
                                     width: width,
                                     color: Colors.white,
                                     child: Row(
                                       children: [
                                         LongPressDraggable<int>(
                                           data: index,
-                                          child: Image(
-                                              image: AssetImage(
-                                                  products[index].bildpfad)),
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: size.width/8,
+                                              ),
+                                              Image(
+                                                  image: AssetImage(
+                                                      products[index].bildpfad), width: size.width/3,),
+                                              SizedBox(
+                                                width: size.width/8,
+                                              )
+                                            ],
+                                          ),
                                           feedback: Image(
                                               image: AssetImage(
                                                   products[index].bildpfad),
-                                              width: 200.0,
-                                              height: 200.0),
+                                              width: size.width/3),
 
                                           // onDraggableCanceled: ,
                                         ),
-                                        Text(products[index].bezeichnung),
+                                        Text(products[index].bezeichnung, style: TextStyle(
+                                          fontSize: size.width/20
+                                        ),),
                                       ],
                                     ),
                                   );
@@ -343,8 +353,11 @@ class _WohnzimmerState extends State<Wohnzimmer> {
         Slot1ImageNumber = accessoire.accessoire_id;
       }
     }
+    setState(() {
+      Slot1ImagePfad = products[Slot1ImageNumber].bildpfad;
+      print("pfad $Slot1ImagePfad");
+    });
 
-    Slot1ImagePfad = products[Slot1ImageNumber].bildpfad;
 
     //Switch für mehrere Slots - Überprüfen von Slot jenachdem SlotImage dann 1, 2, 3 mit ID besetzen und Bildpfad erstellen
   }
@@ -352,16 +365,16 @@ class _WohnzimmerState extends State<Wohnzimmer> {
 
 AssetImage getEmotion(double wellbeing) {
   if (1 <= wellbeing && wellbeing < 2) {
-    return AssetImage('assets/Blume_1.png');
-  } else if (2 <= wellbeing && wellbeing < 3) {
-    return AssetImage('assets/Blume_2.png');
+    return AssetImage('assets/5_traurig.gif');
+  } else if (2 <= wellbeing && wellbeing < 3){
+    return AssetImage('assets/4_traurig.gif');
   } else if (3 <= wellbeing && wellbeing < 4) {
-    return AssetImage('assets/Blume_3.png');
+    return AssetImage('assets/Vitachi_Neutral.gif');
   } else if (4 <= wellbeing && wellbeing < 4.5) {
-    return AssetImage('assets/Blume_4.png');
+    return AssetImage('assets/2_glücklich.gif');
   } else if (4.5 <= wellbeing && wellbeing <= 5) {
-    return AssetImage('assets/Blume_5.png');
+    return AssetImage('assets/1_glücklich.gif');
   } else {
-    return AssetImage('assets/Blume_3.png');
+    return AssetImage('assets/Vitachi_Neutral.gif');
   }
 }

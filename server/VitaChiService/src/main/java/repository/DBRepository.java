@@ -237,6 +237,13 @@ public class DBRepository {
         return q.getResultList();
     }
 
+    @Transactional
+    public List<Accessoire> getBoughtAccessoire(long userid) {
+        Query q = em.createQuery("select a from Accessoire as a where a IN (select ba.accessoire from BenutzerAccessoire as ba where ba.userID = ?1)");
+        q.setParameter(1, userid);
+        return q.getResultList();
+    }
+
 
 
     //Wohlbefinden berechnen

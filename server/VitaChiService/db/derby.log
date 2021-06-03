@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Sat May 15 22:19:07 CEST 2021 : Apache Derby Network Server - 10.15.1.3 - (1853019) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
 Sat May 15 22:19:38 CEST 2021:
@@ -20,3 +21,6 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\Markus Stadler\Documents\HTL\4.Klasse\ITP\Projekt2021\VitaChi\server\VitaChiService\db
 Database Class Loader started - derby.database.classpath=''
+=======
+Fri May 28 23:17:27 CEST 2021 : Apache Derby Network Server - 10.15.2.0 - (1873585) started and ready to accept connections on port 1527
+>>>>>>> 4c6aaa06dd203d9a6ca29af450e766a8df95a83f
