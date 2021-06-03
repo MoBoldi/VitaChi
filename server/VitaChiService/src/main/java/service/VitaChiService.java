@@ -2,6 +2,9 @@ package service;
 
 import entity.*;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
+import org.jose4j.json.internal.json_simple.JSONObject;
+import org.jose4j.json.internal.json_simple.parser.JSONParser;
+import org.jose4j.json.internal.json_simple.parser.ParseException;
 import repository.DBRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -10,6 +13,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Base64;
 import java.util.List;
 
 @ApplicationScoped
@@ -49,17 +53,17 @@ public class VitaChiService {
     }
 
     // Liste aller Objekte je nach Entität senden
-    @Path("findInputByType/{Type}")
+    @Path("findInputByType/{Type}/{userID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Eingabe> findInputByType(@PathParam("Type") String type) {
-        return repo.findInputByType(type);
+    public List<Eingabe> findInputByType(@PathParam("Type") String type, @PathParam("userID") int userID) {
+        return repo.findInputByType(type, userID);
     }
 
-    @Path("getWellbeingStats")
+    @Path("getWellbeingStats/{userID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Object> getWellbeingStats() {return repo.getWellbeingStats();}
+    public List<Object> getWellbeingStats(@PathParam int userID) {return repo.getWellbeingStats(userID);}
 
     // Ein Objekt je nach Entität senden
     @Path("find/{Entity}/{id}")
@@ -70,11 +74,11 @@ public class VitaChiService {
     }
 
     // Daten für Statistikseite senden
-    @Path("getStats/{type}")
+    @Path("getStats/{type}/{userID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Object> getStats(@PathParam("type") String type) {
-        return repo.getStats(type);
+    public List<Object> getStats(@PathParam("type") String type, @PathParam("userID") int userID) {
+        return repo.getStats(type, userID);
     }
 
     // Ein Objekt je nach Entität löschen
@@ -220,6 +224,15 @@ public class VitaChiService {
         return benutzerAccessoire;
     }
 
+    @Path("createAccessoirePlatz")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public JsonObject createAccessoirePlatz(JsonObject accessoirePlatz) {
+
+        repo.createAccessoirePlatz(new AccessoirePlatz(accessoirePlatz.getInt("userID"), accessoirePlatz.getInt("slot1"), accessoirePlatz.getInt("slot1ImageNumber")));
+        return accessoirePlatz;
+    }
+
     @Path("getOpenAccessoire/{userid}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -227,11 +240,67 @@ public class VitaChiService {
         return repo.getOpenAccessoires(userid);
     }
 
-    @Path("getStartOfWorking")
+    @Path("getSetAccessoire/{userid}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Arbeit> getStartOfWorking(){
-        return repo.findLastEntry(2);
+    public List<AccessoirePlatz> getSetAccessoire (@PathParam long userid) {
+        return repo.getSetAccessoire(userid);
+    }
+
+    @Path("getStartOfWorking/{userID}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Arbeit> getStartOfWorking(@PathParam("uerID") long userID){
+        return repo.findLastEntry(userID);
+    }
+
+    @Path("newUser")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public JsonObject newUser(JsonObject json) {
+
+        String token = json.getString("token");
+
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getDecoder();
+        String payload = new String(decoder.decode(chunks[1]));
+
+        JSONParser parser = new JSONParser();
+        JSONObject payloadObject = new JSONObject();
+        try {
+            payloadObject = (JSONObject) parser.parse(payload);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        repo.newUser(payloadObject.get("sub").toString());
+
+        return json;
+    }
+
+    @Path("getUser")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Long getUser(JsonObject json) {
+
+        String token = json.getString("token");
+
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getDecoder();
+        String payload = new String(decoder.decode(chunks[1]));
+
+        JSONParser parser = new JSONParser();
+        JSONObject payloadObject = new JSONObject();
+        try {
+            payloadObject = (JSONObject) parser.parse(payload);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return repo.getUser(payloadObject.get("sub").toString());
+
     }
 
 }

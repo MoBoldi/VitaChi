@@ -1,7 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:webview_cookie_manager/webview_cookie_manager.dart';
 
 class MyDrawer extends StatelessWidget {
+
+  final flutterWebViewPlugin = FlutterWebviewPlugin();
+  String selectedUrl = 'http://10.0.2.2:8010/auth/realms/vitachi/protocol/openid-connect/logout?client_id=account&response_type=code';
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -151,11 +161,32 @@ class MyDrawer extends StatelessWidget {
               ],
             ),
             onTap: () {
+              logout();
               Navigator.pushReplacementNamed(context, '/login');
             },
           ),
         ],
       ),
     );
+  }
+
+  void logout() async {
+
+    final cookieManager = WebviewCookieManager();
+    String token;
+    String refresh;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String accessToken = prefs.getString("accessToken");
+    String refreshToken = prefs.getString("refreshToken");
+
+    String url = 'http://10.0.2.2:8010/auth/realms/vitachi/protocol/openid-connect/logout?response_type=code';
+    Map<String, String> headers = {"Authorization": "Bearer $accessToken", "Content-type": "application/json"};
+    String json = jsonEncode(<String, Object>{'client_id': "vitachi-client",'client_secret': "6c6151b2-ea27-42fc-97fd-b05c42eebf4f",'refresh_token': refreshToken});
+    print(json);
+    Response response = await post(url, headers: headers, body: json);
+
+    print(response.statusCode);
+
+    cookieManager.clearCookies();
   }
 }

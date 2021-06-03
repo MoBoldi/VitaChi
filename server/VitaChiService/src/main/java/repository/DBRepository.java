@@ -5,6 +5,7 @@ import entity.*;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -68,6 +69,12 @@ public class DBRepository {
         return e;
     }
 
+    public Long getUser(String keycloakId) {
+        TypedQuery<Long> query = em.createNamedQuery("UserEnt.findUser", Long.class);
+        query.setParameter("keycloakId", keycloakId);
+        return query.getSingleResult();
+    }
+
     // Löschen eines Trainings
     @Transactional
     public void delete(String entity, long id) {
@@ -98,6 +105,9 @@ public class DBRepository {
     public void createArbeit(Arbeit newArbeit) {
         em.persist(newArbeit);
     }
+
+    @Transactional
+    public void newUser(String keycloakId) { em.persist(new UserEnt(keycloakId)); }
 
     // Lesen eines Trainings mit id
     public Object find(String entity, long id) {
@@ -173,6 +183,14 @@ public class DBRepository {
     }
 
     @Transactional
+    public List<AccessoirePlatz> getSetAccessoire(long userID) {
+        TypedQuery<AccessoirePlatz> query = em.createNamedQuery(AccessoirePlatz.FINDALLBYUSER, AccessoirePlatz.class);
+        query.setParameter("benutzer_id", userID);
+
+        return query.getResultList();
+    }
+
+    @Transactional
     public String activeArbeit(long id){
         LocalDateTime date = LocalDateTime.of(0,1,1,0,0,0,0);
         List<Arbeit> a = findLastEntry(id);
@@ -192,6 +210,24 @@ public class DBRepository {
     public BenutzerAccessoire createBenutzerAccessoire(BenutzerAccessoire benutzerAccessoire){
         em.persist(benutzerAccessoire);
         return benutzerAccessoire;
+    }
+
+    @Transactional
+    public AccessoirePlatz createAccessoirePlatz(AccessoirePlatz accessoirePlatz) {
+        Query query = em.createQuery("Select ap from AccessoirePlatz as ap where ap.benutzer_id = :benutzer_id and ap.slot_it = :slot_it");
+        query.setParameter("benutzer_id", accessoirePlatz.getBenutzer_id());
+        query.setParameter("slot_it", accessoirePlatz.getSlot_it());
+
+        List<AccessoirePlatz> aplist = query.getResultList();
+
+        if(aplist.size() == 0) {
+            em.persist(accessoirePlatz);
+        } else {
+            em.remove(aplist.get(0));
+            em.persist(accessoirePlatz);
+        }
+
+        return accessoirePlatz;
     }
 
     @Transactional
@@ -248,19 +284,20 @@ public class DBRepository {
         this.createArbeit(a4);
     }
 
-    public List<Eingabe> findInputByType(String type) {
+    public List<Eingabe> findInputByType(String type, int userID) {
         TypedQuery<Eingabe> query = em.createNamedQuery("Eingabe.findByType", Eingabe.class);
         query.setParameter("type", type);
+        query.setParameter("userID", userID);
         List<Eingabe> e = query.getResultList();
         return e;
     }
 
-    public List<Object> getStats(String type) {
-        String bewertung11 = "SELECT (count(e.bewertung1)) from Eingabe e where e.typ = '"+type+"' and e.bewertung1 = 1";
-        String bewertung21 = "SELECT (count(e.bewertung2)) from Eingabe e where e.typ = '"+type+"' and e.bewertung2 = 1";
-        String bewertung15 = "SELECT (count(e.bewertung1)) from Eingabe e where e.typ = '"+type+"' and e.bewertung1 = 5";
-        String bewertung25 = "SELECT (count(e.bewertung2)) from Eingabe e where e.typ = '"+type+"' and e.bewertung2 = 5";
-        String ges = "SELECT count(e.bewertung1) + count(e.bewertung2) from Eingabe e where e.typ = '" + type + "'";
+    public List<Object> getStats(String type, int userID) {
+        String bewertung11 = "SELECT (count(e.bewertung1)) from Eingabe e where e.typ = '"+type+"' and e.bewertung1 = 1 and e.userid = " + userID;
+        String bewertung21 = "SELECT (count(e.bewertung2)) from Eingabe e where e.typ = '"+type+"' and e.bewertung2 = 1 and e.userid = " + userID;
+        String bewertung15 = "SELECT (count(e.bewertung1)) from Eingabe e where e.typ = '"+type+"' and e.bewertung1 = 5 and e.userid = " + userID;
+        String bewertung25 = "SELECT (count(e.bewertung2)) from Eingabe e where e.typ = '"+type+"' and e.bewertung2 = 5 and e.userid = " + userID;
+        String ges = "SELECT count(e.bewertung1) + count(e.bewertung2) from Eingabe e where e.typ = '" + type + "' and e.userid = " + userID;
         Query query11 = em.createNativeQuery(bewertung11);
         Query query21 = em.createNativeQuery(bewertung15);
         Query query15 = em.createNativeQuery(bewertung21);
@@ -271,11 +308,7 @@ public class DBRepository {
         Object result21 = query21.getSingleResult();
         Object result25 = query25.getSingleResult();
         Object resultGes = queryGes.getSingleResult();
-        System.out.println(result11);
-        System.out.println(result15);
-        System.out.println(result21);
-        System.out.println(result25);
-        System.out.println(resultGes);
+
         List<Object> result = new LinkedList<>();
         result.add((int) result11 + (int) result21);
         result.add((int) result15 + (int) result25);
@@ -283,11 +316,10 @@ public class DBRepository {
         return result;
     }
 
-    public List<Object> getWellbeingStats() {
-        String sql1 = "SELECT SUM((bewertung1 + BEWERTUNG2) / 2.0)/Count(*), DATUM from EINGABE group by DATUM";
+    public List<Object> getWellbeingStats(int userID) {
+        String sql1 = "SELECT SUM((bewertung1 + BEWERTUNG2) / 2.0)/Count(*), DATUM from EINGABE where userid = " + userID + " group by DATUM";
         Query query1 = em.createNativeQuery(sql1);
         List<Object> result = query1.getResultList();
-        System.out.println(result);
         return result;
     }
 }

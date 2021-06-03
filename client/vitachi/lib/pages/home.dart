@@ -87,7 +87,6 @@ class Home extends StatelessWidget {
       int id = prefs.getInt("UserID");
       Response response =
       await get(url+'/getWokringPerWeek/$id');
-      print(response.statusCode);
       arbeit = double.parse(response.body);
       work[0].y = arbeit;
       work[1].y = 38.5-arbeit;
@@ -361,7 +360,6 @@ IconData getIcon(String input) {
 }
 
 int getRating(double wellbeing) {
-  print("WELLBEING: " + wellbeing.toString());
   if (1 <= wellbeing && wellbeing < 2) {
     return 1;
   } else if (2 <= wellbeing && wellbeing < 3) {

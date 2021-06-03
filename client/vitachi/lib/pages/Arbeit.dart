@@ -29,7 +29,6 @@ class _ArbeitState extends State<Arbeit> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int id = prefs.getInt("UserID");
     Response response = await get('http://10.0.2.2:8080/vitaChi/activeArbeit/$id');
-    print("response" + response.body);
       if(response.body=='true'){
         status = true;
       }else if (response.body == 'false'){
@@ -43,7 +42,6 @@ class _ArbeitState extends State<Arbeit> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int id = prefs.getInt("UserID");
     Response response = await get('http://10.0.2.2:8080/vitaChi/getWorkingTime/$id');
-    print(response.statusCode);
     if (response.body.startsWith("<!")){
     }else{
       timestring=response.body;
@@ -173,8 +171,6 @@ class _ArbeitState extends State<Arbeit> {
                                                   }
                                                 },
                                                 onChanged: (bool position) {
-                                                  print(
-                                                      "The button is $position");
                                                 },
                                               ),
                                               margin: EdgeInsets.only(top: size.height/15),

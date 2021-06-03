@@ -20,7 +20,6 @@ class _BodyState extends State<Body> {
     data = json.decode(response.body);
 
     userData = data["data"];
-    print(userData.toString());
   }
 
   @override

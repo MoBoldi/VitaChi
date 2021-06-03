@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -26,21 +27,20 @@ class _Statistics extends State<Statistics> {
   getChartData() {
     var i = 1;
     for (var entry in entries) {
-      print(entry);
       ChartData c =
           new ChartData(i.toString(), entry.eingabe1 + entry.eingabe2);
       cdata.add(c);
       i++;
     }
-    print("------------- cdata --------------");
-    print(cdata);
   }
 
   @override
   Widget build(BuildContext context) {
     Future getDBData() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
       Response response = await get(
-          'http://10.0.2.2:8080/vitaChi/findInputByType/' + widget.type);
+          'http://10.0.2.2:8080/vitaChi/findInputByType/' + widget.type + '/$id');
       var entriesJson = json.decode(response.body);
       entries = [];
       cdata = [];
@@ -51,10 +51,10 @@ class _Statistics extends State<Statistics> {
     }
 
     Future getAvgData() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
       Response response =
-          await get('http://10.0.2.2:8080/vitaChi/get' + widget.type + 'AVG');
-      print('--------------- AVG ----------------');
-      print(response.body);
+          await get('http://10.0.2.2:8080/vitaChi/get' + widget.type + 'AVG/$id');
       avg = [
         ChartData('', 0, Color(0xFF4DA8DA)),
         ChartData('', 5, Color(0xFF9dc6dd)),
@@ -62,15 +62,14 @@ class _Statistics extends State<Statistics> {
       avg[0].x = widget.type;
       avg[0].y = double.parse(response.body);
       avg[1].y = 5 - avg[0].y;
-      print(avg);
     }
 
     Future getStats() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
       Response response =
-          await get('http://10.0.2.2:8080/vitaChi/getStats/' + widget.type);
+          await get('http://10.0.2.2:8080/vitaChi/getStats/' + widget.type + '/$id');
       List<dynamic> statsJson = json.decode(response.body);
-      print('------------ StatsJson ------------');
-      print(statsJson);
       List list = statsJson;
       int star1 = int.parse(list.elementAt(0).toString());
       int star5 = int.parse(list.elementAt(1).toString());
@@ -79,8 +78,6 @@ class _Statistics extends State<Statistics> {
       stats.add(star1);
       stats.add(star5);
       stats.add(ges);
-      print('---------------- Stats ------------------');
-      print(stats);
     }
 
     return Scaffold(
