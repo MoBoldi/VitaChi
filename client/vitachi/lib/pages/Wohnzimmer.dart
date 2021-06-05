@@ -181,11 +181,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                     /*Container(
                                 
                                  
-                            height: 200.0,
-                            width: width,
-                            color: Colors.blue,
-                          ),
-                          Container(
+                           
                             height: 200.0,
                             width: width,
                             color: Colors.pink,
