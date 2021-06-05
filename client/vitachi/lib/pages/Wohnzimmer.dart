@@ -179,17 +179,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                           }
                         });
                     /*Container(
-                                alignment: Alignment.center,
-                                width: width * 0.3,
-                                height: 100.0,
-                                color: Colors.white,
-                                child: Draggable<String>(
-                                  data: 'Item',
-                                  child: Image.asset(
-                                    'assets/test2.png',
-                                    width: width * 0.3,
-                                    height: 100.0,
-                                  ),
+                                
                                   feedback: Image.asset(
                                     'assets/test2.png',
                                     width: width,
