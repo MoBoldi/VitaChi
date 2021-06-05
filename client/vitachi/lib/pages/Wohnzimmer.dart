@@ -1,20 +1,16 @@
-import 'dart:collection';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+<<<<<<< HEAD
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vitachi/components/myAppBar.dart';
+=======
+>>>>>>> cdeed1b3feb086bdfbe9f4fe213939474f9f4f1d
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:vitachi/components/myDrawer.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vitachi/entitys/AccessoirePlatz.dart';
 import 'package:vitachi/entitys/Produkt.dart';
 import 'package:vitachi/pages/home.dart';
-import 'package:shape_of_view/shape/arc.dart';
-import 'package:shape_of_view/shape_of_view.dart';
-import 'package:step_progress_indicator/step_progress_indicator.dart';
-//import "package:json_object/json_object.dart";
 
 class Wohnzimmer extends StatefulWidget {
   Map data = {};
@@ -65,10 +61,15 @@ class _WohnzimmerState extends State<Wohnzimmer> {
     var products = List<Produkt>();
     final size = MediaQuery.of(context).size;
     Future<List<Produkt>> getData() async {
+<<<<<<< HEAD
       SharedPreferences prefs = await SharedPreferences.getInstance();
       int id = prefs.getInt("UserID");
       Response response =
       await get('http://10.0.2.2:8080/vitaChi/getBoughtAccessoire/$id');
+=======
+      Response response =
+          await get('http://10.0.2.2:8080/vitaChi/getBoughtAccessoire');
+>>>>>>> cdeed1b3feb086bdfbe9f4fe213939474f9f4f1d
       var productsJson = json.decode(response.body);
       for (var productJson in productsJson) {
         products.add(Produkt.fromJson(productJson));
@@ -76,16 +77,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
 
       return productsJson;
     }
-
-    /*data = ModalRoute.of(context).settings.arguments;
-    if (data == null) {
-      data = {
-        'arg': food[0].y,
-      };
-    } else {
-      food[0].y = data['avg'];
-      food[1].y = 5 - data['avg'];
-    }*/
 
     return Scaffold(
         appBar: MyAppBarWohnzimmer(context, 'VitaChi', null),
@@ -109,10 +100,10 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                           image: getEmotion(food[0].y),
                         )),
                     DragTarget<int>(builder: (
-                        BuildContext context,
-                        data,
-                        rejected,
-                        ) {
+                      BuildContext context,
+                      data,
+                      rejected,
+                    ) {
                       return Container(
                           width: 200,
                           margin: EdgeInsets.only(top: 60, left: size.width/4),
@@ -131,8 +122,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                       image: AssetImage(Slot1ImagePfad),
                                       fit: BoxFit.fill))));
                     }, onWillAccept: (int data) {
-                      //Get Request ob der Slot bereits mit diesem Element belegt ist (IF) wenn nicht return true
-
                       return true;
                     }, onAccept: (int data) {
                       int slot1 = 1;
@@ -144,62 +133,8 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                         postAccessoirePlatz(userID, Slot1ImageNumber, slot1);
                       });
                     }),
-                    /*,
-                         DragTarget<int>(
-                        builder: (
-                            BuildContext context,
-                         data,
-                        rejected,
-              ) {
-                return Container(
-                    width: 120,
-                 margin: EdgeInsets.only(top: 0, left: 300),
-                    height: 200,
-                    color: Colors.transparent,
-                    child:Container(
-                        width: 120,
-                        margin: EdgeInsets.only(top: 130),
-                         height: 70,
-                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blueAccent)
-                        ),
-                    )
-
-                );
-              },
-              onWillAccept: (int data) {
-                    print("HOVERED OVER DRAG TARGET2");
-                      return true;
-              },
-              onAccept: (int data) {
-                int slot2 =2;
-                print("onAccept 2");
-                print("Dropped item NR  $data  on Slot $slot2");
-
-                 setState(() {
-                  Slot1Displayed = true;
-                });
-              print(Slot1Displayed);
-
-
-              }
-                      )*/
                   ],
                 )),
-
-            /* Container(
-              /*child: Image(
-                width: MediaQuery.of(context).size.width * 0.5,
-                image: getEmotion(food[0].y),
-              ),*/
-              child: Image(image: AssetImage("assets/Blume_Placeholder.png")),
-              height: height * 0.8,
-              width: width,
-              margin: EdgeInsets.only(top: height * 0.2),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/boden.jpg"), fit: BoxFit.fill)),
-            ,*/
             Stack(
               children: [
                 DraggableScrollableSheet(
@@ -243,6 +178,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                               image: AssetImage(
                                                   products[index].bildpfad),
                                               width: size.width / 3),
+<<<<<<< HEAD
 
                                           // onDraggableCanceled: ,
                                         ),
@@ -251,6 +187,14 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                           style: TextStyle(
                                               fontSize: size.width / 20),
                                         ),
+=======
+                                        ),
+                                        Text(
+                                          products[index].bezeichnung,
+                                          style: TextStyle(
+                                              fontSize: size.width / 20),
+                                        ),
+>>>>>>> cdeed1b3feb086bdfbe9f4fe213939474f9f4f1d
                                       ],
                                     ),
                                   );
@@ -281,51 +225,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                             );
                           }
                         });
-                    /*Container(
-                      child: ListView(
-                        controller: myScrollController,
-                        children: [
-                          Container(
-                            height: 200.0,
-                            width: width,
-                            color: Colors.red,
-                            child: Container(
-                                alignment: Alignment.center,
-                                width: width * 0.3,
-                                height: 100.0,
-                                color: Colors.white,
-                                child: Draggable<String>(
-                                  data: 'Item',
-                                  child: Image.asset(
-                                    'assets/test2.png',
-                                    width: width * 0.3,
-                                    height: 100.0,
-                                  ),
-                                  feedback: Image.asset(
-                                    'assets/test2.png',
-                                    width: width,
-                                    height: height,
-                                  ),
-                                )),
-                          ),
-                          Container(
-                            height: 200.0,
-                            width: width,
-                            color: Colors.blue,
-                          ),
-                          Container(
-                            height: 200.0,
-                            width: width,
-                            color: Colors.pink,
-                          ),
-                          Container(
-                            height: 200.0,
-                            width: width,
-                            color: Colors.black,
-                          ),
-                        ],
-                      ),
-                    );*/
                   },
                 ),
               ],
@@ -355,7 +254,11 @@ class _WohnzimmerState extends State<Wohnzimmer> {
     int id = prefs.getInt("UserID");
 
     Response response =
+<<<<<<< HEAD
     await get('http://10.0.2.2:8080/vitaChi/getBoughtAccessoire/$id');
+=======
+        await get('http://10.0.2.2:8080/vitaChi/findAll/Accessoire');
+>>>>>>> cdeed1b3feb086bdfbe9f4fe213939474f9f4f1d
     var productsJson = json.decode(response.body);
     for (var productJson in productsJson) {
       products.add(Produkt.fromJson(productJson));

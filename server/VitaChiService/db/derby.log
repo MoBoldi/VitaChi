@@ -1,9 +1,28 @@
+<<<<<<< HEAD
 Fri Jun 04 08:24:46 CEST 2021 : Apache Derby Network Server - 10.15.2.0 - (1873585) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
 Fri Jun 04 08:25:46 CEST 2021:
 Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0179-d5b2-0a30-00005d376287 
 on database directory C:\Users\Markus Stadler\Documents\HTL\4.Klasse\ITP\Projekt2021\VitaChi\server\VitaChiService\db\vitaChiDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a 
 Loaded from file:/C:/opt/db-derby-10.15.2.0-bin/lib/derby.jar
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+Sat May 15 22:19:07 CEST 2021 : Apache Derby Network Server - 10.15.1.3 - (1853019) started and ready to accept connections on port 1527
+----------------------------------------------------------------
+Sat May 15 22:19:38 CEST 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.1.3 - (1853019): instance a816c00e-0179-71ae-ba54-000045fc6bee 
+on database directory C:\Users\noahs\OneDrive\Dokumente\Schule\VitaChi\VitaChi\server\VitaChiService\db\vitaChiDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a 
+Loaded from file:/C:/opt/db-derby-10.15.1.3-bin/db-derby-10.15.1.3-bin/lib/derby.jar
+=======
+Thu May 27 21:49:02 CEST 2021 : Apache Derby Network Server - 10.15.2.0 - (1873585) started and ready to accept connections on port 1527
+----------------------------------------------------------------
+Thu May 27 21:49:52 CEST 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0179-af5f-80b4-00005d376287 
+on database directory C:\Users\Markus Stadler\Documents\HTL\4.Klasse\ITP\Projekt2021\VitaChi\server\VitaChiService\db\vitaChiDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a 
+Loaded from file:/C:/opt/db-derby-10.15.2.0-bin/lib/derby.jar
+>>>>>>> fad6c587d762cbeae60fefc6b907c8d2abc5ca7a
+>>>>>>> cdeed1b3feb086bdfbe9f4fe213939474f9f4f1d
 java.vendor=Oracle Corporation
 user.dir=C:\Users\Markus Stadler\Documents\HTL\4.Klasse\ITP\Projekt2021\VitaChi\server\VitaChiService\db
 os.name=Windows 10
@@ -11,4 +30,10 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\Markus Stadler\Documents\HTL\4.Klasse\ITP\Projekt2021\VitaChi\server\VitaChiService\db
 Database Class Loader started - derby.database.classpath=''
+<<<<<<< HEAD
 Derby could not obtain the locks needed to release the unused, preallocated values for the sequence 'APP'.'HIBERNATE_SEQUENCE'. As a result, unexpected gaps may appear in this sequence.
+=======
+=======
+Fri May 28 23:17:27 CEST 2021 : Apache Derby Network Server - 10.15.2.0 - (1873585) started and ready to accept connections on port 1527
+>>>>>>> 4c6aaa06dd203d9a6ca29af450e766a8df95a83f
+>>>>>>> cdeed1b3feb086bdfbe9f4fe213939474f9f4f1d
