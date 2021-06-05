@@ -125,12 +125,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                 )),
 
             /* Container(
-              child: Image(image: AssetImage("assets/Blume_Placeholder.png")),
-              height: height * 0.8,
-              width: width,
-              margin: EdgeInsets.only(top: height * 0.2),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
                       image: AssetImage("assets/boden.jpg"), fit: BoxFit.fill)),
             ,*/
             Stack(
