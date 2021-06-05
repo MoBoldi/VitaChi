@@ -66,13 +66,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
       return productsJson;
     }
 
-    /*data = ModalRoute.of(context).settings.arguments;
-    if (data == null) {
-      data = {
-        'arg': food[0].y,
-
-    }*/
-
     return Scaffold(
         appBar: MyAppBarWohnzimmer(context, 'VitaChi', null),
         drawer: MyDrawer(),
