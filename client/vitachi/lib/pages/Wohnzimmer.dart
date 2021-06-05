@@ -180,14 +180,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                         });
                     /*Container(
                                 
-                                  feedback: Image.asset(
-                                    'assets/test2.png',
-                                    width: width,
-                                    height: height,
-                                  ),
-                                )),
-                          ),
-                          Container(
+                                 
                             height: 200.0,
                             width: width,
                             color: Colors.blue,
