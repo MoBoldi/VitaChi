@@ -72,7 +72,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
         'arg': food[0].y,
 
     }*/
-    a
 
     return Scaffold(
         appBar: MyAppBarWohnzimmer(context, 'VitaChi', null),
