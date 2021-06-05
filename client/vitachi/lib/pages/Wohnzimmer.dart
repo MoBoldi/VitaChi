@@ -125,10 +125,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                 )),
 
             /* Container(
-              /*child: Image(
-                width: MediaQuery.of(context).size.width * 0.5,
-                image: getEmotion(food[0].y),
-              ),*/
               child: Image(image: AssetImage("assets/Blume_Placeholder.png")),
               height: height * 0.8,
               width: width,
