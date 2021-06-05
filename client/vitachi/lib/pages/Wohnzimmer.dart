@@ -179,14 +179,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                           }
                         });
                     /*Container(
-                      child: ListView(
-                        controller: myScrollController,
-                        children: [
-                          Container(
-                            height: 200.0,
-                            width: width,
-                            color: Colors.red,
-                            child: Container(
                                 alignment: Alignment.center,
                                 width: width * 0.3,
                                 height: 100.0,
