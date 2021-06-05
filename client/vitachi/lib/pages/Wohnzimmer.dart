@@ -178,16 +178,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                 });
                           }
                         });
-                    /*Container(
-                                
-                                 
-                           
-                          
-                            
-                          ),
-                        ],
-                      ),
-                    );*/
                   },
                 ),
               ],
