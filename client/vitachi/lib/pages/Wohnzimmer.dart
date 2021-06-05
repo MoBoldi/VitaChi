@@ -1,26 +1,21 @@
-import 'dart:collection';
-import 'dart:convert';
 
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:vitachi/components/myDrawer.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vitachi/entitys/AccessoirePlatz.dart';
 import 'package:vitachi/entitys/Produkt.dart';
 import 'package:vitachi/pages/home.dart';
-import 'package:shape_of_view/shape/arc.dart';
-import 'package:shape_of_view/shape_of_view.dart';
-import 'package:step_progress_indicator/step_progress_indicator.dart';
 
+a
 class Wohnzimmer extends StatefulWidget {
   Map data = {};
 
   @override
   _WohnzimmerState createState() => _WohnzimmerState();
 }
-a
+
 class _WohnzimmerState extends State<Wohnzimmer> {
   Offset position = Offset(0, 0);
 
@@ -140,46 +135,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                         postAccessoirePlatz(userID, Slot1ImageNumber, slot1);
                       });
                     }),
-                    /*,
-                         DragTarget<int>(
-                        builder: (
-                            BuildContext context,
-                         data,
-                        rejected,
-              ) {
-                return Container(
-                    width: 120,
-                 margin: EdgeInsets.only(top: 0, left: 300),
-                    height: 200,
-                    color: Colors.transparent,
-                    child:Container(
-                        width: 120,
-                        margin: EdgeInsets.only(top: 130),
-                         height: 70,
-                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blueAccent)
-                        ),
-                    )
 
-                );
-              },
-              onWillAccept: (int data) {
-                    print("HOVERED OVER DRAG TARGET2");
-                      return true;
-              },
-              onAccept: (int data) {
-                int slot2 =2;
-                print("onAccept 2");
-                print("Dropped item NR  $data  on Slot $slot2");
-
-                 setState(() {
-                  Slot1Displayed = true;
-                });
-              print(Slot1Displayed);
-
-
-              }
-                      )*/
                   ],
                 )),
 
