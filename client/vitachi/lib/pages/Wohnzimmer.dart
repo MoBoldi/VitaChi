@@ -183,8 +183,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                  
                            
                           
-                            width: width,
-                            color: Colors.black,
+                            
                           ),
                         ],
                       ),
