@@ -110,8 +110,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                       image: AssetImage(Slot1ImagePfad),
                                       fit: BoxFit.fill))));
                     }, onWillAccept: (int data) {
-                      //Get Request ob der Slot bereits mit diesem Element belegt ist (IF) wenn nicht return true
-
                       return true;
                     }, onAccept: (int data) {
                       int slot1 = 1;
