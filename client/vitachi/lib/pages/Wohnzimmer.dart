@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -8,7 +7,6 @@ import 'package:vitachi/entitys/AccessoirePlatz.dart';
 import 'package:vitachi/entitys/Produkt.dart';
 import 'package:vitachi/pages/home.dart';
 
-a
 class Wohnzimmer extends StatefulWidget {
   Map data = {};
 
@@ -72,10 +70,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
     if (data == null) {
       data = {
         'arg': food[0].y,
-      };
-    } else {
-      food[0].y = data['avg'];
-      food[1].y = 5 - data['avg'];
+
     }*/
 
     return Scaffold(
@@ -135,7 +130,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                         postAccessoirePlatz(userID, Slot1ImageNumber, slot1);
                       });
                     }),
-
                   ],
                 )),
 
