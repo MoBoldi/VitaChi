@@ -123,10 +123,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                     }),
                   ],
                 )),
-
-            /* Container(
-                      image: AssetImage("assets/boden.jpg"), fit: BoxFit.fill)),
-            ,*/
             Stack(
               children: [
                 DraggableScrollableSheet(
