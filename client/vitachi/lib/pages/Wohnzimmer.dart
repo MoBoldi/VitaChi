@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-<<<<<<< HEAD
+
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vitachi/components/myAppBar.dart';
-=======
->>>>>>> cdeed1b3feb086bdfbe9f4fe213939474f9f4f1d
+
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:vitachi/components/myDrawer.dart';
 import 'package:vitachi/entitys/AccessoirePlatz.dart';
@@ -61,15 +59,10 @@ class _WohnzimmerState extends State<Wohnzimmer> {
     var products = List<Produkt>();
     final size = MediaQuery.of(context).size;
     Future<List<Produkt>> getData() async {
-<<<<<<< HEAD
       SharedPreferences prefs = await SharedPreferences.getInstance();
       int id = prefs.getInt("UserID");
       Response response =
-      await get('http://10.0.2.2:8080/vitaChi/getBoughtAccessoire/$id');
-=======
-      Response response =
-          await get('http://10.0.2.2:8080/vitaChi/getBoughtAccessoire');
->>>>>>> cdeed1b3feb086bdfbe9f4fe213939474f9f4f1d
+          await get('http://10.0.2.2:8080/vitaChi/getBoughtAccessoire/$id');
       var productsJson = json.decode(response.body);
       for (var productJson in productsJson) {
         products.add(Produkt.fromJson(productJson));
@@ -106,7 +99,8 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                     ) {
                       return Container(
                           width: 200,
-                          margin: EdgeInsets.only(top: 60, left: size.width/4),
+                          margin:
+                              EdgeInsets.only(top: 60, left: size.width / 4),
                           height: 200,
                           decoration: BoxDecoration(
                             border: Border.all(width: 3, color: Colors.grey),
@@ -146,7 +140,8 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                         future: getData(),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
-                              ConnectionState.done && !products.isEmpty) {
+                                  ConnectionState.done &&
+                              !products.isEmpty) {
                             return ListView.builder(
                                 itemCount: products.length,
                                 controller: myScrollController,
@@ -178,23 +173,12 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                               image: AssetImage(
                                                   products[index].bildpfad),
                                               width: size.width / 3),
-<<<<<<< HEAD
-
-                                          // onDraggableCanceled: ,
                                         ),
                                         Text(
                                           products[index].bezeichnung,
                                           style: TextStyle(
                                               fontSize: size.width / 20),
                                         ),
-=======
-                                        ),
-                                        Text(
-                                          products[index].bezeichnung,
-                                          style: TextStyle(
-                                              fontSize: size.width / 20),
-                                        ),
->>>>>>> cdeed1b3feb086bdfbe9f4fe213939474f9f4f1d
                                       ],
                                     ),
                                   );
@@ -203,22 +187,19 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                             return Row(
                               children: [
                                 SizedBox(
-                                  height: size.height/20,
+                                  height: size.height / 20,
                                 ),
                                 Container(
                                   child: Column(
-                                    children: [
-                                      Text(
-                                        "Noch keine Bilder gekauft!",
-                                        style: TextStyle(
-                                        fontSize: size.width / 18,
-                                        color: Colors.black,
-                                          fontWeight: FontWeight.bold
-                                      )
-                                      ),
-                                    ],
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround
-                                  ),
+                                      children: [
+                                        Text("Noch keine Bilder gekauft!",
+                                            style: TextStyle(
+                                                fontSize: size.width / 18,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold)),
+                                      ],
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround),
                                   width: size.width,
                                 ),
                               ],
@@ -254,11 +235,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
     int id = prefs.getInt("UserID");
 
     Response response =
-<<<<<<< HEAD
-    await get('http://10.0.2.2:8080/vitaChi/getBoughtAccessoire/$id');
-=======
         await get('http://10.0.2.2:8080/vitaChi/findAll/Accessoire');
->>>>>>> cdeed1b3feb086bdfbe9f4fe213939474f9f4f1d
     var productsJson = json.decode(response.body);
     for (var productJson in productsJson) {
       products.add(Produkt.fromJson(productJson));
@@ -285,8 +262,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
       Slot1ImagePfad = products[Slot1ImageNumber].bildpfad;
       print("pfad $Slot1ImagePfad");
     });
-
-    //Switch für mehrere Slots - Überprüfen von Slot jenachdem SlotImage dann 1, 2, 3 mit ID besetzen und Bildpfad erstellen
   }
 }
 
