@@ -310,4 +310,20 @@ public class VitaChiService {
 
     }
 
+    @Path("getCoins/{userID}")
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getCoins(@PathParam("userID") long userID){
+        return repo.getCoinsByUser(userID);
+    }
+
+    //updated
+    @Path("updateCoins/{id}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String updateCoins(@PathParam("id") long id, JsonObject jsonObject){
+        repo.updateUserEnt(id, jsonObject.getInt("userUpdateCoins"));
+        return "updated Coins";
+    }
+
 }

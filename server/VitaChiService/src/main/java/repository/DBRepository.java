@@ -147,10 +147,31 @@ public class DBRepository {
 
         LocalDateTime start = a.get(0).getStartdatum();
         LocalDateTime ende = a.get(0).getDauer();
-
+        //new
         if (ende!=null){
 
             long millis = Duration.between(start, ende).toMillis();
+
+            long minutes = Duration.between(start, ende).toMinutes();
+            long CoinsNew= minutes;
+
+            TypedQuery<Long> query2 = em.createQuery("Select ue.coins from UserEnt as ue where ue.userId = :userId", Long.class);
+            query2.setParameter("userId", id);
+            Long coinsOld = query2.getSingleResult();
+
+            Query query = em.createQuery("update UserEnt as ue set ue.coins = :newcoins where ue.userId = :userId");
+            query.setParameter("newcoins", coinsOld + CoinsNew);
+            query.setParameter("userId", id);
+            query.executeUpdate();
+
+             /*Alternative
+             List<UserEnt> lue = getUserID(id);
+             UserEnt ue = lue.get(0);
+             ue.setCoins(CoinsNew);
+             em.merge(ue);
+             */
+
+
 
             String result = String.format("%02d:%02d:%02d",
                     TimeUnit.MILLISECONDS.toHours(millis),
@@ -165,6 +186,33 @@ public class DBRepository {
 
 
 
+    }
+    //new
+    @Transactional
+    public List<UserEnt> getUserID(long id){
+        TypedQuery<UserEnt> query = em.createNamedQuery(UserEnt.findUserById, UserEnt.class);
+        query.setParameter("userId", id);
+        return query.getResultList();
+    }
+    //new
+    @Transactional
+    public String updateUserEnt(long id, long coins){
+        List<UserEnt> lue = getUserID(id);
+        UserEnt ue = lue.get(0);
+        long aktcoins = ue.getCoins();
+        long newCoins=aktcoins-coins;
+        ue.setCoins(newCoins);
+        em.merge(ue);
+        return "done";
+    }
+
+    //new
+    @Transactional
+    public String getCoinsByUser(long id){
+        Query query = em.createQuery("Select ue.coins from UserEnt as ue where ue.userId = :userId");
+        query.setParameter("userId", id);
+        Object coins = query.getSingleResult();
+        return "" + coins + "";
     }
 
     public double getWorkingPerWeek(long id){
@@ -232,8 +280,9 @@ public class DBRepository {
 
     @Transactional
     public List<Accessoire> getOpenAccessoires(long userid){
-        Query q =  em.createQuery("select a from Accessoire as a where a NOT IN (select ba.accessoire from BenutzerAccessoire as ba where ba.userID = ?1)");
+        Query q =  em.createQuery("select a from Accessoire as a where a NOT IN (select ba.accessoire from BenutzerAccessoire as ba where ba.userID = ?1) AND a.preis < (Select ue.coins from UserEnt as ue where ue.userId = :id)");
         q.setParameter(1, userid);
+        q.setParameter("id", userid);
         return q.getResultList();
     }
 

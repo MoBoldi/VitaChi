@@ -26,7 +26,7 @@ class DetailShop extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: size.height/1.1,
+                height: size.height/1,
                 child: Stack(
                   children: [
                     Container(
@@ -61,8 +61,8 @@ class DetailShop extends StatelessWidget {
                                       children: [
                                         Text("${data.preis}", style: TextStyle(color: Colors.white, fontSize: size.width/20),),
                                         Icon(
-                                            Icons.monetization_on_outlined,
-                                            color: Colors.amberAccent,
+                                          Icons.monetization_on_outlined,
+                                          color: Colors.amberAccent,
                                         ),
                                       ],
                                     )
@@ -85,15 +85,16 @@ class DetailShop extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(20,0,20,0),
                           child: AutoSizeText(data.beschreibung,
-                              style: TextStyle(fontSize: 20, color: Colors.white), maxLines: 4,),
+                            style: TextStyle(fontSize: 20, color: Colors.white), maxLines: 4,),
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height / 20
+                            height: MediaQuery.of(context).size.height / 15
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FlatButton(
+                              //new
                               onPressed: () async {
                                 SharedPreferences prefs = await SharedPreferences.getInstance();
                                 int id = prefs.getInt("UserID");
@@ -103,27 +104,36 @@ class DetailShop extends StatelessWidget {
                                 Map<String, String> headers = {"Content-type": "application/json"};
                                 String json = jsonEncode(<String, Object>{'BenutzerAccessoire': benutzerAccessoire});
                                 Response response = await post(url, headers: headers, body: json);
-                                if (response.statusCode == 200){
+
+                                String url2 = 'http://10.0.2.2:8080/vitaChi/updateCoins/$id';
+                                Map<String, String> headers2 = {"Content-type": "application/json"};
+                                String json2 = jsonEncode(<String, Object>{'userUpdateCoins': data.preis});
+                                Response response2 = await put(url2, headers: headers2, body: json2);
+
+
+                                if (response.statusCode == 200 && response2.statusCode == 200){
                                   Navigator.pushReplacementNamed(context, "/shop");
                                 }
+
+
                               },
                               child: Text(
-                                      "Kaufen",
-                                      style: TextStyle(
-                                        fontSize: size.width/20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  color: Color(0xff266cbe),
-                                  shape: RoundedRectangleBorder(
-                                    side: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                    borderRadius: BorderRadius.circular(18),
-                                  ),
-                              minWidth: size.width/2.5,
+                                "Kaufen",
+                                style: TextStyle(
+                                  fontSize: size.width/20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
                               ),
+                              color: Color(0xff266cbe),
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.white,
+                                ),
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              minWidth: size.width/2.5,
+                            ),
                           ],
                         )
                       ],

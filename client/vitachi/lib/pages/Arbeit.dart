@@ -64,6 +64,9 @@ class _ArbeitState extends State<Arbeit> {
                         width: size.height / 5,
                         image: AssetImage('assets/laptopneu.png')
                     ),
+                    SizedBox(
+                      height: size.height/20,
+                    ),
                     Container(
                         margin: EdgeInsets.only(top: size.height / 30),
                         child: Text("Arbeit", style: TextStyle(fontSize: size
@@ -76,6 +79,9 @@ class _ArbeitState extends State<Arbeit> {
                             fontSize: size.width / 25
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      height: size.height/20,
                     ),
                     Stack(
                       children: <Widget>[
@@ -97,6 +103,7 @@ class _ArbeitState extends State<Arbeit> {
                                   topLeft: const Radius.circular(40.0),
                                   topRight: const Radius.circular(40.0),
                                   bottomLeft: const Radius.circular(40.0),
+                                  bottomRight: const Radius.circular(40.0)
                                 )
                             ),
                             child: Column(
@@ -188,15 +195,28 @@ class _ArbeitState extends State<Arbeit> {
                                   // ignore: missing_return
                                   builder: (context, snapshot) {
                                     if (snapshot.connectionState == ConnectionState.done) {
-                                      return Container(
-                                        child: Text(
-                                          "$timestring",
-                                          style: TextStyle(
-                                            fontSize: size.width / 16,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        margin: EdgeInsets.only(top: size.height/30),
+                                      return Column(
+                                          children: [
+                                            Container(
+                                              child: Text(
+                                                "Zuletzt gearbeitet:\n$timestring",
+                                                style: TextStyle(
+                                                  fontSize: size.width / 16,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              margin: EdgeInsets.only(top: size.height/30),
+                                            ),
+                                            Container(
+                                              child: Text(
+                                                "$timestring",
+                                                style: TextStyle(
+                                                  fontSize: size.width / 16,
+                                                  color: Colors.white,
+                                                ),
+                                              )
+                                            )
+                                          ]
                                       );
                                     }else{
                                       return Image(image: AssetImage('assets/LogoSlider.png'), width: size.width/5);

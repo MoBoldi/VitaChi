@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vitachi/components/myAppBar.dart';
 import 'package:vitachi/components/myAppBarEingaben.dart';
 import 'package:vitachi/components/myDrawer.dart';
@@ -64,14 +65,14 @@ class _WohnzimmerState extends State<Wohnzimmer> {
     var products = List<Produkt>();
     final size = MediaQuery.of(context).size;
     Future<List<Produkt>> getData() async {
-
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int id = prefs.getInt("UserID");
       Response response =
-      await get('http://10.0.2.2:8080/vitaChi/findAll/Accessoire');
+      await get('http://10.0.2.2:8080/vitaChi/getBoughtAccessoire/$id');
       var productsJson = json.decode(response.body);
       for (var productJson in productsJson) {
         products.add(Produkt.fromJson(productJson));
       }
-
 
       return productsJson;
     }
@@ -91,11 +92,9 @@ class _WohnzimmerState extends State<Wohnzimmer> {
         drawer: MyDrawer(),
         body: Stack(
           children: [
-
             Container(
-                height: height*0.75,
+                height: height * 0.75,
                 width: width,
-
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage("assets/background1.jpg"),
@@ -104,12 +103,11 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                   children: [
                     Container(
                         margin: EdgeInsets.only(top: 310, left: 5),
-                    child: Image(
-                      width: MediaQuery.of(context).size.width * 0.60,
-
-                      alignment: Alignment.center,
-                      image: getEmotion(food[0].y),
-                    )),
+                        child: Image(
+                          width: MediaQuery.of(context).size.width * 0.60,
+                          alignment: Alignment.center,
+                          image: getEmotion(food[0].y),
+                        )),
                     DragTarget<int>(builder: (
                         BuildContext context,
                         data,
@@ -117,27 +115,21 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                         ) {
                       return Container(
                           width: 200,
-                          margin: EdgeInsets.only(top: 20, left: 25),
+                          margin: EdgeInsets.only(top: 60, left: size.width/4),
                           height: 200,
                           decoration: BoxDecoration(
                             border: Border.all(width: 3, color: Colors.grey),
-
                             color: Colors.transparent,
                           ),
-                          child:
-
-
-                          Container(
+                          child: Container(
                               width: 200,
                               height: 200,
-
-                              child:  Container(
+                              child: Container(
                                   width: 200,
                                   height: 200,
                                   child: Image(
                                       image: AssetImage(Slot1ImagePfad),
-                                      fit: BoxFit.fill))
-                                  ));
+                                      fit: BoxFit.fill))));
                     }, onWillAccept: (int data) {
                       //Get Request ob der Slot bereits mit diesem Element belegt ist (IF) wenn nicht return true
 
@@ -210,7 +202,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
             ,*/
             Stack(
               children: [
-
                 DraggableScrollableSheet(
                   initialChildSize: 0.2,
                   minChildSize: 0.2,
@@ -220,13 +211,13 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                         future: getData(),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
-                              ConnectionState.done) {
+                              ConnectionState.done && !products.isEmpty) {
                             return ListView.builder(
                                 itemCount: products.length,
                                 controller: myScrollController,
                                 itemBuilder: (context, index) {
                                   return Container(
-                                    height:200.0,
+                                    height: 200.0,
                                     width: width,
                                     color: Colors.white,
                                     child: Row(
@@ -236,32 +227,59 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                           child: Row(
                                             children: [
                                               SizedBox(
-                                                width: size.width/8,
+                                                width: size.width / 8,
                                               ),
                                               Image(
-                                                  image: AssetImage(
-                                                      products[index].bildpfad), width: size.width/3,),
+                                                image: AssetImage(
+                                                    products[index].bildpfad),
+                                                width: size.width / 3,
+                                              ),
                                               SizedBox(
-                                                width: size.width/8,
+                                                width: size.width / 8,
                                               )
                                             ],
                                           ),
                                           feedback: Image(
                                               image: AssetImage(
                                                   products[index].bildpfad),
-                                              width: size.width/3),
+                                              width: size.width / 3),
 
                                           // onDraggableCanceled: ,
                                         ),
-                                        Text(products[index].bezeichnung, style: TextStyle(
-                                          fontSize: size.width/20
-                                        ),),
+                                        Text(
+                                          products[index].bezeichnung,
+                                          style: TextStyle(
+                                              fontSize: size.width / 20),
+                                        ),
                                       ],
                                     ),
                                   );
                                 });
+                          } else {
+                            return Row(
+                              children: [
+                                SizedBox(
+                                  height: size.height/20,
+                                ),
+                                Container(
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        "Noch keine Bilder gekauft!",
+                                        style: TextStyle(
+                                        fontSize: size.width / 18,
+                                        color: Colors.black,
+                                          fontWeight: FontWeight.bold
+                                      )
+                                      ),
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround
+                                  ),
+                                  width: size.width,
+                                ),
+                              ],
+                            );
                           }
-
                         });
                     /*Container(
                       child: ListView(
@@ -319,7 +337,11 @@ class _WohnzimmerState extends State<Wohnzimmer> {
   void postAccessoirePlatz(int userID, int slot1ImageNumber, int slot1) async {
     String url = 'http://10.0.2.2:8080/vitaChi/createAccessoirePlatz';
     Map<String, String> headers = {"Content-type": "application/json"};
-    String json = jsonEncode(<String, Object>{'userID': userID, 'slot1ImageNumber': slot1ImageNumber, 'slot1': slot1});
+    String json = jsonEncode(<String, Object>{
+      'userID': userID,
+      'slot1ImageNumber': slot1ImageNumber,
+      'slot1': slot1
+    });
     Response response = await post(url, headers: headers, body: json);
 
     getSetAccessoire(userID);
@@ -329,8 +351,11 @@ class _WohnzimmerState extends State<Wohnzimmer> {
     List<dynamic> accessoires;
     var products = List<Produkt>();
 
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int id = prefs.getInt("UserID");
+
     Response response =
-    await get('http://10.0.2.2:8080/vitaChi/findAll/Accessoire');
+    await get('http://10.0.2.2:8080/vitaChi/getBoughtAccessoire/$id');
     var productsJson = json.decode(response.body);
     for (var productJson in productsJson) {
       products.add(Produkt.fromJson(productJson));
@@ -344,12 +369,12 @@ class _WohnzimmerState extends State<Wohnzimmer> {
 
     List<AccessoirePlatz> accessoirePlatzList = new List();
 
-    for(var accessoire in accessoires) {
+    for (var accessoire in accessoires) {
       accessoirePlatzList.add(AccessoirePlatz.fromJson(accessoire));
     }
 
     for (var accessoire in accessoirePlatzList) {
-      if(accessoire.slot_it == 1) {
+      if (accessoire.slot_it == 1) {
         Slot1ImageNumber = accessoire.accessoire_id;
       }
     }
@@ -358,7 +383,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
       print("pfad $Slot1ImagePfad");
     });
 
-
     //Switch für mehrere Slots - Überprüfen von Slot jenachdem SlotImage dann 1, 2, 3 mit ID besetzen und Bildpfad erstellen
   }
 }
@@ -366,7 +390,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
 AssetImage getEmotion(double wellbeing) {
   if (1 <= wellbeing && wellbeing < 2) {
     return AssetImage('assets/5_traurig.gif');
-  } else if (2 <= wellbeing && wellbeing < 3){
+  } else if (2 <= wellbeing && wellbeing < 3) {
     return AssetImage('assets/4_traurig.gif');
   } else if (3 <= wellbeing && wellbeing < 4) {
     return AssetImage('assets/Vitachi_Neutral.gif');

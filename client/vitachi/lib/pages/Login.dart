@@ -132,6 +132,29 @@ class _LoginState extends State<Login> {
                                         passwordController.clear(),
 
                                         Navigator.pushNamed(context, '/')
+                                      } else {
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) => new AlertDialog(
+                                              title: const Text('Eingaben falsch'),
+                                              content: new Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Text(
+                                                      "Email oder Passwort falsch!"),
+                                                ],
+                                              ),
+                                              actions: <Widget>[
+                                                new FlatButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: const Text('Ok'),
+                                                ),
+                                              ],
+                                            ),
+                                          )
                                       }
                                     });
                                   },

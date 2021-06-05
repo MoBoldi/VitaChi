@@ -22,6 +22,9 @@ class _EingabenNavState extends State<EingabenNav> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              SizedBox(
+                height: size.height/20,
+              ),
               InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, '/essen');
