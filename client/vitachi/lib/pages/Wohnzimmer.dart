@@ -166,8 +166,6 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                               image: AssetImage(
                                                   products[index].bildpfad),
                                               width: size.width / 3),
-
-                                          // onDraggableCanceled: ,
                                         ),
                                         Text(
                                           products[index].bezeichnung,
