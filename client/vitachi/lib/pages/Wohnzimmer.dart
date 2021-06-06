@@ -235,7 +235,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
     int id = prefs.getInt("UserID");
 
     Response response =
-        await get('http://10.0.2.2:8080/vitaChi/findAll/Accessoire');
+        await get('http://10.0.2.2:8080/vitaChi/getBoughtAccessoire/$id');
     var productsJson = json.decode(response.body);
     for (var productJson in productsJson) {
       products.add(Produkt.fromJson(productJson));
