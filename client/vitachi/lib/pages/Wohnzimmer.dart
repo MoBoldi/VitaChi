@@ -81,7 +81,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                 width: width,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/background1.jpg"),
+                        image: AssetImage("assets/background1.png"),
                         fit: BoxFit.fill)),
                 child: Stack(
                   children: [
@@ -262,6 +262,13 @@ class _WohnzimmerState extends State<Wohnzimmer> {
       Slot1ImagePfad = products[Slot1ImageNumber].bildpfad;
       print("pfad $Slot1ImagePfad");
     });
+  }
+
+  Future<int> getUserID() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int userID = prefs.getInt("UserID");
+
+    return userID;
   }
 }
 

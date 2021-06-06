@@ -171,10 +171,9 @@ class _ArbeitState extends State<Arbeit> {
                                                     Response response = await put(
                                                         url, headers: headers,
                                                         body: json);
-
-
-
-                                                    Navigator.pushReplacementNamed(context, '/arbeit',);
+                                                    getWorkingTime();
+                                                    await Future.delayed(Duration(seconds: 1));
+                                                    Navigator.pushReplacementNamed(context, '/',);
                                                   }
                                                 },
                                                 onChanged: (bool position) {
@@ -199,13 +198,17 @@ class _ArbeitState extends State<Arbeit> {
                                           children: [
                                             Container(
                                               child: Text(
-                                                "Zuletzt gearbeitet:\n$timestring",
+                                                "Zuletzt gearbeitet:",
                                                 style: TextStyle(
                                                   fontSize: size.width / 16,
                                                   color: Colors.white,
+                                                  fontWeight: FontWeight.bold
                                                 ),
                                               ),
                                               margin: EdgeInsets.only(top: size.height/30),
+                                            ),
+                                            SizedBox(
+                                              height: size.height/60,
                                             ),
                                             Container(
                                               child: Text(
