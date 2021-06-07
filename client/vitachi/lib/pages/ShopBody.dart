@@ -71,7 +71,7 @@ class _BodyState extends State<Body> {
                             "Du hast nicht genug Geld oder bereits alles gekauft!",
                             style: TextStyle(
                                 fontSize: size.width / 18,
-                                color: Colors.black,
+                                color: Colors.grey,
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),

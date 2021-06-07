@@ -195,7 +195,7 @@ class _WohnzimmerState extends State<Wohnzimmer> {
                                         Text("Noch keine Bilder gekauft!",
                                             style: TextStyle(
                                                 fontSize: size.width / 18,
-                                                color: Colors.black,
+                                                color: Colors.grey,
                                                 fontWeight: FontWeight.bold)),
                                       ],
                                       mainAxisAlignment:
